@@ -32,26 +32,13 @@ namespace TopLearn.DataLayer.Entities.User
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string Password { get; set; }
 
-        [Display(Name = "کد فعال سازی")]
-        [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string ActiveCode { get; set; }
-
         [Display(Name = "وضعیت")]
         public bool IsActive { get; set; }
-
-        [Display(Name = "آواتار")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string UserAvatar { get; set; }
 
         [Display(Name = "تاریخ ثبت نام")]
         public DateTime RegisterDate { get; set; }
 
         public bool IsDelete { get; set; }
-
-        #region Relations
-
-        public virtual List<Course.Product> Courses { get; set; }
-        #endregion
 
     }
 }

@@ -8,27 +8,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
-namespace TopLearn.Web.Pages.Admin.Instruments
+namespace TopLearn.Web.Pages.Admin.Academy
 {
     [Authorize]
-    public class DeleteInstrumentModel : PageModel
+    public class DeleteAcademyModel : PageModel
     {
-        private readonly IInstrumentService _instrumentService;
+        private readonly IAcademyService _academyService;
 
-        public DeleteInstrumentModel(IInstrumentService instrumentService)
+        public DeleteAcademyModel(IAcademyService academyService)
         {
-            _instrumentService = instrumentService;
+            _academyService = academyService;
         }
 
-        public Instrument Instruments { get; set; }
+        public DataLayer.Entities.Course.Academy Academy { get; set; }
         public void OnGet(int id)
         {
-            Instruments = _instrumentService.GetById(id);
+            Academy = _academyService.GetById(id);
         }
 
         public IActionResult OnPost()
         {
-            _instrumentService.DeleteInstrument(Instruments);
+            _academyService.DeleteAcademy(Academy);
             return RedirectToPage("Index");
         }
     }

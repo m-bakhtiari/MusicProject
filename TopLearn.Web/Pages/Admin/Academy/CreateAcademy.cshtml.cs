@@ -3,37 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
-namespace TopLearn.Web.Pages.Admin.Instruments
+namespace TopLearn.Web.Pages.Admin.Academy
 {
     [Authorize]
-    public class CreateInstrumentModel : PageModel
+    public class CreateAcademyModel : PageModel
     {
-        private readonly IInstrumentService _instrumentService;
+        private readonly IAcademyService _academyService;
 
-        public CreateInstrumentModel(IInstrumentService instrumentService)
+        public CreateAcademyModel(IAcademyService academyService)
         {
-            _instrumentService = instrumentService;
+            _academyService = academyService;
         }
 
         [BindProperty]
-        public Instrument Instruments { get; set; }
+        public DataLayer.Entities.Course.Academy Academy { get; set; }
 
         public void OnGet(int? id)
         {
-            Instruments = new Instrument() { };
+            Academy = new DataLayer.Entities.Course.Academy() { };
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(IFormFile imgLogo)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _instrumentService.AddInstrument(Instruments);
+            _academyService.AddAcademy(Academy,imgLogo);
 
             return RedirectToPage("Index");
         }

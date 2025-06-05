@@ -35,11 +35,7 @@
                 <input type="number" asp-for="Product.CoursePrice" value="0" class="form-control" />
                 <span asp-validation-for="Product.CourseDescription"></span>
             </div>
-            <div class="form-group">
-                <label>فایل دمو دوره</label>
-                <input type="file" name="demoUp">
-                <span asp-validation-for="Product.CourseTitle"></span>
-            </div>
+            
             <div class="form-group">
                 <label>کلمات کلیدی دوره</label>
                 <input type="text" asp-for="Product.Tags" class="form-control">
@@ -49,7 +45,6 @@
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
         </div>
         <div class="col-md-4">
-            <p></p>
             <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg"/>
             <div class="form-group">
 

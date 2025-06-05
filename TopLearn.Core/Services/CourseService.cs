@@ -261,10 +261,6 @@ namespace TopLearn.Core.Services
 
         public void DeleteGroup(CourseGroup group)
         {
-            if (_context.CourseGroups.Any(x => x.ParentId == group.GroupId))
-                return;
-            if (_context.Courses.Any(x => x.GroupId == group.GroupId))
-                return;
             _context.CourseGroups.Remove(group);
             _context.SaveChanges();
         }

@@ -27,60 +27,6 @@ namespace TopLearn.Web.Controllers
             _viewRender = viewRender;
         }
 
-        
-
-     
-
-        #region Register
-
-        [Route("Register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Route("Register")]
-        public IActionResult Register(RegisterViewModel register)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(register);
-            }
-
-            
-            if (_userService.IsExistUserName(register.UserName))
-            {
-                ModelState.AddModelError("UserName","نام کاربری معتبر نمی باشد");
-                return View(register);
-            }
-
-            if (_userService.IsExistEmail(FixedText.FixEmail(register.Email)))
-            {
-                ModelState.AddModelError("Email", "ایمیل معتبر نمی باشد");
-                return View(register);
-            }
-
-
-            DataLayer.Entities.User.User user=new User()
-            {
-                ActiveCode = NameGenerator.GenerateUniqCode(),
-                Email = FixedText.FixEmail(register.Email),
-                IsActive = false,
-                Password = PasswordHelper.EncodePasswordMd5(register.Password),
-                RegisterDate = DateTime.Now,
-                UserAvatar = "Defult.jpg",
-                UserName = register.UserName
-            };
-            _userService.AddUser(user);
-
-
-            return View("SuccessRegister",user);
-        }
-
-
-        #endregion
-
         #region Login
         [Route("Login")]
         public ActionResult Login(bool EditProfile=false)
@@ -135,16 +81,6 @@ namespace TopLearn.Web.Controllers
 
         #endregion
 
-        #region Active Account
-
-        public IActionResult ActiveAccount(string id)
-        {
-            ViewBag.IsActive = _userService.ActiveAccount(id);
-            return View();
-        }
-
-        #endregion
-
         #region Logout
         [Route("Logout")]
         public IActionResult Logout()
@@ -155,66 +91,5 @@ namespace TopLearn.Web.Controllers
 
         #endregion
 
-
-        #region Forgot Password
-        [Route("ForgotPassword")]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Route("ForgotPassword")]
-        public ActionResult ForgotPassword(ForgotPasswordViewModel forgot)
-        {
-            if (!ModelState.IsValid)
-                return View(forgot);
-
-            string fixedEmail = FixedText.FixEmail(forgot.Email);
-            DataLayer.Entities.User.User user = _userService.GetUserByEmail(fixedEmail);
-
-            if (user == null)
-            {
-                ModelState.AddModelError("Email", "کاربری یافت نشد");
-                return View(forgot);
-            }
-
-            string bodyEmail = _viewRender.RenderToStringAsync("_ForgotPassword", user);
-            ViewBag.IsSuccess = true;
-
-            return View();
-        }
-        #endregion
-
-        #region Reset Password
-
-        public ActionResult ResetPassword(string id)
-        {
-            return View(new ResetPasswordViewModel()
-            {
-                ActiveCode = id
-            });
-        }
-
-
-        [HttpPost]
-        public ActionResult ResetPassword(ResetPasswordViewModel reset)
-        {
-            if (!ModelState.IsValid)
-                return View(reset);
-
-            DataLayer.Entities.User.User user = _userService.GetUserByActiveCode(reset.ActiveCode);
-
-            if (user == null)
-                return NotFound();
-
-            string hashNewPassword = PasswordHelper.EncodePasswordMd5(reset.Password);
-            user.Password = hashNewPassword;
-            _userService.UpdateUser(user);
-
-            return Redirect("/Login");
-
-        }
-        #endregion
     }
 }

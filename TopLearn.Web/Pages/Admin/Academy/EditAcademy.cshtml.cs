@@ -3,37 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
-namespace TopLearn.Web.Pages.Admin.CourseGroups
+namespace TopLearn.Web.Pages.Admin.Academy
 {
     [Authorize]
-    public class EditGroupModel : PageModel
+    public class EditAcademyModel : PageModel
     {
-        private ICourseService _courseService;
+        private readonly IAcademyService _academyService;
 
-        public EditGroupModel(ICourseService courseService)
+        public EditAcademyModel(IAcademyService academyService)
         {
-            _courseService = courseService;
+            _academyService = academyService;
         }
 
         [BindProperty]
-        public CourseGroup CourseGroups { get; set; }
+        public DataLayer.Entities.Course.Academy Academy { get; set; }
 
         public void OnGet(int id)
         {
-            CourseGroups = _courseService.GetById(id);
+            Academy = _academyService.GetById(id);
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(IFormFile imgLogo)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _courseService.UpdateGroup(CourseGroups);
+            _academyService.UpdateAcademy(Academy,imgLogo);
 
             return RedirectToPage("Index");
         }

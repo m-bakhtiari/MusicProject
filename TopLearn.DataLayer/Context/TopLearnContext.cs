@@ -31,6 +31,19 @@ namespace TopLearn.DataLayer.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                Email = "vahidnajafizadeh@gmail.com",
+                Password = "123456",
+                RegisterDate = DateTime.Now,
+                UserId = 1,
+                IsActive = true,
+                IsDelete = false,
+                UserName = "Vahid Najafizadeh"
+            });
+
+
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetForeignKeys())
                 .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
@@ -49,5 +62,7 @@ namespace TopLearn.DataLayer.Context
 
             base.OnModelCreating(modelBuilder);
         }
+
+       
     }
 }

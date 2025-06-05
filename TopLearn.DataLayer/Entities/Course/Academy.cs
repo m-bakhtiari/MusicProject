@@ -27,5 +27,17 @@ namespace TopLearn.DataLayer.Entities.Course
         [Display(Name = "سازهای قابل تدریس ")]
         [MaxLength(1000, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string LearningInstrument { get; set; }
+
+        [Display(Name = "عکس لوگو آموزشگاه ")]
+        [MaxLength(100,ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string LogoImageName { get; set; }
+
+        [Display(Name = "تلفن")]
+        [MaxLength(50,ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Phone { get; set; }
+
+        [Display(Name = "آدرس سایت")]
+        [MaxLength(100,ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Website { get; set; }
     }
 }
