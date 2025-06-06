@@ -10,8 +10,8 @@ using TopLearn.DataLayer.Context;
 namespace TopLearn.DataLayer.Migrations
 {
     [DbContext(typeof(TopLearnContext))]
-    [Migration("14040315195146_Add_AcademyLogo")]
-    partial class Add_AcademyLogo
+    [Migration("14040316080855_Initial_Database")]
+    partial class Initial_Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,15 +123,11 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<DateTime?>("UpdateDate");
 
-                    b.Property<int?>("UserId");
-
                     b.HasKey("ProductId");
 
                     b.HasIndex("GroupId");
 
                     b.HasIndex("SubGroup");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
                 });
@@ -141,9 +137,6 @@ namespace TopLearn.DataLayer.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ActiveCode")
-                        .HasMaxLength(50);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -159,9 +152,6 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<DateTime>("RegisterDate");
 
-                    b.Property<string>("UserAvatar")
-                        .HasMaxLength(200);
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(200);
@@ -169,6 +159,10 @@ namespace TopLearn.DataLayer.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new { UserId = 1, Email = "vahidnajafizadeh@gmail.com", IsActive = true, IsDelete = false, Password = "E1-0A-DC-39-49-BA-59-AB-BE-56-E0-57-F2-0F-88-3E", RegisterDate = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), UserName = "Vahid Najafizadeh" }
+                    );
                 });
 
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.CourseGroup", b =>
@@ -188,10 +182,6 @@ namespace TopLearn.DataLayer.Migrations
                     b.HasOne("TopLearn.DataLayer.Entities.Course.CourseGroup", "Group")
                         .WithMany("SubGroup")
                         .HasForeignKey("SubGroup");
-
-                    b.HasOne("TopLearn.DataLayer.Entities.User.User")
-                        .WithMany("Courses")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

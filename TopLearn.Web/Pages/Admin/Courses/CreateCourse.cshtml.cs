@@ -30,8 +30,12 @@ namespace TopLearn.Web.Pages.Admin.Courses
             var groups = _courseService.GetGroupForManageCourse();
             ViewData["Groups"] = new SelectList(groups, "Value", "Text");
 
-            var subGrous = _courseService.GetSubGroupForManageCourse(int.Parse(groups.First().Value));
-            ViewData["SubGroups"] = new SelectList(subGrous, "Value", "Text");
+            if (groups.Any())
+            {
+                var subGroups = _courseService.GetSubGroupForManageCourse(int.Parse(groups.First().Value));
+                ViewData["SubGroups"] = new SelectList(subGroups, "Value", "Text");
+            }
+
         }
 
         public IActionResult OnPost(IFormFile imgCourseUp, IFormFile demoUp)

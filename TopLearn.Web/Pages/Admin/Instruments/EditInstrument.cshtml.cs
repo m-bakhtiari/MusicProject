@@ -23,17 +23,17 @@ namespace TopLearn.Web.Pages.Admin.Instruments
         [BindProperty]
         public Instrument Instruments { get; set; }
 
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
-            Instruments = _instrumentService.GetById(id);
+            Instruments = await _instrumentService.GetById(id);
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _instrumentService.UpdateInstrument(Instruments);
+            await _instrumentService.UpdateInstrument(Instruments);
 
             return RedirectToPage("Index");
         }

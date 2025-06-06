@@ -19,16 +19,17 @@ namespace TopLearn.Web.Pages.Admin.Instruments
         {
             _instrumentService = instrumentService;
         }
-
+        [BindProperty]
         public Instrument Instruments { get; set; }
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
-            Instruments = _instrumentService.GetById(id);
+            Instruments = await _instrumentService.GetById(id);
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            _instrumentService.DeleteInstrument(Instruments);
+            var instrument = await _instrumentService.GetById(Instruments.InstrumentId);
+            await _instrumentService.DeleteInstrument(instrument);
             return RedirectToPage("Index");
         }
     }

@@ -28,12 +28,12 @@ namespace TopLearn.Web.Pages.Admin.Instruments
             Instruments = new Instrument() { };
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _instrumentService.AddInstrument(Instruments);
+            await _instrumentService.AddInstrument(Instruments);
 
             return RedirectToPage("Index");
         }

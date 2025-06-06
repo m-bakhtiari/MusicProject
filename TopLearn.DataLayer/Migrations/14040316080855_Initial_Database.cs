@@ -17,7 +17,10 @@ namespace TopLearn.DataLayer.Migrations
                     AcademyTitle = table.Column<string>(maxLength: 800, nullable: false),
                     Address = table.Column<string>(maxLength: 4200, nullable: true),
                     ActiveDays = table.Column<string>(maxLength: 500, nullable: true),
-                    LearningInstrument = table.Column<string>(maxLength: 1000, nullable: true)
+                    LearningInstrument = table.Column<string>(maxLength: 1000, nullable: true),
+                    LogoImageName = table.Column<string>(maxLength: 100, nullable: true),
+                    Phone = table.Column<string>(maxLength: 50, nullable: true),
+                    Website = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,9 +72,7 @@ namespace TopLearn.DataLayer.Migrations
                     UserName = table.Column<string>(maxLength: 200, nullable: false),
                     Email = table.Column<string>(maxLength: 200, nullable: false),
                     Password = table.Column<string>(maxLength: 200, nullable: false),
-                    ActiveCode = table.Column<string>(maxLength: 50, nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
-                    UserAvatar = table.Column<string>(maxLength: 200, nullable: true),
                     RegisterDate = table.Column<DateTime>(nullable: false),
                     IsDelete = table.Column<bool>(nullable: false)
                 },
@@ -94,8 +95,7 @@ namespace TopLearn.DataLayer.Migrations
                     Tags = table.Column<string>(maxLength: 600, nullable: true),
                     CourseImageName = table.Column<string>(maxLength: 50, nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    UpdateDate = table.Column<DateTime>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    UpdateDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,13 +112,12 @@ namespace TopLearn.DataLayer.Migrations
                         principalTable: "CourseGroups",
                         principalColumn: "GroupId",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Courses_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Email", "IsActive", "IsDelete", "Password", "RegisterDate", "UserName" },
+                values: new object[] { 1, "vahidnajafizadeh@gmail.com", true, false, "E1-0A-DC-39-49-BA-59-AB-BE-56-E0-57-F2-0F-88-3E", new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vahid Najafizadeh" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseGroups_ParentId",
@@ -134,11 +133,6 @@ namespace TopLearn.DataLayer.Migrations
                 name: "IX_Courses_SubGroup",
                 table: "Courses",
                 column: "SubGroup");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Courses_UserId",
-                table: "Courses",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -153,10 +147,10 @@ namespace TopLearn.DataLayer.Migrations
                 name: "Instruments");
 
             migrationBuilder.DropTable(
-                name: "CourseGroups");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "CourseGroups");
         }
     }
 }

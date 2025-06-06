@@ -14,58 +14,57 @@
 
 <div class="row">
     <form method="post" enctype="multipart/form-data">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    آموزشگاه جدید
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label>نام آموزشگاه</label>
-                        <input type="text" asp-for="Academy.AcademyTitle" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>آدرس آموزشگاه</label>
-                        <input type="text" asp-for="Academy.Address" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>روز های تدریس در  آموزشگاه</label>
-                        <input type="text" asp-for="Academy.ActiveDays" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>سازهای تدریس شده در  آموزشگاه</label>
-                        <input type="text" asp-for="Academy.LearningInstrument" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>آدرس سایت</label>
-                        <input type="text" asp-for="Academy.Website" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>تلفن</label>
-                        <input type="text" asp-for="Academy.Phone" class="form-control">
-                    </div>
-                    <div class="col-md-4">
-                        <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" />
-                        <div class="form-group">
+        <input type="hidden" asp-for="Academy.AcademyId" />
+        <input type="hidden" asp-for="Academy.LogoImageName" />
 
-                            <label>انتخاب تصویر</label>
-                            <input type="file" name="imgCourseUp" id="imgCourseUp">
-                        </div>
-
-                    </div>
-                    <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
-                </div>
-                <!-- /.panel-body -->
+        <!-- /.panel-heading -->
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>نام آموزشگاه</label>
+                <input type="text" asp-for="Academy.AcademyTitle" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>آدرس آموزشگاه</label>
+                <input type="text" asp-for="Academy.Address" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>روز های تدریس در آموزشگاه</label>
+                <input type="text" asp-for="Academy.ActiveDays" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>سازهای تدریس شده در آموزشگاه</label>
+                <input type="text" asp-for="Academy.LearningInstrument" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>آدرس سایت</label>
+                <input type="text" asp-for="Academy.Website" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>تلفن</label>
+                <input type="text" asp-for="Academy.Phone" class="form-control">
+            </div>
+            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+        </div>
+        <div class="col-md-4">
+            @if (Model.Academy.LogoImageName == "no-photo.jpg")
+            {
+                <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="logo" />
+            }
+            else
+            {
+                <img id="imgCourse" src="/academy/@Model.Academy.LogoImageName" alt="logo" class="thumbnail" />
+            }
+            <div class="form-group">
+                <label>انتخاب تصویر</label>
+                <input type="file" name="imgLogo" id="imgLogo">
             </div>
         </div>
-
     </form>
 </div>
 
 @section Scripts
 {
-<script>
+    <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -76,10 +75,10 @@
             }
         }
 
-        $("#imgCourseUp").change(function () {
+        $("#imgLogo").change(function () {
             readURL(this);
         });
-</script>
+    </script>
 }
 
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TopLearn.Core.Services.Interfaces;
 
 namespace TopLearn.Web.Pages.Admin.Academy
@@ -16,9 +17,9 @@ namespace TopLearn.Web.Pages.Admin.Academy
         }
 
         public List<DataLayer.Entities.Course.Academy> Academies { get; set; }
-        public void OnGet()
+        public async Task OnGet()
         {
-            Academies = _academyService.GetAllAcademy();
+            Academies = await _academyService.GetAllAcademy();
         }
     }
 }

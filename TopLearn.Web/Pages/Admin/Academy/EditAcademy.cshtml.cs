@@ -24,17 +24,17 @@ namespace TopLearn.Web.Pages.Admin.Academy
         [BindProperty]
         public DataLayer.Entities.Course.Academy Academy { get; set; }
 
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
-            Academy = _academyService.GetById(id);
+            Academy = await _academyService.GetById(id);
         }
 
-        public IActionResult OnPost(IFormFile imgLogo)
+        public async Task<IActionResult> OnPost(IFormFile imgLogo)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _academyService.UpdateAcademy(Academy,imgLogo);
+            await _academyService.UpdateAcademy(Academy, imgLogo);
 
             return RedirectToPage("Index");
         }

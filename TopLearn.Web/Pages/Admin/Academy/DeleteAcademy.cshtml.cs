@@ -19,16 +19,17 @@ namespace TopLearn.Web.Pages.Admin.Academy
         {
             _academyService = academyService;
         }
-
+        [BindProperty]
         public DataLayer.Entities.Course.Academy Academy { get; set; }
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
-            Academy = _academyService.GetById(id);
+            Academy = await _academyService.GetById(id);
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            _academyService.DeleteAcademy(Academy);
+            var academy = await _academyService.GetById(Academy.AcademyId);
+            await _academyService.DeleteAcademy(academy);
             return RedirectToPage("Index");
         }
     }

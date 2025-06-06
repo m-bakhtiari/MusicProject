@@ -21,9 +21,9 @@ namespace TopLearn.Web.Pages.Admin.Instruments
         }
 
         public List<Instrument> Instruments { get; set; }
-        public void OnGet()
+        public async Task OnGet()
         {
-            Instruments = _instrumentService.GetAll();
+            Instruments = await _instrumentService.GetAll();
         }
     }
 }

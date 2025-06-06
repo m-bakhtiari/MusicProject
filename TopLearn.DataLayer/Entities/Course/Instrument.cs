@@ -12,7 +12,6 @@ namespace TopLearn.DataLayer.Entities.Course
         public int InstrumentId { get; set; }
 
         [DisplayName("عنوان ساز")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(450, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string InstrumentTitle { get; set; }
 

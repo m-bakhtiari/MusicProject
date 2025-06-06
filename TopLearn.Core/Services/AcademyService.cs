@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using TopLearn.Core.Convertors;
 using TopLearn.Core.Generator;
 using TopLearn.Core.Security;
@@ -22,91 +24,68 @@ namespace TopLearn.Core.Services
             _context = context;
         }
 
-        public void AddAcademy(Academy academy, IFormFile imgLogo)
+        public async Task AddAcademy(Academy academy, IFormFile imgLogo)
         {
             academy.LogoImageName = "no-photo.jpg";
             if (imgLogo != null && imgLogo.IsImage())
             {
                 academy.LogoImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgLogo.FileName);
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", academy.LogoImageName);
-
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/academy", academy.LogoImageName);
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    imgLogo.CopyTo(stream);
+                    await imgLogo.CopyToAsync(stream);
                 }
-
-                ImageConvertor imgResizer = new ImageConvertor();
-                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/thumb", academy.LogoImageName);
-
-                imgResizer.Image_resize(imagePath, thumbPath, 250);
             }
-            _context.Academies.Add(academy);
-            _context.SaveChanges();
+            await _context.Academies.AddAsync(academy);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteAcademy(Academy academy)
+        public async Task DeleteAcademy(Academy academy)
         {
             if (academy.LogoImageName != "no-photo.jpg")
             {
-                var deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", academy.LogoImageName);
-                if (File.Exists(deleteimagePath))
+                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/academy", academy.LogoImageName);
+                if (File.Exists(deleteImagePath))
                 {
-                    File.Delete(deleteimagePath);
-                }
-
-                var deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/thumb", academy.LogoImageName);
-                if (File.Exists(deletethumbPath))
-                {
-                    File.Delete(deletethumbPath);
+                    File.Delete(deleteImagePath);
                 }
             }
             _context.Academies.Remove(academy);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<Academy> GetAllAcademy()
+        public async Task<List<Academy>> GetAllAcademy()
         {
-            return _context.Academies.ToList();
+            return await _context.Academies.ToListAsync();
         }
 
-        public Academy GetById(int academyId)
+        public async Task<Academy> GetById(int academyId)
         {
-            return _context.Academies.FirstOrDefault(x => x.AcademyId == academyId);
+            return await _context.Academies.FirstOrDefaultAsync(x => x.AcademyId == academyId);
         }
 
-        public void UpdateAcademy(Academy academy, IFormFile imgCourse)
+        public async Task UpdateAcademy(Academy academy, IFormFile imgCourse)
         {
             if (imgCourse != null && imgCourse.IsImage())
             {
                 if (academy.LogoImageName != "no-photo.jpg")
                 {
-                    var deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", academy.LogoImageName);
-                    if (File.Exists(deleteimagePath))
+                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/academy", academy.LogoImageName);
+                    if (File.Exists(deleteImagePath))
                     {
-                        File.Delete(deleteimagePath);
-                    }
-
-                    var deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/thumb", academy.LogoImageName);
-                    if (File.Exists(deletethumbPath))
-                    {
-                        File.Delete(deletethumbPath);
+                        File.Delete(deleteImagePath);
                     }
                 }
                 academy.LogoImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", academy.LogoImageName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/academy", academy.LogoImageName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    imgCourse.CopyTo(stream);
+                    await imgCourse.CopyToAsync(stream);
                 }
-
-                var imgResizer = new ImageConvertor();
-                var thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/thumb", academy.LogoImageName);
-
-                imgResizer.Image_resize(imagePath, thumbPath, 250);
             }
             _context.Academies.Update(academy);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

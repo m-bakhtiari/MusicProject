@@ -24,10 +24,10 @@
                 <select class="form-control" asp-for="Product.SubGroup" asp-items="@(ViewData["SubGroups"] as SelectList)"></select>
                 <span asp-validation-for="Product.SubGroup"></span>
             </div>
-          
+
             <div class="form-group">
                 <label>شرح دوره</label>
-                <textarea class="form-control" asp-for="Product.CourseDescription" rows="10"></textarea>
+                <textarea id="description" class="form-control" asp-for="Product.CourseDescription" rows="10"></textarea>
                 <span asp-validation-for="Product.CourseDescription"></span>
             </div>
             <div class="form-group">
@@ -35,7 +35,7 @@
                 <input type="number" asp-for="Product.CoursePrice" value="0" class="form-control" />
                 <span asp-validation-for="Product.CourseDescription"></span>
             </div>
-            
+
             <div class="form-group">
                 <label>کلمات کلیدی دوره</label>
                 <input type="text" asp-for="Product.Tags" class="form-control">
@@ -45,7 +45,7 @@
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
         </div>
         <div class="col-md-4">
-            <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg"/>
+            <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" />
             <div class="form-group">
 
                 <label>انتخاب تصویر</label>
@@ -58,16 +58,37 @@
 
 @section Scripts
 {
+    <script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>
     <script>
-        $("#Course_GroupId").change(function() {
+        CKEDITOR.replace('description', {
+            language: 'fa',
+            contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
+            extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
+            toolbar: [
+                { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                { name: 'clipboard', items: ['Undo', 'Redo'] },
+                { name: 'editing', items: ['Scayt'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+                { name: 'insert', items: ['Image', 'Table'] },
+                { name: 'styles', items: ['Format'] },
+                { name: 'tools', items: ['Maximize'] }
+            ]
+        });
+
+
+    </script>
+
+    <script>
+        $("#Course_GroupId").change(function () {
             $("#Course_SubGroup").empty();
             $.getJSON("/home/GetSubGroups/" + $("#Course_GroupId :selected").val(),
-                function(data) {
+                function (data) {
 
                     $.each(data,
-                        function() {
+                        function () {
                             $("#Course_SubGroup").append('<option value=' + this.value + '>' + this.text + '</option>');
-                            
+
                         });
 
                 });
@@ -92,13 +113,6 @@
             readURL(this);
         });
     </script>
-    
-    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
-    <script>
-    
-        CKEDITOR.replace('Course_CourseDescription', {
-            customConfig: '/js/Config.js'
-        });
-   
-    </script>
+
+
 }

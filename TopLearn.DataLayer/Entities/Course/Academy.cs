@@ -11,7 +11,6 @@ namespace TopLearn.DataLayer.Entities.Course
         public int AcademyId { get; set; }
 
         [Display(Name = "عنوان آموزشگاه")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(800, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string AcademyTitle { get; set; }
 

@@ -94,10 +94,7 @@ namespace TopLearn.Core.Services
                     imgCourse.CopyTo(stream);
                 }
 
-                ImageConvertor imgResizer = new ImageConvertor();
-                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/thumb", product.CourseImageName);
-
-                imgResizer.Image_resize(imagePath, thumbPath, 250);
+              
             }
 
 
@@ -141,10 +138,7 @@ namespace TopLearn.Core.Services
                     imgCourse.CopyTo(stream);
                 }
 
-                ImageConvertor imgResizer = new ImageConvertor();
-                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/thumb", product.CourseImageName);
-
-                imgResizer.Image_resize(imagePath, thumbPath, 250);
+               
             }
 
 

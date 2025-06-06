@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Context;
 using TopLearn.DataLayer.Entities.Course;
@@ -16,33 +18,33 @@ namespace TopLearn.Core.Services
         {
             _context = context;
         }
-        public void AddInstrument(Instrument instrument)
+        public async Task AddInstrument(Instrument instrument)
         {
             instrument.CreatedDate = DateTime.Now.Date;
-            _context.Instruments.Add(instrument);
-            _context.SaveChanges();
+            await _context.Instruments.AddAsync(instrument);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteInstrument(Instrument instrument)
+        public async Task DeleteInstrument(Instrument instrument)
         {
             _context.Instruments.Remove(instrument);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<Instrument> GetAll()
+        public async Task<List<Instrument>> GetAll()
         {
-            return _context.Instruments.ToList();
+            return await _context.Instruments.ToListAsync();
         }
 
-        public Instrument GetById(int instrumentId)
+        public async Task<Instrument> GetById(int instrumentId)
         {
-            return _context.Instruments.FirstOrDefault(x => x.InstrumentId == instrumentId);
+            return await _context.Instruments.FirstOrDefaultAsync(x => x.InstrumentId == instrumentId);
         }
 
-        public void UpdateInstrument(Instrument instrument)
+        public async Task UpdateInstrument(Instrument instrument)
         {
             _context.Instruments.Update(instrument);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

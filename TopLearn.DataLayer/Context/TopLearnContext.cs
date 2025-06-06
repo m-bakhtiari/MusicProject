@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using TopLearn.DataLayer.Entities.Course;
@@ -9,12 +10,12 @@ using TopLearn.DataLayer.Entities.User;
 
 namespace TopLearn.DataLayer.Context
 {
-   public class TopLearnContext:DbContext
+    public class TopLearnContext : DbContext
     {
 
-        public TopLearnContext(DbContextOptions<TopLearnContext> options):base(options)
+        public TopLearnContext(DbContextOptions<TopLearnContext> options) : base(options)
         {
-            
+
         }
 
 
@@ -35,8 +36,8 @@ namespace TopLearn.DataLayer.Context
             modelBuilder.Entity<User>().HasData(new User()
             {
                 Email = "vahidnajafizadeh@gmail.com",
-                Password = "123456",
-                RegisterDate = DateTime.Now,
+                Password = EncodePasswordMd5("123456"),
+                RegisterDate = new DateTime(2024,02,02),
                 UserId = 1,
                 IsActive = true,
                 IsDelete = false,
@@ -58,11 +59,21 @@ namespace TopLearn.DataLayer.Context
             modelBuilder.Entity<CourseGroup>()
                 .HasQueryFilter(g => !g.IsDelete);
 
-     
+
 
             base.OnModelCreating(modelBuilder);
         }
 
-       
+        private string EncodePasswordMd5(string pass) //Encrypt using MD5   
+        {
+            Byte[] originalBytes;
+            Byte[] encodedBytes;
+            MD5 md5;
+            md5 = new MD5CryptoServiceProvider();
+            originalBytes = ASCIIEncoding.Default.GetBytes(pass);
+            encodedBytes = md5.ComputeHash(originalBytes);
+            return BitConverter.ToString(encodedBytes);
+        }
+
     }
 }
