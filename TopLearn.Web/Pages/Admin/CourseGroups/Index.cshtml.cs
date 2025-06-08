@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
@@ -21,9 +18,9 @@ namespace TopLearn.Web.Pages.Admin.CourseGroups
         }
 
         public List<CourseGroup> CourseGroups { get; set; }
-        public void OnGet()
+        public async Task OnGet()
         {
-            CourseGroups = _courseService.GetAllGroup();
+            CourseGroups = await _courseService.GetAllGroup();
         }
     }
 }

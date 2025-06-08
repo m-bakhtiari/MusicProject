@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Context;
 using TopLearn.DataLayer.Entities.Course;
@@ -24,27 +25,27 @@ namespace TopLearn.Web.Pages.Admin.CourseGroups
         }
 
         public CourseGroup Groups { get; set; }
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
             ViewData["GroupId"] = id;
 
-            Groups = _courseService.GetById(id);
+            Groups = await _courseService.GetById(id);
         }
 
-        public IActionResult OnPost(CourseGroup group)
+        public async Task<IActionResult> OnPost(CourseGroup group)
         {
-            if (_context.CourseGroups.Any(x => x.ParentId == group.GroupId))
+            if (await _context.CourseGroups.AnyAsync(x => x.ParentId == group.GroupId))
             {
                 ViewData["Error"] = "ابتدا تمام زیر گروه های این گروه را حذف نمایید";
                 return RedirectToPage("Index");
             }
 
-            if (_context.Courses.Any(x => x.GroupId == group.GroupId))
+            if (await _context.Courses.AnyAsync(x => x.GroupId == group.GroupId))
             {
                 ViewData["Error"] = "برای این گروه محصولاتی ثبت شده است . امکان حذف وجود ندارد";
                 return RedirectToPage("Index");
             }
-            _courseService.DeleteGroup(group);
+            await _courseService.DeleteGroup(group);
             ViewData["Error"] = null;
             return RedirectToPage("Index");
         }

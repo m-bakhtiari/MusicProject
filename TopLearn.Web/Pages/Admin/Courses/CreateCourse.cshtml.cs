@@ -25,25 +25,25 @@ namespace TopLearn.Web.Pages.Admin.Courses
         [BindProperty]
         public Product Product { get; set; }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            var groups = _courseService.GetGroupForManageCourse();
+            var groups = await _courseService.GetGroupForManageCourse();
             ViewData["Groups"] = new SelectList(groups, "Value", "Text");
 
             if (groups.Any())
             {
-                var subGroups = _courseService.GetSubGroupForManageCourse(int.Parse(groups.First().Value));
+                var subGroups = await _courseService.GetSubGroupForManageCourse(int.Parse(groups.First().Value));
                 ViewData["SubGroups"] = new SelectList(subGroups, "Value", "Text");
             }
 
         }
 
-        public IActionResult OnPost(IFormFile imgCourseUp, IFormFile demoUp)
+        public async Task<IActionResult> OnPost(IFormFile imgCourseUp)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _courseService.AddCourse(Product, imgCourseUp, demoUp);
+            await _courseService.AddCourse(Product, imgCourseUp);
 
             return RedirectToPage("Index");
         }

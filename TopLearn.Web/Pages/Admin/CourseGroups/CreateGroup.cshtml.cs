@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TopLearn.Core.Services.Interfaces;
@@ -21,18 +22,18 @@ namespace TopLearn.Web.Pages.Admin.CourseGroups
 
         public void OnGet(int? id)
         {
-            CourseGroups=new CourseGroup()
+            CourseGroups = new CourseGroup()
             {
                 ParentId = id
             };
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _courseService.AddGroup(CourseGroups);
+            await _courseService.AddGroup(CourseGroups);
 
             return RedirectToPage("Index");
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,68 +19,69 @@ namespace TopLearn.Core.Services
 {
     public class CourseService : ICourseService
     {
-        private TopLearnContext _context;
+        private readonly TopLearnContext _context;
 
         public CourseService(TopLearnContext context)
         {
             _context = context;
         }
 
-        public List<CourseGroup> GetAllGroup()
+        public async Task<List<CourseGroup>> GetAllGroup()
         {
-            return _context.CourseGroups.Include(c => c.CourseGroups).ToList();
+            return await _context.CourseGroups.Include(c => c.CourseGroups).ToListAsync();
         }
 
-        public List<SelectListItem> GetGroupForManageCourse()
+        public async Task<List<SelectListItem>> GetGroupForManageCourse()
         {
-            return _context.CourseGroups.Where(g => g.ParentId == null)
+            return await _context.CourseGroups.Where(g => g.ParentId == null)
                 .Select(g => new SelectListItem()
                 {
                     Text = g.GroupTitle,
                     Value = g.GroupId.ToString()
-                }).ToList();
+                }).ToListAsync();
         }
 
-        public List<SelectListItem> GetSubGroupForManageCourse(int groupId)
+        public async Task<List<SelectListItem>> GetSubGroupForManageCourse(int groupId)
         {
-            return _context.CourseGroups.Where(g => g.ParentId == groupId)
+            return await _context.CourseGroups.Where(g => g.ParentId == groupId)
                 .Select(g => new SelectListItem()
                 {
                     Text = g.GroupTitle,
                     Value = g.GroupId.ToString()
-                }).ToList();
+                }).ToListAsync();
         }
 
 
 
-        public CourseGroup GetById(int groupId)
+        public async Task<CourseGroup> GetById(int groupId)
         {
-            return _context.CourseGroups.Find(groupId);
+            return await _context.CourseGroups.FindAsync(groupId);
         }
 
-        public void AddGroup(CourseGroup @group)
+        public async Task AddGroup(CourseGroup @group)
         {
-            _context.CourseGroups.Add(group);
-            _context.SaveChanges();
+            await _context.CourseGroups.AddAsync(group);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateGroup(CourseGroup @group)
+        public async Task UpdateGroup(CourseGroup @group)
         {
             _context.CourseGroups.Update(group);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<ShowCourseForAdminViewModel> GetCoursesForAdmin()
+        public async Task<List<ShowCourseForAdminViewModel>> GetCoursesForAdmin()
         {
-            return _context.Courses.Select(c => new ShowCourseForAdminViewModel()
+            return await _context.Courses.Select(c => new ShowCourseForAdminViewModel()
             {
                 CourseId = c.ProductId,
                 ImageName = c.CourseImageName,
                 Title = c.CourseTitle,
-            }).ToList();
+                Price = c.CoursePrice
+            }).ToListAsync();
         }
 
-        public int AddCourse(Product product, IFormFile imgCourse, IFormFile courseDemo)
+        public async Task<int> AddCourse(Product product, IFormFile imgCourse)
         {
             product.CreateDate = DateTime.Now;
             product.CourseImageName = "no-photo.jpg";
@@ -87,30 +89,25 @@ namespace TopLearn.Core.Services
             if (imgCourse != null && imgCourse.IsImage())
             {
                 product.CourseImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    imgCourse.CopyTo(stream);
+                    await imgCourse.CopyToAsync(stream);
                 }
-
-              
             }
-
-
-
-            _context.Add(product);
-            _context.SaveChanges();
+            await _context.AddAsync(product);
+            await _context.SaveChangesAsync();
 
             return product.ProductId;
         }
 
-        public Product GetCourseById(int courseId)
+        public async Task<Product> GetCourseById(int courseId)
         {
-            return _context.Courses.Find(courseId);
+            return await _context.Courses.FindAsync(courseId);
         }
 
-        public void UpdateCourse(Product product, IFormFile imgCourse, IFormFile courseDemo)
+        public async Task UpdateCourse(Product product, IFormFile imgCourse)
         {
             product.UpdateDate = DateTime.Now;
 
@@ -118,36 +115,25 @@ namespace TopLearn.Core.Services
             {
                 if (product.CourseImageName != "no-photo.jpg")
                 {
-                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
-                    if (File.Exists(deleteimagePath))
+                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                    if (File.Exists(deleteImagePath))
                     {
-                        File.Delete(deleteimagePath);
-                    }
-
-                    string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/thumb", product.CourseImageName);
-                    if (File.Exists(deletethumbPath))
-                    {
-                        File.Delete(deletethumbPath);
+                        File.Delete(deleteImagePath);
                     }
                 }
                 product.CourseImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    imgCourse.CopyTo(stream);
+                    await imgCourse.CopyToAsync(stream);
                 }
-
-               
             }
-
-
-
             _context.Courses.Update(product);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Tuple<List<ShowCourseListItemViewModel>, int> GetCourse(int pageId = 1, string filter = ""
+        public async Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = ""
             , string getType = "all", string orderByType = "date",
             int startPrice = 0, int endPrice = 0, List<int> selectedGroups = null, int take = 0)
         {
@@ -205,43 +191,43 @@ namespace TopLearn.Core.Services
 
             if (selectedGroups != null && selectedGroups.Any())
             {
-                foreach (int groupId in selectedGroups)
+                foreach (var groupId in selectedGroups)
                 {
                     result = result.Where(c => c.GroupId == groupId || c.SubGroup == groupId);
                 }
 
             }
 
-            int skip = (pageId - 1) * take;
+            var skip = (pageId - 1) * take;
 
-            int pageCount = result.Select(c => new ShowCourseListItemViewModel()
+            var pageCount = await result.Select(c => new ShowCourseListItemViewModel()
             {
                 CourseId = c.ProductId,
                 ImageName = c.CourseImageName,
                 Price = c.CoursePrice,
                 Title = c.CourseTitle,
-            }).Count() / take;
+            }).CountAsync() / take;
 
-            var query = result.Select(c => new ShowCourseListItemViewModel()
+            var query = await result.Select(c => new ShowCourseListItemViewModel()
             {
                 CourseId = c.ProductId,
                 ImageName = c.CourseImageName,
                 Price = c.CoursePrice,
                 Title = c.CourseTitle,
-            }).Skip(skip).Take(take).ToList();
+            }).Skip(skip).Take(take).ToListAsync();
 
             return Tuple.Create(query, pageCount);
         }
 
-        public Product GetCourseForShow(int courseId)
+        public async Task<Product> GetCourseForShow(int courseId)
         {
-            return _context.Courses
-                .FirstOrDefault(c => c.ProductId == courseId);
+            return await _context.Courses
+                .FirstOrDefaultAsync(c => c.ProductId == courseId);
         }
 
-        public List<ShowCourseListItemViewModel> GetPopularCourse()
+        public async Task<List<ShowCourseListItemViewModel>> GetPopularCourse()
         {
-            return _context.Courses
+            return await _context.Courses
                 .Take(8)
                 .Select(c => new ShowCourseListItemViewModel()
                 {
@@ -250,13 +236,28 @@ namespace TopLearn.Core.Services
                     Price = c.CoursePrice,
                     Title = c.CourseTitle,
                 })
-                .ToList();
+                .ToListAsync();
         }
 
-        public void DeleteGroup(CourseGroup group)
+        public async Task DeleteGroup(CourseGroup group)
         {
             _context.CourseGroups.Remove(group);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteCourse(int courseId)
+        {
+            var product = await _context.Courses.FindAsync(courseId);
+            if (product.CourseImageName != "no-photo.jpg")
+            {
+                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                if (File.Exists(deleteImagePath))
+                {
+                    File.Delete(deleteImagePath);
+                }
+            }
+            _context.Courses.Remove(product);
+            await _context.SaveChangesAsync();
         }
     }
 }

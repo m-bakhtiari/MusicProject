@@ -20,43 +20,50 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="col-md-12" style="margin: 10px 0;">
-                          
+
                     <a asp-page="CreateCourse" class="btn btn-outline btn-success">افزودن دوره جدید</a>
-                           
+
                 </div>
-                
+
                 <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
                     <thead>
                         <tr>
                             <th>تصویر</th>
                             <th>عنوان دوره</th>
-                            <th>تعداد جلسه</th>
+                            <th>قیمت </th>
                             <th>دستورات</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model.ListCourse)
-                    {
-                        <tr>
-                            <td>
-                                <img src="/course/thumb/@item.ImageName" class="thumbnail"/>
-                            </td>
-                            <td>
-                                @item.Title
-                            </td>
-                            <td>
-                                @item.EpisodeCount
-                            </td>
-                            <td>
-                                <a href="/Admin/Courses/EditCourse/@item.CourseId" class="btn btn-warning btn-sm">
-                                    ویرایش
-                                </a>
-                                <a href="/Admin/Courses/IndexEpisode/@item.CourseId" class="btn btn-warning btn-sm">
-                                    افزودن بخش
-                                </a>
-                            </td>
-                        </tr>
-                    }
+                        @foreach (var item in Model.ListCourse)
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.ImageName == "no-photo.jpg")
+                                    {
+                                        <img src="/UserAvatar/Defult.jpg" alt="no-photo" style="width: 150px;height: 150px"/>
+                                    }
+                                    else
+                                    {
+                                        <img src="/course/image/@item.ImageName" alt="@item.Title" style="width: 150px;height: 150px" />
+                                    }
+                                </td>
+                                <td>
+                                    @item.Title
+                                </td>
+                                <td>
+                                    @item.Price
+                                </td>
+                                <td>
+                                    <a href="/Admin/Courses/EditCourse/@item.CourseId" class="btn btn-primary btn-sm">
+                                        ویرایش
+                                    </a>
+                                    <a href="/Admin/Courses/DeleteCourse/@item.CourseId" class="btn btn-warning btn-sm">
+                                        حذف
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
 

@@ -9,7 +9,7 @@ namespace TopLearn.Core.DTOs.Course
         public int CourseId { get; set; }
         public string Title { get; set; }
         public string ImageName { get; set; }
-        public int EpisodeCount { get; set; }
-
+        public int Price { get; set; }
+        
     }
 }

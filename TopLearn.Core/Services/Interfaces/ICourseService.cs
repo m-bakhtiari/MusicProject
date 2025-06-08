@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TopLearn.Core.DTOs.Course;
@@ -12,30 +13,32 @@ namespace TopLearn.Core.Services.Interfaces
     {
         #region Group
 
-        List<CourseGroup> GetAllGroup();
-        List<SelectListItem> GetGroupForManageCourse();
-        List<SelectListItem> GetSubGroupForManageCourse(int groupId);
-        CourseGroup GetById(int groupId);
-        void AddGroup(CourseGroup group);
-        void UpdateGroup(CourseGroup group);
+        Task<List<CourseGroup>> GetAllGroup();
+        Task<List<SelectListItem>> GetGroupForManageCourse();
+        Task<List<SelectListItem>> GetSubGroupForManageCourse(int groupId);
+        Task<CourseGroup> GetById(int groupId);
+        Task AddGroup(CourseGroup group);
+        Task UpdateGroup(CourseGroup group);
+        Task DeleteGroup(CourseGroup group);
 
-        void DeleteGroup(CourseGroup group);
         #endregion
 
         #region Course
 
-        List<ShowCourseForAdminViewModel> GetCoursesForAdmin();
+        Task<List<ShowCourseForAdminViewModel>> GetCoursesForAdmin();
 
-        int AddCourse(Product product, IFormFile imgCourse, IFormFile courseDemo);
-        Product GetCourseById(int courseId);
-        void UpdateCourse(Product product, IFormFile imgCourse, IFormFile courseDemo);
+        Task<int> AddCourse(Product product, IFormFile imgCourse);
+        Task<Product> GetCourseById(int courseId);
+        Task UpdateCourse(Product product, IFormFile imgCourse);
 
-        Tuple<List<ShowCourseListItemViewModel>,int> GetCourse(int pageId = 1, string filter = "", string getType = "all",
+        Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = "", string getType = "all",
             string orderByType = "date", int startPrice = 0, int endPrice = 0, List<int> selectedGroups = null,int take=0);
 
-        Product GetCourseForShow(int courseId);
+        Task<Product> GetCourseForShow(int courseId);
 
-        List<ShowCourseListItemViewModel> GetPopularCourse();
+        Task<List<ShowCourseListItemViewModel>> GetPopularCourse();
+
+        Task DeleteCourse(int courseId);
 
         #endregion
 

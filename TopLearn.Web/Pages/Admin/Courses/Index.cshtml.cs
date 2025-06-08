@@ -22,9 +22,9 @@ namespace TopLearn.Web.Pages.Admin.Courses
 
         public List<ShowCourseForAdminViewModel> ListCourse { get; set; }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            ListCourse = _courseService.GetCoursesForAdmin();
+            ListCourse = await _courseService.GetCoursesForAdmin();
         }
     }
 }

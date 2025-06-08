@@ -1,40 +1,35 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
-namespace TopLearn.Web.Pages.Admin.CourseGroups
+namespace TopLearn.Web.Pages.Admin.Courses
 {
-    [Authorize]
-    public class EditGroupModel : PageModel
+    public class DeleteCourseModel : PageModel
     {
-        private ICourseService _courseService;
+        private readonly ICourseService _courseService;
 
-        public EditGroupModel(ICourseService courseService)
+        public DeleteCourseModel(ICourseService courseService)
         {
             _courseService = courseService;
         }
 
         [BindProperty]
-        public CourseGroup CourseGroups { get; set; }
+        public Product Product { get; set; }
 
         public async Task OnGet(int id)
         {
-            CourseGroups = await _courseService.GetById(id);
+            ViewData["CourseId"] = id;
+            Product = await _courseService.GetCourseById(id);
         }
 
         public async Task<IActionResult> OnPost()
         {
-            if (!ModelState.IsValid)
-                return Page();
-
-            await _courseService.UpdateGroup(CourseGroups);
-
+            await _courseService.DeleteCourse(Product.ProductId);
             return RedirectToPage("Index");
         }
     }

@@ -24,18 +24,18 @@ namespace TopLearn.Web.Pages.Admin.Courses
 
         [BindProperty]
         public Product Product { get; set; }
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
-            Product = _courseService.GetCourseById(id);
+            Product = await _courseService.GetCourseById(id);
 
-            var groups = _courseService.GetGroupForManageCourse();
-            ViewData["Groups"] = new SelectList(groups, "Value", "Text",Product.GroupId);
+            var groups = await _courseService.GetGroupForManageCourse();
+            ViewData["Groups"] = new SelectList(groups, "Value", "Text", Product.GroupId);
 
-            List<SelectListItem> subgroups=new List<SelectListItem>()
+            List<SelectListItem> subgroups = new List<SelectListItem>()
             {
                 new SelectListItem(){Text = "انتخاب کنید",Value = ""}
             };
-            subgroups.AddRange(_courseService.GetSubGroupForManageCourse(Product.GroupId));
+            subgroups.AddRange(await _courseService.GetSubGroupForManageCourse(Product.GroupId));
             string selectedSubGroup = null;
             if (Product.SubGroup != null)
             {
@@ -45,12 +45,12 @@ namespace TopLearn.Web.Pages.Admin.Courses
 
         }
 
-        public IActionResult OnPost(IFormFile imgCourseUp, IFormFile demoUp)
+        public async Task<IActionResult> OnPost(IFormFile imgCourseUp)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _courseService.UpdateCourse(Product,imgCourseUp,demoUp);
+            await _courseService.UpdateCourse(Product, imgCourseUp);
 
             return RedirectToPage("Index");
         }

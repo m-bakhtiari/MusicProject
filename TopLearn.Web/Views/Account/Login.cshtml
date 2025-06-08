@@ -13,25 +13,7 @@
 
 <main class="client-page">
     <div class="container-content">
-        @if (ViewBag.IsSuccess != null)
-        {
-            <div class="alert alert-success">
-                <p class="help-block">ورود با موفقیت انجام شد</p>
-            </div>
 
-            <script>
-                // Your delay in milliseconds
-                var delay = 3000; 
-                setTimeout(function () { window.location = "https://localhost:44349/UserPanel"; }, delay);
-            </script>
-        }
-        
-        @if (ViewBag.EditProfile==true)
-        {
-            <div class="alert alert-warning">
-بدلیل ویرایش پروفایل و بارگزاری مجدد اطلاعات لطفا مجدد لاگین کنید
-            </div>
-        }
         <header><h2> ورود به سایت </h2></header>
 
         <div class="form-layer">
