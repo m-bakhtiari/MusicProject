@@ -26,6 +26,8 @@ namespace TopLearn.DataLayer.Context
         public DbSet<Product> Courses { get; set; }
         public DbSet<Academy> Academies { get; set; }
         public DbSet<Instrument> Instruments { get; set; }
+        public DbSet<StudentConcert> StudentConcerts { get; set; }
+        public DbSet<StudentConcertImage> StudentConcertImages { get; set; }
 
         #endregion
 
@@ -58,7 +60,6 @@ namespace TopLearn.DataLayer.Context
 
             modelBuilder.Entity<CourseGroup>()
                 .HasQueryFilter(g => !g.IsDelete);
-
 
 
             base.OnModelCreating(modelBuilder);
