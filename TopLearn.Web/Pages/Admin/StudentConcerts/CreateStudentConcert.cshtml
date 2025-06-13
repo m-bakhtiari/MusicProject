@@ -1,0 +1,101 @@
+﻿@page
+@model TopLearn.Web.Pages.Admin.StudentConcerts.CreateStudentConcertModel
+@{
+    ViewData["Title"] = "افزودن کنسرت هنرجویی جدید";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">افزودن کنسرت هنرجویی جدید</h1>
+    </div>
+</div>
+
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>عنوان</label>
+                <input type="text" asp-for="StudentConcert.Title" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>انتخاب تصویر</label>
+                <!-- به این شیوه name به فایل ها اختصاص می‌یابد و در ارسال فرم دریافت می‌شود -->
+                <input type="file" id="imageList" name="imageList" multiple>
+            </div>
+
+            <div class="form-group">
+                <div id="imagePreview"></div>
+            </div>
+
+            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        // یک DataTransfer برای مدیریت فایل‌های انتخاب شده ایجاد می‌کنیم.
+        var dt = new DataTransfer();
+
+        function updatePreview() {
+            $("#imagePreview").html("");
+            // بررسی فایل‌هایی که در DataTransfer هستند
+            for (var i = 0; i < dt.files.length; i++) {
+                var file = dt.files[i];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // ایجاد container برای هر عکس
+                    var imgContainer = $("<div>").css({
+                        "display": "inline-block",
+                        "position": "relative",
+                        "margin": "5px"
+                    });
+
+                    var img = $("<img>").attr("src", e.target.result).css({
+                        "width": "100px",
+                        "height": "100px",
+                        "display": "block"
+                    });
+
+                    // دکمه حذف برای هر عکس
+                    var deleteButton = $("<button>").text("X").css({
+                        "position": "absolute",
+                        "top": "5px",
+                        "right": "5px",
+                        "background": "red",
+                        "color": "white",
+                        "border": "none",
+                        "cursor": "pointer",
+                        "padding": "2px 5px"
+                    }).click(function () {
+                        // حذف فایل از DataTransfer
+                        dt.items.remove(i);
+                        // به‌روزرسانی لیست فایل‌های موجود در فایل اینپوت.
+                        $("#imageList").prop("files", dt.files);
+                        // به‌روزرسانی نمایش تصاویر
+                        updatePreview();
+                    });
+
+                    imgContainer.append(img).append(deleteButton);
+                    $("#imagePreview").append(imgContainer);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // هنگامی که کاربر فایل انتخاب می‌کند
+        $("#imageList").on("change", function (e) {
+            var files = e.target.files;
+            // فایل‌های جدید به DataTransfer اضافه شوند
+            for (let i = 0; i < files.length; i++) {
+                dt.items.add(files[i]);
+            }
+            // ویژگی files اینپوت را به‌روز‌رسانی می‌کنیم
+            $("#imageList").prop("files", dt.files);
+            updatePreview();
+        });
+    </script>
+}

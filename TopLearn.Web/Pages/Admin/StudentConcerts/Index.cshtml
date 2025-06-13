@@ -1,0 +1,68 @@
+﻿@page
+@model TopLearn.Web.Pages.Admin.StudentConcerts.IndexModel
+@{
+    ViewData["Title"] = "لیست کنسرت های هنرجویی";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">لیست کنسرت های هنرجویی</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                لیست گروه های سایت
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <div class="col-md-12" style="margin: 10px 0;">
+
+                            <a asp-page="CreateStudentConcert" class="btn btn-outline btn-success">افزودن گروه جدید</a>
+
+                        </div>
+                        @if (ViewData["Error"] != null)
+                        {
+                            <p class="alert alert-warning">@ViewData["Error"]</p>
+                        }
+                        <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+                            <thead>
+                                <tr>
+                                    <th>عنوان </th>
+                                    <th>تاریخ کنسرت</th>
+                                    <th>دستورات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var concert in Model.StudentConcert)
+                                {
+                                    <tr>
+                                        <td>@concert.Title</td>
+                                        <td>@concert.ConcertDate</td>
+                                        <td>
+                                            <a href="/Admin/StudentConcerts/EditStudentConcert/@concert.StudentConcertId" class="btn btn-warning btn-sm">
+                                                ویرایش
+                                            </a>
+                                            <a href="/Admin/StudentConcerts/DeleteStudentConcert/@concert.StudentConcertId" class="btn btn-danger btn-sm">
+                                                حذف
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

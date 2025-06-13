@@ -49,6 +49,7 @@
     <Folder Include="wwwroot\MyImages\" />
     <Folder Include="wwwroot\courseFiles\" />
     <Folder Include="wwwroot\academy\" />
+    <Folder Include="wwwroot\studentConcert\" />
   </ItemGroup>
 
 </Project>

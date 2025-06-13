@@ -24,12 +24,7 @@ namespace TopLearn.Core.Services
         public async Task Add(StudentConcert studentConcert, List<IFormFile> imagesFiles)
         {
             var insert = await _context.StudentConcerts.AddAsync(studentConcert);
-            var img = new StudentConcertImage
-            {
-                ImageName = "no-photo.jpg",
-                StudentConcertId = insert.Entity.StudentConcertId
-            };
-            await _context.StudentConcertImages.AddAsync(img);
+           
             if (imagesFiles != null)
             {
                 foreach (var file in imagesFiles)
@@ -46,6 +41,15 @@ namespace TopLearn.Core.Services
                     }
                     await _context.StudentConcertImages.AddAsync(photo);
                 }
+            }
+            else
+            {
+                var img = new StudentConcertImage
+                {
+                    ImageName = "no-photo.jpg",
+                    StudentConcertId = insert.Entity.StudentConcertId
+                };
+                await _context.StudentConcertImages.AddAsync(img);
             }
             await _context.SaveChangesAsync();
         }
