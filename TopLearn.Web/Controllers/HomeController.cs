@@ -18,5 +18,42 @@ namespace TopLearn.Web.Controllers
         {
             return View();
         }
+
+
+        public async Task<IActionResult> Download(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+                return NotFound();
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", filename);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+
+            return File(memory, GetContentType(filename), filename);
+        }
+
+
+        private string GetContentType(string path)
+        {
+            var types = new Dictionary<string, string>
+            {
+                { ".pdf", "application/pdf" },
+                { ".png", "image/png" },
+                { ".jpg", "image/jpeg" },
+                { ".jpeg", "image/jpeg" }
+            };
+
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types.ContainsKey(ext) ? types[ext] : "application/octet-stream";
+        }
+
     }
 }

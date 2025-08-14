@@ -72,6 +72,7 @@ namespace TopLearn.Web
             services.AddTransient<IAcademyService, AcademyService>();
             services.AddTransient<IInstrumentService, InstrumentService>();
             services.AddTransient<IStudentConcertService, StudentConcertService>();
+            services.AddTransient<IMusicNoteService, MusicNoteService>();
 
             #endregion
         }

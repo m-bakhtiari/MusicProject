@@ -85,7 +85,7 @@ namespace TopLearn.Core.Services
                     }
                 }
             }
-
+            _context.StudentConcertImages.RemoveRange(studentConcert.StudentConcertImages);
             _context.StudentConcerts.Remove(studentConcert);
             await _context.SaveChangesAsync();
         }

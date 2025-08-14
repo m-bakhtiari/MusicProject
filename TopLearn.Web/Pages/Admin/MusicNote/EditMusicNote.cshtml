@@ -1,0 +1,61 @@
+﻿@page "{id}"
+@model TopLearn.Web.Pages.Admin.MusicNote.EditMusicNoteModel
+@{
+    ViewData["Title"] = "ویرایش نت";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">افزودن نت جدید</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="MusicNote.MusicNoteId" />
+        <input type="hidden" asp-for="MusicNote.FileName" />
+
+        <!-- /.panel-heading -->
+        <div class="col-12">
+            <div class="form-group">
+                <label>عنوان نت</label>
+                <input type="text" asp-for="MusicNote.Title" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>فایل قبلی</label>
+                <embed src="/note/@Model.MusicNote.FileName"/>
+            </div>
+            <div class="form-group">
+                <label>انتخاب فایل نت</label>
+                <input type="file" name="imgLogo" id="imgLogo">
+            </div>
+            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgCourse').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgLogo").change(function () {
+            readURL(this);
+        });
+
+    </script>
+}
+
+
+
