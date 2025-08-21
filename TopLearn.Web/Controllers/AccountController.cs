@@ -64,11 +64,12 @@ namespace TopLearn.Web.Controllers
                     HttpContext.SignInAsync(principal, properties);
 
                     ViewBag.IsSuccess = true;
-                    if (ReturnUrl != "/")
-                    {
-                        return Redirect(ReturnUrl);
-                    }
-                    return View();
+                    //if (ReturnUrl != "/")
+                    //{
+                    //    return Redirect(ReturnUrl);
+                    //}
+                    //return View();
+                    return Redirect("/Admin");
                 }
                 else
                 {

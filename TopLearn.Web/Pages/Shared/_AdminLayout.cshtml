@@ -1,25 +1,15 @@
-﻿@using TopLearn.Core.Services.Interfaces
-
-
+﻿
 <!DOCTYPE html>
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>پنل مدیریت  </title>
-
-    <!-- Core CSS - Include with every page -->
     <link href="/AdminContent/css/bootstrap-rtl.css" rel="stylesheet">
     <link href="/AdminContent/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="/AdminContent/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="/AdminContent/css/plugins/timeline/timeline.css" rel="stylesheet">
-
-    <!-- SB Admin CSS - Include with every page -->
     <link href="/AdminContent/css/sb-admin.css" rel="stylesheet">
 
 </head>
@@ -38,15 +28,12 @@
                 </button>
                 <a class="navbar-brand" href="https://vahidnajafizadeh.com/" target="_blank">Vahidnajafizadeh.com</a>
             </div>
-            <!-- /.navbar-header -->
-
-
 
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="/Admin"><i class="fa fa-dashboard fa-fw"></i> پنل ادمین</a>
+                            <a href="/Admin"> پنل ادمین</a>
                         </li>
                         <li>
                             <a href="/Admin/Courses">محصولات</a>
@@ -67,36 +54,27 @@
                             <a href="/Admin/MusicNote">نت ها</a>
                         </li>
                     </ul>
-                    <!-- /#side-menu -->
                 </div>
-                <!-- /.sidebar-collapse -->
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
 
         <div id="page-wrapper">
             @RenderBody()
         </div>
-        <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-    <!-- Core Scripts - Include with every page -->
+
     @*<script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>*@
     <script src="/AdminContent/js/jquery-1.10.2.js"></script>
     <script src="/AdminContent/js/bootstrap.min.js"></script>
     <script src="/AdminContent/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-    <!-- Page-Level Plugin Scripts - Dashboard -->
     <script src="/AdminContent/js/plugins/morris/raphael-2.1.0.min.js"></script>
     <script src="/AdminContent/js/plugins/morris/morris.js"></script>
 
-    <!-- SB Admin Scripts - Include with every page -->
     <script src="/AdminContent/js/sb-admin.js"></script>
-
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
     <script src="/AdminContent/js/demo/dashboard-demo.js"></script>
-    @RenderSection("Scripts", false)
+    @await RenderSectionAsync("Scripts", false)
 </body>
 
 </html>
