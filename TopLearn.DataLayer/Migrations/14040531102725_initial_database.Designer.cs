@@ -10,8 +10,8 @@ using TopLearn.DataLayer.Context;
 namespace TopLearn.DataLayer.Migrations
 {
     [DbContext(typeof(TopLearnContext))]
-    [Migration("14040523104110_add_MusicNote")]
-    partial class add_MusicNote
+    [Migration("14040531102725_initial_database")]
+    partial class initial_database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
