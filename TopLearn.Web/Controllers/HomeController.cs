@@ -8,51 +8,29 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using TopLearn.Core.DTOs;
 using TopLearn.Core.Services.Interfaces;
 
 namespace TopLearn.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IInstrumentService _instrumentService;
+        private readonly IAcademyService _academyService;
+
+        public HomeController(IInstrumentService instrumentService, IAcademyService academyService)
         {
-            return View();
+            _instrumentService = instrumentService;
+            _academyService = academyService;
         }
-
-
-        public async Task<IActionResult> Download(string filename)
+        public async Task<IActionResult> Index()
         {
-            if (string.IsNullOrEmpty(filename))
-                return NotFound();
-
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", filename);
-
-            if (!System.IO.File.Exists(filePath))
-                return NotFound();
-
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            var model = new ItemForIndexDto()
             {
-                await stream.CopyToAsync(memory);
-            }
-            memory.Position = 0;
-
-            return File(memory, GetContentType(filename), filename);
-        }
-
-
-        private string GetContentType(string path)
-        {
-            var types = new Dictionary<string, string>
-            {
-                { ".pdf", "application/pdf" },
-                { ".png", "image/png" },
-                { ".jpg", "image/jpeg" },
-                { ".jpeg", "image/jpeg" }
+                Instruments = await _instrumentService.GetAll(),
+                Academies = await _academyService.GetAllAcademy()
             };
-
-            var ext = Path.GetExtension(path).ToLowerInvariant();
-            return types.ContainsKey(ext) ? types[ext] : "application/octet-stream";
+            return View(model);
         }
 
     }

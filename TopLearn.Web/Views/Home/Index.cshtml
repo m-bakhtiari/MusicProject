@@ -1,518 +1,471 @@
-﻿@{
-    ViewData["Title"] = "خانه";
-}
+﻿@model TopLearn.Core.DTOs.ItemForIndexDto
 
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<section class="hero" data-scroll-section>
+    <video width="100%" height="auto" autoplay muted loop>
+        <source src="SiteTemplate/img/hirovid.mp4" type="video/mp4">
+    </video>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="وحید نجفی زاده مدرس و نوازنده پرکاشن">
-    <link rel="stylesheet" href="/ostad/assets/css/bootstrap.rtl.min.css">
-    <link rel="stylesheet" href="/ostad/assets/css/meanmenu.css">
-    <link rel="stylesheet" href="/ostad/assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/ostad/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/ostad/assets/css/icofont.min.css">
-    <link rel="stylesheet" href="/ostad/assets/css/font-awesome-pro.css">
-    <link rel="stylesheet" href="/ostad/assets/css/scrollcue.css">
-    <link rel="stylesheet" href="/ostad/assets/css/magnific-popup.min.css">
-    <link rel="stylesheet" href="/ostad/assets/css/helvetica-neue.css">
-    <link rel="stylesheet" href="/ostad/assets/css/style.css">
-    <link rel="stylesheet" href="/ostad/assets/css/responsive.css">
-    <link rel="icon" href="/ostad/assets/favicon-96x96.png" sizes="96x96" type="image/png">
-    <link rel="icon" href="/ostad/assets/web-app-manifest-192x192.png" sizes="192x192" type="image/png">
-    <link rel="icon" href="/ostad/assets/web-app-manifest-512x512.png" sizes="512x512" type="image/png">
-
-</head>
-
-<body class="business-agency-body">
-    <div class="preloader">
-        <div class="content">
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
+    <div class="divHero">
+        <div class="titleHero">
+            vahid
+            <br />
+            najafizadeh
         </div>
+
     </div>
-    <div class="navbar-area style-two bg-color-0c0c1c py-0">
-        <div class="main-nav">
-            <div class="container mw-1680">
-                <nav class="navbar navbar-expand-md">
-                    <!-- <a class="navbar-brand" href="/" style="width: 3.5em; height: 3.5em;">
-                        <img src=".//ostad/assets/images/V-Logo.png" alt="logo">
-                    </a> -->
-                    <div class="collapse navbar-collapse for-mobile-menu" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a href="/" class="nav-link dropdown-toggle active">صفحه اصلی</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#aboutus" class="nav-link dropdown-toggle  "> درباره من </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#instrument" class="nav-link dropdown-toggle  "> ساز ها </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#academy" class="nav-link dropdown-toggle  "> آموزشگاه ها </a>
-                            </li>
 
-                        </ul>
-                        <div class="nav-right-options d-flex align-items-center">
 
-                            <a href="https://wa.me/989354868864" target="_blank"
-                               class="main-btn d-none d-lg-block">
-                                <span>در تماس باشید</span>
-                                <i class="fa-brands fa-whatsapp"></i>
-                            </a>
+
+    <div class="text" data-scroll data-scroll-speed=".5">
+        <h2> SCROLL dOWN</h2>
+        <span class="line"></span>
+    </div>
+</section>
+
+<section data-scroll-section>
+    <div class="imgOverlay"></div>
+</section>
+
+<section data-scroll-section class="textMain">
+    <h4>پیشینه هنری</h4>
+    <h5>
+        نوازنده و مدرس پرکاشن(سازهای کوبه ای)
+        <br>
+        دارای کارت صلاحیت تدریس از وزارت فرهنگ و ارشاد
+        <br>
+        شروع فعالیت از سال 81
+        <br>
+        سابقه اجرا با گروه سنتی ، پاپ و ارکسترال
+        <br>
+        سابقه تدریس در آکادمی های موسیقی تهران و ارائه ورکشاپ سازهای کوبه ای در آکادمی های تهران
+        <br>
+        نویسنده و مولف کتاب کاخن
+        <br>
+        سرپرست گروه موسیقی هاوانا
+        <br>
+        برگزارکننده کنسرت های هاوانا با خواننده های پاپ و تلفیقی در سالن های کنسرت تهران
+    </h5>
+</section>
+
+<br />
+<section data-scroll-section class="imgCenter">
+    <img src="SiteTemplate/img/Copilot_vahid.png" style="width: 33%;">
+</section>
+
+<br />
+
+<section class="intro sliderNot" data-scroll-section>
+    <section class="base-template">
+        <div class="wrapper base-template__wrapper">
+
+
+            <div class="base-template__content">
+                <div class="horizontal-ticker">
+                    <div id="horizontal-ticker-rtl" class="swiper horizontal-ticker__slider">
+                        @foreach (var item in Model.Instruments)
+                        {
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide horizontal-ticker__slide">
+                                    @item.InstrumentTitle
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Horizontal Ticker: Slider LTR -->
+
+                    <div id="horizontal-ticker-ltr" class="swiper horizontal-ticker__slider">
+                        <div class="swiper-wrapper">
+                            @foreach (var item in Model.Instruments)
+                            {
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide horizontal-ticker__slide">
+                                        @item.InstrumentTitle
+                                    </div>
+                                </div>
+                            }
+
                         </div>
                     </div>
-                </nav>
-            </div>
-        </div>
-        <div class="mobile-nav">
-            <div class="container">
-                <div class="mobile-menu">
-                    <!-- <div class="logo"><a href="/" style="width: 1.5em; height: 1.5em;"><img
-                                src=".//ostad/assets/images/V-Logo.png" alt="logo"></a></div> -->
+
                 </div>
             </div>
         </div>
-    </div>
-    <div class="banner-area-two">
-        <div class="container mw-1680">
-            <div class="row align-items-center">
-                <div class="col-lg-7" id="aboutus">
-                    <div class="banner-content-two position-relative" data-cues="slideInUp" data-group="images"
-                         style="color: white;">
+    </section>
+</section>
 
-                        <h2>وحید نجفی زاده</h2>
-                        <div>
-                            <h3>پیشینه هنری</h3>
-                            نوازنده و مدرس پرکاشن(سازهای کوبه ای)
-                            <br>
-                            دارای کارت صلاحیت تدریس از وزارت فرهنگ و ارشاد
-                            <br>
-                            شروع فعالیت از سال 81
-                            <br>
-                            سابقه اجرا با گروه سنتی ، پاپ و ارکسترال
-                            <br>
-                            سابقه تدریس در آکادمی های موسیقی تهران و ارائه ورکشاپ سازهای کوبه ای در آکادمی های تهران
-                            <br>
-                            نویسنده و مولف کتاب کاخن
-                            <br>
-                            سرپرست گروه موسیقی هاوانا
-                            <br>
-                            برگزارکننده کنسرت های هاوانا با خواننده های پاپ و تلفیقی در سالن های کنسرت تهران
-                            <br>
-                            <div style="direction: ltr;">
-                                <br>
-                                <h2>Vahid Najafizadeh</h2>
-                                <h3>Artistic Background</h3>
-                                Percussionist and Instructor
-                                <br>
-                                Has a teaching qualification card from the Ministry of Culture and Guidance
-                                <br>
-                                Started activity in 2002
-                                <br>
-                                Performance history with traditional, pop and orchestral groups
-                                <br>
-                                Teaching background in Tehran's musical instrument academies
-                                And presenting percussion workshops in Tehran's academies
-                                <br>
-                                Author and instructor of the book "Cajon"
-                                <br>
-                                Leader of the Havana's music Group
-                                <br>
-                                Organizer of Havana's concerts with pop and fusion singers in Tehran concert halls
+<br />
+
+<section class="intro TeamSec" data-scroll-section>
+    <h1 class="titrSec base-template__title">
+        Artistic Background
+    </h1>
+
+    <div class="base-template__text">
+        Percussionist and Instructor
+        <br>
+        Has a teaching qualification card from the Ministry of Culture and Guidance
+        <br>
+        Started activity in 2002
+        <br>
+        Performance history with traditional, pop and orchestral groups
+        <br>
+        Teaching background in Tehran's musical instrument academies And presenting percussion workshops in
+        Tehran's academies
+        <br>
+        "Author and instructor of the book "Cajon
+        <br>
+        Leader of the Havana's music Group
+        <br>
+        Organizer of Havana's concerts with pop and fusion singers in Tehran concert halls
+
+    </div>
+</section>
+
+<section class="intro TeamSecT" data-scroll-section>
+
+    <div class="why-us-cards">
+        <div class="pair-cards why-us-s">
+            <div class="pair-card-view s1"
+                 style="transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;">
+                <div class="why-us-card s1">
+                    <div class="why-us-trail-area"
+                         style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px);">
+                        <div class="why-us-trail-flex down">
+                            <div class="why-us-trail move-down">
+                                <div class="why-us-taril-cards">
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad3.jpeg" loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <div class="why-us-video-embed w-embed">
+                                            <div style="width: 100%; height: 100%;"
+                                                 class="w-background-video w-background-video-atom">
+                                                <video loop="" playsinline="" autoplay="" muted=""
+                                                       data-action="video" loading="lazy">
+                                                    <source src="img/conga_ostad.jpeg" data-wf-ignore="true">
+                                                </video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad3.jpeg" loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/conga_ostad.jpeg" loading="lazy" alt=""
+                                             class="image-cover">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- <div class="d-flex align-items-center">
-                            <a href="/" class="main-btn style-two"><span>بیشتر بدانید</span><i
-                                    class="fa-regular fa-arrow-right"></i></a><a href="about-us.html"
-                                class="circle-btn-two position-relative">
-                                <div class="btn-info">
-                                    <span>درباره ما</span><i class="fa-solid fa-arrow-up-right"></i>
+                        <div class="why-us-trail-flex">
+                            <div class="why-us-trail move-up">
+                                <div class="why-us-taril-cards">
+                                    <div class="why-us-taril-card">
+                                        <img src="img/conga_ostad.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad3.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <div class="why-us-video-embed w-embed">
+                                            <div style="width: 100%; height: 100%;"
+                                                 class="w-background-video w-background-video-atom">
+                                                <video loop="" playsinline="" autoplay="" muted=""
+                                                       data-action="video" loading="lazy">
+                                                    <source src="img/ostad2.jpeg" data-wf-ignore="true">
+                                                </video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad2.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/conga_ostad.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad3.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
                                 </div>
-                            </a>
-                        </div> -->
-
+                            </div>
+                        </div>
+                        <div class="why-us-trail-flex down">
+                            <div class="why-us-trail move-down">
+                                <div class="why-us-taril-cards">
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad2.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/conga_ostad.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <div class="why-us-video-embed w-embed">
+                                            <div style="width: 100%; height: 100%;"
+                                                 class="w-background-video w-background-video-atom">
+                                                <video loop="" playsinline="" autoplay="" muted=""
+                                                       data-action="video" loading="lazy">
+                                                    <source src="img/ostad3.jpeg" data-wf-ignore="true">
+                                                </video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/conga_ostad.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad2.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="img/ostad3.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="why-us-move-css w-embed"></div>
                     </div>
-                </div>
-                <div class="col-lg-5" data-cues="slideInUp">
-                    <div class="banner-img">
-                        <img src="/ostad/assets/images/ostadd.jpg" alt="banner-img"><img src="/ostad/assets/images/banner-img-shape.png" class="banner-img-shape" alt="banner-img-shape">
-                    </div>
+                    <div class="why-us-inner-shadow"></div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="about-us-area pb-100" id="instrument">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4">
-                    <div class="about-us-img-two" data-cues="slideInUp">
-                        <img src="/ostad/assets/images/ostad3.jpg"
-                             alt="about-us">
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="about-us-content-two" data-cues="slideInUp">
-                        <!-- <span class="top-title style-two">درباره ما بدانید</span> -->
-                        <h2> سازهای تدریس شده </h2>
-
-                        <p>کونگا / کاخن / هنگدرام / جیمبی / بینگو-بانگو / داربوکا / دف / تنبک</p>
-
-                        <div class="d-flex align-items-center position-relative mt-40">
-                            <!-- <a href="about-us.html" class="main-btn style-two">بیشتر پیدا کن
-                                <i class="fa-regular fa-arrow-right"></i>
-                            </a> -->
-                            <a href="instagram://user?username=vahidnajafizadeh" class="video-btn ms-3 ms-lg-5">
-                                <i class="fa-brands fa-instagram video-btn-animate whites"></i>
-                                <span class="d-none d-sm-inline-block">ویدیوهای بیشتر</span>
-                            </a>
+            <div class="pair-card-view s2"
+                 style="opacity: 1; transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+                <div why-us-avatars="" class="why-us-card s2">
+                    <div class="why-us-avatars"
+                         style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px);">
+                        <div class="why-us-avatar-position s1 visible"
+                             data-original-transform="matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0)"
+                             style="transform: scale(1) matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s2 visible"
+                             data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
+                             style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s3 visible"
+                             data-original-transform="matrix(0.996195, -0.0871557, 0.0871557, 0.996195, 0, 0)"
+                             style="transform: scale(1) matrix(0.996195, -0.0871557, 0.0871557, 0.996195, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s4 visible"
+                             data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
+                             style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s5 visible"
+                             data-original-transform="matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0)"
+                             style="transform: scale(1) matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s6 visible"
+                             data-original-transform="matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0)"
+                             style="transform: scale(1) matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s7 visible"
+                             data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
+                             style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad2.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s8 visible"
+                             data-original-transform="matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0)"
+                             style="transform: scale(1) matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad3.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s9 visible"
+                             data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
+                             style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s10 visible"
+                             data-original-transform="matrix(0.984808, -0.173648, 0.173648, 0.984808, 0, 0)"
+                             style="transform: scale(1) matrix(0.984808, -0.173648, 0.173648, 0.984808, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad2.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s11 visible"
+                             data-original-transform="matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0)"
+                             style="transform: scale(1) matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad3.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s12 visible"
+                             data-original-transform="matrix(0.965926, 0.258819, -0.258819, 0.965926, 0, 0)"
+                             style="transform: scale(1) matrix(0.965926, 0.258819, -0.258819, 0.965926, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s13 visible"
+                             data-original-transform="matrix(0.906308, 0.422618, -0.422618, 0.906308, 0, 0)"
+                             style="transform: scale(1) matrix(0.906308, 0.422618, -0.422618, 0.906308, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s14 visible"
+                             data-original-transform="matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0)"
+                             style="transform: scale(1) matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s15 visible"
+                             data-original-transform="matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0)"
+                             style="transform: scale(1) matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s16 visible"
+                             data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
+                             style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad1.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s17 visible"
+                             data-original-transform="matrix(0.970296, 0.241922, -0.241922, 0.970296, 0, 0)"
+                             style="transform: scale(1) matrix(0.970296, 0.241922, -0.241922, 0.970296, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad2.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s18 visible"
+                             data-original-transform="matrix(0.997564, 0.0697565, -0.0697565, 0.997564, 0, 0)"
+                             style="transform: scale(1) matrix(0.997564, 0.0697565, -0.0697565, 0.997564, 0, 0);">
+                            <div data-rotate="2" class="why-us-avatar">
+                                <img src="img/ostad3.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
+                        </div>
+                        <div class="why-us-avatar-position s19 visible"
+                             data-original-transform="matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0)"
+                             style="transform: scale(1) matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0);">
+                            <div data-rotate="1" class="why-us-avatar">
+                                <img src="img/ostad2.jpeg" loading="lazy"
+                                     alt="" class="image-cover">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="avarars-js w-embed w-script">
 
-    <div class="marquee-area" style="background-color: white;">
-        <div class="container-fluid">
-            <div class="marquee-wrapper">
-                <div class="marquee" data-cues="slideInUp">
-                    <a href="#instrument"><span>Conga</span></a><a href="#instrument">
-                        <span>
-                            Cajon
-                        </span>
-                    </a><a href="#instrument">
-                        <span>
-                            Hang
-                            Drum
-                        </span>
-                    </a><a href="#instrument"><span>Tonbak</span></a><a href="#instrument">
-                        <span>
-                            Daf
-                        </span>
-                    </a><a href="#instrument"><span>Bongos</span></a><a href="#instrument">
-                        <span>
-                            Darbuka
-                        </span>
-                    </a><a href="#instrument"><span>Djembe</span></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="testimonials-area-two ptb-100" id="academy">
-        <div class="container">
-            <div class="row align-items-center" data-cues="slideInUp">
-                <div class="col-lg-8">
-                    <div class="testimonial-slide-two owl-carousel owl-theme">
-                        <div class="testimonials-single-item-two">
-                            <ul class="ps-0 list-unstyled d-flex gap-2 review">
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
+</section>
+
+<br />
+<br />
+
+<section class="products" data-scroll-section>
+    <div class="titrSec">
+        <p>
+            The academies where I teach
+        </p>
+    </div>
+</section>
+
+<section class="products" data-scroll-section>
+
+    <div class="sliderMe">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.Academies)
+                {
+                    <div class="swiper-slide">
+                        <div class="amozeshga">
+                            <ul>
+                                <li>
+                                    <img src="/academy/@item.LogoImageName" alt="@item.AcademyTitle">
+                                </li>
+                                <li>
+                                    <a class="titleAmozeshga" href="@item.Website" target="_blank">
+                                        @item.AcademyTitle
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="TitleInner"> روزهای تدریس :</span>
+                                    <span class="DescInner">
+                                        @item.ActiveDays
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="TitleInner">
+                                        آدرس :
+                                    </span>
+                                    <span class="DescInner">
+                                        @item.Address
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="TitleInner">
+                                        تلفن :
+                                    </span>
+                                    <span class="DescInner">
+                                        @item.Phone
+                                    </span>
+                                </li>
                             </ul>
-                            <p>
-                                <a href="https://www.nivaak.com/default.aspx" target="_blank">
-                                    آموزشگاه نیواک
-                                </a>
-                                <br>
-                                روزهای تدریس : شنبه ها
-                                <br>
-                                تهران، شهرک گلستان، بلوار گلها، نبش بنفشه پنجم، پلاک82
-                                <br>
-                                تلفن :02144754300
-                            </p>
-
-                            <div class="d-flex align-items-center info">
-                                <div class="flex-shrink-0">
-                                    <img src=".//ostad/assets/images/Nivak-logo.png" class="rounded-circle" alt="nivak"
-                                         style="background-color: antiquewhite;width: 100px ;height: 100px;">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h3>
-                                        <a href="https://www.nivaak.com/default.aspx" target="_blank">
-                                            آموزشگاه نیواک
-                                        </a>
-                                    </h3>
-                                    <span>02144754300</span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="testimonials-single-item-two">
-                            <ul class="ps-0 list-unstyled d-flex gap-2 review">
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                            </ul>
-
-                            <p>
-                                <a href="http://www.sornaacademy.com/" target="_blank"> آموزشگاه ملک مسعودی </a>
-                                <br>
-                                روز تدریس : یکشنبه ها
-                                <br>
-                                آدرس : مجیدیه شمالی - میدان ملت - خیابان قلیچ خانی - نبش کوچه فضلعلی بیک
-                                <br>
-                                تلفن : 02122330355
-                            </p>
-                            <div class="d-flex align-items-center info">
-                                <div class="flex-grow-1 ms-3">
-                                    <h3>
-                                        <a href="https://www.instagram.com/academy_malek_masoodi?igsh=MTd5bGNvb3ZidTJjcQ=="
-                                           target="_blank"> آموزشگاه ملک مسعودی </a>
-                                    </h3>
-                                    <span>02122330355</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonials-single-item-two">
-                            <ul class="ps-0 list-unstyled d-flex gap-2 review">
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                            </ul>
-
-                            <p>
-                                <a href="http://www.sornaacademy.com/" target="_blank"> آموزشگاه سرنا </a>
-                                <br>
-                                روز تدریس : دوشنبه ها
-                                <br>
-                                آدرس : خیابان انقلاب، بین شریعتی و بهار، ساختمان آریان، طبقه پنجم شرقی
-                                <br>
-                                تلفن : 02177647535
-                            </p>
-                            <div class="d-flex align-items-center info">
-                                <div class="flex-shrink-0">
-                                    <img src=".//ostad/assets/images/Sorna.png" class="rounded-circle" alt="sorna"
-                                         style="width: 100px; height: 100px;">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h3>
-                                        <a href="http://www.sornaacademy.com/" target="_blank"> آموزشگاه سرنا </a>
-                                    </h3>
-                                    <span>02177647535</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonials-single-item-two">
-                            <ul class="ps-0 list-unstyled d-flex gap-2 review">
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                            </ul>
-                            <p>
-                                <a href="https://www.pedarmusic.ir/" target="_blank"> آموزشگاه پدر </a> <br>
-                                روزهای تدریس : سه شنبه ها
-                                <br>
-                                فلکه دوم صادقیه، بلوار آیت اله کاشانی، نرسیده به خیابان مهران، پلاک 89، طبقه اول
-                                <br>
-                                تلفن :02144960323
-                            </p>
-
-                            <div class="d-flex align-items-center info">
-                                <div class="flex-shrink-0">
-                                    <img src=".//ostad/assets/images/pedar-logo.png" class="rounded-circle" alt="pedar"
-                                         style="background-color: antiquewhite; width: 100px; height: 100px;">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h3>
-                                        <a href="https://www.pedarmusic.ir/" target="_blank"> آموزشگاه پدر </a>
-                                    </h3>
-                                    <span>02144960323</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonials-single-item-two">
-                            <ul class="ps-0 list-unstyled d-flex gap-2 review">
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                            </ul>
-                            <p>
-                                <a href="https://gat-music.com/" target="_blank"> آموزشگاه گات </a> <br>
-                                روزهای تدریس : پنج شنبه ها
-                                <br>
-                                تهران، اتوبان همت، خیابان شیراز جنوبی ، کوچه یاس غربی پ۲۳ زنگ ۲
-                                <br>
-                                تلفن :02188941366
-                            </p>
-
-                            <div class="d-flex align-items-center info">
-                                <div class="flex-shrink-0">
-                                    <img src=".//ostad/assets/images/gat-logo.webp"
-                                         class="rounded-circle" alt="gat" style="width: 100px; height: 100px;">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h3>
-                                        <a href="https://gat-music.com/" target="_blank"> آموزشگاه گات </a>
-                                    </h3>
-                                    <span>02188941366</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-img mt-4 mt-lg-0">
-                        <img src="/ostad/assets/images/conga_ostad.jpeg"
-                             alt="testimonial">
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
-
-
-    <div class="footer-area pt-100 pb-75">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4" data-cues="slideInUp">
-                    <div class="footer-single-item style-two">
-                        <!-- <a href="/" class="logo" style="width: 1.5em;height: 1.5em;">
-                            <img src=".//ostad/assets/images/V-Logo.png" alt="white-logo"></a> -->
-                        <p>
-                            وحید نجفی زاده نوازنده و مدرس پرکاشن
-                        </p>
-
-
-                        <ul class="social-link ps-0 mb-0 list-unstyled">
-                            <li>
-                                <a href="https://instagram.com/vahidnajafizadeh" target="_blank">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://instagram.com/vahidnajafizadeh_student" target="_blank">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://instagram.com/havanaCompanyOfficial" target="_blank">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://wa.me/989354868864" target="_blank">
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xl-8">
-                    <div class="row" data-cues="slideInUp">
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="footer-single-item style-two">
-                                <h3>سازها </h3>
-                                <ul class="useful-link">
-                                    <li><a href="#instrument"> Conga </a></li>
-                                    <li><a href="#instrument"> Cajon </a></li>
-                                    <li><a href="#instrument"> Hang Drum </a></li>
-                                    <li><a href="#instrument"> Djembe </a></li>
-                                    <li><a href="#instrument"> Bongos </a></li>
-                                    <li><a href="#instrument"> Darbuka </a></li>
-                                    <li><a href="#instrument"> Daf </a></li>
-                                    <li><a href="#instrument"> Tonbak </a></li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="footer-single-item style-two">
-                                <h3>آموزشگاه ها</h3>
-                                <ul class="useful-link">
-                                    <li><a href="http://www.sornaacademy.com/" target="_blank"> آموزشگاه سرنا </a></li>
-                                    <li>
-                                        <a href="https://www.instagram.com/academy_malek_masoodi?igsh=MTd5bGNvb3ZidTJjcQ=="
-                                           target="_blank"> آموزشگاه ملک مسعودی </a>
-                                    </li>
-                                    <li><a href="https://gat-music.com/" target="_blank"> آموزشگاه گات </a></li>
-                                    <li><a href="https://www.pedarmusic.ir/" target="_blank"> آموزشگاه پدر </a></li>
-                                    <li>
-                                        <a href="https://www.nivaak.com/default.aspx" target="_blank">
-                                            آموزشگاه نیواک
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="footer-single-item style-two">
-                                <h3>با ما تماس بگیرید</h3>
-                                <ul class="contact-info ms-0">
-                                    <li>
-                                        <a href="https://instagram.com/vahidnajafizadeh" target="_blank">
-                                            <i class="fa-brands fa-instagram"></i><span> vahidnajafizadeh </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://instagram.com/vahidnajafizadeh_student" target="_blank">
-                                            <i class="fa-brands fa-instagram"></i>
-                                            <span> vahidnajafizadeh_student</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://instagram.com/havanaCompanyOfficial" target="_blank">
-                                            <i class="fa-brands fa-instagram"></i><span> havanaCompanyOfficial </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa-regular fa-whatsapp"></i>
-                                        <a href="tel:+989354868864">
-                                            09354868864
-                                        </a>
-                                    </li>
-                                    <!-- <li>
-                                        <i class="fa-regular fa-envelope"></i><a
-                                            href="mailto:vahidnajafizadeh@gmail.com">vahidnajafizadeh@gmail.com</a>
-                                    </li> -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- <div class="copyright-area">
-        <div class="container">
-            <p class="copy-right style-two"> طراحی شده توسط <a href="https://parinazafrasiabian.ir"
-                    target="_blank">parinazafrasiabian.ir</a>
-        </div>
-    </div> -->
-    <div class="back-to-top text-center"><i class="icofont-simple-up"></i></div>
-    <script src="/ostad/assets/js/jquery.min.js"></script>
-    <script src="/ostad/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="/ostad/assets/js/jquery.meanmenu.js"></script>
-    <script src="/ostad/assets/js/owl.carousel.min.js"></script>
-    <script src="/ostad/assets/js/scrollcue.js"></script>
-    <script src="/ostad/assets/js/magnific-popup.min.js"></script>
-    <script src="/ostad/assets/js/counterup.min.js"></script>
-    <script src="/ostad/assets/js/waypoints.min.js"></script>
-    <script src="/ostad/assets/js/mixitup.min.js"></script>
-    <script src="/ostad/assets/js/smoothscroll.min.js"></script>
-    <script src="/ostad/assets/js/custom.js"></script>
-</body>
-
-</html>
+</section>

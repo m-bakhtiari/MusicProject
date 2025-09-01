@@ -1,1 +1,247 @@
-﻿@RenderBody()
+﻿<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="وحید نجفی زاده مدرس و نوازنده پرکاشن">
+    <title> وحید نجفی زاده </title>
+    <link rel="stylesheet" href="SiteTemplate/css/app.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+    <link rel="stylesheet" href="SiteTemplate/css/swiper-bundleM.css">
+
+</head>
+
+<body>
+    <img src="SiteTemplate/img/shape-2.png" class="shape-1" alt="">
+    <img src="SiteTemplate/img/shape-1.png" class="shape-2" alt="">
+
+    <div class="mouseCircle"></div>
+    <header class="light">
+        <section class="mainHeader">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-menu">
+                        <nav>
+                            <ul class="menu">
+                                <li>
+                                    <button class="openMenu"></button>
+                                </li>
+                                <li>
+                                    <a href="#">خانه</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">پروژه ها</a>
+                                </li>
+                                <li>
+                                    <a href="#"> گالری </a>
+                                </li>
+                                <li>
+                                    <a href="#"> نت ها </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-logo">
+                        <a href="#" class="logo">
+                            <!-- <img src="img/logo-light.png" alt="" class="light">
+                                <img src="img/logo-dark.png" alt="" class="dark"> -->
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mainMenu">
+            <div class="bgs">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <button class="closeMenu"></button>
+            <img src="" alt="" class="logo">
+            <ul class="menu">
+                <li>
+                    <a href="#">خانه</a>
+                </li>
+                <li>
+                    <a href="#">درباره ما</a>
+                </li>
+                <li>
+                    <a href="#">آموزشگاه ها</a>
+                </li>
+                <li>
+                    <a href="#">تماس با ما</a>
+                </li>
+            </ul>
+            <div class="info">
+                <h4> </h4>
+                <div class="address">
+                    <i></i>
+                    <span> </span>
+                </div>
+                <div class="tel">
+                    <i></i>
+                    <a href="tel:+989354868864">09354868864</a>
+                </div>
+            </div>
+        </section>
+    </header>
+    <main class="home" data-scroll-container>
+        @RenderBody()
+
+        <footer data-scroll-section class="footer1">
+            <div class="cont">
+                <div class="top">
+
+                    <h3> تایتل </h3>
+                    <p>
+                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ ایپسوم متن ساختگی با تولید سادگی نامفهوم از
+                        صنعت چاپ
+                    </p>
+                    <a href="tel:+989354868864" class="more">
+                        تماس با ما
+                    </a>
+                </div>
+                <div class="info">
+                    <ul class="social">
+                        <li>
+                            <a href="https://t.me/vahidnajafizadeh" target="_blank">
+                                <i class="telegram" style="font-size: 5rem"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="tel:+989354868864" target="_blank">
+                                <i class="whatsapp"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/vahidnajafizadeh" target="_blank">
+                                <i class="instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/vahidnajafizadeh_student" target="_blank">
+                                <i class="instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/havanaCompanyOfficial" target="_blank">
+                                <i class="instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <img src=" " alt="" class="logo">
+                </div>
+                <div class="namasite">
+                    <a href="#">
+                        Website
+                    </a>
+
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="SiteTemplate/js/scroll.js"></script>
+    <script src="SiteTemplate/js/app.js"></script>
+    <script src='SiteTemplate/js/swiper-bundle.min.js'></script>
+    <script src='SiteTemplate/js/preview.js'></script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            var isDesktop = () => window.innerWidth > 767.9;
+
+            var gap = 15;
+
+            if (isDesktop()) gap = 0.0285 * window.innerWidth;
+
+            var sliders = [];
+
+            ["#horizontal-ticker-rtl", "#horizontal-ticker-ltr"].forEach(
+                (query, index) => {
+                    sliders.push(
+                        new Swiper(query, {
+                            loop: true,
+                            slidesPerView: "auto",
+                            spaceBetween: gap,
+                            speed: 8000,
+                            allowTouchMove: false,
+                            autoplay: {
+                                delay: 0,
+                                reverseDirection: index,
+                                disableOnInteraction: false
+                            }
+                        })
+                    );
+                }
+            );
+
+            window.addEventListener("resize", () => {
+                isDesktop() ? (gap = 0.0285 * window.innerWidth) : (gap = 15);
+
+                sliders.forEach((slider) => {
+                    slider.params.spaceBetween = gap;
+                    slider.update();
+                });
+            });
+        });
+
+
+        document.querySelectorAll('.parket .info').forEach((elem) => {
+            elem.querySelector('.dot').addEventListener('click',
+                () => {
+                    elem.querySelector('.dot').classList.add('active');
+                    elem.querySelector('.box').classList.add('active');
+                });
+            elem.querySelector('.close').addEventListener('click',
+                () => {
+                    elem.querySelector('.dot').classList.remove('active');
+                    elem.querySelector('.box').classList.remove('active');
+                });
+        });
+
+
+
+        var swiper = new Swiper(".sliderMe .mySwiper", {
+            effect: "cards",
+            grabCursor: true,
+        });
+
+
+        var swiper = new Swiper(".my-carousel__swiper", {
+            loop: true,
+            grabCursor: true,
+            centeredSlides: true,
+            centeredSlidesBounds: true,
+            navigation: {
+                nextEl: ".my-carousel__control--next",
+                prevEl: ".my-carousel__control--prev"
+            },
+            slidesPerView: 3,
+            effect: "creative",
+            creativeEffect: {
+                perspective: true,
+                limitProgress: 3,
+                prev: {
+                    translate: ["-90%", "20%", -100],
+                    rotate: [0, 0, -20],
+                    origin: "bottom"
+                },
+                next: {
+                    translate: ["90%", "20%", -100],
+                    rotate: [0, 0, 20],
+                    origin: "bottom"
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
