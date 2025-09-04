@@ -29,23 +29,18 @@
                         <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>عنوان آموزشگاه</th>
                                     <th>روزهای تدریس</th>
                                     <th>سازهای تدریس</th>
                                     <th>سایت</th>
                                     <th>تلفن</th>
-                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.Academies)
                                 {
                                     <tr>
-                                        <td>@item.AcademyTitle</td>
-                                        <td>@item.ActiveDays</td>
-                                        <td>@item.LearningInstrument</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Website</td>
                                         <td>
                                             <a href="/Admin/Academy/DeleteAcademy/@item.AcademyId" class="btn btn-info btn-sm">
                                                 حذف
@@ -54,6 +49,11 @@
                                                 ویرایش
                                             </a>
                                         </td>
+                                        <td>@item.AcademyTitle</td>
+                                        <td>@item.ActiveDays</td>
+                                        <td>@item.LearningInstrument</td>
+                                        <td>@item.Website</td>
+                                        <td>@item.Phone</td>
                                     </tr>
                                 }
                             </tbody>

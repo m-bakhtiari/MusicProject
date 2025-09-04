@@ -1,42 +1,36 @@
 ﻿@model TopLearn.Core.DTOs.LoginViewModel
 @{
     ViewData["Title"] = "ورود به سایت";
+    Layout = "_AdminLayout";
 }
+<link rel="stylesheet" href="AdminContent/css/bootstrap-rtl.css"/>
 
-<link rel="stylesheet" href="./AdminContent/css/bootstrap-rtl.css"/>
-<div class="container">
-    <main class="client-page">
-        <div class="container-content">
+<section style="margin-top: 100px" data-scroll-section>
 
-            <header><h2> ورود به سایت </h2></header>
+    <div class="container-fluid">
+        <form asp-action="Login" method="post">
 
-            <div class="form-layer">
+            <div class="input-group">
+                <span class="input-group-addon" id="email-address"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input asp-for="Email" type="text" class="form-control" placeholder="ایمیل" aria-describedby="email-address">
 
-                <form asp-action="Login" method="post">
-
-                    <div class="input-group">
-                        <span class="input-group-addon" id="email-address"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input asp-for="Email" type="text" class="form-control" placeholder="ایمیل" aria-describedby="email-address">
-
-                    </div>
-                    <span asp-validation-for="Email"></span>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="password"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور " aria-describedby="password">
-
-                    </div>
-                    <span asp-validation-for="Password"></span>
-                    <br/>
-                    <div class="remember-me">
-                        <label><input asp-for="RememberMe" type="checkbox" name="">  مرا بخاطر بسپار </label>
-                    </div>
-                    <br/>
-                    <button class="btn btn-success"> ورود به سایت </button>
-
-                </form>
             </div>
+            <span asp-validation-for="Email"></span>
+            <br />
+            <div class="input-group">
+                <span class="input-group-addon" id="password"><i class="glyphicon glyphicon-lock"></i></span>
+                <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور " aria-describedby="password">
 
-        </div>
-    </main>
-</div>
+            </div>
+            <span asp-validation-for="Password"></span>
+            <br />
+            <div class="remember-me">
+                <label><input asp-for="RememberMe" type="checkbox" name="">  مرا بخاطر بسپار </label>
+            </div>
+            <br />
+            <button class="btn btn-success"> ورود به سایت </button>
+
+        </form>
+    </div>
+</section>
+

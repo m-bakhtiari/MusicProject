@@ -36,7 +36,7 @@ namespace TopLearn.DataLayer.Entities.Course
         public string Phone { get; set; }
 
         [Display(Name = "آدرس سایت")]
-        [MaxLength(100,ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [MaxLength(1000,ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string Website { get; set; }
     }
 }

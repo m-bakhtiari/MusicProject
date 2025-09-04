@@ -49,7 +49,7 @@
 
 <br />
 <section data-scroll-section class="imgCenter">
-    <img src="SiteTemplate/img/Copilot_vahid.png" style="width: 33%;">
+    <img src="SiteTemplate/img/Copilot_vahid.png" style="width: 33%;" alt="banner">
 </section>
 
 <br />
@@ -62,29 +62,24 @@
             <div class="base-template__content">
                 <div class="horizontal-ticker">
                     <div id="horizontal-ticker-rtl" class="swiper horizontal-ticker__slider">
-                        @foreach (var item in Model.Instruments)
-                        {
-                            <div class="swiper-wrapper">
+                        <div class="swiper-wrapper">
+                            @foreach (var item in Model.Instruments)
+                            {
                                 <div class="swiper-slide horizontal-ticker__slide">
                                     @item.InstrumentTitle
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
-
-                    <!-- Horizontal Ticker: Slider LTR -->
 
                     <div id="horizontal-ticker-ltr" class="swiper horizontal-ticker__slider">
                         <div class="swiper-wrapper">
                             @foreach (var item in Model.Instruments)
                             {
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide horizontal-ticker__slide">
-                                        @item.InstrumentTitle
-                                    </div>
+                                <div class="swiper-slide horizontal-ticker__slide">
+                                    @item.InstrumentTitle
                                 </div>
                             }
-
                         </div>
                     </div>
 
@@ -93,8 +88,6 @@
         </div>
     </section>
 </section>
-
-<br />
 
 <section class="intro TeamSec" data-scroll-section>
     <h1 class="titrSec base-template__title">
@@ -135,31 +128,30 @@
                             <div class="why-us-trail move-down">
                                 <div class="why-us-taril-cards">
                                     <div class="why-us-taril-card">
-                                        <img src="img/ostad3.jpeg" loading="lazy" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/ostad3.jpeg" alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <div class="why-us-video-embed w-embed">
-                                            <div style="width: 100%; height: 100%;"
-                                                 class="w-background-video w-background-video-atom">
-                                                <video loop="" playsinline="" autoplay="" muted=""
-                                                       data-action="video" loading="lazy">
-                                                    <source src="img/conga_ostad.jpeg" data-wf-ignore="true">
-                                                </video>
-                                            </div>
-                                        </div>
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="img/ostad3.jpeg" loading="lazy" alt="" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="img/conga_ostad.jpeg" loading="lazy" alt=""
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt=""
                                              class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt=""
+                                             class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="" class="image-cover">
                                     </div>
                                 </div>
                             </div>
@@ -168,35 +160,37 @@
                             <div class="why-us-trail move-up">
                                 <div class="why-us-taril-cards">
                                     <div class="why-us-taril-card">
-                                        <img src="img/conga_ostad.jpeg"
+                                        <img src="SiteTemplate/img/Untitled.jpeg"
+                                              alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
                                              loading="lazy" alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="img/ostad3.jpeg" loading="lazy"
+                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
                                              alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <div class="why-us-video-embed w-embed">
-                                            <div style="width: 100%; height: 100%;"
-                                                 class="w-background-video w-background-video-atom">
-                                                <video loop="" playsinline="" autoplay="" muted=""
-                                                       data-action="video" loading="lazy">
-                                                    <source src="img/ostad2.jpeg" data-wf-ignore="true">
-                                                </video>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="img/ostad2.jpeg" loading="lazy"
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
                                              alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="img/conga_ostad.jpeg"
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
                                              loading="lazy" alt="" class="image-cover">
                                     </div>
+
                                     <div class="why-us-taril-card">
-                                        <img src="img/ostad3.jpeg" loading="lazy"
+                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
                                              alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/Untitled.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
                                     </div>
                                 </div>
                             </div>
@@ -205,34 +199,35 @@
                             <div class="why-us-trail move-down">
                                 <div class="why-us-taril-cards">
                                     <div class="why-us-taril-card">
-                                        <img src="img/ostad2.jpeg" loading="lazy"
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
                                              alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="img/conga_ostad.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <div class="why-us-video-embed w-embed">
-                                            <div style="width: 100%; height: 100%;"
-                                                 class="w-background-video w-background-video-atom">
-                                                <video loop="" playsinline="" autoplay="" muted=""
-                                                       data-action="video" loading="lazy">
-                                                    <source src="img/ostad3.jpeg" data-wf-ignore="true">
-                                                </video>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="img/conga_ostad.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="img/ostad2.jpeg" loading="lazy"
+                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
                                              alt="" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="img/ostad3.jpeg" loading="lazy"
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
+                                              alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/Untitled.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/Untitled.jpeg"
+                                             loading="lazy" alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
+                                             alt="" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
                                              alt="" class="image-cover">
                                     </div>
                                 </div>
@@ -252,7 +247,7 @@
                              data-original-transform="matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0)"
                              style="transform: scale(1) matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/JEMA.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -260,7 +255,7 @@
                              data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
                              style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -268,7 +263,7 @@
                              data-original-transform="matrix(0.996195, -0.0871557, 0.0871557, 0.996195, 0, 0)"
                              style="transform: scale(1) matrix(0.996195, -0.0871557, 0.0871557, 0.996195, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/hangdrum-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -276,7 +271,7 @@
                              data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
                              style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/JEMA.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -284,7 +279,7 @@
                              data-original-transform="matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0)"
                              style="transform: scale(1) matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -292,7 +287,7 @@
                              data-original-transform="matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0)"
                              style="transform: scale(1) matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/hangdrum-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -300,7 +295,7 @@
                              data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
                              style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad2.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/JEMA.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -308,7 +303,7 @@
                              data-original-transform="matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0)"
                              style="transform: scale(1) matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad3.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -316,7 +311,7 @@
                              data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
                              style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/hangdrum-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -324,7 +319,7 @@
                              data-original-transform="matrix(0.984808, -0.173648, 0.173648, 0.984808, 0, 0)"
                              style="transform: scale(1) matrix(0.984808, -0.173648, 0.173648, 0.984808, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad2.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -332,7 +327,7 @@
                              data-original-transform="matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0)"
                              style="transform: scale(1) matrix(0.984808, 0.173648, -0.173648, 0.984808, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad3.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/JEMA.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -340,7 +335,7 @@
                              data-original-transform="matrix(0.965926, 0.258819, -0.258819, 0.965926, 0, 0)"
                              style="transform: scale(1) matrix(0.965926, 0.258819, -0.258819, 0.965926, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -348,7 +343,7 @@
                              data-original-transform="matrix(0.906308, 0.422618, -0.422618, 0.906308, 0, 0)"
                              style="transform: scale(1) matrix(0.906308, 0.422618, -0.422618, 0.906308, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/hangdrum-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -356,7 +351,7 @@
                              data-original-transform="matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0)"
                              style="transform: scale(1) matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/JEMA.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -364,7 +359,7 @@
                              data-original-transform="matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0)"
                              style="transform: scale(1) matrix(0.965926, -0.258819, 0.258819, 0.965926, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -372,7 +367,7 @@
                              data-original-transform="matrix(0.5, 0, 0, 0.5, 0, 0)"
                              style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad1.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/hangdrum-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -380,7 +375,7 @@
                              data-original-transform="matrix(0.970296, 0.241922, -0.241922, 0.970296, 0, 0)"
                              style="transform: scale(1) matrix(0.970296, 0.241922, -0.241922, 0.970296, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad2.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/JEMA.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -388,7 +383,7 @@
                              data-original-transform="matrix(0.997564, 0.0697565, -0.0697565, 0.997564, 0, 0)"
                              style="transform: scale(1) matrix(0.997564, 0.0697565, -0.0697565, 0.997564, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
-                                <img src="img/ostad3.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -396,7 +391,7 @@
                              data-original-transform="matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0)"
                              style="transform: scale(1) matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
-                                <img src="img/ostad2.jpeg" loading="lazy"
+                                <img src="SiteTemplate/img/hangdrum-removebg-preview.png" loading="lazy"
                                      alt="" class="image-cover">
                             </div>
                         </div>
@@ -424,6 +419,7 @@
 <section class="products" data-scroll-section>
 
     <div class="sliderMe">
+
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 @foreach (var item in Model.Academies)
@@ -461,11 +457,38 @@
                                         @item.Phone
                                     </span>
                                 </li>
+                                <li>
+                                    <span class="TitleInner">
+                                        سازها :
+                                    </span>
+                                    <span class="DescInner">
+                                        @item.LearningInstrument
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 }
             </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
+
     </div>
 </section>
+
+@section Scripts
+{
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "cards",
+            grabCursor: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev"
+            }
+        });
+
+    </script>
+
+}

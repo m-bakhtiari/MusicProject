@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="fa">
 
 <head>
@@ -30,17 +31,10 @@
                                     <button class="openMenu"></button>
                                 </li>
                                 <li>
-                                    <a href="#">خانه</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">پروژه ها</a>
+                                    <a href="/">صفحه اصلی</a>
                                 </li>
                                 <li>
-                                    <a href="#"> گالری </a>
-                                </li>
-                                <li>
-                                    <a href="#"> نت ها </a>
+                                    <a href="/Note"> نت ها </a>
                                 </li>
                             </ul>
                         </nav>
@@ -66,16 +60,10 @@
             <img src="" alt="" class="logo">
             <ul class="menu">
                 <li>
-                    <a href="#">خانه</a>
+                    <a href="/">صفحه اصلی</a>
                 </li>
                 <li>
-                    <a href="#">درباره ما</a>
-                </li>
-                <li>
-                    <a href="#">آموزشگاه ها</a>
-                </li>
-                <li>
-                    <a href="#">تماس با ما</a>
+                    <a href="/Note">نت ها</a>
                 </li>
             </ul>
             <div class="info">
@@ -98,10 +86,12 @@
             <div class="cont">
                 <div class="top">
 
-                    <h3> تایتل </h3>
+                    <h3> درود بر شما </h3>
                     <p>
-                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                        صنعت چاپ
+                        کلاس های خصوصی یک جلسه در هفته و نیم ساعت می باشد.
+                    </p>
+                    <p>
+                        کلاس های گروهی دوشنبه ها در سالن تمرین سرنا برگزار می گردد که جهت شرکت در این کلاس ها باید تعیین سطح شوید.
                     </p>
                     <a href="tel:+989354868864" class="more">
                         تماس با ما
@@ -139,18 +129,15 @@
                     <img src=" " alt="" class="logo">
                 </div>
                 <div class="namasite">
-                    <a href="#">
-                        Website
-                    </a>
-
+                   @DateTime.Now.ToString("D")
                 </div>
             </div>
         </footer>
     </main>
     <script src="SiteTemplate/js/scroll.js"></script>
     <script src="SiteTemplate/js/app.js"></script>
-    <script src='SiteTemplate/js/swiper-bundle.min.js'></script>
-    <script src='SiteTemplate/js/preview.js'></script>
+    <script src="SiteTemplate/js/swiper-bundle.min.js"></script>
+    <script src="SiteTemplate/js/preview.js"></script>
 
     <script>
 
@@ -242,6 +229,10 @@
         });
 
     </script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", false)
 </body>
 
 </html>

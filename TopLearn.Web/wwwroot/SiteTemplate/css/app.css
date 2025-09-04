@@ -11851,6 +11851,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
             .list .swiper .swiper-slide .info .type,
             .list .swiper .swiper-slide .info .type a {
                 color: #ecc739 !important;
+                cursor: pointer;
             }
 
             .list .swiper .swiper-slide .info h4 {
@@ -11924,7 +11925,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
 
 .swiper .showActive {
     position: absolute;
-    z-index: 1;
+    z-index: 999;
     top: 38%;
     left: 15%;
     transform: translateX(34%) rotate(-180deg);
@@ -11983,7 +11984,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         margin: 0 auto;
         margin-top: 1em;
         width: 90% !important;
-        text-align: justify;
+        text-align: end;
         font-size: 0.9rem !important;
         line-height: 28px !important;
         direction: rtl;
