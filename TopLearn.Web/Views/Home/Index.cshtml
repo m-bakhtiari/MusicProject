@@ -61,12 +61,13 @@
 
             <div class="base-template__content">
                 <div class="horizontal-ticker">
-                    <div id="horizontal-ticker-rtl" class="swiper horizontal-ticker__slider">
+                    <div id="horizontal-ticker-rtl" class="swiper horizontal-ticker__slider" style="height: 10rem">
                         <div class="swiper-wrapper">
                             @foreach (var item in Model.Instruments)
                             {
-                                <div class="swiper-slide horizontal-ticker__slide">
-                                    @item.InstrumentTitle
+                                <div class="swiper-slide horizontal-ticker__slide" style="width: 20rem">
+                                    <img src="/SiteTemplate/img/JEMA.png" alt="" style="height: 100%"/>
+                                    <p>@item.InstrumentTitle</p>
                                 </div>
                             }
                         </div>

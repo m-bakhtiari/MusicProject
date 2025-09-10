@@ -29,6 +29,8 @@ namespace TopLearn.DataLayer.Context
         public DbSet<StudentConcert> StudentConcerts { get; set; }
         public DbSet<StudentConcertImage> StudentConcertImages { get; set; }
         public DbSet<MusicNote> MusicNotes { get; set; }
+        public DbSet<Student> Students { get; set; }
+
 
         #endregion
 

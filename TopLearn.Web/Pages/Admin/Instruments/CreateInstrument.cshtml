@@ -14,10 +14,10 @@
 
 <div class="row">
     <form method="post" enctype="multipart/form-data">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                   ساز جدید
+                    ساز جدید
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -30,12 +30,30 @@
                         <textarea id="description" class="form-control" asp-for="Instruments.Description" rows="10"></textarea>
                         <span asp-validation-for="Instruments.Description"></span>
                     </div>
+
                     <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
                 </div>
                 <!-- /.panel-body -->
             </div>
         </div>
-  
+        <div class="col-md-4">
+            <img id="imgInstrument" class="thumbnail" src="/UserAvatar/Defult.jpg" alt=""/>
+            <div class="form-group">
+
+                <label>تصویر آیکون</label>
+                <input type="file" name="imgInstrumentUp" id="imgInstrumentUp">
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <img id="imgInstrumentLogo" class="thumbnail" src="/UserAvatar/Defult.jpg" alt=""/>
+            <div class="form-group">
+
+                <label>انتخاب اصلی</label>
+                <input type="file" name="imgInstrumentLogoUp" id="imgInstrumentLogoUp">
+            </div>
+
+        </div>
     </form>
 </div>
 
@@ -48,19 +66,53 @@
             contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
             extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
             toolbar: [
-                { name: 'paragraph', items: [ 'BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft' ] },
-                { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
-                { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
-                { name: 'editing', items: [ 'Scayt' ] },
-                { name: 'links', items: [ 'Link', 'Unlink' ] },
-                { name: 'insert', items: [ 'Image', 'Table' ] },
-                { name: 'styles', items: [ 'Format' ] },
-                { name: 'tools', items: [ 'Maximize' ] }
+                { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                { name: 'clipboard', items: ['Undo', 'Redo'] },
+                { name: 'editing', items: ['Scayt'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+                { name: 'insert', items: ['Image', 'Table'] },
+                { name: 'styles', items: ['Format'] },
+                { name: 'tools', items: ['Maximize'] }
             ]
         });
 
 
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgInstrument').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readURLLogo(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgInstrumentLogo').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInstrumentUp").change(function () {
+            readURL(this);
+        });
+        $("#imgInstrumentLogoUp").change(function () {
+            readURLLogo(this);
+        });
     </script>
+    
+
 }
 
 

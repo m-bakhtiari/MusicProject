@@ -68,6 +68,14 @@
     --bs-highlight-bg: #fff3cd;
 }
 
+@media only screen and (max-width: 768px) {
+    html,
+    body {
+        overflow-y: auto !important;
+    }
+}
+
+
 *,
 *::before,
 *::after {
@@ -958,7 +966,7 @@ swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader,
 .sliderMe .swiper-button-next,
 .sliderMe .swiper-rtl .swiper-button-prev {
     right: var(--swiper-navigation-sides-offset, 10px);
-    left: auto;
+    right: auto;
 }
 
     .sliderMe .swiper-button-next:after,
@@ -12020,4 +12028,34 @@ header.fixed .mainHeader .col-logo .logo img.dark {
     main.home .parket {
         margin-top: 0;
     }
+
+    .hero {
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        bottom: 10px; /* فاصله از پایین */
+        top: auto; /* غیرفعال کردن موقعیت بالا */
+        transform: none; /* حذف انتقال عمودی */
+        z-index: 10;
+    }
+
+    .swiper-button-prev {
+        left: 20px; /* فاصله از چپ */
+    }
+
+    .swiper-button-next {
+        right: 20px; /* فاصله از راست */
+    }
+
 }

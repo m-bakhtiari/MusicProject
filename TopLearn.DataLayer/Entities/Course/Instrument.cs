@@ -20,5 +20,9 @@ namespace TopLearn.DataLayer.Entities.Course
 
         [DisplayName("تاریخ ایجاد")]
         public DateTime CreatedDate { get; set; }
+
+        public string IconImage { get; set; }
+
+        public string ImageName { get; set; }
     }
 }

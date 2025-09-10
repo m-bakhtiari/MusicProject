@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
@@ -14,11 +15,13 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
 {
     public class EditMusicNoteModel : PageModel
     {
-        private readonly IMusicNoteService _MusicNoteService;
+        private readonly IMusicNoteService _musicNoteService;
+        private readonly IInstrumentService _instrumentService;
 
-        public EditMusicNoteModel(IMusicNoteService MusicNoteService)
+        public EditMusicNoteModel(IMusicNoteService musicNoteService, IInstrumentService instrumentService)
         {
-            _MusicNoteService = MusicNoteService;
+            _musicNoteService = musicNoteService;
+            _instrumentService = instrumentService;
         }
 
         [BindProperty]
@@ -27,7 +30,9 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
         [Authorize]
         public async Task OnGet(int id)
         {
-            MusicNote = await _MusicNoteService.GetNoteById(id);
+            var groups = await _instrumentService.GetAll();
+            ViewData["Instruments"] = new SelectList(groups, "Value", "Text",MusicNote.InstrumentId);
+            MusicNote = await _musicNoteService.GetNoteById(id);
         }
 
         [Authorize]
@@ -36,7 +41,7 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
             if (!ModelState.IsValid)
                 return Page();
 
-            await _MusicNoteService.UpdateNote(MusicNote, imgLogo);
+            await _musicNoteService.UpdateNote(MusicNote, imgLogo);
 
             return RedirectToPage("Index");
         }

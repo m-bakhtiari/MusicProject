@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TopLearn.Core.Services.Interfaces;
@@ -28,12 +29,12 @@ namespace TopLearn.Web.Pages.Admin.Instruments
             Instruments = await _instrumentService.GetById(id);
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(IFormFile imgInstrumentUp, IFormFile imgInstrumentLogoUp)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            await _instrumentService.UpdateInstrument(Instruments);
+            await _instrumentService.UpdateInstrument(Instruments, imgInstrumentUp, imgInstrumentLogoUp);
 
             return RedirectToPage("Index");
         }

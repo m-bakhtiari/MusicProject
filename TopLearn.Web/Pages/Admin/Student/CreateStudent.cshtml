@@ -1,14 +1,14 @@
 ﻿@page
 
-@model TopLearn.Web.Pages.Admin.MusicNote.CreateMusicNoteModel
+@model TopLearn.Web.Pages.Admin.Student.CreateStudentModel
 @{
-    ViewData["Title"] = "افزودن نت جدید";
+    ViewData["Title"] = "افزودن هنرجو جدید";
 }
 
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">افزودن نت جدید</h1>
+        <h1 class="page-header">افزودن هنرجو جدید</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -17,19 +17,28 @@
     <form method="post" enctype="multipart/form-data">
         <div class="col-md-8">
             <div class="form-group">
-                <label>نام ساز</label>
-                <select class="form-control" asp-for="MusicNote.InstrumentId" asp-items="@(ViewData["Instruments"] as SelectList)"></select>
-                <span asp-validation-for="MusicNote.InstrumentId"></span>
+                <label>نام هنرجو</label>
+                <input type="text" asp-for="Student.StudentFullName" class="form-control">
             </div>
             <div class="form-group">
-                <label>عنوان نت</label>
-                <input type="text" asp-for="MusicNote.Title" class="form-control">
+                <label>سازها هنرجو</label>
+                <input type="text" asp-for="Student.LearningInstrument" class="form-control">
             </div>
             <div class="form-group">
-                <label>انتخاب فایل نت</label>
+                <label>توضیحات</label>
+                <input type="text" asp-for="Student.Description" class="form-control">
+            </div>
+
+            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+
+        </div>
+        <div class="col-md-4">
+            <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="logo" />
+            <div class="form-group">
+
+                <label>انتخاب تصویر</label>
                 <input type="file" name="imgLogo" id="imgLogo">
             </div>
-            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
 
         </div>
     </form>
