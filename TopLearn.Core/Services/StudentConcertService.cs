@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace TopLearn.Core.Services
         public async Task Add(StudentConcert studentConcert, List<IFormFile> imagesFiles)
         {
             var insert = await _context.StudentConcerts.AddAsync(studentConcert);
-           
+
             if (imagesFiles != null)
             {
                 foreach (var file in imagesFiles)
@@ -71,7 +72,7 @@ namespace TopLearn.Core.Services
 
         public async Task DeleteItem(StudentConcert studentConcert)
         {
-            if (studentConcert.StudentConcertImages.Any())
+            if (EnumerableExtensions.Any(studentConcert.StudentConcertImages))
             {
                 foreach (var img in studentConcert.StudentConcertImages)
                 {
@@ -92,7 +93,8 @@ namespace TopLearn.Core.Services
 
         public async Task<List<StudentConcert>> GetAll()
         {
-            return await _context.StudentConcerts.Include(x => x.StudentConcertImages).ToListAsync();
+            var res = _context.StudentConcerts.OrderByDescending(x => x.Position);
+            return await res.Include(x => x.StudentConcertImages).ToListAsync();
         }
 
         public async Task<StudentConcert> GetItemById(int id)

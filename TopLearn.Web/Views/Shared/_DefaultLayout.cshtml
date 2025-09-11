@@ -1,4 +1,7 @@
-﻿
+﻿@using TopLearn.Core.Convertors
+@{
+    var today = DateTime.Now.ToPersianDate();
+}
 <!DOCTYPE html>
 <html lang="fa">
 
@@ -7,6 +10,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="وحید نجفی زاده مدرس و نوازنده پرکاشن">
+    <meta name="description" content="وب‌سایت رسمی وحید نجفی‌زاده؛ مدرس و نوازنده سازهای کوبه ای.">
+    <meta name="keywords" content="وحید,نجفی زاده,استاد نجفی زاده,وحید نجفی زاده,استاد وحید نجفی زاده,کاخن,کونگا,کونگا,هنگدرام,هنگ درام,هاوانا,گروه نوازی,کوبه ای,درام">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="وحید نجفی‌زاده">
+
     <title> وحید نجفی زاده </title>
     <link rel="stylesheet" href="SiteTemplate/css/app.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +43,7 @@
                                     <a href="/">صفحه اصلی</a>
                                 </li>
                                 <li>
-                                    <a href="/Note"> نت ها </a>
+                                    <a href="/Note"> نت های هنگدرام </a>
                                 </li>
                             </ul>
                         </nav>
@@ -63,7 +72,7 @@
                     <a href="/">صفحه اصلی</a>
                 </li>
                 <li>
-                    <a href="/Note">نت ها</a>
+                    <a href="/Note">نت های هنگدرام</a>
                 </li>
             </ul>
             <div class="info">
@@ -83,47 +92,45 @@
         @RenderBody()
 
         <footer data-scroll-section class="footer1">
-            <div class="cont">
-                <div class="top">
+            <div class="top">
 
-                    <a href="tel:+989354868864" class="more">
-                        تماس با ما
-                    </a>
-                </div>
-                <div class="info">
-                    <ul class="social">
-                        <li>
-                            <a href="https://t.me/vahidnajafizadeh" target="_blank">
-                                <i class="telegram" style="font-size: 5rem"></i>
-                            </a>
-                        </li>
+                <a href="tel:+989354868864" class="more">
+                    تماس با ما
+                </a>
+            </div>
+            <div class="info">
+                <ul class="social">
+                    <li>
+                        <a href="https://t.me/vahidnajafizadeh" target="_blank">
+                            <i class="telegram"></i>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href="tel:+989354868864" target="_blank">
-                                <i class="whatsapp"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://instagram.com/vahidnajafizadeh" target="_blank">
-                                <i class="instagram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://instagram.com/vahidnajafizadeh_student" target="_blank">
-                                <i class="instagram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://instagram.com/havanaCompanyOfficial" target="_blank">
-                                <i class="instagram"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <img src=" " alt="" class="logo">
-                </div>
-                <div class="namasite">
-                   @DateTime.Now.ToString("D")
-                </div>
+                    <li>
+                        <a href="tel:+989354868864" target="_blank">
+                            <i class="whatsapp"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/vahidnajafizadeh" target="_blank">
+                            <i class="instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/vahidnajafizadeh_student" target="_blank">
+                            <i class="instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/havanaCompanyOfficial" target="_blank">
+                            <i class="instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+                <img src=" " alt="" class="logo">
+            </div>
+            <div class="namasite">
+                @today
             </div>
         </footer>
     </main>
@@ -196,6 +203,7 @@
 
         var swiper = new Swiper(".my-carousel__swiper", {
             loop: true,
+            rtl: true,
             grabCursor: true,
             centeredSlides: true,
             centeredSlidesBounds: true,

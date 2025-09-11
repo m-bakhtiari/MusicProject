@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TopLearn.Core.Convertors;
 using TopLearn.Core.Services;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Context;
+using TopLearn.Web.Controllers;
 
 namespace TopLearn.Web
 {
@@ -33,8 +35,6 @@ namespace TopLearn.Web
             services.AddMvc();
 
             //services.Configure<FormOptions>(options => { options.MultipartBodyLengthLimit = 6000000; });
-        
-
 
             #region Authentication
 
@@ -42,13 +42,13 @@ namespace TopLearn.Web
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme= CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
             }).AddCookie(options =>
             {
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/Logout";
-                options.ExpireTimeSpan=TimeSpan.FromMinutes(43200);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(43200);
 
             });
 
@@ -73,6 +73,8 @@ namespace TopLearn.Web
             services.AddTransient<IInstrumentService, InstrumentService>();
             services.AddTransient<IStudentConcertService, StudentConcertService>();
             services.AddTransient<IMusicNoteService, MusicNoteService>();
+            services.AddTransient<ILogger<HomeController>, Logger<HomeController>>();
+            services.AddTransient<IStudentService, StudentService>();
 
             #endregion
         }
@@ -85,23 +87,44 @@ namespace TopLearn.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Use(async (context, next) =>
+            {
+                await next();
+
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home/Error";
+                    context.Request.Headers.Add("LogData", "this is 404");
+
+                    await next();
+                }
+                else
+                {
+                    context.Request.Path = "/Home/Error";
+                    context.Request.Headers.Add("LogData", context.Response.StatusCode.ToString());
+
+                    await next();
+                }
+
+            });
+
             app.UseStaticFiles();
             app.UseAuthentication();
-         
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                    
+
                 );
                 routes.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
         }
     }
 }

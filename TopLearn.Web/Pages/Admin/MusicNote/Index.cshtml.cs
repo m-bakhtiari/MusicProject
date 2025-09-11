@@ -9,17 +9,17 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly IMusicNoteService _MusicNoteService;
+        private readonly IMusicNoteService _musicNoteService;
 
-        public IndexModel(IMusicNoteService MusicNoteService)
+        public IndexModel(IMusicNoteService musicNoteService)
         {
-            _MusicNoteService = MusicNoteService;
+            _musicNoteService = musicNoteService;
         }
 
         public List<DataLayer.Entities.Course.MusicNote> MusicNotes { get; set; }
         public async Task OnGet()
         {
-            MusicNotes = await _MusicNoteService.GetAllNotes();
+            MusicNotes = await _musicNoteService.GetAllNotes();
         }
     }
 }

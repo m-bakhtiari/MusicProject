@@ -18,9 +18,10 @@ namespace TopLearn.Web.Pages.Admin.StudentConcerts
             _studentConcertService = studentConcertService;
         }
         public List<StudentConcert> StudentConcert { get; set; }
-        public async Task OnGet()
+        public async Task OnGet(int? type)
         {
-            StudentConcert = await _studentConcertService.GetAll();
+            var res = await _studentConcertService.GetAll();
+            StudentConcert = res.Where(x => x.Type == type).ToList();
         }
     }
 }

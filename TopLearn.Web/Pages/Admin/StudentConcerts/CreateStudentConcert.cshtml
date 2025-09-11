@@ -13,6 +13,11 @@
 <div class="row">
     <form method="post" enctype="multipart/form-data">
         <div class="col-md-12">
+           <input type="hidden" asp-for="StudentConcert.Type"/>
+            <div class="form-group">
+                <label>ترتیب نمایش</label>
+                <input type="number" asp-for="StudentConcert.Position" class="form-control">
+            </div>
             <div class="form-group">
                 <label>عنوان</label>
                 <input type="text" asp-for="StudentConcert.Title" class="form-control">
@@ -36,7 +41,7 @@
                 <div id="imagePreview"></div>
             </div>
 
-            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success"/>
         </div>
     </form>
 </div>

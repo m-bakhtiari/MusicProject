@@ -19,9 +19,12 @@ namespace TopLearn.Web.Pages.Admin.StudentConcerts
         }
         [BindProperty]
         public StudentConcert StudentConcert { get; set; }
-        public void OnGet()
+        public void OnGet(int? type)
         {
-            StudentConcert = new StudentConcert();
+            StudentConcert = new StudentConcert()
+            {
+                Type = type
+            };
         }
 
         public async Task<IActionResult> OnPost(List<IFormFile> imageList)

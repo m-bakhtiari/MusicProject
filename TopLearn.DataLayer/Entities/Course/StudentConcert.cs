@@ -21,6 +21,11 @@ namespace TopLearn.DataLayer.Entities.Course
         [MaxLength(300, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string ConcertDate { get; set; }
 
+
+        public int? Type { get; set; }
+
+        public int? Position { get; set; }
+
         public List<StudentConcertImage> StudentConcertImages { get; set; }
     }
 }
