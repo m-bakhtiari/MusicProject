@@ -13,7 +13,7 @@ namespace TopLearn.Core.Services.Interfaces
 
        Task Update(StudentConcert studentConcert, List<IFormFile> imagesFiles);
 
-       Task<List<StudentConcert>> GetAll();
+       Task<List<StudentConcert>> GetAll(int type);
 
        Task<StudentConcert> GetItemById(int id);
 

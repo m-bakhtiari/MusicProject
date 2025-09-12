@@ -91,9 +91,9 @@ namespace TopLearn.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<StudentConcert>> GetAll()
+        public async Task<List<StudentConcert>> GetAll(int type)
         {
-            var res = _context.StudentConcerts.OrderByDescending(x => x.Position);
+            var res = _context.StudentConcerts.OrderByDescending(x => x.Position).Where(x => x.Type == type);
             return await res.Include(x => x.StudentConcertImages).ToListAsync();
         }
 

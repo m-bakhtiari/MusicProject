@@ -4,6 +4,7 @@
 
     <div class="container-fluid">
         <div class="swiper">
+            <h2 style="text-align: center">نت های هنگدرام</h2>
             <div class="swiper-wrapper" dir="rtl">
                 @foreach (var item in Model)
                 {
@@ -16,16 +17,13 @@
                                     @item.Title
                                 </h4>
                             </a>
-                          
                             <span class="type">
                                 <a href="/Download/@item.MusicNoteId" download>
                                     دانلود نت
                                 </a>
-
                             </span>
                         </div>
                     </div>
-
                 }
 
             </div>
