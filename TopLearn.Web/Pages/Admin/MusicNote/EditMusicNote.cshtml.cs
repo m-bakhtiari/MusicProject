@@ -30,9 +30,10 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
         [Authorize]
         public async Task OnGet(int id)
         {
-            var groups = await _instrumentService.GetAll();
-            ViewData["Instruments"] = new SelectList(groups, "Value", "Text",MusicNote.InstrumentId);
             MusicNote = await _musicNoteService.GetNoteById(id);
+            var groups = await _instrumentService.GetAll();
+            if (MusicNote.InstrumentId != null)
+                ViewData["Instruments"] = new SelectList(groups, "Value", "Text", MusicNote.InstrumentId.Value);
         }
 
         [Authorize]

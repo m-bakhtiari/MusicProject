@@ -1,25 +1,24 @@
-﻿@model TopLearn.Core.DTOs.NoteViewModel
+﻿@model List<TopLearn.DataLayer.Entities.Course.Instrument>
 
 <section class="list" data-scroll-section>
 
     <div class="container-fluid">
         <div class="swiper">
-            <h2 style="text-align: center">نت های هنگدرام</h2>
+            <h2 style="text-align: center">معرفی سازها</h2>
             <div class="swiper-wrapper" dir="rtl">
-                @foreach (var item in Model.MusicNotes)
+                @foreach (var item in Model)
                 {
                     <div class="swiper-slide swiper-slide-active">
-                        <img src="SiteTemplate/img/hangdrum-removebg-preview.png" class="imgMain" alt="">
-                        <img src="SiteTemplate/img/treble_clef-removebg-preview.png" class="showActive" alt="">
+                        <img src="/instrument/@item.IconImage" class="imgMain" alt="">
                         <div class="info">
-                            <a href="/Download/@item.MusicNoteId" download>
+                            <a href="/Download/@item.InstrumentId">
                                 <h4 class="name" style="color: white">
-                                    @item.Title
+                                    @item.InstrumentTitle
                                 </h4>
                             </a>
                             <span class="type">
-                                <a href="/Download/@item.MusicNoteId" download>
-                                    دانلود نت
+                                <a href="/Download/@item.InstrumentId" download>
+                                   مشاهده توضیحات
                                 </a>
                             </span>
                         </div>
@@ -38,47 +37,22 @@
 
 
     <div class="listDnl wrapper mrgTop">
-        <div class="maxWidth">
-            <div class="tab-wrapper row">
-                <div class="col-md-8">
-                    <ul class="tabs">
-                        <li class="tab-link @ViewData["A"]"><a href="/SearchNote" style="color: white">سازها</a></li>
-                        <li class="tab-link @ViewData["B"]"><a href="/SearchNote" style="color: white">هنگدرام</a></li>
-                        <li class="tab-link @ViewData["C"]"><a href="/SearchNote" style="color: white">کاخن</a></li>
-                        <li class="tab-link @ViewData["D"]"><a href="/SearchNote" style="color: white">کونگا</a></li>
-                        <li class="tab-link @ViewData["E"]"><a href="/SearchNote" style="color: white">داربوکا</a></li>
-                    </ul>
-                </div>
-
-
-                <div class="searchBox col-md-4">
-                    <input class="searchInput" type="text" name="" placeholder="Search">
-                    <button class="searchButton" href="#">
-                        <i class="telegram" style="color: #000000">
-                        </i>
-                    </button>
-                </div>
-
-            </div>
-        </div>
-
 
         <div class="content-wrapper">
             <div class="tab-content active">
                 <div class="productList">
-                    @foreach (var item in Model.NoteViewModelItem.Item1)
+                    @foreach (var item in Model)
                     {
                         <div class="product-item">
-                            <img src="/instrument/@item.InstrumentImageName" alt="@item.InstrumentTitle">
+                            <img src="/instrument/@item.ImageName" alt="@item.InstrumentTitle">
                             <div style="display: flex; justify-content: space-between;">
-                                <p class="product-item-p1"> @item.Title </p>
+                                <p class="product-item-p1"> @item.InstrumentTitle </p>
                                 <div class="product-item-p2">
-                                    <a href="/Download/@item.NoteId" download>
-                                        <img src="SiteTemplate/img/IconDownload.svg" alt="download" title="دانلود نت">
+                                    <a href="/Download/@item.InstrumentId" download>
+                                        <img src="SiteTemplate/img/IconDownload.svg" alt="download" title="مشاهده توضیحات">
                                     </a>
                                 </div>
                             </div>
-                            <p>@item.InstrumentTitle</p>
                         </div>
                     }
                 </div>
@@ -87,14 +61,6 @@
 
     </div>
 
-    <ul id="pagination">
-        <li><a class="" href="#">«</a></li>
-        <li><a href="#" class="active">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">...</a></li>
-        <li><a href="#">@Model.NoteViewModelItem.Item2</a></li>
-        <li><a href="#">»</a></li>
-    </ul>
 </section>
 
 @section Scripts
@@ -165,7 +131,7 @@
         .listDnl .tabs {
             padding: 0;
             display: flex;
-            justify-content: center;
+            justify-content: start;
             align-items: flex-end;
             margin: 0 auto;
         }
@@ -203,6 +169,7 @@
                 color: #ecc739;
                 border-color: transparent;
                 border-radius: 25px;
+                overflow: hidden;
                 inset: 0%;
                 border: 3px solid #000;
                 border-radius: 35px;
@@ -724,62 +691,6 @@
 
             .productList {
                 margin: 1em auto;
-            }
-        }
-    </style>
-
-    <style>
-        .searchBox {
-            left: auto;
-            transform: none;
-            background: #2f3640;
-            height: 60px;
-            border-radius: 40px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: auto;
-        }
-
-            .searchBox .searchInput {
-                width: 240px;
-                padding: 0 6px;
-                border: none;
-                background: none;
-                outline: none;
-                /* float: left; <-- Remove this */
-                color: white;
-                font-size: 16px;
-                transition: 0.4s;
-                line-height: 40px;
-                /* width: 0px; <-- Remove this, use width on the input itself */
-            }
-
-            .searchBox .searchButton {
-                /* Remove float */
-                /* float: right; <-- Remove this */
-                background: white;
-                color: #2f3640;
-                /* These are already good for centering content *within* the button */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                transition: 0.4s;
-            }
-
-            /* You'll likely want to adjust the input's width */
-            .searchBox .searchInput {
-                width: 200px; /* Example adjustment */
-            }
-
-        /* Media query adjustment */
-        @@media screen and (max-width: 620px) {
-            .searchBox .searchInput {
-                width: 150px;
             }
         }
     </style>

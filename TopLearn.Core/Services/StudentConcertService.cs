@@ -103,6 +103,11 @@ namespace TopLearn.Core.Services
                 .FirstOrDefaultAsync(x => x.StudentConcertId == id);
         }
 
+        public async Task<List<StudentConcertImage>> GetImages()
+        {
+            return await _context.StudentConcertImages.Include(x => x.StudentConcert).ToListAsync();
+        }
+
         public async Task Update(StudentConcert studentConcert, List<IFormFile> imagesFiles)
         {
             _context.StudentConcerts.Update(studentConcert);

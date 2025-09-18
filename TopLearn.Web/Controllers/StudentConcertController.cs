@@ -18,7 +18,13 @@ namespace TopLearn.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var model = await _studentConcertService.GetAll((int)ConstantValue.Type.StudentConcert);
+            var concert = await _studentConcertService.GetAll((int)ConstantValue.Type.StudentConcert);
+            var image = await _studentConcertService.GetImages();
+            var model = new StudentConcertDto()
+            {
+                Images = image.OrderByDescending(x => Guid.NewGuid()).Take(10).ToList(),
+                StudentConcerts = concert
+            };
             return View(model);
         }
     }

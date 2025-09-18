@@ -17,12 +17,14 @@
     <meta name="author" content="وحید نجفی‌زاده">
 
     <title> وحید نجفی زاده </title>
+    <link rel="icon" href="/SiteTemplate/img/logo.png" type="image/png" />
     <link rel="stylesheet" href="SiteTemplate/css/app.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
     <link rel="stylesheet" href="SiteTemplate/css/swiper-bundleM.css">
+    <link rel="stylesheet" href="SiteTemplate/css/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="SiteTemplate/css/app.css?v=@DateTime.Now.Ticks">
-    @await RenderSectionAsync("Styles",false);
+    @await RenderSectionAsync("Styles", false)
 </head>
 
 <body>
@@ -46,13 +48,24 @@
                                 <li>
                                     <a href="/Note"> نت های هنگدرام </a>
                                 </li>
+                                <li>
+                                    <a href="/Instrument">معرفی سازها</a>
+                                </li>
+                                <li>
+                                    <a href="/Student">هنرجویان ارشد</a>
+                                </li>
+                                <li>
+                                    <a href="/Academy">آموزشگاه ها</a>
+                                </li>
+                                <li>
+                                    <a href="/StudentConcert">کنسرت های هنرجویی</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
                     <div class="col-logo">
-                        <a href="#" class="logo">
-                            <!-- <img src="img/logo-light.png" alt="" class="light">
-                                <img src="img/logo-dark.png" alt="" class="dark"> -->
+                        <a href="/" class="logo">
+                             @*<img src="SiteTemplate/img/logo.png" alt="" class="light">*@
                         </a>
                     </div>
                 </div>
@@ -75,6 +88,15 @@
                 <li>
                     <a href="/Note">نت های هنگدرام</a>
                 </li>
+                <li>
+                    <a href="/Instrument">معرفی سازها</a>
+                </li>
+                <li>
+                    <a href="/Student">هنرجویان ارشد</a>
+                </li>
+                <li>
+                    <a href="/Academy">آموزشگاه ها</a>
+                </li>
             </ul>
             <div class="info">
                 <h4> </h4>
@@ -90,27 +112,6 @@
         </section>
     </header>
 <main class="home" data-scroll-container>
-    <section class="hero" data-scroll-section>
-        <video width="100%" height="auto" autoplay muted loop>
-            <source src="SiteTemplate/img/hirovid.mp4" type="video/mp4">
-        </video>
-
-        <div class="divHero">
-            <div class="titleHero">
-                vahid
-                <br />
-                najafizadeh
-            </div>
-
-        </div>
-
-
-
-        <div class="text" data-scroll data-scroll-speed=".5">
-            <h2> SCROLL dOWN</h2>
-            <span class="line"></span>
-        </div>
-    </section>
 
     @RenderBody()
 
@@ -154,7 +155,7 @@
                     </a>
                 </li>
             </ul>
-            <img src="" alt="" class="logo">
+            <img src="SiteTemplate/img/logo.png" alt="logo" class="logo">
         </div>
         <div class="namasite">
             @today
@@ -165,7 +166,7 @@
     <script src="SiteTemplate/js/app.js"></script>
     <script src="SiteTemplate/js/swiper-bundle.min.js"></script>
     <script src="SiteTemplate/js/preview.js"></script>
-
+    <script src="SiteTemplate/js/script.js"></script>
     <script>
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -260,7 +261,6 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
     @await RenderSectionAsync("Scripts", false)
 </body>
 

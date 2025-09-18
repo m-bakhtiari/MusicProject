@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using TopLearn.Core.DTOs;
 using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Core.Services.Interfaces
@@ -15,5 +16,8 @@ namespace TopLearn.Core.Services.Interfaces
         Task<Tuple<List<MusicNote>, int>> GetCourse(int pageId = 1, string filter = "", int take = 0);
         Task<List<MusicNote>> GetAllNotes();
         Task<MusicNote> GetNoteById(int noteId);
+
+        Task<Tuple<List<NoteViewModelItem>, int>> GetMusicNote(int pageId = 1, string filter = ""
+           ,List<int> selectedGroups = null, int take = 0);
     }
 }

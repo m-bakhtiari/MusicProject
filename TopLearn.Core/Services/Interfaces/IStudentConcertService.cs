@@ -19,5 +19,6 @@ namespace TopLearn.Core.Services.Interfaces
 
        Task DeleteItem(StudentConcert studentConcert);
        Task DeleteImage(int id);
+       Task<List<StudentConcertImage>> GetImages();
    }
 }

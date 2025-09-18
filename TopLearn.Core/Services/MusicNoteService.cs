@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using TopLearn.Core.DTOs;
 using TopLearn.Core.DTOs.Course;
 using TopLearn.Core.Generator;
 using TopLearn.Core.Services.Interfaces;
@@ -104,6 +105,49 @@ namespace TopLearn.Core.Services
             }
             _context.MusicNotes.Update(musicNote);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Tuple<List<NoteViewModelItem>, int>> GetMusicNote(int pageId = 1, string filter = "",
+            List<int> selectedGroups = null, int take = 0)
+        {
+            if (take == 0)
+                take = 12;
+
+            IQueryable<MusicNote> result = _context.MusicNotes.Include(x => x.Instrument);
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                result = result.Where(c => c.Title.Contains(filter));
+            }
+            result = result.OrderByDescending(c => c.MusicNoteId);
+
+            if (selectedGroups != null && selectedGroups.Any())
+            {
+                foreach (var groupId in selectedGroups)
+                {
+                    result = result.Where(c => c.InstrumentId == groupId);
+                }
+            }
+
+            var skip = (pageId - 1) * take;
+
+            var pageCount = await result.Select(c => new NoteViewModelItem()
+            {
+                NoteId = c.MusicNoteId,
+                FileName = c.FileName,
+                Title = c.Title
+            }).CountAsync() / take;
+
+            var query = await result.Select(c => new NoteViewModelItem()
+            {
+                NoteId = c.MusicNoteId,
+                FileName = c.FileName,
+                Title = c.Title,
+                InstrumentId = c.InstrumentId.Value,
+                InstrumentTitle = c.Instrument.InstrumentTitle,
+                InstrumentImageName = c.Instrument.ImageName
+            }).Skip(skip).Take(take).ToListAsync();
+            return Tuple.Create(query, pageCount);
         }
     }
 }
