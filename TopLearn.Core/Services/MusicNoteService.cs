@@ -108,7 +108,7 @@ namespace TopLearn.Core.Services
         }
 
         public async Task<Tuple<List<NoteViewModelItem>, int>> GetMusicNote(int pageId = 1, string filter = "",
-            List<int> selectedGroups = null, int take = 0)
+            int instrumentId = 0, int take = 0)
         {
             if (take == 0)
                 take = 12;
@@ -121,12 +121,9 @@ namespace TopLearn.Core.Services
             }
             result = result.OrderByDescending(c => c.MusicNoteId);
 
-            if (selectedGroups != null && selectedGroups.Any())
+            if (instrumentId != 0)
             {
-                foreach (var groupId in selectedGroups)
-                {
-                    result = result.Where(c => c.InstrumentId == groupId);
-                }
+                result = result.Where(c => c.InstrumentId == instrumentId);
             }
 
             var skip = (pageId - 1) * take;

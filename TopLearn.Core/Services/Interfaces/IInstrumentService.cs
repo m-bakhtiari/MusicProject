@@ -14,5 +14,6 @@ namespace TopLearn.Core.Services.Interfaces
         Task AddInstrument(Instrument instrument, IFormFile imgInstrumentUp, IFormFile imgInstrumentLogoUp);
         Task UpdateInstrument(Instrument instrument, IFormFile imgInstrumentUp, IFormFile imgInstrumentLogoUp);
         Task DeleteInstrument(Instrument instrument);
+        Task<List<Instrument>> GetInstrumentHasNote();
     }
 }

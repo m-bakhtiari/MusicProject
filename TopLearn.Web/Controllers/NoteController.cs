@@ -19,16 +19,22 @@ namespace TopLearn.Web.Controllers
             _musicNoteService = musicNoteService;
             _instrumentService = instrumentService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageId = 1, string filter = "",int instrumentId = 0)
         {
-            var items = await _musicNoteService.GetMusicNote(1, "", null, 15);
+            var items = await _musicNoteService.GetMusicNote(pageId, filter, instrumentId, 12);
             var notes = await _musicNoteService.GetAllNotes();
             var model = new NoteViewModel()
             {
-                MusicNotes = notes,
-                NoteViewModelItem = items
+                MusicNotes = notes.OrderByDescending(x => x.MusicNoteId).Take(10).ToList(),
+                NoteViewModelItem = items,
+                Instruments = await _instrumentService.GetInstrumentHasNote()
             };
-            ViewData["A"] = "active";
+            if (instrumentId == 0)
+                ViewData["A"] = "active";
+            else
+                ViewData["A"] = "";
+            ViewBag.pageId = pageId;
+            ViewBag.instrumentId = instrumentId;
             return View(model);
         }
 
@@ -40,5 +46,7 @@ namespace TopLearn.Web.Controllers
             var fileBytes = await System.IO.File.ReadAllBytesAsync(imagePath);
             return File(fileBytes, "application/pdf", data.FileName);
         }
+
+
     }
 }

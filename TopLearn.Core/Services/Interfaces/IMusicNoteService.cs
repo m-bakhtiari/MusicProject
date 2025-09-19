@@ -18,6 +18,6 @@ namespace TopLearn.Core.Services.Interfaces
         Task<MusicNote> GetNoteById(int noteId);
 
         Task<Tuple<List<NoteViewModelItem>, int>> GetMusicNote(int pageId = 1, string filter = ""
-           ,List<int> selectedGroups = null, int take = 0);
+           , int instrumentId = 0, int take = 0);
     }
 }

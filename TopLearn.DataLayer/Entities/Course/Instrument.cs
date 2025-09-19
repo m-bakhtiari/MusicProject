@@ -24,5 +24,7 @@ namespace TopLearn.DataLayer.Entities.Course
         public string IconImage { get; set; }
 
         public string ImageName { get; set; }
+
+        public List<MusicNote> MusicNotes { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace TopLearn.Core.Services
         {
             _context = context;
         }
-        public async Task AddInstrument(Instrument instrument,IFormFile imgInstrumentUp, IFormFile imgInstrumentLogoUp)
+        public async Task AddInstrument(Instrument instrument, IFormFile imgInstrumentUp, IFormFile imgInstrumentLogoUp)
         {
             instrument.IconImage = "no-photo.jpg";
             instrument.ImageName = "no-photo.jpg";
@@ -77,6 +77,11 @@ namespace TopLearn.Core.Services
         public async Task<List<Instrument>> GetAll()
         {
             return await _context.Instruments.ToListAsync();
+        }
+
+        public async Task<List<Instrument>> GetInstrumentHasNote()
+        {
+            return await _context.Instruments.Where(x => x.MusicNotes.Any()).ToListAsync();
         }
 
         public async Task<Instrument> GetById(int instrumentId)

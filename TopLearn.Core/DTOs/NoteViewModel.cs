@@ -10,6 +10,7 @@ namespace TopLearn.Core.DTOs
     {
         public List<MusicNote> MusicNotes { get; set; }
         public Tuple<List<NoteViewModelItem>, int> NoteViewModelItem { get; set; }
+        public List<Instrument> Instruments { get; set; }
     }
 
    public class NoteViewModelItem

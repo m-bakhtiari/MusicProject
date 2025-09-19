@@ -7,8 +7,8 @@
             <div class="swiper-wrapper" dir="rtl">
                 @foreach (var item in Model)
                 {
-                    <div class="swiper-slide swiper-slide-active">
-                        <img src="/academy/@item.LogoImageName" class="imgMain" alt="">
+                    <div class="swiper-slide swiper-slide-active" style="margin-left: 5px;margin-right: 5px">
+                        <img src="/academy/@item.LogoImageName" class="imgMain" alt="@item.AcademyTitle">
                         <div class="info">
                             <a href="@item.Website" target="_blank">
                                 <h4 class="name" style="color: white">
@@ -84,7 +84,7 @@
                             <img src="/academy/@item.LogoImageName" alt="Mobile Image" loading="lazy" width="450" height="315">
                         </div>
                         <a href="@item.Website" target="_blank" class="list-images__item-btn">
-                            مشاهده سایت آموزشگاه
+                             وبسایت 
                         </a>
                     </div>
 

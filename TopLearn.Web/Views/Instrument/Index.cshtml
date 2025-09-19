@@ -18,7 +18,7 @@
                             </a>
                             <span class="type">
                                 <a href="/Download/@item.InstrumentId" download>
-                                   مشاهده توضیحات
+                                    مشاهده توضیحات
                                 </a>
                             </span>
                         </div>
@@ -43,14 +43,18 @@
                 <div class="productList">
                     @foreach (var item in Model)
                     {
+
                         <div class="product-item">
-                            <img src="/instrument/@item.ImageName" alt="@item.InstrumentTitle">
+                            <img src="/instrument/@item.ImageName" alt="@item.InstrumentTitle" style="height: 150px;max-width: 100%">
                             <div style="display: flex; justify-content: space-between;">
                                 <p class="product-item-p1"> @item.InstrumentTitle </p>
                                 <div class="product-item-p2">
-                                    <a href="/Download/@item.InstrumentId" download>
-                                        <img src="SiteTemplate/img/IconDownload.svg" alt="download" title="مشاهده توضیحات">
-                                    </a>
+                                    <a style=" color: #ecc739; font-size: 17px; padding: 10px;
+                                              border-color: transparent;
+                                              border-radius: 5px;
+                                              inset: 0%;
+                                              border: 3px solid #000;
+                                              box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;" href="/InstrumentInfo">توضیحات</a>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +259,7 @@
         }
 
         .product-item {
-            cursor: pointer;
+           /* cursor: pointer;*/
             /* background: #232323; */
             border-radius: 16px;
             padding: 24px;
@@ -346,7 +350,7 @@
             color: #fff;
             font-family: Poppins;
             font-size: 16px;
-            font-weight: undefined;
+            font-weight: normal;
             letter-spacing: 0;
             text-align: right;
             text-transform: uppercase;

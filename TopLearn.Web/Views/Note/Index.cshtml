@@ -36,65 +36,79 @@
         </div>
     </div>
 
+    <form action="/Note" method="get" id="formFilter">
+        <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
+        <input type="hidden" id="instrumentId" name="instrumentId" value="@ViewBag.instrumentId.ToString()" />
 
-    <div class="listDnl wrapper mrgTop">
-        <div class="maxWidth">
-            <div class="tab-wrapper row">
-                <div class="col-md-8">
-                    <ul class="tabs">
-                        <li class="tab-link @ViewData["A"]"><a href="/SearchNote" style="color: white">سازها</a></li>
-                        <li class="tab-link @ViewData["B"]"><a href="/SearchNote" style="color: white">هنگدرام</a></li>
-                        <li class="tab-link @ViewData["C"]"><a href="/SearchNote" style="color: white">کاخن</a></li>
-                        <li class="tab-link @ViewData["D"]"><a href="/SearchNote" style="color: white">کونگا</a></li>
-                        <li class="tab-link @ViewData["E"]"><a href="/SearchNote" style="color: white">داربوکا</a></li>
-                    </ul>
+        <div class="listDnl wrapper mrgTop">
+            <div class="maxWidth">
+                <div class="tab-wrapper row">
+                    <div class="col-md-8">
+                        <ul class="tabs">
+                            <li class="tab-link @ViewData["A"]"><a href="#" style="color: white">سازها</a></li>
+                            @foreach (var item in Model.Instruments)
+                            {
+                                <li class="tab-link @(ViewBag.instrumentId == item.InstrumentId ? "active" : "")">
+                                    <a href="#" style="color: white" onclick="filterNote(null, @item.InstrumentId)">@item.InstrumentTitle</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="searchBox col-md-4">
+                        <input class="searchInput" type="text" name="filter" placeholder="Search">
+                        <button class="searchButton" href="#">
+                            <i class="telegram" style="color: #000000"></i>
+                        </button>
+                    </div>
+
                 </div>
-
-
-                <div class="searchBox col-md-4">
-                    <input class="searchInput" type="text" name="" placeholder="Search">
-                    <button class="searchButton" href="#">
-                        <i class="telegram" style="color: #000000">
-                        </i>
-                    </button>
-                </div>
-
             </div>
-        </div>
 
 
-        <div class="content-wrapper">
-            <div class="tab-content active">
-                <div class="productList">
-                    @foreach (var item in Model.NoteViewModelItem.Item1)
-                    {
-                        <div class="product-item">
-                            <img src="/instrument/@item.InstrumentImageName" alt="@item.InstrumentTitle">
-                            <div style="display: flex; justify-content: space-between;">
-                                <p class="product-item-p1"> @item.Title </p>
-                                <div class="product-item-p2">
-                                    <a href="/Download/@item.NoteId" download>
-                                        <img src="SiteTemplate/img/IconDownload.svg" alt="download" title="دانلود نت">
-                                    </a>
+            <div class="content-wrapper">
+                <div class="tab-content active">
+                    <div class="productList">
+                        @foreach (var item in Model.NoteViewModelItem.Item1)
+                        {
+                            <div class="product-item">
+                                <img src="/instrument/@item.InstrumentImageName" alt="@item.InstrumentTitle" style="max-width: 100%; max-height: 150px">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <p class="product-item-p1"> @item.Title </p>
+                                    <div class="product-item-p2">
+                                        <a href="/Download/@item.NoteId" download>
+                                            <img src="SiteTemplate/img/IconDownload.svg" alt="download" title="دانلود نت">
+                                        </a>
+                                    </div>
                                 </div>
+                                <p>@item.InstrumentTitle</p>
                             </div>
-                            <p>@item.InstrumentTitle</p>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
+        @if (Model.NoteViewModelItem.Item2 > 1)
+        {
+            <ul id="pagination">
+                @for (var i = 1; i <= (int)Model.NoteViewModelItem.Item2; i++)
+                {
+                    <li><a class="@(ViewBag.pageId==i?"active":"")" onclick="filterNote(@i,null)" href="#">@i</a></li>
+                }
+            </ul>
+        }
 
-    <ul id="pagination">
-        <li><a class="" href="#">«</a></li>
-        <li><a href="#" class="active">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">...</a></li>
-        <li><a href="#">@Model.NoteViewModelItem.Item2</a></li>
-        <li><a href="#">»</a></li>
-    </ul>
+        @*<ul id="pagination">
+                <li><a class="" href="#">«</a></li>
+                <li><a href="#" class="active">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">...</a></li>
+                <li><a href="#">@Model.NoteViewModelItem.Item2</a></li>
+                <li><a href="#">»</a></li>
+            </ul>*@
+    </form>
 </section>
 
 @section Scripts
@@ -129,6 +143,16 @@
                 prevEl: ".swiper-button-prev"
             }
         });
+    </script>
+
+    <script>
+        function filterNote(pageId, instrumentId) {
+            if (pageId != null)
+                $("#pageId").val(pageId);
+            if (instrumentId != null)
+                $("#instrumentId").val(instrumentId);
+            $("#formFilter").submit();
+        }
     </script>
 }
 
