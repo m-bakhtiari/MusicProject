@@ -30,6 +30,7 @@ namespace TopLearn.Web.Controllers
             _logger = logger;
             _studentConcertService = studentConcertService;
         }
+
         public async Task<IActionResult> Index()
         {
             var model = new ItemForIndexDto()

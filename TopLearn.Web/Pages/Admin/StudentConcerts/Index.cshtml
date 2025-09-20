@@ -23,7 +23,7 @@
                     <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
                         <div class="col-md-12" style="margin: 10px 0;">
 
-                            <a asp-page="CreateStudentConcert" class="btn btn-outline btn-success">افزودن گروه جدید</a>
+                            <a asp-page="CreateStudentConcert" asp-route-type="@ViewData["type"]" class="btn btn-outline btn-success">افزودن گروه جدید</a>
 
                         </div>
                         @if (ViewData["Error"] != null)

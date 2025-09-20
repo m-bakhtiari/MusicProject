@@ -87,27 +87,6 @@ namespace TopLearn.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Use(async (context, next) =>
-            {
-                await next();
-
-                if (context.Response.StatusCode == 404)
-                {
-                    context.Request.Path = "/Home/Error";
-                    context.Request.Headers.Add("LogData", "this is 404");
-
-                    await next();
-                }
-                else
-                {
-                    context.Request.Path = "/Home/Error";
-                    context.Request.Headers.Add("LogData", context.Response.StatusCode.ToString());
-
-                    await next();
-                }
-
-            });
-
             app.UseStaticFiles();
             app.UseAuthentication();
 
@@ -121,10 +100,10 @@ namespace TopLearn.Web
                 routes.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            });
         }
     }
 }

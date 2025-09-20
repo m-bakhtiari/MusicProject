@@ -45,7 +45,7 @@
                 <div class="tab-wrapper row">
                     <div class="col-md-8">
                         <ul class="tabs">
-                            <li class="tab-link @ViewData["A"]"><a href="#" style="color: white">سازها</a></li>
+                            <li class="tab-link @ViewData["A"]"><a href="#" onclick="filterNote(null, 0)" style="color: white">سازها</a></li>
                             @foreach (var item in Model.Instruments)
                             {
                                 <li class="tab-link @(ViewBag.instrumentId == item.InstrumentId ? "active" : "")">
@@ -58,7 +58,7 @@
                     <div class="searchBox col-md-4">
                         <input class="searchInput" type="text" name="filter" placeholder="Search">
                         <button class="searchButton" href="#">
-                            <i class="telegram" style="color: #000000"></i>
+                            جستجو
                         </button>
                     </div>
 
@@ -113,9 +113,9 @@
 
 @section Scripts
 {
-    <script src="SiteTemplate/js/scroll.js"></script>
-    <script src="SiteTemplate/js/app.js"></script>
     <script src="SiteTemplate/js/swiper-bundleList.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script>
         var swiper = new Swiper(".swiper", {
             effect: "coverflow",
@@ -789,10 +789,9 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
+                border-radius: 30%;
                 transition: 0.4s;
+                margin-right: auto;
             }
 
             /* You'll likely want to adjust the input's width */

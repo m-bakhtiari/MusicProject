@@ -51,6 +51,7 @@
     <img src="SiteTemplate/img/banner.png" style="width: 45%;" alt="banner">
 </section>
 
+
 <section class="intro sliderNot" data-scroll-section>
     <section class="base-template">
         <div class="wrapper base-template__wrapper">
@@ -62,10 +63,8 @@
                             @foreach (var item in Model.Instruments)
                             {
                                 <div class="swiper-slide horizontal-ticker__slide" style="width: 20rem">
-                                    <a style="color: white; display: flex; align-items: center; gap: 10px;" href="/Instrument?id=@item.InstrumentId">
-                                        <img src="/instrument/@item.IconImage" alt="@item.InstrumentTitle" style="height: 80%;" />
-                                        <p style="margin: 0;">@item.InstrumentTitle</p>
-                                    </a>
+                                    <img src="/instrument/@item.IconImage" alt="@item.InstrumentTitle" style="height: 80%;" />
+                                    <p style="margin: 0;">@item.InstrumentTitle</p>
                                 </div>
                             }
                         </div>
@@ -76,10 +75,8 @@
                             @foreach (var item in Model.Instruments)
                             {
                                 <div class="swiper-slide horizontal-ticker__slide" style="width: 20rem">
-                                    <a style="color: white" href="/Instrument?id=@item.InstrumentId">
-                                        <img src="/instrument/@item.IconImage" alt="@item.InstrumentTitle" style="height: 100%" />
-                                        <p>@item.InstrumentTitle</p>
-                                    </a>
+                                    <img src="/instrument/@item.IconImage" alt="@item.InstrumentTitle" style="height: 100%" />
+                                    <p>@item.InstrumentTitle</p>
                                 </div>
                             }
                         </div>
@@ -130,30 +127,36 @@
                             <div class="why-us-trail move-down">
                                 <div class="why-us-taril-cards">
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/ostad3.jpeg" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/DSC08975.jpg" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt=""
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="ostad" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt="ostad"
                                              class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt=""
+                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt="ostad"
                                              class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="" class="image-cover">
+                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="ostad" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                 </div>
                             </div>
@@ -163,36 +166,40 @@
                                 <div class="why-us-taril-cards">
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/Untitled.jpeg"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
+                                             loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy"
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
+                                             loading="lazy" alt="ostad" class="image-cover">
                                     </div>
 
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/Untitled.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
+                                             loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                 </div>
                             </div>
@@ -202,15 +209,19 @@
                                 <div class="why-us-taril-cards">
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy"
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/Untitled.jpeg"
@@ -218,19 +229,23 @@
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
+                                             loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/Untitled.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
+                                             loading="lazy" alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
                                     </div>
                                     <div class="why-us-taril-card">
                                         <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="" class="image-cover">
+                                             alt="ostad" class="image-cover">
+                                    </div>
+                                    <div class="why-us-taril-card">
+                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy"
+                                             alt="ostad" class="image-cover">
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +265,7 @@
                              style="transform: scale(1) matrix(0.866025, -0.5, 0.5, 0.866025, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
                                 <img src="SiteTemplate/img/JEMA.png" loading="lazy"
-                                     alt="" class="image-cover">
+                                     alt="ostad" class="image-cover">
                             </div>
                         </div>
                         <div class="why-us-avatar-position s2 visible"
@@ -258,7 +273,7 @@
                              style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
                                 <img src="SiteTemplate/img/cajon-removebg-preview.png" loading="lazy"
-                                     alt="" class="image-cover">
+                                     alt="ostad" class="image-cover">
                             </div>
                         </div>
                         <div class="why-us-avatar-position s3 visible"
@@ -266,7 +281,7 @@
                              style="transform: scale(1) matrix(0.996195, -0.0871557, 0.0871557, 0.996195, 0, 0);">
                             <div data-rotate="1" class="why-us-avatar">
                                 <img src="SiteTemplate/img/hangdrum-removebg-preview.png" loading="lazy"
-                                     alt="" class="image-cover">
+                                     alt="ostad" class="image-cover">
                             </div>
                         </div>
                         <div class="why-us-avatar-position s4 visible"
@@ -274,7 +289,7 @@
                              style="transform: scale(1) matrix(0.5, 0, 0, 0.5, 0, 0);">
                             <div data-rotate="2" class="why-us-avatar">
                                 <img src="SiteTemplate/img/JEMA.png" loading="lazy"
-                                     alt="" class="image-cover">
+                                     alt="ostad" class="image-cover">
                             </div>
                         </div>
                         <div class="why-us-avatar-position s5 visible"
@@ -477,31 +492,79 @@
 </section>
 
 <section class="parket" data-scroll-section>
-    <div style="text-align: center; width: auto; height: auto">
-        <a href="/StudentConcert" style="color: white">
-            <h3>STUDENT'S CONCERT</h3>
-            <img src="/SiteTemplate/img/Havana-removebg-preview.png" alt="Havana" style="width: 40%" />
-        </a>
-    </div>
     <div class="my-carousel bg-darker">
-        <div class="swiper my-carousel__swiper swiper-rtl">
+        <div class="swiper my-carousel__swiper">
             <div class="swiper-wrapper">
-                @foreach (var item in Model.StudentConcerts)
-                {
-                    <div class="swiper-slide">
-                        <div class="swiper-card swiper-card--3">
-                            <img src="/studentConcert/@item.StudentConcertImages.FirstOrDefault().ImageName" alt="@item.Title" id="galleryTrigger">
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/ostad1.jpeg" alt="Najafizadeh">
                         </div>
-                        <p style=" text-align: center !important;
-                                  font-size: 14px;
-                                  color: #fff !important;
-                                  margin-top: 8px !important;
-                                  font-weight: 500;
-                                  line-height: 1.6;
-                                  font-family: 'IRANSans', sans-serif;
-                                  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);">@item.Title</p>
                     </div>
-                }
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/ostad2.jpeg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/ostad3.jpeg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/Untitled.jpeg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/DSC08975.jpg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/ostad1.jpeg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/ostad2.jpeg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/ostad3.jpeg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/Untitled.jpeg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-card swiper-card--3">
+                        <div>
+                            <img src="/SiteTemplate/img/DSC08975.jpg" alt="Najafizadeh">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -510,7 +573,6 @@
             <button class="btn btn--subtle my-carousel__control my-carousel__control--next"> بعدی </button>
         </div>
     </div>
-
 </section>
 
 @section Scripts

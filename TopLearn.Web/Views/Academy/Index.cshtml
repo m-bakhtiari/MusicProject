@@ -37,7 +37,7 @@
         <div class="list-images__heading-box">
 
             <p class="list-images__text">
-                برای هماهنگی حضور در کلاس های خصوصی یا گرفتن مشاوره برای انتخاب ساز با آکادمی های زیر در تماس باشید 
+                برای هماهنگی حضور در کلاس های خصوصی یا گرفتن مشاوره برای انتخاب ساز با آکادمی های زیر در تماس باشید
             </p>
             <h1 class="list-images__heading">
                 OUR
@@ -64,7 +64,7 @@
                 @foreach (var item in Model)
                 {
                     <div class="list-images__item" data-img="/academy/@item.LogoImageName">
-                        <div><img src="academy/@item.LogoImageName" alt="@item.AcademyTitle" style="width: 80px;height: 80px"/></div>
+                        <div><img src="academy/@item.LogoImageName" alt="@item.AcademyTitle" style="width: 80px;height: 80px" /></div>
                         <h2 class="list-images__item-heading">
                             @item.AcademyTitle
                         </h2>
@@ -84,7 +84,7 @@
                             <img src="/academy/@item.LogoImageName" alt="Mobile Image" loading="lazy" width="450" height="315">
                         </div>
                         <a href="@item.Website" target="_blank" class="list-images__item-btn">
-                             وبسایت 
+                            وبسایت
                         </a>
                     </div>
 
@@ -98,8 +98,37 @@
 
 @section Scripts
 {
-    <script src="https://bato-web-agency.github.io/bato-shared/js/preview.js?v=1.1"></script>
-    <script src="https://bato-web-agency.github.io/bato-shared/js/menu.js?v=1.2"></script>
+    <script src="SiteTemplate/js/scroll.js"></script>
+    <script src="SiteTemplate/js/app.js"></script>
+    <script src="SiteTemplate/js/swiper-bundleList.min.js"></script>
+    <script>
+        var swiper = new Swiper(".swiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            autoplay: {
+                delay: 3000
+            },
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 0,
+                depth: 30,
+                modifier: 1,
+                slideShadows: false
+            },
+            spaceBetween: 180,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev"
+            }
+        });
+    </script>
 }
 
 
@@ -289,15 +318,18 @@
                 .list-images__item:hover .list-images__item-text {
                     color: white;
                 }
-            .list-images__item:hover .list-images__item-text02 {
-                color: white;
-            }
-            .list-images__item:hover .list-images__item-text03 {
-                color: white;
-            }
-            .list-images__item:hover .list-images__item-text04 {
-                color: white;
-            }
+
+                .list-images__item:hover .list-images__item-text02 {
+                    color: white;
+                }
+
+                .list-images__item:hover .list-images__item-text03 {
+                    color: white;
+                }
+
+                .list-images__item:hover .list-images__item-text04 {
+                    color: white;
+                }
 
 
             .list-images__item-btn:hover {
@@ -362,18 +394,21 @@
                 max-width: 100%;
                 pointer-events: none;
             }
+
             .list-images__item-text02 {
                 grid-column: 1 / -1;
                 grid-row: 4;
                 max-width: 100%;
                 pointer-events: none;
             }
+
             .list-images__item-text03 {
                 grid-column: 1 / -1;
                 grid-row: 5;
                 max-width: 100%;
                 pointer-events: none;
             }
+
             .list-images__item-text04 {
                 grid-column: 1 / -1;
                 grid-row: 6;

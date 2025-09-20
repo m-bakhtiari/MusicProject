@@ -79,15 +79,14 @@
                         </div>
                         <div class="textHover">
                             <div class="titleListConsert">
-
                                 <span class="label-up"> @item.Title </span>
-                                <span class="label-up textFa"> @item.Title </span>
+                                @*<span class="label-up textFa"> @item.Title </span>*@
                             </div>
                             <!-- <span class="text-regular tracking-0" data-v-cd555a4b=""> مشاهده  </span> -->
 
-                            <div class="textDesc">
+                            @*<div class="textDesc">
                                 @item.Description
-                            </div>
+                            </div>*@
 
                         </div>
 
@@ -537,22 +536,22 @@
             color: white;
             border-radius: 2px;
             transition: 0.3s;
-            font-size: 5rem;
+            font-size: 3rem;
         }
 
 
         .label-up {
             display: block;
-            margin: 0px 30px;
+            margin: 0px 10px;
             height: 100%;
             position: relative;
             top: 0%;
             transition: 0.3s;
         }
 
-        .block:hover .label-up {
+       /* .block:hover .label-up {
             top: -100%;
-        }
+        }*/
 
 
         .label-down {
@@ -564,9 +563,9 @@
             transition: 0.3s;
         }
 
-        .block:hover .label-down {
+       /* .block:hover .label-down {
             top: 0%;
-        }
+        }*/
 
         .block img {
             filter: unset;
@@ -575,9 +574,9 @@
             height: 140px;
         }
 
-        .block:hover {
+      /*  .block:hover {
             color: #fff;
-        }
+        }*/
 
             .block:hover img {
                 filter: brightness(125%);
@@ -602,10 +601,10 @@
             color: #a3a3a3;
         }
 
-        .block:hover .textDesc {
+       /* .block:hover .textDesc {
             bottom: -10px;
             transition: all .5s;
-        }
+        }*/
 
         .block .textHover {
             bottom: -5px;
@@ -613,10 +612,10 @@
             transition: all .5s;
         }
 
-        .block:hover .textHover {
+      /*  .block:hover .textHover {
             bottom: 3em;
             transition: all .5s;
-        }
+        }*/
 
         .date {
             position: relative;
@@ -630,8 +629,8 @@
             }
 
             .titleListConsert {
-                height: 57px;
-                font-size: 3rem;
+                height: auto;
+                font-size: 2rem;
             }
 
             .textDesc {
@@ -662,10 +661,10 @@
             font-size: 3rem;
         }
 
-        .block:hover .textFa {
+      /*  .block:hover .textFa {
             display: block;
             margin-top: .7em;
-        }
+        }*/
     </style>
 }
 

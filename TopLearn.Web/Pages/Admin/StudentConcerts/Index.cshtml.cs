@@ -20,6 +20,7 @@ namespace TopLearn.Web.Pages.Admin.StudentConcerts
         public List<StudentConcert> StudentConcert { get; set; }
         public async Task OnGet(int type)
         {
+            ViewData["type"] = type;
             StudentConcert = await _studentConcertService.GetAll(type);
         }
     }
