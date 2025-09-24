@@ -9,6 +9,5 @@ namespace TopLearn.Core.DTOs
     {
         public List<Instrument> Instruments { get; set; }
         public List<Academy> Academies { get; set; }
-        public List<StudentConcert> StudentConcerts { get; set; }
     }
 }

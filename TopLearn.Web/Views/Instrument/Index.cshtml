@@ -2,40 +2,6 @@
 
 <section class="list" data-scroll-section>
 
-    <div class="container-fluid">
-        <div class="swiper">
-            <h2 style="text-align: center">معرفی سازها</h2>
-            <div class="swiper-wrapper" dir="rtl">
-                @foreach (var item in Model)
-                {
-                    <div class="swiper-slide swiper-slide-active">
-                        <img src="/instrument/@item.IconImage" class="imgMain" alt="">
-                        <div class="info">
-                            <a href="/Download/@item.InstrumentId">
-                                <h4 class="name" style="color: white">
-                                    @item.InstrumentTitle
-                                </h4>
-                            </a>
-                            <span class="type">
-                                <a href="/Download/@item.InstrumentId" download>
-                                    مشاهده توضیحات
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                }
-
-            </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
-
-            <!-- If we need navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-    </div>
-
-
     <div class="listDnl wrapper mrgTop">
 
         <div class="content-wrapper">
@@ -43,21 +9,13 @@
                 <div class="productList">
                     @foreach (var item in Model)
                     {
-
-                        <div class="product-item">
-                            <img src="/instrument/@item.ImageName" alt="@item.InstrumentTitle" style="height: 150px;max-width: 100%">
-                            <div style="display: flex; justify-content: space-between;">
-                                <p class="product-item-p1"> @item.InstrumentTitle </p>
-                                <div class="product-item-p2">
-                                    <a style=" color: #ecc739; font-size: 17px; padding: 10px;
-                                              border-color: transparent;
-                                              border-radius: 5px;
-                                              inset: 0%;
-                                              border: 3px solid #000;
-                                              box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;" href="/InstrumentInfo">توضیحات</a>
-                                </div>
+                        <a href="">
+                            <div class="product-item">
+                                <img src="/instrument/@item.ImageName" alt="@item.InstrumentTitle" style="height: 150px;max-width: 100%">
+                                <p class="product-item-p1"> @item.InstrumentTitle.Split("-")[0] </p>
+                                <p class="product-item-p1"> @item.InstrumentTitle.Split("-")[1] </p>
                             </div>
-                        </div>
+                        </a>
                     }
                 </div>
             </div>
@@ -66,41 +24,6 @@
     </div>
 
 </section>
-
-@section Scripts
-{
-    <script src="SiteTemplate/js/scroll.js"></script>
-    <script src="SiteTemplate/js/app.js"></script>
-    <script src="SiteTemplate/js/swiper-bundleList.min.js"></script>
-    <script>
-        var swiper = new Swiper(".swiper", {
-            effect: "coverflow",
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            autoplay: {
-                delay: 3000
-            },
-            coverflowEffect: {
-                rotate: 0,
-                stretch: 0,
-                depth: 30,
-                modifier: 1,
-                slideShadows: false
-            },
-            spaceBetween: 180,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev"
-            }
-        });
-    </script>
-}
 
 @section Styles
 {
@@ -259,7 +182,7 @@
         }
 
         .product-item {
-           /* cursor: pointer;*/
+            /* cursor: pointer;*/
             /* background: #232323; */
             border-radius: 16px;
             padding: 24px;
@@ -280,9 +203,9 @@
             }
 
             .product-item img {
-                object-fit: cover;
+                /*object-fit: cover;*/
                 border-radius: 12px;
-                width: 60%;
+                /*width: 60%;*/
                 height: auto;
                 margin-bottom: 16px;
                 margin-left: auto;
@@ -338,7 +261,7 @@
         .product-item-p1 {
             color: #cfcfcf;
             letter-spacing: 0;
-            text-align: left;
+            text-align: center;
             text-transform: uppercase;
             font-family: Poppins;
             font-size: 16px;

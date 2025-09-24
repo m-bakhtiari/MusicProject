@@ -30,8 +30,7 @@ namespace TopLearn.DataLayer.Context
         public DbSet<StudentConcertImage> StudentConcertImages { get; set; }
         public DbSet<MusicNote> MusicNotes { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Log> Log { get; set; }
-
+        public DbSet<StudentImage> StudentImages { get; set; }
         #endregion
 
 

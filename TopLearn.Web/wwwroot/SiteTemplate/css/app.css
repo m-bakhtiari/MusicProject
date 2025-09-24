@@ -11689,7 +11689,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
     margin: 0 auto;
     margin-top: 1em;
     width: 60%;
-    text-align: left;
+    text-align: center;
 }
 
 .TeamSec {
@@ -12187,7 +12187,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         }
     }
 
-    .listDnl ul {
+   /* .listDnl ul {
         width: 80%;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -12195,7 +12195,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         margin: 0 auto;
         margin-top: 1em;
         position: relative;
-    }
+    }*/
 
     .listDnl li {
         list-style-type: none;
@@ -12260,9 +12260,9 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         }
 
         .product-item img {
-            object-fit: cover;
+            /*object-fit: cover;*/
             border-radius: 12px;
-            width: 60%;
+            /*width: 60%;*/
             height: auto;
             margin-bottom: 16px;
             margin-left: auto;

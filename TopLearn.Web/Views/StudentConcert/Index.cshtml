@@ -58,12 +58,7 @@
                      style="translate: none; rotate: none; scale: none; transform: translate(-50%, 0%) translate(0px, -128px); opacity: 0.35;">
                 </div>
             </div>
-            <h1 class="list-images__heading">
-                OUR
-                <span class="list-images__heading-span">
-                    Concerts
-                </span>
-            </h1>
+           <img src="SiteTemplate/img/Havana-removebg-preview.png" class="havanaLogo container" alt="Havana"/>
         </div>
     </div>
 
@@ -82,6 +77,7 @@
                                 <span class="label-up"> @item.Title </span>
                                 @*<span class="label-up textFa"> @item.Title </span>*@
                             </div>
+                            
                             <!-- <span class="text-regular tracking-0" data-v-cd555a4b=""> مشاهده  </span> -->
 
                             @*<div class="textDesc">
@@ -536,7 +532,7 @@
             color: white;
             border-radius: 2px;
             transition: 0.3s;
-            font-size: 3rem;
+            font-size: 2rem;
         }
 
 
@@ -630,7 +626,7 @@
 
             .titleListConsert {
                 height: auto;
-                font-size: 2rem;
+                font-size: 1.4rem;
             }
 
             .textDesc {
@@ -654,7 +650,7 @@
         }
 
         .concertList {
-            margin-top: 5em;
+            /*margin-top: 5em;*/
         }
 
         .textFa {
@@ -665,6 +661,15 @@
             display: block;
             margin-top: .7em;
         }*/
+
+        @@media screen and (max-width: 768px) {
+            .havanaLogo {
+                width: 90%;
+                margin-right: 5px;
+                margin-left: 5px;
+            }
+
+        }
     </style>
 }
 

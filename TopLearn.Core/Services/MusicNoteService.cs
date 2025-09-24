@@ -128,13 +128,15 @@ namespace TopLearn.Core.Services
 
             var skip = (pageId - 1) * take;
 
-            var pageCount = await result.Select(c => new NoteViewModelItem()
+            var itemCount = await result.Select(c => new NoteViewModelItem()
             {
                 NoteId = c.MusicNoteId,
                 FileName = c.FileName,
                 Title = c.Title
-            }).CountAsync() / take;
+            }).CountAsync();
 
+            double count = (double)itemCount / take;
+            var pageCount = (int)Math.Ceiling(count);
             var query = await result.Select(c => new NoteViewModelItem()
             {
                 NoteId = c.MusicNoteId,

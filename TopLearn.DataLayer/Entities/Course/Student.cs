@@ -20,5 +20,10 @@ namespace TopLearn.DataLayer.Entities.Course
 
         [MaxLength(500)]
         public string ImageName { get; set; }
+
+        public int? Position { get; set; }
+
+
+        public List<StudentImage> StudentImages { get; set; }
     }
 }

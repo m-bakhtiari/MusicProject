@@ -21,7 +21,7 @@ namespace TopLearn.Web.Controllers
         }
         public async Task<IActionResult> Index(int pageId = 1, string filter = "",int instrumentId = 0)
         {
-            var items = await _musicNoteService.GetMusicNote(pageId, filter, instrumentId, 12);
+            var items = await _musicNoteService.GetMusicNote(pageId, filter, instrumentId, 5);
             var notes = await _musicNoteService.GetAllNotes();
             var model = new NoteViewModel()
             {

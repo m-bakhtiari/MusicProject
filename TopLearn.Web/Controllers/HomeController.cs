@@ -36,8 +36,7 @@ namespace TopLearn.Web.Controllers
             var model = new ItemForIndexDto()
             {
                 Instruments = await _instrumentService.GetAll(),
-                Academies = await _academyService.GetAllAcademy(),
-                StudentConcerts = await _studentConcertService.GetAll((int)ConstantValue.Type.StudentConcert)
+                Academies = await _academyService.GetAllAcademy()
             };
             return View(model);
         }

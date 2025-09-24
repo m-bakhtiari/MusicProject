@@ -48,7 +48,7 @@
 </section>
 
 <section data-scroll-section class="imgCenter">
-    <img src="SiteTemplate/img/banner.png" style="width: 45%;" alt="banner">
+    <img src="SiteTemplate/img/banner.png" alt="banner">
 </section>
 
 
@@ -62,9 +62,8 @@
                         <div class="swiper-wrapper">
                             @foreach (var item in Model.Instruments)
                             {
-                                <div class="swiper-slide horizontal-ticker__slide" style="width: 20rem">
-                                    <img src="/instrument/@item.IconImage" alt="@item.InstrumentTitle" style="height: 80%;" />
-                                    <p style="margin: 0;">@item.InstrumentTitle</p>
+                                <div class="swiper-slide horizontal-ticker__slide">
+                                    <p style="margin: 0;">@item.InstrumentTitle.Split("-")[0]</p>
                                 </div>
                             }
                         </div>
@@ -74,9 +73,8 @@
                         <div class="swiper-wrapper">
                             @foreach (var item in Model.Instruments)
                             {
-                                <div class="swiper-slide horizontal-ticker__slide" style="width: 20rem">
-                                    <img src="/instrument/@item.IconImage" alt="@item.InstrumentTitle" style="height: 100%" />
-                                    <p>@item.InstrumentTitle</p>
+                                <div class="swiper-slide horizontal-ticker__slide">
+                                    <p style="margin: 0;">@item.InstrumentTitle.Split("-")[1]</p>
                                 </div>
                             }
                         </div>
@@ -94,23 +92,14 @@
     </h1>
 
     <div class="base-template__text">
-        Percussionist and Instructor
-        <br>
-        Has a teaching qualification card from the Ministry of Culture and Guidance
-        <br>
-        Started activity in 2002
-        <br>
-        Performance history with traditional, pop and orchestral groups
-        <br>
-        Teaching background in Tehran's musical instrument academies And presenting percussion workshops in
-        Tehran's academies
-        <br>
-        "Author and instructor of the book "Cajon
-        <br>
-        Leader of the Havana's music Group
-        <br>
+        Percussionist and Instructor,
+        Has a teaching qualification card from the Ministry of Culture and Guidance,
+        Started activity in 2002,
+        Performance history with traditional, pop and orchestral groups,
+        Teaching background in Tehran's musical instrument academies And presenting percussion workshops in Tehran's academies,
+        Author and instructor of the book "Cajon",
+        Leader of the Havana's music Group,
         Organizer of Havana's concerts with pop and fusion singers in Tehran concert halls
-
     </div>
 </section>
 
@@ -422,159 +411,6 @@
     </div>
 </section>
 
-<section class="products" data-scroll-section>
-    <div class="titrSec">
-        <p>
-            The academies
-        </p>
-    </div>
-</section>
-
-<section class="products" data-scroll-section>
-
-    <div class="sliderMe">
-
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                @foreach (var item in Model.Academies)
-                {
-                    <div class="swiper-slide">
-                        <div class="amozeshga">
-                            <ul>
-                                <li>
-                                    <img src="/academy/@item.LogoImageName" alt="@item.AcademyTitle">
-                                </li>
-                                <li>
-                                    <a class="titleAmozeshga" href="@item.Website" target="_blank">
-                                        @item.AcademyTitle
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="TitleInner"> روزهای تدریس :</span>
-                                    <span class="DescInner">
-                                        @item.ActiveDays
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="TitleInner">
-                                        آدرس :
-                                    </span>
-                                    <span class="DescInner">
-                                        @item.Address
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="TitleInner">
-                                        تلفن :
-                                    </span>
-                                    <span class="DescInner">
-                                        @item.Phone
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="TitleInner">
-                                        سازها :
-                                    </span>
-                                    <span class="DescInner">
-                                        @item.LearningInstrument
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                }
-            </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-
-    </div>
-</section>
-
-<section class="parket" data-scroll-section>
-    <div class="my-carousel bg-darker">
-        <div class="swiper my-carousel__swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/ostad1.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/ostad2.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/ostad3.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/Untitled.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/DSC08975.jpg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/ostad1.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/ostad2.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/ostad3.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/Untitled.jpeg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-card swiper-card--3">
-                        <div>
-                            <img src="/SiteTemplate/img/DSC08975.jpg" alt="Najafizadeh">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="my-carousel__actions">
-            <button class="btn btn--subtle my-carousel__control my-carousel__control--prev"> قبلی </button>
-            <button class="btn btn--subtle my-carousel__control my-carousel__control--next"> بعدی </button>
-        </div>
-    </div>
-</section>
-
 @section Scripts
 {
     <script>
@@ -592,4 +428,21 @@
 
     </script>
 
+}
+@section Styles
+{
+    <style>
+        @@media only screen and (max-width: 768px) {
+            .imgCenter img {
+                width: 85%;
+            }
+        }
+        @@media only screen and (min-width: 768px) {
+            .imgCenter img {
+                width: 40%;
+            }
+        }
+
+
+    </style>
 }

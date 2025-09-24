@@ -1,114 +1,74 @@
 ﻿@model TopLearn.Core.DTOs.NoteViewModel
 
 <section class="list" data-scroll-section>
+    <div class="listDnl wrapper mrgTop">
+        <div class="content-wrapper tab-content active productList">
+            <form action="/Note" method="get" id="formFilter">
+                <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
+                <input type="hidden" id="instrumentId" name="instrumentId" value="@ViewBag.instrumentId.ToString()" />
 
-    <div class="container-fluid">
-        <div class="swiper">
-            <h2 style="text-align: center">نت های هنگدرام</h2>
-            <div class="swiper-wrapper" dir="rtl">
-                @foreach (var item in Model.MusicNotes)
-                {
-                    <div class="swiper-slide swiper-slide-active">
-                        <img src="SiteTemplate/img/hangdrum-removebg-preview.png" class="imgMain" alt="">
-                        <img src="SiteTemplate/img/treble_clef-removebg-preview.png" class="showActive" alt="">
-                        <div class="info">
-                            <a href="/Download/@item.MusicNoteId" download>
-                                <h4 class="name" style="color: white">
-                                    @item.Title
-                                </h4>
-                            </a>
-                            <span class="type">
-                                <a href="/Download/@item.MusicNoteId" download>
-                                    دانلود نت
-                                </a>
-                            </span>
+                <div class="listDnl wrapper mrgTop">
+                    <div class="maxWidth">
+                        <div class="tab-wrapper row">
+                            <div class="col-md-8">
+                                <ul class="tabs">
+                                    <li class="tab-link @ViewData["A"]"><a href="#" onclick="filterNote(null, 0)" style="color: white">سازها</a></li>
+                                    @foreach (var item in Model.Instruments)
+                                    {
+                                        <li class="tab-link @(ViewBag.instrumentId == item.InstrumentId ? "active" : "")">
+                                            <a href="#" style="color: white" onclick="filterNote(null, @item.InstrumentId)">@item.InstrumentTitle</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+
+                            <div class="searchBox col-md-4">
+                                <input class="searchInput" type="text" name="filter" placeholder="Search">
+                                <button class="searchButton" href="#">
+                                    جستجو
+                                </button>
+                            </div>
+
                         </div>
                     </div>
+
+
+                    <div class="content-wrapper">
+                        <div class="tab-content active">
+                            <div class="productList">
+                                @foreach (var item in Model.NoteViewModelItem.Item1)
+                                {
+                                    <a href="/Download/@item.NoteId" download style="color: darkgray">
+                                        <div class="product-item">
+                                            <img src="/instrument/@item.InstrumentImageName" alt="@item.InstrumentTitle" style="max-width: 100%; max-height: 150px">
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <p class="product-item-p1"> @item.Title </p>
+                                                <div class="product-item-p2">
+                                                    <img src="SiteTemplate/img/IconDownload.svg" alt="download" title="دانلود نت">
+                                                </div>
+                                            </div>
+                                            <p>@item.InstrumentTitle</p>
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                @if (Model.NoteViewModelItem.Item2 > 1)
+                {
+                    <ul id="pagination">
+                        @for (var i = 1; i <= (int)Model.NoteViewModelItem.Item2; i++)
+                        {
+                            <li><a class="@(ViewBag.pageId == i ? "active" : "")" onclick="filterNote(@i, null)" href="#">@i</a></li>
+                        }
+                    </ul>
                 }
-
-            </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
-
-            <!-- If we need navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            </form>
         </div>
     </div>
-
-    <form action="/Note" method="get" id="formFilter">
-        <input type="hidden" id="pageId" name="pageId" value="@ViewBag.pageId.ToString()" />
-        <input type="hidden" id="instrumentId" name="instrumentId" value="@ViewBag.instrumentId.ToString()" />
-
-        <div class="listDnl wrapper mrgTop">
-            <div class="maxWidth">
-                <div class="tab-wrapper row">
-                    <div class="col-md-8">
-                        <ul class="tabs">
-                            <li class="tab-link @ViewData["A"]"><a href="#" onclick="filterNote(null, 0)" style="color: white">سازها</a></li>
-                            @foreach (var item in Model.Instruments)
-                            {
-                                <li class="tab-link @(ViewBag.instrumentId == item.InstrumentId ? "active" : "")">
-                                    <a href="#" style="color: white" onclick="filterNote(null, @item.InstrumentId)">@item.InstrumentTitle</a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-
-                    <div class="searchBox col-md-4">
-                        <input class="searchInput" type="text" name="filter" placeholder="Search">
-                        <button class="searchButton" href="#">
-                            جستجو
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="content-wrapper">
-                <div class="tab-content active">
-                    <div class="productList">
-                        @foreach (var item in Model.NoteViewModelItem.Item1)
-                        {
-                            <div class="product-item">
-                                <img src="/instrument/@item.InstrumentImageName" alt="@item.InstrumentTitle" style="max-width: 100%; max-height: 150px">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="product-item-p1"> @item.Title </p>
-                                    <div class="product-item-p2">
-                                        <a href="/Download/@item.NoteId" download>
-                                            <img src="SiteTemplate/img/IconDownload.svg" alt="download" title="دانلود نت">
-                                        </a>
-                                    </div>
-                                </div>
-                                <p>@item.InstrumentTitle</p>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        @if (Model.NoteViewModelItem.Item2 > 1)
-        {
-            <ul id="pagination">
-                @for (var i = 1; i <= (int)Model.NoteViewModelItem.Item2; i++)
-                {
-                    <li><a class="@(ViewBag.pageId==i?"active":"")" onclick="filterNote(@i,null)" href="#">@i</a></li>
-                }
-            </ul>
-        }
-
-        @*<ul id="pagination">
-                <li><a class="" href="#">«</a></li>
-                <li><a href="#" class="active">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">...</a></li>
-                <li><a href="#">@Model.NoteViewModelItem.Item2</a></li>
-                <li><a href="#">»</a></li>
-            </ul>*@
-    </form>
 </section>
 
 @section Scripts
@@ -171,9 +131,9 @@
             text-align: left;
         }
 
-            .list-images__heading span {
-                color: white;
-            }
+        .list-images__heading span {
+            color: white;
+        }
 
         .listDnl.wrapper {
             margin: auto;
@@ -213,25 +173,25 @@
             font-family: "IRANSans";
         }
 
-            .listDnl .tab-link:hover {
-                color: #999;
-                border-color: #999;
-            }
+        .listDnl .tab-link:hover {
+            color: #999;
+            border-color: #999;
+        }
 
-            .listDnl .tab-link.active {
-                color: #333;
-                border-color: #333;
-            }
+        .listDnl .tab-link.active {
+            color: #333;
+            border-color: #333;
+        }
 
-            .listDnl .tab-link.active {
-                color: #ecc739;
-                border-color: transparent;
-                border-radius: 25px;
-                inset: 0%;
-                border: 3px solid #000;
-                border-radius: 35px;
-                box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;
-            }
+        .listDnl .tab-link.active {
+            color: #ecc739;
+            border-color: transparent;
+            border-radius: 25px;
+            inset: 0%;
+            border: 3px solid #000;
+            border-radius: 35px;
+            box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;
+        }
 
 
         .listDnl .content-wrapper {
@@ -249,9 +209,9 @@
             animation: fadeIn 0.8s ease 1 forwards;
         }
 
-            .listDnl .tab-content.active {
-                display: block;
-            }
+        .listDnl .tab-content.active {
+            display: block;
+        }
 
         @@keyframes fadeIn {
             100% {
@@ -260,7 +220,7 @@
             }
         }
 
-        .listDnl ul {
+        /* .listDnl ul {
             width: 80%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -268,19 +228,19 @@
             margin: 0 auto;
             margin-top: 1em;
             position: relative;
-        }
+        }*/
 
-        .listDnl li {
+        /* .listDnl li {
             list-style-type: none;
             width: 80%;
             margin: 0 auto;
             margin-bottom: 5em;
-        }
+        }*/
 
-            .listDnl li img {
-                width: 100%;
-                height: auto;
-            }
+        .listDnl li img {
+            width: 100%;
+            height: auto;
+        }
 
         /* ... */
 
@@ -325,23 +285,24 @@
             /* background-color: #0b0c0f; */
         }
 
-            .product-item:hover {
-                /* transform: translateY(-8px);
-        box-shadow: 0 12px 89px #e8a11257; */
-                transform: translateY(-8px);
-                box-shadow: 0 6px 30px #e8a11229;
-            }
 
-            .product-item img {
-                object-fit: cover;
-                border-radius: 12px;
-                width: 60%;
-                height: auto;
-                margin-bottom: 16px;
-                margin-left: auto;
-                margin-right: auto;
-                display: block;
-            }
+        .product-item:hover {
+            /* transform: translateY(-8px);
+        box-shadow: 0 12px 89px #e8a11257; */
+            transform: translateY(-8px);
+            box-shadow: 0 6px 30px #e8a11229;
+        }
+
+        .product-item img {
+            /*object-fit: cover;*/
+            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 16px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
 
         .productList .product-swiper .swiper-slide img {
             object-fit: contain;
@@ -369,29 +330,29 @@
             position: relative;
         }
 
-            .product-item a:after {
-                content: "";
-                background-color: #e9a215;
-                width: 0;
-                height: 2px;
-                transition: width .3s;
-                position: absolute;
-                bottom: -4px;
-                left: 0;
-            }
+        .product-item a:after {
+            content: "";
+            background-color: #e9a215;
+            width: 0;
+            height: 2px;
+            transition: width .3s;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+        }
 
         .product-item:hover a {
             color: #e9a215;
         }
 
-            .product-item:hover a:after {
-                width: 100%;
-            }
+        .product-item:hover a:after {
+            width: 100%;
+        }
 
         .product-item-p1 {
             color: #cfcfcf;
             letter-spacing: 0;
-            text-align: left;
+            text-align: center;
             text-transform: uppercase;
             font-family: Poppins;
             font-size: 16px;
@@ -403,7 +364,7 @@
             color: #fff;
             font-family: Poppins;
             font-size: 16px;
-            font-weight: undefined;
+            font-weight: normal;
             letter-spacing: 0;
             text-align: right;
             text-transform: uppercase;
@@ -482,21 +443,21 @@
             left: 0;
         }
 
-            .productList .swiper-slide.active {
-                opacity: 1;
-                visibility: visible;
-                height: auto;
-                position: relative;
-            }
+        .productList .swiper-slide.active {
+            opacity: 1;
+            visibility: visible;
+            height: auto;
+            position: relative;
+        }
 
-            .productList .swiper-slide img {
-                object-fit: contain;
-                border-radius: 12px;
-                width: auto;
-                max-width: 100%;
-                height: auto;
-                max-height: 100%;
-            }
+        .productList .swiper-slide img {
+            object-fit: contain;
+            border-radius: 12px;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+        }
 
         .productList .swiper-button-prev,
         .productList .swiper-button-next {
@@ -524,22 +485,22 @@
             right: 10px;
         }
 
-            .productList .swiper-button-prev:hover,
-            .productList .swiper-button-next:hover {
-                color: #fff;
-                background: #e9a215;
-                transform: translateY(-50%)scale(1.05);
-            }
+        .productList .swiper-button-prev:hover,
+        .productList .swiper-button-next:hover {
+            color: #fff;
+            background: #e9a215;
+            transform: translateY(-50%) scale(1.05);
+        }
 
-            .productList .swiper-button-prev:active,
-            .productList .swiper-button-next:active {
-                transform: translateY(-50%)scale(.95);
-            }
+        .productList .swiper-button-prev:active,
+        .productList .swiper-button-next:active {
+            transform: translateY(-50%) scale(.95);
+        }
 
-            .productList .swiper-button-prev:after,
-            .productList .swiper-button-next:after {
-                content: none;
-            }
+        .productList .swiper-button-prev:after,
+        .productList .swiper-button-next:after {
+            content: none;
+        }
 
         .productList .product-thumbnails {
             z-index: 20;
@@ -564,37 +525,37 @@
             overflow: hidden;
         }
 
-            .productList .thumbnail-item:hover {
-                border-color: #e9a215;
-                transform: scale(1.05);
-            }
+        .productList .thumbnail-item:hover {
+            border-color: #e9a215;
+            transform: scale(1.05);
+        }
 
-            .productList .thumbnail-item.active {
-                opacity: 1;
-                border-color: #e9a215;
-                box-shadow: 0 0 10px #e9a2154d;
-            }
+        .productList .thumbnail-item.active {
+            opacity: 1;
+            border-color: #e9a215;
+            box-shadow: 0 0 10px #e9a2154d;
+        }
 
-            .productList .thumbnail-item img {
-                object-fit: contain;
-                border-radius: 6px;
-                width: 100%;
-                height: 100%;
-            }
+        .productList .thumbnail-item img {
+            object-fit: contain;
+            border-radius: 6px;
+            width: 100%;
+            height: 100%;
+        }
 
-        @@media (max-width:1400px) {
+        @@media (max-width: 1400px) {
             .productList {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
 
-        @@media (max-width:992px) {
+        @@media (max-width: 992px) {
             .productList {
                 grid-template-columns: repeat(1, 1fr);
             }
         }
 
-        @@media (max-width:576px) {
+        @@media (max-width: 576px) {
             .productList {
                 margin-bottom: 40px;
             }
@@ -608,7 +569,7 @@
             }
         }
 
-        @@media (max-width:450px) {
+        @@media (max-width: 450px) {
             .productList .product-swiper .swiper-slide img {
                 max-width: 50%;
             }
@@ -626,35 +587,35 @@
             margin-bottom: 5em;
         }
 
-            #pagination li {
-                display: inline
-            }
+        #pagination li {
+            display: inline
+        }
 
-                #pagination li a {
-                    display: inline-block;
-                    text-decoration: none;
-                    padding: 5px 1rem;
-                    color: #fff;
-                }
+        #pagination li a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 5px 1rem;
+            color: #fff;
+        }
 
-                #pagination li a {
-                    border-radius: 25px;
-                    border: 3px solid transparent;
-                    border-radius: 35px;
-                    -webkit-transition: background-color 0.3s;
-                    transition: background-color 0.3s
-                }
+        #pagination li a {
+            border-radius: 25px;
+            border: 3px solid transparent;
+            border-radius: 35px;
+            -webkit-transition: background-color 0.3s;
+            transition: background-color 0.3s
+        }
 
-                    #pagination li a.active {
-                        color: #ecc739
-                    }
+        #pagination li a.active {
+            color: #ecc739
+        }
 
-                    #pagination li a:hover:not(.active) {
-                        border: 3px solid #000;
-                        border-radius: 35px;
-                        box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;
-                        text-shadow: 0 1px 3px #86C4F9;
-                    }
+        #pagination li a:hover:not(.active) {
+            border: 3px solid #000;
+            border-radius: 35px;
+            box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;
+            text-shadow: 0 1px 3px #86C4F9;
+        }
 
         .b-pagination-outer {
             width: 100%;
@@ -670,35 +631,35 @@
             text-align: center
         }
 
-            #border-pagination li {
-                display: inline;
-            }
+        #border-pagination li {
+            display: inline;
+        }
 
-                #border-pagination li a {
-                    display: block;
-                    text-decoration: none;
-                    color: #000;
-                    padding: 5px 10px;
-                    border: 1px solid #ddd;
-                    float: left;
-                }
+        #border-pagination li a {
+            display: block;
+            text-decoration: none;
+            color: #000;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            float: left;
+        }
 
-                #border-pagination li a {
-                    -webkit-transition: background-color 0.4s;
-                    transition: background-color 0.4s
-                }
+        #border-pagination li a {
+            -webkit-transition: background-color 0.4s;
+            transition: background-color 0.4s
+        }
 
-                    #border-pagination li a.active {
-                        color: #ecc739;
-                        text-shadow: 0 1px 3px #ecc739;
-                    }
+        #border-pagination li a.active {
+            color: #ecc739;
+            text-shadow: 0 1px 3px #ecc739;
+        }
 
-                    #border-pagination li a:hover:not(.active) {
-                        border: 3px solid #000;
-                        border-radius: 35px;
-                        box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;
-                        text-shadow: 0 1px 3px #86C4F9;
-                    }
+        #border-pagination li a:hover:not(.active) {
+            border: 3px solid #000;
+            border-radius: 35px;
+            box-shadow: inset 0 1px 2px 0 #585858, inset 0 1px 1px 0 #4E4F53;
+            text-shadow: 0 1px 3px #86C4F9;
+        }
 
         .mrgTop {
             margin-top: 8em;
@@ -709,9 +670,9 @@
             height: auto;
         }
 
-            .product-item-p2 img:hover {
-                color: #fff;
-            }
+        .product-item-p2 img:hover {
+            color: #fff;
+        }
 
         .maxWidth {
             display: flex;
@@ -721,7 +682,7 @@
             padding: 0 6rem;
         }
 
-        @@media (max-width:980px) {
+        @@media (max-width: 980px) {
             .listDnl .tab-wrapper {
                 display: block;
             }
@@ -766,38 +727,38 @@
             margin-right: auto;
         }
 
-            .searchBox .searchInput {
-                width: 240px;
-                padding: 0 6px;
-                border: none;
-                background: none;
-                outline: none;
-                /* float: left; <-- Remove this */
-                color: white;
-                font-size: 16px;
-                transition: 0.4s;
-                line-height: 40px;
-                /* width: 0px; <-- Remove this, use width on the input itself */
-            }
+        .searchBox .searchInput {
+            width: 240px;
+            padding: 0 6px;
+            border: none;
+            background: none;
+            outline: none;
+            /* float: left; <-- Remove this */
+            color: white;
+            font-size: 16px;
+            transition: 0.4s;
+            line-height: 40px;
+            /* width: 0px; <-- Remove this, use width on the input itself */
+        }
 
-            .searchBox .searchButton {
-                /* Remove float */
-                /* float: right; <-- Remove this */
-                background: white;
-                color: #2f3640;
-                /* These are already good for centering content *within* the button */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 30%;
-                transition: 0.4s;
-                margin-right: auto;
-            }
+        .searchBox .searchButton {
+            /* Remove float */
+            /* float: right; <-- Remove this */
+            background: white;
+            color: #2f3640;
+            /* These are already good for centering content *within* the button */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30%;
+            transition: 0.4s;
+            margin-right: auto;
+        }
 
-            /* You'll likely want to adjust the input's width */
-            .searchBox .searchInput {
-                width: 200px; /* Example adjustment */
-            }
+        /* You'll likely want to adjust the input's width */
+        .searchBox .searchInput {
+            width: 200px; /* Example adjustment */
+        }
 
         /* Media query adjustment */
         @@media screen and (max-width: 620px) {
