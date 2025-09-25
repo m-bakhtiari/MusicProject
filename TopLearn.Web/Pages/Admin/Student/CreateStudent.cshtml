@@ -26,9 +26,18 @@
             </div>
             <div class="form-group">
                 <label>توضیحات</label>
-                <input type="text" asp-for="Student.Description" class="form-control">
+                <textarea id="description" class="form-control" asp-for="Student.Description" rows="10"></textarea>
+                <span asp-validation-for="Student.Description"></span>
+            </div>
+            <div class="form-group">
+                <label>انتخاب تصویر</label>
+                <!-- به این شیوه name به فایل ها اختصاص می‌یابد و در ارسال فرم دریافت می‌شود -->
+                <input type="file" id="imageList" name="imageList" multiple>
             </div>
 
+            <div class="form-group">
+                <div id="imagePreview"></div>
+            </div>
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
 
         </div>
@@ -61,6 +70,93 @@
             readURL(this);
         });
     </script>
+
+    <script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('description', {
+            language: 'fa',
+            contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
+            extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
+            toolbar: [
+                { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                { name: 'clipboard', items: ['Undo', 'Redo'] },
+                { name: 'editing', items: ['Scayt'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+                { name: 'insert', items: ['Image', 'Table'] },
+                { name: 'styles', items: ['Format'] },
+                { name: 'tools', items: ['Maximize'] }
+            ]
+        });
+
+
+    </script>
+
+    <script>
+        // یک DataTransfer برای مدیریت فایل‌های انتخاب شده ایجاد می‌کنیم.
+        var dt = new DataTransfer();
+
+        function updatePreview() {
+            $("#imagePreview").html("");
+            // بررسی فایل‌هایی که در DataTransfer هستند
+            for (var i = 0; i < dt.files.length; i++) {
+                var file = dt.files[i];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // ایجاد container برای هر عکس
+                    var imgContainer = $("<div>").css({
+                        "display": "inline-block",
+                        "position": "relative",
+                        "margin": "5px"
+                    });
+
+                    var img = $("<img>").attr("src", e.target.result).css({
+                        "width": "250px",
+                        "height": "250px",
+                        "display": "block"
+                    }).addClass("img-thumbnail");
+
+                    // دکمه حذف برای هر عکس
+                    var deleteButton = $("<button>").text("X").css({
+                        "position": "absolute",
+                        "top": "20px",
+                        "right": "20px",
+                        "background": "red",
+                        "color": "white",
+                        "border": "none",
+                        "cursor": "pointer",
+                        "padding": "2px 5px"
+                    }).click(function () {
+                        // حذف فایل از DataTransfer
+                        dt.items.remove(i);
+                        // به‌روزرسانی لیست فایل‌های موجود در فایل اینپوت.
+                        $("#imageList").prop("files", dt.files);
+                        // به‌روزرسانی نمایش تصاویر
+                        updatePreview();
+                    });
+
+                    imgContainer.append(img).append(deleteButton);
+                    $("#imagePreview").append(imgContainer);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // هنگامی که کاربر فایل انتخاب می‌کند
+        $("#imageList").on("change", function (e) {
+            var files = e.target.files;
+            // فایل‌های جدید به DataTransfer اضافه شوند
+            for (let i = 0; i < files.length; i++) {
+                dt.items.add(files[i]);
+            }
+            // ویژگی files اینپوت را به‌روز‌رسانی می‌کنیم
+            $("#imageList").prop("files", dt.files);
+            updatePreview();
+        });
+    </script>
+
 }
 
 

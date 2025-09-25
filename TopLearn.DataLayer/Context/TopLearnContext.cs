@@ -31,6 +31,7 @@ namespace TopLearn.DataLayer.Context
         public DbSet<MusicNote> MusicNotes { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentImage> StudentImages { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
         #endregion
 
 

@@ -75,6 +75,7 @@ namespace TopLearn.Web
             services.AddTransient<IMusicNoteService, MusicNoteService>();
             services.AddTransient<ILogger<HomeController>, Logger<HomeController>>();
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IMenuItemService, MenuItemService>();
 
             #endregion
         }

@@ -1,0 +1,39 @@
+﻿@page "{id}"
+@model TopLearn.Web.Pages.Admin.MenuItem.EditMenuItemModel
+@{
+    ViewData["Title"] = "ویرایش منو";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">افزودن منو جدید</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <form method="post">
+        <input type="hidden" asp-for="MenuItem.MenuItemId" />
+
+        <!-- /.panel-heading -->
+        <div class="col-12">
+            <div class="form-group">
+                <label>ترتیب نمایش</label>
+                <input type="number" asp-for="MenuItem.Position" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>عنوان نت</label>
+                <input type="text" asp-for="MenuItem.Title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>عنوان لینک</label>
+                <input type="text" asp-for="MenuItem.Link" class="form-control">
+            </div>
+            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+        </div>
+    </form>
+</div>
+
+
+

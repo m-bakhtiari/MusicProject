@@ -7,11 +7,11 @@ using TopLearn.Core.Services.Interfaces;
 
 namespace TopLearn.Web.Controllers
 {
-    public class StudentController : Controller
+    public class MentorsController : Controller
     {
         private readonly IStudentService _studentService;
 
-        public StudentController(IStudentService studentService)
+        public MentorsController(IStudentService studentService)
         {
             _studentService = studentService;
         }

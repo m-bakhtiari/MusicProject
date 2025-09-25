@@ -26,17 +26,29 @@ namespace TopLearn.Web.Pages.Admin.Student
 
         public async Task OnGet(int id)
         {
+            Student = new DataLayer.Entities.Course.Student()
+            {
+                StudentImages = new List<StudentImage>()
+            };
             Student = await _studentService.GetById(id);
         }
 
-        public async Task<IActionResult> OnPost(IFormFile imgLogo)
+        public async Task<IActionResult> OnPost(IFormFile imgLogo, List<IFormFile> imageList)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            await _studentService.UpdateStudent(Student, imgLogo);
+            await _studentService.UpdateStudent(Student, imgLogo, imageList);
 
             return RedirectToPage("Index");
+        }
+        public async Task<IActionResult> OnPostDeleteStudentImage(int id)
+        {
+            // حذف تصویر از سرویس مربوطه
+            await _studentService.DeleteImage(id);
+
+            // در صورت موفقیت‌آمیز بودن حذف، به عنوان پاسخ یک نتیجه JSON برگردانید
+            return new JsonResult(new { success = true });
         }
     }
 }

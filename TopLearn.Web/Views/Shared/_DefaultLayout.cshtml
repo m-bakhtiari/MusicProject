@@ -1,6 +1,9 @@
 ﻿@using TopLearn.Core.Convertors
+@using TopLearn.Core.Services.Interfaces
+@inject IMenuItemService _menuItemService;
 @{
     var today = DateTime.Now.ToPersianDate();
+    var menu = await _menuItemService.GetAllMenuItem();
 }
 <!DOCTYPE html>
 <html lang="fa">
@@ -48,24 +51,12 @@
                                 <li>
                                     <button class="openMenu"></button>
                                 </li>
-                                <li>
-                                    <a href="/">صفحه اصلی</a>
-                                </li>
-                                <li>
-                                    <a href="/Academy">آموزشگاه ها</a>
-                                </li>
-                                <li>
-                                    <a href="/StudentConcert">کنسرت های هنرجویی</a>
-                                </li>
-                                <li>
-                                    <a href="/Instrument">معرفی سازها</a>
-                                </li>
-                                <li>
-                                    <a href="/Note"> نت های هنگدرام </a>
-                                </li>
-                                <li>
-                                    <a href="/Student">منتورها</a>
-                                </li>
+                                @foreach (var item in menu)
+                                {
+                                    <li>
+                                        <a href="@item.Link">@item.Title</a>
+                                    </li>
+                                }
                             </ul>
                         </nav>
                     </div>
@@ -91,25 +82,14 @@
                 @*<li>
                     <button class="openMenu"></button>
                 </li>*@
-                <li></li>
                 <li>
-                    <a href="/">صفحه اصلی</a>
                 </li>
-                <li>
-                    <a href="/Academy">آموزشگاه ها</a>
-                </li>
-                <li>
-                    <a href="/StudentConcert">کنسرت های هنرجویی</a>
-                </li>
-                <li>
-                    <a href="/Instrument">معرفی سازها</a>
-                </li>
-                <li>
-                    <a href="/Note"> نت های هنگدرام </a>
-                </li>
-                <li>
-                    <a href="/Student">منتورها</a>
-                </li>
+                @foreach (var item in menu)
+                {
+                    <li>
+                        <a href="/@item.Link">@item.Title</a>
+                    </li>
+                }
             </ul>
             <div class="info">
                 <h4> </h4>

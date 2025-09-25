@@ -11,8 +11,9 @@ namespace TopLearn.Core.Services.Interfaces
     {
         Task<List<Student>> GetAllStudent();
         Task<Student> GetById(int studentId);
-        Task AddStudent(Student student, IFormFile imgLogo);
-        Task UpdateStudent(Student student, IFormFile imgLogo);
+        Task AddStudent(Student student, IFormFile imgLogo, List<IFormFile> imageList);
+        Task UpdateStudent(Student student, IFormFile imgLogo, List<IFormFile> imageList);
         Task DeleteStudent(Student student);
+        Task DeleteImage(int id);
     }
 }
