@@ -15,5 +15,7 @@ namespace TopLearn.Core.Services.Interfaces
         Task UpdateStudent(Student student, IFormFile imgLogo, List<IFormFile> imageList);
         Task DeleteStudent(Student student);
         Task DeleteImage(int id);
+        Task<Student> GetStudentByKey(string key);
+
     }
 }

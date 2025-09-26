@@ -26,6 +26,7 @@ namespace TopLearn.Core.Services
 
         public async Task AddStudent(Student student, IFormFile imgLogo, List<IFormFile> imagesFiles)
         {
+            student.ShortKey = await GenerateShortKey();
             student.ImageName = "no-photo.jpg";
             if (imgLogo != null && imgLogo.IsImage())
             {
@@ -35,7 +36,7 @@ namespace TopLearn.Core.Services
                 {
                     await imgLogo.CopyToAsync(stream);
                 }
-            } 
+            }
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
 
@@ -143,6 +144,22 @@ namespace TopLearn.Core.Services
             }
             _context.StudentImages.Remove(img);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Student> GetStudentByKey(string key)
+        {
+            return await _context.Students.Include(x=>x.StudentImages).FirstOrDefaultAsync(x => x.ShortKey.Equals(key));
+        }
+        private async Task<string> GenerateShortKey(int length = 4)
+        {
+            var key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
+
+            while (await _context.Students.AnyAsync(s => s.ShortKey == key))
+            {
+                key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
+            }
+
+            return key;
         }
     }
 }

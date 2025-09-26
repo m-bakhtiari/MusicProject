@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TopLearn.Core.DTOs;
 using TopLearn.Core.Services.Interfaces;
+using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Web.Controllers
 {
@@ -18,14 +19,36 @@ namespace TopLearn.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var concert = await _studentConcertService.GetAll((int)ConstantValue.Type.StudentConcert);
-            var image = await _studentConcertService.GetImages();
-            var model = new StudentConcertDto()
-            {
-                Images = image.OrderByDescending(x => Guid.NewGuid()).Take(10).ToList(),
-                StudentConcerts = concert
-            };
+            var model = await _studentConcertService.GetAll((int)ConstantValue.Type.StudentConcert);
             return View(model);
+        }
+        
+        [HttpGet("/StudentConcertInfo")]
+        public async Task<IActionResult> StudentConcertInfo([FromQuery] int id)
+        {
+            var model = await _studentConcertService.GetItemById(id);
+            return View(model);
+        }
+
+        [HttpGet("/Workshop")]
+        public async Task<IActionResult> WorkshopInfo()
+        {
+            var model = await _studentConcertService.GetWorkshop();
+            return View("StudentConcertInfo", model);
+        }
+
+        [HttpGet("/Havana")]
+        public async Task<IActionResult> Havana()
+        {
+            var model = await _studentConcertService.GetHavana();
+            return View("StudentConcertInfo", model);
+        }
+
+        [HttpGet("/Book")]
+        public async Task<IActionResult> Book()
+        {
+            var model = await _studentConcertService.GetBook();
+            return View("StudentConcertInfo", model);
         }
     }
 }

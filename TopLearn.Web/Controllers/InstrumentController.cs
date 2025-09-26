@@ -20,5 +20,12 @@ namespace TopLearn.Web.Controllers
             var model = await _instrumentService.GetAll();
             return View(model);
         }
+
+        [HttpGet("InstrumentInfo")]
+        public async Task<IActionResult> InstrumentInfo([FromQuery]int id)
+        {
+            var model = await _instrumentService.GetById(id);
+            return View(model);
+        }
     }
 }

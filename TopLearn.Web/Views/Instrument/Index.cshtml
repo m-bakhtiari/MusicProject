@@ -9,7 +9,7 @@
                 <div class="productList">
                     @foreach (var item in Model)
                     {
-                        <a href="">
+                        <a href="/InstrumentInfo?id=@item.InstrumentId">
                             <div class="product-item">
                                 <img src="/instrument/@item.ImageName" alt="@item.InstrumentTitle" style="height: 150px;max-width: 100%">
                                 <p class="product-item-p1"> @item.InstrumentTitle.Split("-")[0] </p>

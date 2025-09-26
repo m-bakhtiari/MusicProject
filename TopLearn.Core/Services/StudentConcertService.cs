@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using TopLearn.Core.DTOs;
 using TopLearn.Core.Generator;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Context;
@@ -103,11 +104,23 @@ namespace TopLearn.Core.Services
                 .FirstOrDefaultAsync(x => x.StudentConcertId == id);
         }
 
-        public async Task<List<StudentConcertImage>> GetImages()
+        public async Task<List<StudentConcertImage>> GetImagesByConcertId(int concertId)
         {
-            return await _context.StudentConcertImages.Include(x => x.StudentConcert).ToListAsync();
+            return await _context.StudentConcertImages.Where(x=>x.StudentConcertId==concertId).ToListAsync();
         }
 
+        public async Task<StudentConcert> GetWorkshop()
+        {
+            return await _context.StudentConcerts.Include(x=>x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Workshop);
+        }
+        public async Task<StudentConcert> GetHavana()
+        {
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Havana);
+        }
+        public async Task<StudentConcert> GetBook()
+        {
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Book);
+        }
         public async Task Update(StudentConcert studentConcert, List<IFormFile> imagesFiles)
         {
             _context.StudentConcerts.Update(studentConcert);

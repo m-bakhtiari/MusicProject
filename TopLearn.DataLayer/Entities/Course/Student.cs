@@ -23,6 +23,8 @@ namespace TopLearn.DataLayer.Entities.Course
 
         public int? Position { get; set; }
 
+        [MaxLength(5)]
+        public string ShortKey { get; set; }
 
         public List<StudentImage> StudentImages { get; set; }
     }

@@ -190,6 +190,9 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<int?>("Position");
 
+                    b.Property<string>("ShortKey")
+                        .HasMaxLength(5);
+
                     b.Property<string>("StudentFullName")
                         .HasMaxLength(200);
 

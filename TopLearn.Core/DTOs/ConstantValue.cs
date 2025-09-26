@@ -10,7 +10,8 @@ namespace TopLearn.Core.DTOs
         {
             StudentConcert = 1,
             Workshop = 2,
-            Havana = 3
+            Havana = 3,
+            Book=4
         }
     }
 }
