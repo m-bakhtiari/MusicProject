@@ -68,6 +68,10 @@
     --bs-highlight-bg: #fff3cd;
 }
 
+
+body {
+    font-family: 'IRANSans' !important, sans-serif;
+}
 @media only screen and (max-width: 768px) {
     html,
     body {
@@ -501,13 +505,13 @@ progress {
 
 @font-face {
     font-family: "BebasNeue";
-    font-size: normal;
+    font-size:medium;
     font-weight: 700;
     src: url("../fonts/BebasNeue.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: IRANSans;
+    font-family: 'IRANSans';
     font-style: normal;
     font-weight: 900;
     src: url("../fonts/eot/IRANSansWeb_Black.eot");
@@ -515,7 +519,7 @@ progress {
 }
 
 @font-face {
-    font-family: IRANSans;
+    font-family: 'IRANSans';
     font-style: normal;
     font-weight: bold;
     src: url("../fonts/eot/IRANSansWeb_Bold.eot");
@@ -523,7 +527,7 @@ progress {
 }
 
 @font-face {
-    font-family: IRANSans;
+    font-family: 'IRANSans';
     font-style: normal;
     font-weight: 500;
     src: url("../fonts/eot/IRANSansWeb_Medium.eot");
@@ -531,7 +535,7 @@ progress {
 }
 
 @font-face {
-    font-family: IRANSans;
+    font-family: 'IRANSans';
     font-style: normal;
     font-weight: 300;
     src: url("../fonts/eot/IRANSansWeb_Light.eot");
@@ -539,7 +543,7 @@ progress {
 }
 
 @font-face {
-    font-family: IRANSans;
+    font-family: 'IRANSans';
     font-style: normal;
     font-weight: 200;
     src: url("../fonts/eot/IRANSansWeb_UltraLight.eot");
@@ -547,7 +551,7 @@ progress {
 }
 
 @font-face {
-    font-family: IRANSans;
+    font-family: 'IRANSans';
     font-style: normal;
     font-weight: normal;
     src: url("../fonts/eot/IRANSansWeb.eot");
@@ -2113,6 +2117,7 @@ footer.footer1 .top .more {
     font-weight: 500;
     line-height: 25px;
     transition: all 600ms;
+    margin-top: 15px;
 }
 
     footer.footer1 .top .more:hover {
@@ -10578,9 +10583,9 @@ header .mainHeader .col-menu nav .menu li .openMenu {
 
 header .mainHeader .col-menu nav .menu li a {
     display: block;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
-    line-height: 21px;
+    line-height: 18px;
     color: #000;
     transition: all 600ms;
 }
@@ -12675,6 +12680,15 @@ header.fixed .mainHeader .col-logo .logo img.dark {
 
         .productList {
             margin: 1em auto;
+        }
+
+        .main-wrapper {
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        .social img {
+            width: 22px;
         }
     }
 }

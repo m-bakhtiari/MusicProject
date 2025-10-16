@@ -51,6 +51,61 @@ namespace TopLearn.DataLayer.Migrations
                     b.ToTable("Academies");
                 });
 
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ConcertTicket", b =>
+                {
+                    b.Property<int>("ConcertTicketId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasMaxLength(15);
+
+                    b.Property<int>("TicketCount");
+
+                    b.HasKey("ConcertTicketId");
+
+                    b.ToTable("ConcertTickets");
+                });
+
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ConcertTicketSeat", b =>
+                {
+                    b.Property<int>("ConcertTicketSeatId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ConcertTicketId");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1200);
+
+                    b.Property<bool>("IsPay");
+
+                    b.Property<string>("SeatNumber")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.HasKey("ConcertTicketSeatId");
+
+                    b.HasIndex("ConcertTicketId");
+
+                    b.ToTable("ConcertTicketSeats");
+                });
+
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.CourseGroup", b =>
                 {
                     b.Property<int>("GroupId")
@@ -293,6 +348,14 @@ namespace TopLearn.DataLayer.Migrations
                     b.HasData(
                         new { UserId = 1, Email = "vahidnajafizadeh@gmail.com", IsActive = true, IsDelete = false, Password = "E1-0A-DC-39-49-BA-59-AB-BE-56-E0-57-F2-0F-88-3E", RegisterDate = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), UserName = "Vahid Najafizadeh" }
                     );
+                });
+
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ConcertTicketSeat", b =>
+                {
+                    b.HasOne("TopLearn.DataLayer.Entities.Course.ConcertTicket", "ConcertTicket")
+                        .WithMany("ConcertTicketSeats")
+                        .HasForeignKey("ConcertTicketId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.CourseGroup", b =>

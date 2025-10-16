@@ -2,50 +2,6 @@
 
 
 <section data-scroll-section>
-    <div class="album-cover">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                @foreach (var item in Model)
-                {
-                    <div class="swiper-slide">
-                        <img src="/studentConcert/@item.StudentConcertImages.FirstOrDefault().ImageName" alt="@item.Title" />
-                        <div class="overlay">
-                            <a href="#">
-                                <ion-icon name="logo-youtube"></ion-icon>
-                            </a>
-                        </div>
-                    </div>
-                }
-
-            </div>
-        </div>
-    </div>
-
-    <div class="music-player">
-        <h1> </h1>
-        <p> </p>
-
-        <div class="controls">
-            <button class="backward">
-                <
-            </button>
-            <button class="play-pause-btn" hidden="hidden">
-                <i class="fa-solid fa-play" id="controlIcon"></i>
-            </button>
-            <button class="forward">
-                >
-            </button>
-        </div>
-        <audio id="song" hidden="hidden">
-            <source src="song-list/Luke-Bergs-Gold.mp3" type="audio/mpeg" />
-        </audio>
-
-        <input type="range" value="0" id="progress" hidden="hidden" />
-    </div>
-</section>
-
-
-<section data-scroll-section>
     <div class="headSection">
         <div class="lightbar">
             <div class="lightbar_line" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px);">
@@ -91,23 +47,6 @@
 @section Styles
 {
     <style>
-
-
-        body {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            width: 100%;
-            background: url(img/.png);
-            background-color: #0c0c0d;
-            background-repeat: no-repeat;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            animation: slidein 120s forwards infinite alternate;
-        }
 
         @@keyframes slidein {
             0%,

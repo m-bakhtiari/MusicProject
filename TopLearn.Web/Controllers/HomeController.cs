@@ -41,6 +41,12 @@ namespace TopLearn.Web.Controllers
             return View(model);
         }
 
+        [HttpGet("Gallery")]
+        public IActionResult Gallery()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -49,6 +55,30 @@ namespace TopLearn.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        //[Route("OnlinePayment/{id}")]
+        //public IActionResult onlinePayment(int id)
+        //{
+        //    if (HttpContext.Request.Query["Status"] != "" &&
+        //        HttpContext.Request.Query["Status"].ToString().ToLower() == "ok"
+        //        && HttpContext.Request.Query["Authority"] != "")
+        //    {
+        //        string authority = HttpContext.Request.Query["Authority"];
 
+        //        var wallet = _userService.GetWalletByWalletId(id);
+
+        //        var payment = new ZarinpalSandbox.Payment(wallet.Amount);
+        //        var res = payment.Verification(authority).Result;
+        //        if (res.Status == 100)
+        //        {
+        //            ViewBag.code = res.RefId;
+        //            ViewBag.IsSuccess = true;
+        //            wallet.IsPay = true;
+        //            _userService.UpdateWallet(wallet);
+        //        }
+
+        //    }
+
+        //    return View();
+        //}
     }
 }

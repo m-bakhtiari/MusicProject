@@ -83,7 +83,7 @@ namespace TopLearn.Core.Services
 
         public async Task<List<Student>> GetAllStudent()
         {
-            return await _context.Students.OrderBy(x => x.Position).ToListAsync();
+            return await _context.Students.OrderBy(x => Guid.NewGuid()).ToListAsync();
         }
 
         public async Task<Student> GetById(int studentId)

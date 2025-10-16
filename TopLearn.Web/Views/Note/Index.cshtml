@@ -1,6 +1,6 @@
 ﻿@model TopLearn.Core.DTOs.NoteViewModel
 
-<section class="list" data-scroll-section>
+<section class="list" data-scroll-section style="margin-top: 50px">
     <div class="listDnl wrapper mrgTop">
         <div class="content-wrapper tab-content active productList">
             <form action="/Note" method="get" id="formFilter">
@@ -10,7 +10,7 @@
                 <div class="listDnl wrapper mrgTop">
                     <div class="maxWidth">
                         <div class="tab-wrapper row">
-                            <div class="col-md-8">
+                            @*<div class="col-md-8">
                                 <ul class="tabs">
                                     <li class="tab-link @ViewData["A"]"><a href="#" onclick="filterNote(null, 0)" style="color: white">سازها</a></li>
                                     @foreach (var item in Model.Instruments)
@@ -20,7 +20,7 @@
                                         </li>
                                     }
                                 </ul>
-                            </div>
+                            </div>*@
 
                             <div class="searchBox col-md-4">
                                 <input class="searchInput" type="text" name="filter" placeholder="Search">

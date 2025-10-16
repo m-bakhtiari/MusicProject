@@ -62,7 +62,7 @@
                         <div class="swiper-wrapper">
                             @foreach (var item in Model.Instruments)
                             {
-                                <div class="swiper-slide horizontal-ticker__slide">
+                                <div class="swiper-slide horizontal-ticker__slide" onclick="instrument(@item.InstrumentId)">
                                     <p style="margin: 0;">@item.InstrumentTitle.Split("-")[0]</p>
                                 </div>
                             }
@@ -73,7 +73,7 @@
                         <div class="swiper-wrapper">
                             @foreach (var item in Model.Instruments)
                             {
-                                <div class="swiper-slide horizontal-ticker__slide">
+                                <div class="swiper-slide horizontal-ticker__slide" onclick="instrument(@item.InstrumentId)">
                                     <p style="margin: 0;">@item.InstrumentTitle.Split("-")[1]</p>
                                 </div>
                             }
@@ -426,6 +426,10 @@
             centeredSlides: false
         });
 
+
+        function instrument(id) {
+            window.location.href = "/InstrumentInfo?id=" + id;
+        }
     </script>
 
 }
@@ -446,3 +450,4 @@
 
     </style>
 }
+

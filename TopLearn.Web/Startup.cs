@@ -76,6 +76,7 @@ namespace TopLearn.Web
             services.AddTransient<ILogger<HomeController>, Logger<HomeController>>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IMenuItemService, MenuItemService>();
+            services.AddTransient<ITicketService, TicketService>();
 
             #endregion
         }

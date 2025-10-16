@@ -1,0 +1,462 @@
+﻿@using Newtonsoft.Json
+@model List<TopLearn.DataLayer.Entities.Course.ConcertTicket>
+@{
+    var seatCounts = ViewData["Seat"].ToString().Split("-");
+    var reservedSeats = ViewData["SeatReserve"] as List<string>;
+}
+
+<section data-scroll-section style="margin-top: 60px">
+    <div class="container row">
+
+        <section class="seating">
+            <h1 style="text-align: center">کنسرت بزرگ هاوانا</h1>
+            <br />
+            <button class="nav-button" onclick="openTicket()">دانلود بلیط های من</button>
+            <hr />
+            <h2>انتخاب صندلی</h2>
+            <h3 style="color:orangered">@ViewData["Error"]</h3>
+            <div class="seat-chart">
+
+                @for (var i = 0; i < 13; i++)
+                {
+                    <div class="row">
+                        <span class="row-label">@((i + 1))</span>
+                        @for (var j = 1; j <= int.Parse(seatCounts[i]); j++)
+                        {
+                            <button value="@($"{i + 1}-{j}")" class="seat @(reservedSeats.Contains($"{i + 1}-{j}") ? "unavailable" : "available")">@j</button>
+                        }
+                    </div>
+                }
+
+                <div class="legend row">
+                    <div class="legend-item">
+                        <span class="seatTag unavailableTag"></span>
+                        <span>خریداری شده (آبی)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="seatTag availableTag"></span>
+                        <span>آزاد (زرد)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="seatTag reserveTag"></span>
+                        <span>در انتظار پرداخت (سبز)</span>
+                    </div>
+                </div>
+
+                <div class="footer row">
+                    <form action="/BuyTicket" method="get" id="buyTicket">
+                        <div class="form-group">
+                            <p style="color: whitesmoke" id="selectedSeatList"></p>
+                        </div>
+                        @*   <div class="form-group">
+                            <label for="firstname">نام :</label>
+                            <input type="text" class="form-control" name="firstname" id="firstname" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname">نام خانوادگی :</label>
+                            <input type="text" class="form-control" name="lastname" id="lastname" required>
+                        </div> *@
+
+                        <div class="form-group">
+                            <label for="mobile">شماره موبایل:</label>
+                            <input type="text" class="form-control" name="mobile" id="mobile" maxlength="11" minlength="11"
+                                   required onkeyup="validSave()" autocomplete="off" placeholder="09123456789">
+                        </div>
+                        <input type="hidden" name="selectedSeats" id="selectedSeats" required />
+                        <button type="button" class="reserve" disabled id="saveBtn" onclick="confirmSubmit()">رزرو و ادامه</button>
+                    </form>
+                </div>
+                <!-- ردیف‌های دیگر مشابه همین -->
+            </div>
+        </section>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+@section Scripts
+{
+    <script>
+                         function updateSelectedSeatList() {
+            const listContainer = document.getElementById('selectedSeatList');
+
+            if (selectedSeats.length === 0) {
+                listContainer.textContent = "هیچ صندلی انتخاب نشده است.";
+                return;
+            }
+
+            const readableList = selectedSeats.map(seat => {
+                const parts = seat.split("-");
+                return `ردیف ${parts[0]} صندلی ${parts[1]}`;
+            });
+
+        listContainer.innerHTML = `<strong>تعداد انتخاب شده‌ها: ${selectedSeats.length} عدد</strong><br>${readableList.join("<br>")}`;
+                }
+
+
+             // قیمت پایه هر صندلی
+             var basePrice = 400000;
+
+             // گرفتن عناصر مورد نیاز
+             var seatButtons = document.querySelectorAll('.seat.available');
+             var priceDisplay = document.querySelector('.footer p');
+             var priceSlider = document.getElementById('price');
+
+             var selectedSeats = [];
+
+             // تابع برای به‌روزرسانی قیمت نهایی
+             // function updatePrice() {
+             //     var total = selectedSeats.length * basePrice;
+             //     priceDisplay.textContent = `قیمت نهایی: ${total.toLocaleString()} تومان`;
+             // }
+
+
+        var validMobiles = @Html.Raw(JsonConvert.SerializeObject(ViewData["mobile"]))
+
+        function validSave() {
+            var mobile = document.getElementById("mobile").value;
+            var saveBtn = document.getElementById("saveBtn");
+
+            if (validMobiles.includes(mobile.trim())) {
+                saveBtn.removeAttribute("disabled");
+            } else {
+                saveBtn.setAttribute("disabled", "true");
+            }
+        }
+
+
+             // انتخاب یا لغو انتخاب صندلی
+             seatButtons.forEach(seat => {
+                 seat.addEventListener('click', () => {
+                     var seatNumber = seat.value;
+
+                     if (seat.classList.contains('selected')) {
+                         seat.classList.remove('selected');
+                         selectedSeats = selectedSeats.filter(s => s !== seatNumber);
+                     } else {
+                         seat.classList.add('selected');
+                         selectedSeats.push(seatNumber);
+                     }
+                     document.getElementById('selectedSeats').value = selectedSeats;
+                         updateSelectedSeatList();
+                     //updatePrice();
+                 });
+             });
+
+             // تغییر قیمت بر اساس اسلایدر
+             // priceSlider.addEventListener('input', (e) => {
+             //     basePrice = parseInt(e.target.value);
+             //     updatePrice();
+             // });
+
+             //function showSeat() {
+             //    console.log(selectedSeats);
+             //    document.getElementById('selectedSeats').value = selectedSeats;
+             //    var form = document.getElementById("buyTicket");
+             //    var firstName = document.getElementById('firstname').value;
+             //    var lastName = document.getElementById('lastname').value;
+             //    var mobile = document.getElementById('mobile').value;
+             //    debugger;
+             //    if (selectedSeats.length < 1) {
+             //        Swal.fire({
+             //            title: "اخطار",
+             //            text: "هیچ صندلی انتخاب نشده است",
+             //            icon: "warning"
+             //        });
+             //    } else {
+             //        if (document.getElementById('firstname').value != "" && document.getElementById('lastname').value != "" &&
+             //            document.getElementById('mobile').value != "" && document.getElementById('mobile').length == 11)
+             //            form.submit();
+             //    }
+
+             //}
+
+             function openTicket() {
+                 Swal.fire({
+                     title: 'شماره موبایل خود را وارد نمایید',
+                     input: 'text',
+                     inputPlaceholder: '09123456789',
+                     showCancelButton: true,
+                     confirmButtonText: 'دانلود',
+                     cancelButtonText: 'انصراف',
+                     preConfirm: (value) => {
+                         if (!value || value.length !== 11) {
+                             Swal.showValidationMessage('شماره موبایل معتبر نمی باشد');
+                         }
+                         return value;
+                     }
+                 }).then((result) => {
+                     if (result.isConfirmed) {
+                         var inputValue = result.value;
+                         var targetUrl = `https://localhost:44349/DownloadTicket?mobile=${inputValue}`;
+                         window.location.href = targetUrl;
+                     }
+                 });
+             }
+
+        function confirmSubmit() {
+            Swal.fire({
+                title: 'آیا از انتخاب خود اطمینان دارید؟',
+                text: 'پس از تایید امکان تغییر صندلی وجود ندارد.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'بله، ادامه بده',
+                cancelButtonText: 'خیر، بازگشت'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("buyTicket").submit();
+                }
+            });
+        }
+
+    </script>
+}
+
+@section Styles
+{
+    <style>
+
+        .ticket-header {
+            background: #6200ea;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 0.5rem;
+        }
+
+        .nav-button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .filters {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .seating {
+            padding: 1rem;
+        }
+
+        .seat-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .row-label {
+            font-weight: bold;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .seat {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .reserve {
+            background: orange;
+            color: white;
+        }
+
+        .available {
+            background: green;
+            color: white;
+        }
+
+        .unavailable {
+            background: #2196f3;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .selected {
+            background: #fff;
+            border: 2px solid orange;
+            color: #000;
+        }
+
+        .footer {
+            padding: 1rem;
+            text-align: center;
+            background: transparent;
+        }
+
+        .reserve {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* 📱 واکنش‌گرایی */
+        @@media (max-width: 600px) {
+            .row {
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: 1px;
+            }
+
+            .seat {
+                width: 14px;
+                height: 14px;
+                font-size: 10px;
+                /* اگر عدد داخل دکمه مهمه */
+                padding: 0;
+            }
+
+            nav button {
+                margin-top: 0.5rem;
+                display: block;
+                width: 100%;
+            }
+
+            .row-label {
+                display: none;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+            .form-group label {
+                font-weight: bold;
+                margin-bottom: 0.25rem;
+                text-align: right;
+            }
+
+            .form-group input {
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+
+        .footer form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .reserve {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+            .reserve:hover {
+                background: #388e3c;
+            }
+
+        /* 📱 واکنش‌گرایی فرم */
+        @@media (max-width: 600px) {
+            .form-group {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .footer form {
+                gap: 0.75rem;
+            }
+
+            .reserveTag {
+                width: 100%;
+            }
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+            .legend-item .seatTag {
+                width: 1.5rem;
+                height: 1.5rem;
+                border-radius: 4px;
+                border: none;
+            }
+
+        .availableTag {
+            background: green;
+            color: white;
+        }
+
+        .unavailableTag {
+            background: #2196f3;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .selectedTag {
+            background: #fff;
+            border: 2px solid green;
+            color: #000;
+        }
+
+        .reserveTag {
+            background-color: orange;
+            color: white;
+        }
+    </style>
+}

@@ -12,15 +12,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="وحید نجفی زاده مدرس و نوازنده پرکاشن">
-    <meta name="description" content="وب‌سایت رسمی وحید نجفی‌زاده؛ مدرس و نوازنده سازهای کوبه ای.">
+    <meta name="description" content="وب‌سایت رسمی وحید نجفی‌زاده؛ مدرس و نوازنده سازهای کوبه ای، سرپرست گروه هاوانا ، مدرس ساز های کاخن ، کونگا ، دف ، تنبک ، هنگدرام ، داربوکا و جیمبی.">
     <meta name="keywords" content="وحید,نجفی زاده,استاد نجفی زاده,وحید نجفی زاده,استاد وحید نجفی زاده,کاخن,کونگا,کونگا,هنگدرام,هنگ درام,هاوانا,گروه نوازی,کوبه ای,درام">
-    <meta name="keywords" content="استاد نجفی زاده"/>
+    <meta name="keywords" content="استاد نجفی زاده" />
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="وحید نجفی‌زاده">
+    <meta property="og:image" content="https://vahidnajafizadeh.com/SiteTemplate/img/ostad2.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="وحید نجفی زاده | مدرس و نوازنده پرکاشن" />
+    <meta property="og:title" content="وحید نجفی زاده" />
+    <meta property="og:description" content="وبسایت رسمی وحید نجفی زاده ، مدرس و نوازنده پرکاشن" />
+    <meta property="og:url" content="https://vahidnajafizadeh.com" />
+    <meta property="og:type" content="website" />
 
-    <title> وحید نجفی زاده </title>
+
+    <title> وحید نجفی زاده | مدرس و نوازنده پرکاشن </title>
     <link rel="icon" href="/SiteTemplate/img/V-Logo.png" type="image/png" />
     <link rel="icon" href="/SiteTemplate/img/favicon-96x96.png" sizes="96x96" type="image/png">
     <link rel="icon" href="/SiteTemplate/img/web-app-manifest-192x192.png" sizes="192x192" type="image/png">
@@ -30,9 +39,20 @@
     <link rel="stylesheet" href="SiteTemplate/css/swiper-bundleM.css">
     <link rel="stylesheet" href="SiteTemplate/css/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@6.0/dist/fancybox/fancybox.css" />
     <link rel="stylesheet" href="SiteTemplate/css/app.css?v=@DateTime.Now.Ticks">
+    <link rel="apple-touch-icon" href="SiteTemplate/img/V-Logo.png">
+
+    <link rel="canonical" href="https://vahidnajafizadeh.com" />
+    <link rel="canonical" href="https://vahidnajafizadeh.com/academy" />
+    <link rel="canonical" href="https://vahidnajafizadeh.com/studentConcert" />
+    <link rel="canonical" href="https://vahidnajafizadeh.com/mentor" />
+    <link rel="canonical" href="https://vahidnajafizadeh.com/instrument" />
+    <link rel="canonical" href="https://vahidnajafizadeh.com/book" />
+    <link rel="canonical" href="https://vahidnajafizadeh.com/workshop" />
+
+
+
     @await RenderSectionAsync("Styles", false)
 </head>
 
@@ -41,7 +61,7 @@
     <img src="SiteTemplate/img/shape-1.png" class="shape-2" alt="menu">
 
     <div class="mouseCircle"></div>
-    <header class="light">
+    <header class="light fixed">
         <section class="mainHeader">
             <div class="container-fluid">
                 <div class="row">
@@ -62,7 +82,6 @@
                     </div>
                     <div class="col-logo">
                         <a href="/" class="logo">
-                            @*<img src="SiteTemplate/img/logo.png" alt="" class="light">*@
                         </a>
                     </div>
                 </div>
@@ -80,8 +99,8 @@
             <img src="/SiteTemplate/img/V-Logo.png" alt="logo" class="logo" style="width: 35%">
             <ul class="menu">
                 @*<li>
-                    <button class="openMenu"></button>
-                </li>*@
+                        <button class="openMenu"></button>
+                    </li>*@
                 <li>
                 </li>
                 @foreach (var item in menu)
@@ -109,57 +128,75 @@
         @RenderBody()
 
         <footer data-scroll-section class="footer1">
-            <div class="top">
+            <div class="cont">
+                <div class="top">
 
-                <a href="tel:+989354868864" class="more">
-                    تماس با ما
-                </a>
-            </div>
-            <div class="info">
-                <ul class="social">
-                    <li>
-                        <a href="tel:+989354868864" target="_blank" title="+989354868864">
-                            <i class="mobile"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://t.me/vahidnajafizadeh" target="_blank" title="vahidnajafizadeh">
-                            <i class="telegram"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://wa.me/989354868864" target="_blank" title="989354868864">
-                            <i class="whatsapp"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://instagram.com/vahidnajafizadeh" target="_blank" title="vahidnajafizadeh">
-                            <i class="instagram"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://instagram.com/vahidnajafizadeh_student" target="_blank" title="vahidnajafizadeh_student">
-                            <i class="instagram"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://instagram.com/havanaCompanyOfficial" target="_blank" title="havanaCompanyOfficial">
-                            <i class="instagram"></i>
-                        </a>
-                    </li>
-                </ul>
-                <img src="SiteTemplate/img/V-Logo.png" alt="logo" class="logo">
-            </div>
-            <div class="namasite">
-                @today
+                    <strong>وحید نجفی زاده</strong>
+                    <br/>
+                    <b>  مدرس و نوازنده پرکاشن  </b>
+                    <br/>
+                    <a href="tel:+989354868864" class="more">
+                        تماس با ما
+                    </a>
+                </div>
+                <div class="info">
+                    <ul class="social">
+                        <li>
+                            <a href="tel:+989354868864" target="_blank">
+                                <img src="SiteTemplate/img/icon-tel.png" alt="phone" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://t.me/vahidnajafizadeh" target="_blank" style="border: 2px solid blue">
+                                <img src="SiteTemplate/img/icon-telegram-big.png" alt="telegram">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/vahidnajafizadeh" target="_blank" title="vahidnajafizadeh" style="border: 2px solid green">
+                                <img src="SiteTemplate/img/icon-instagram-big.png" alt="instagram">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/vahidnajafizadeh_student" target="_blank" title="vahidnajafizadeh_student" style="border: 2px solid blue">
+                                <img src="SiteTemplate/img/icon-instagram-big.png" alt="instagram">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/havanaCompanyOfficial" target="_blank" title="havanaCompanyOfficial" style="border: 2px solid red">
+                                <img src="SiteTemplate/img/icon-instagram-big.png" alt="instagram">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/vpan.instruments" target="_blank" title="vpan.instruments" style="border: 2px solid yellow">
+                                <img src="SiteTemplate/img/icon-instagram-big.png" alt="instagram">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/989354868864" target="_blank" style="border: 2px solid green">
+                                <img src="SiteTemplate/img/icon-whatsapp-big.png" alt="whatsapp">
+                            </a>
+                        </li>
+
+                    </ul>
+                    <img src="SiteTemplate/img/V-Logo.png" alt="logo" class="logo">
+                </div>
+                <div class="namasite">
+                    <a href="#">
+                        @today
+                    </a>
+                </div>
             </div>
         </footer>
     </main>
+
+
     <script src="SiteTemplate/js/scroll.js"></script>
     <script src="SiteTemplate/js/swiper-bundle.min.js"></script>
     <script src="SiteTemplate/js/preview.js"></script>
     <script src="SiteTemplate/js/script.js"></script>
     <script src="SiteTemplate/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             var isDesktop = () => window.innerWidth > 767.9;
@@ -250,7 +287,52 @@
         });
 
     </script>
-@await RenderSectionAsync("Scripts", false)
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            Toolbar: {
+                display: [
+                    { id: "counter", position: "center" },
+                    "fullscreen",
+                    "close",
+                ],
+            },
+            Image: {
+                zoom: true,
+            },
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", false)
+
+    <noscript>
+        <style amp-boilerplate>
+            body {
+                visibility: visible
+            }
+        </style>
+    </noscript>
+
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Article",
+          "headline": "وحید نجفی زاده",
+          "description": "وبسایت رسمی وحید نجفی زاده ، مدرس و نوازنده پرکاشن",
+          "author": {
+            "@@type": "Person",
+            "name": "وحید نجفی زاده"
+          },
+          "datePublished": "2025-10-09",
+          "image": "https://vahidnajafizadeh.com/SiteTemplate/img/icon-whatsapp-big.png",
+          "publisher": {
+            "@@type": "Organization",
+            "name": "VahidNajafizadeh",
+            "logo": {
+              "@@type": "ImageObject",
+              "url": "https://vahidnajafizadeh.com/SiteTemplate/img/icon-whatsapp-big.png"
+            }
+          }
+        }
+    </script>
 </body>
 
 </html>

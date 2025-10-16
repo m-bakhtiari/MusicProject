@@ -32,6 +32,9 @@ namespace TopLearn.DataLayer.Context
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentImage> StudentImages { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<ConcertTicket> ConcertTickets { get; set; }
+        public DbSet<ConcertTicketSeat> ConcertTicketSeats { get; set; }
+
         #endregion
 
 
@@ -42,7 +45,7 @@ namespace TopLearn.DataLayer.Context
             {
                 Email = "vahidnajafizadeh@gmail.com",
                 Password = EncodePasswordMd5("123456"),
-                RegisterDate = new DateTime(2024,02,02),
+                RegisterDate = new DateTime(2024, 02, 02),
                 UserId = 1,
                 IsActive = true,
                 IsDelete = false,
