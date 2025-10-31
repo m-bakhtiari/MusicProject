@@ -16,7 +16,7 @@ namespace TopLearn.Core.Services.Interfaces
         Task<List<ConcertTicket>> GetReservedSeat();
         Task<ConcertTicket> GetTicketById(int id);
         Task<List<ConcertTicketSeat>> GetTickets();
-        Task<string> FinalizeTicketManual(string mobile, string seat);
+        Task<string> FinalizeTicketManual(string mobile, string seat,string nationalCode);
         Task AddTicketManual(ConcertTicket concertTicket);
         Task UpdateTicketManual(ConcertTicket concertTicket);
         Task DeleteTicketManual(ConcertTicket concertTicket);

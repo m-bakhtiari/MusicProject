@@ -89,7 +89,7 @@ namespace TopLearn.Core.Services
             if (imgCourse != null && imgCourse.IsImage())
             {
                 product.CourseImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "course", product.CourseImageName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -107,6 +107,14 @@ namespace TopLearn.Core.Services
             return await _context.Courses.FindAsync(courseId);
         }
 
+        public async Task<List<Product>> GetProductsBySubGroup(int subId)
+        {
+            var group = await _context.CourseGroups.FindAsync(subId);
+            if (group.ParentId == null)
+                return await _context.Courses.Where(x => x.GroupId == subId).ToListAsync();
+            return await _context.Courses.Where(x => x.SubGroup == subId).ToListAsync();
+        }
+
         public async Task UpdateCourse(Product product, IFormFile imgCourse)
         {
             product.UpdateDate = DateTime.Now;
@@ -115,14 +123,14 @@ namespace TopLearn.Core.Services
             {
                 if (product.CourseImageName != "no-photo.jpg")
                 {
-                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", product.CourseImageName);
                     if (File.Exists(deleteImagePath))
                     {
                         File.Delete(deleteImagePath);
                     }
                 }
                 product.CourseImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", product.CourseImageName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -133,79 +141,29 @@ namespace TopLearn.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = ""
-            , string getType = "all", string orderByType = "date",
-            int startPrice = 0, int endPrice = 0, List<int> selectedGroups = null, int take = 0)
+        public async Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = "", int groupId = 0, int take = 0)
         {
             if (take == 0)
                 take = 8;
 
             IQueryable<Product> result = _context.Courses;
-
+            var group = await _context.CourseGroups.ToListAsync();
             if (!string.IsNullOrEmpty(filter))
             {
                 result = result.Where(c => c.CourseTitle.Contains(filter) || c.Tags.Contains(filter));
             }
-
-            switch (getType)
+            if (groupId != 0)
             {
-                case "all":
-                    break;
-                case "buy":
-                    {
-                        result = result.Where(c => c.CoursePrice != 0);
-                        break;
-                    }
-                case "free":
-                    {
-                        result = result.Where(c => c.CoursePrice == 0);
-                        break;
-                    }
-
+                result = result.Where(c => c.GroupId == groupId || c.SubGroup == groupId);
             }
-
-            switch (orderByType)
-            {
-                case "date":
-                    {
-                        result = result.OrderByDescending(c => c.CreateDate);
-                        break;
-                    }
-                case "updatedate":
-                    {
-                        result = result.OrderByDescending(c => c.UpdateDate);
-                        break;
-                    }
-            }
-
-            if (startPrice > 0)
-            {
-                result = result.Where(c => c.CoursePrice > startPrice);
-            }
-
-            if (endPrice > 0)
-            {
-                result = result.Where(c => c.CoursePrice < startPrice);
-            }
-
-
-            if (selectedGroups != null && selectedGroups.Any())
-            {
-                foreach (var groupId in selectedGroups)
-                {
-                    result = result.Where(c => c.GroupId == groupId || c.SubGroup == groupId);
-                }
-
-            }
-
             var skip = (pageId - 1) * take;
-
             var pageCount = await result.Select(c => new ShowCourseListItemViewModel()
             {
                 CourseId = c.ProductId,
                 ImageName = c.CourseImageName,
                 Price = c.CoursePrice,
                 Title = c.CourseTitle,
+                GroupTitle = group.FirstOrDefault(x => x.GroupId == c.GroupId).GroupTitle,
             }).CountAsync() / take;
 
             var query = await result.Select(c => new ShowCourseListItemViewModel()
@@ -214,6 +172,7 @@ namespace TopLearn.Core.Services
                 ImageName = c.CourseImageName,
                 Price = c.CoursePrice,
                 Title = c.CourseTitle,
+                GroupTitle = group.FirstOrDefault(x => x.GroupId == c.GroupId).GroupTitle,
             }).Skip(skip).Take(take).ToListAsync();
 
             return Tuple.Create(query, pageCount);

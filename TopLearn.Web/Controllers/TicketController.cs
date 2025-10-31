@@ -21,7 +21,14 @@ namespace TopLearn.Web.Controllers
         {
             _ticketService = ticketService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {          
+            return View();
+        }
+
+        [Route("ReserveTicket")]
+        [HttpGet]
+        public async Task<IActionResult> ReserveTicket()
         {
             var model = await _ticketService.GetReservedSeat();
             ViewData["Seat"] = "14-17-18-19-20-21-22-23-22-23-22-21-20";
@@ -34,13 +41,14 @@ namespace TopLearn.Web.Controllers
 
         [Route("BuyTicket")]
         [HttpGet]
-        public async Task<IActionResult> BuyTicket(string selectedSeats, string mobile)
+        public async Task<IActionResult> BuyTicket(string selectedSeats, string mobile, string nationalCode)
         {
-            if (string.IsNullOrWhiteSpace(mobile) || mobile.Length != 11 || string.IsNullOrWhiteSpace(selectedSeats))
+            if (string.IsNullOrWhiteSpace(mobile) || mobile.Length != 11 || string.IsNullOrWhiteSpace(selectedSeats) ||
+                string.IsNullOrWhiteSpace(nationalCode))
             {
-                return RedirectToRoute("/Ticket");
+                return Redirect("/Ticket");
             }
-            var res = await _ticketService.FinalizeTicketManual(mobile, selectedSeats);
+            var res = await _ticketService.FinalizeTicketManual(mobile, selectedSeats, nationalCode);
             if (string.IsNullOrWhiteSpace(res) == false)
             {
                 var data = await _ticketService.GetReservedSeat();
@@ -50,10 +58,18 @@ namespace TopLearn.Web.Controllers
                 ViewData["SeatReserve"] = ticket.Select(x => x.SeatNumber).ToList();
                 ViewData["mobile"] = data.Select(x => x.Mobile);
                 ViewData["Error"] = res;
-                return View("Index",data);
+                return View("Index", data);
             }
-                var model = await _ticketService.GetTicketByName(mobile.Trim());
+            var model = await _ticketService.GetTicketByName(mobile.Trim());
             return View("DownloadTicket", model);
+
+            //var reservedSeat = await _ticketService.GetReservedSeat();
+            //ViewData["Seat"] = "14-17-18-19-20-21-22-23-22-23-22-21-20";
+            //var tickets = await _ticketService.GetTickets();
+            //ViewData["SeatReserve"] = tickets.Select(x => x.SeatNumber).ToList();
+            //ViewData["mobile"] = reservedSeat.Select(x => x.Mobile);
+            //ViewData["Error"] = "";
+            //return View("Index", reservedSeat);
         }
 
         [Route("DownloadTicket")]

@@ -10,6 +10,6 @@ namespace TopLearn.Core.DTOs.Course
         public string Title { get; set; }
         public string ImageName { get; set; }
         public int Price { get; set; }
-        public TimeSpan TotalTime { get; set; }
+        public string GroupTitle { get; set; }
     }
 }

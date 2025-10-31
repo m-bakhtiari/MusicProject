@@ -117,9 +117,9 @@ namespace TopLearn.Core.Services
         {
             return await _context.StudentConcerts.Include(x => x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Havana);
         }
-        public async Task<StudentConcert> GetBook()
+        public async Task<List<StudentConcert>> GetBook()
         {
-            return await _context.StudentConcerts.Include(x => x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Book);
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages).Where(x => x.Type == (int)ConstantValue.Type.Book).ToListAsync();
         }
         public async Task Update(StudentConcert studentConcert, List<IFormFile> imagesFiles)
         {

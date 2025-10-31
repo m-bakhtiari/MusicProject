@@ -20,9 +20,10 @@ namespace TopLearn.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await _studentConcertService.GetAll((int)ConstantValue.Type.StudentConcert);
+            ViewData["typeUrl"] = "/StudentConcertInfo?id=";
             return View(model);
         }
-        
+
         [HttpGet("/StudentConcertInfo")]
         public async Task<IActionResult> StudentConcertInfo([FromQuery] int id)
         {
@@ -48,6 +49,14 @@ namespace TopLearn.Web.Controllers
         public async Task<IActionResult> Book()
         {
             var model = await _studentConcertService.GetBook();
+            ViewBag.typeUrl = "/BookInfo?id=";
+            return View("Index", model);
+        }
+
+        [HttpGet("/BookInfo")]
+        public async Task<IActionResult> BookInfo(int id)
+        {
+            var model = await _studentConcertService.GetItemById(id);
             return View("StudentConcertInfo", model);
         }
     }

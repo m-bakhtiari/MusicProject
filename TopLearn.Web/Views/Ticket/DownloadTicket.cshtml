@@ -2,10 +2,12 @@
 
 <section data-scroll-section>
 
-    <div style="text-align:center ;margin-top:80px;" >
+    <div style="text-align:center ;margin-top:80px;">
         <p>برای دانلود بلیط دکمه زیر را کلیک نمایید</p>
-        <button type="button" onclick="getTicket()" class="btn btn-primary" 
-        style="background-color:blue;color:white;">دانلود بلیط</button>
+        <button type="button" onclick="getTicket()" class="btn btn-primary"
+                style="background-color:blue;color:white;">
+            دانلود بلیط
+        </button>
     </div>
 
     <div id="content">
@@ -18,9 +20,9 @@
                 <div class="main-content no-break">
                     <div class="ticket">
                         <div class="ticket__main">
-                            <div class="header">کنسرت بزرگ هاوانا</div>
+                            <div class="header">کنسرت هاوانا - وحید نجفی زاده</div>
                             <div class="info passenger">
-                                <div style="font-size: 11px;color: black">: نام طرفدار</div>
+                                <div style="font-size: 11px;color: black">: نام مهمان</div>
                                 <div class="info__detail">@item.FirstName&nbsp;@item.LastName</div>
                             </div>
                             <div class="info platform">
@@ -46,7 +48,7 @@
                             </div>
                             <div class="info time">
                                 <div class="info__item">زمان</div>
-                                <div class="info__detail">17:00</div>
+                                <div class="info__detail"><span style="unicode-bidi: plaintext; direction: rtl;">11 صبح</span></div>
                             </div>
                             <div class="info carriage">
                                 <div class="info__item">ردیف</div>
@@ -58,17 +60,19 @@
                             </div>
                             <div class="fineprint">
                                 <p>
-                                    آدرس : تهران, خیابان پاسداران، بعد از سه راه اقدسیه، روبروی پارک نیاوران، خیابان فرهنگسرا,
-                                    فرهنگسرای نیاوران - سالن خلیج فارس
+                                    آدرس تهران خیابان پاسداران بعد از سه راه اقدسیه روبروی پارک نیاوران خیابان فرهنگسرا
+                                    فرهنگسرای نیاوران  سالن خلیج فارس 
+                                    <br />
+                                    <span style="font-size:10px;">لطفا نیم ساعت قبل از شروع کنسرت در سالن حضور داشته باشید</span>
                                 </p>
-                                <p>این بلیط غیر قابل فروش می باشد. لطفا نیم ساعت زودتر در محل کنسرت حضور داشته باشید</p>
+                                <p>از سر لطف و مرحمت استدعا می گردد به جای تقدیم گل و هدایا وجه، آن را در مسیر کمک به نیازمندان و امور خیریه مبذول فرمایید</p>
                             </div>
                             <div class="snack">
                                 <img src="SiteTemplate/img/QRCODE.jpg" alt="qrcode" />
                             </div>
                             <div class="barcode">
                                 <div class="barcode__scan"></div>
-                                <div class="barcode__id">@item.Mobile@seat.ConcertTicketSeatId</div>
+                                <div class="barcode__id">@seat.Description</div>
                             </div>
                         </div>
 
@@ -130,7 +134,7 @@
             width: 600px;
             display: grid;
             grid-template-columns: auto;
-            background: #f3f1c9;
+            background: white;
             border-radius: 10px;
             border: 2px solid #222;
         }
@@ -175,8 +179,8 @@
         .platform {
             grid-column: 7/span 1;
             grid-row: 2/span 3;
-            background: #c02a28;
-            color: #fff;
+            background: yellow;
+            color: black;
             border-color: #000;
             text-align: center;
         }
@@ -216,22 +220,18 @@
         .fineprint {
             grid-column-start: span 5;
             font-size: 14px;
-            line-height: 1;
+            line-height: 1.2;
             margin-top: 10px;
             padding-right: 5px;
             text-align: right !important;
         }
-
-            .fineprint p:nth-child(1) {
-                line-height: 1.4;
-            }
 
             .fineprint p:nth-child(2) {
                 margin: 4px 4px 0 0;
                 padding-top: 4px;
                 border-top: 1.5px dotted;
                 text-align: right !important;
-                font-size: 10px;
+                font-size: 11px;
             }
 
         .snack {
@@ -275,11 +275,12 @@
             page-break-inside: avoid;
             break-inside: avoid;
         }
-         #content{
+
+        #content {
             overflow-x: auto;
             overflow-y: hidden;
             width: 100%;
-         }
+        }
 
     </style>
 }

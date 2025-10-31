@@ -93,7 +93,7 @@ namespace TopLearn.Core.Services
                 .FirstOrDefaultAsync(x => x.ConcertTicketId == id);
         }
 
-        public async Task<string> FinalizeTicketManual(string mobile, string seat)
+        public async Task<string> FinalizeTicketManual(string mobile, string seat,string nationalCode)
         {
             var ticket = await _context.ConcertTickets.FirstOrDefaultAsync(x => x.Mobile == mobile);
             if (ticket == null)
@@ -113,7 +113,7 @@ namespace TopLearn.Core.Services
                     ConcertTicketId = ticket.ConcertTicketId,
                     CreatedDate = DateTime.Now,
                     IsPay = true,
-                    Description = "توسط کارت به کارت پرداخت شده",
+                    Description = nationalCode,
                     SeatNumber = item
                 });
             }

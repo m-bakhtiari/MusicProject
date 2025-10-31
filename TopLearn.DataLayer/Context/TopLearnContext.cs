@@ -34,6 +34,7 @@ namespace TopLearn.DataLayer.Context
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<ConcertTicket> ConcertTickets { get; set; }
         public DbSet<ConcertTicketSeat> ConcertTicketSeats { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
 
         #endregion
 

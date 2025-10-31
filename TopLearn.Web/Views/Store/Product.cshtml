@@ -1,14 +1,14 @@
-﻿@model List<TopLearn.DataLayer.Entities.Course.Student>
+﻿@model List<TopLearn.DataLayer.Entities.Course.Product>
 
 <section data-scroll-section style="margin-top: 50px;margin-bottom: 50px">
     <div class="swiper">
         <div class="swiper-wrapper">
             @foreach (var item in Model)
             {
-                <div class="swiper-slide" onclick="MentorInfo('@item.StudentId','@item.StudentFullName.Replace(' ','-')')">
-                    <img src="/student/@item.ImageName" alt="@item.StudentFullName" />
+                <div class="swiper-slide">
+                    <img src="/course/@item.CourseImageName" alt="@item.CourseTitle" />
                     <div class="slide-info" style="margin-top: 30px">
-                        <h3>@item.StudentFullName</h3>
+                        <h3>@item.CourseTitle</h3>
                     </div>
                 </div>
             }

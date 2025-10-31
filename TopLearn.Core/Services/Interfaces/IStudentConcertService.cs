@@ -22,6 +22,6 @@ namespace TopLearn.Core.Services.Interfaces
        Task<List<StudentConcertImage>> GetImagesByConcertId(int concertId);
        Task<StudentConcert> GetWorkshop();
        Task<StudentConcert> GetHavana();
-       Task<StudentConcert> GetBook();
+       Task<List<StudentConcert>> GetBook();
    }
 }

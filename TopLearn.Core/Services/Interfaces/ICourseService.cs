@@ -31,14 +31,15 @@ namespace TopLearn.Core.Services.Interfaces
         Task<Product> GetCourseById(int courseId);
         Task UpdateCourse(Product product, IFormFile imgCourse);
 
-        Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = "", string getType = "all",
-            string orderByType = "date", int startPrice = 0, int endPrice = 0, List<int> selectedGroups = null,int take=0);
+        Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = "", int groupId = 0, int take = 0);
 
         Task<Product> GetCourseForShow(int courseId);
 
         Task<List<ShowCourseListItemViewModel>> GetPopularCourse();
 
         Task DeleteCourse(int courseId);
+
+        Task<List<Product>> GetProductsBySubGroup(int subId);
 
         #endregion
 
