@@ -1,1 +1,260 @@
 ﻿
+<section data-scroll-section style="margin-top: 100px">
+    <div class="container row">
+        <div class="footer row">
+
+            <div class="tab-buttons">
+                <button class="tablinks active" onclick="openTab(event, 'Tab1Content')">درخواست مدرک</button>
+                <button class="tablinks" onclick="openTab(event, 'Tab2Content')">دریافت مدرک</button>
+            </div>
+
+            <div id="Tab1Content" class="tab-content" style="display: block;">
+                <form action="/RequestCertificate" method="post" id="requestCertificate">
+                    <h3>هنرجوی گرامی فرم درخواست مدرک زیر را پرنمایید .</h3>
+                    <p>مدارک دوره‌های آموزشی در ۴ سطح (مبتدی، متوسطه، پیشرفته و مربی‌گری) صادر می‌شوند. لازم به ذکر است که هزینه چاپ و ارسال مدرک بر عهده خود هنرجو خواهد بود.</p>
+                    <div class="form-group">
+                        <label for="firstName">نام(به انگلیسی)  :</label>
+                        <input type="text" class="form-control" name="firstName" id="firstName" required placeholder="نام">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">نام خانوادگی(به انگلیسی)  :</label>
+                        <input type="text" class="form-control" name="lastName" id="lastName" required placeholder="نام خانوادگی">
+                    </div>
+                    <div class="form-group">
+                        <label for="nationalCode">کد ملی  :</label>
+                        <input type="text" class="form-control" name="nationalCode" id="nationalCode" required placeholder="کد ملی">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">شماره موبایل:</label>
+                        <input type="text" class="form-control" name="mobile" id="mobile" maxlength="11" minlength="11"
+                               required placeholder="09123456789">
+                    </div>
+                    <div class="form-group">
+                        <label for="academy">نام آموزشگاه  :</label>
+                        <input type="text" class="form-control" name="academy" id="academy" placeholder="نام آموزشگاه">
+                    </div>
+                    <div class="form-group">
+                        <label for="instrument">نام ساز  :</label>
+                        <input type="text" class="form-control" name="instrument" id="instrument" placeholder="نام ساز">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">آدرس :</label>
+                        <textarea type="text" class="form-control" name="address" id="address" placeholder="آدرس" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">کد پستی  :</label>
+                        <input type="text" class="form-control" name="postalCode" id="postalCode" placeholder="کد پستی">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">توضیحات :</label>
+                        <textarea type="text" class="form-control" name="description" id="description" placeholder="توضیحات" rows="3"></textarea>
+                    </div>
+                    <p style="color:yellow;font-weight:bold" id="error-text"></p>
+                    <button type="button" style="background-color:blue;color:white;padding:10px;border-radius:5px;"
+                            id="saveBtn" onclick="confirmSubmit(1)">
+                        رزرو و ادامه
+                    </button>
+                </form>
+
+            </div>
+
+            <div id="Tab2Content" class="tab-content">
+                <form id="showCertificate">
+                    <h3>دریافت مدارک تقاضاداده شده </h3>
+                    <div class="form-group">
+                        <label for="mobileReq"> موبایل :</label>
+                        <input type="text" class="form-control" name="mobileReq" id="mobileReq" required placeholder="موبایل">
+                    </div>
+                    <button type="button" style="background-color:blue;color:white;padding:10px;border-radius:5px;"
+                            id="saveBtn" onclick="confirmSubmit(2)">
+                        دریافت مدرک
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Styles {
+    <style>
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+            .form-group label {
+                font-weight: bold;
+                margin-bottom: 0.25rem;
+                text-align: right;
+            }
+
+            .form-group input {
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+
+        .footer form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+
+        /* 📱 واکنش‌گرایی فرم */
+        @@media (max-width: 600px) {
+            .form-group {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .footer form {
+                gap: 0.75rem;
+            }
+
+            .reserveTag {
+                width: 100%;
+            }
+        }
+    </style>
+    <style>
+        /* ۲. کدهای CSS در اینجا قرار می‌گیرند */
+        .tab-buttons {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            .tab-buttons button {
+                background-color: inherit;
+                float: right; /* برای راست به چپ */
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                .tab-buttons button:hover {
+                    background-color: #ddd;
+                }
+
+                .tab-buttons button.active {
+                    background-color: #ccc;
+                }
+
+        .tab-content {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            // پنهان کردن تمام محتواهای تب
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // حذف کلاس 'active' از تمام دکمه‌های تب
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // نمایش محتوای تب فعلی
+            document.getElementById(tabName).style.display = "block";
+
+            // اضافه کردن کلاس 'active' به دکمه‌ای که کلیک شده است
+            evt.currentTarget.className += " active";
+        }
+
+        // به طور پیش‌فرض، تب اول را هنگام بارگذاری صفحه فعال می‌کند (اختیاری)
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".tablinks").click();
+        });
+    </script>
+
+    <script>
+        function confirmSubmit(type) {
+            if (type == 2) {
+                Swal.fire({
+                    title: 'دریافت مدرک',
+                    text: ' پس از آماده‌سازی، مراحل چاپ و صدور مدرک از طریق پیامک به شما اطلاع داده خواهد شد ',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'متوجه شدم'
+                });
+                //var mobileReq = document.getElementById("mobileReq").value;
+                //window.location = "/ShowCertificate?mobile=" + mobileReq;
+            } else {
+                var firstName = document.getElementById("firstName").value;
+                var lastName = document.getElementById("lastName").value;
+                var instrument = document.getElementById("instrument").value;
+                var nationalCode = document.getElementById("nationalCode").value;
+                var mobile = document.getElementById("mobile").value;
+                var address = document.getElementById("address").value;
+                var postalCode = document.getElementById("postalCode").value;
+                if (firstName.length < 2)
+                    document.getElementById("error-text").innerText = "نام را وارد نمایید";
+                else if (lastName.length < 2)
+                    document.getElementById("error-text").innerText = "نام خانوادگی را وارد نمایید";
+                else if (instrument.length < 2)
+                    document.getElementById("error-text").innerText = "نام ساز را وارد نمایید";
+                else if (nationalCode.length < 2)
+                    document.getElementById("error-text").innerText = "کد ملی را وارد نمایید";
+                else if (mobile.length != 11)
+                    document.getElementById("error-text").innerText = "شماره موبایل معتبر نمی باشد";
+                else if (address.length < 2)
+                    document.getElementById("error-text").innerText = "آدرس را وارد نمایید";
+                else if (postalCode.length !=10)
+                    document.getElementById("error-text").innerText = "کد پستی معتبر نمی باشد";
+                else if (containsPersianChars(firstName))
+                    document.getElementById("error-text").innerText = ' نام باید فقط با حروف انگلیسی وارد شود';
+                else if (containsPersianChars(lastName))
+                    document.getElementById("error-text").innerText = ' نام خانوادگی باید فقط با حروف انگلیسی وارد شود';
+
+                else if (type == 1) {
+                    Swal.fire({
+                        title: 'اطلاعات شما ثبت شد',
+                        text: 'اطلاعات شما با موفقیت ثبت شد ، پس از آماده‌سازی، مراحل چاپ و صدور مدرک از طریق پیامک به شما اطلاع داده خواهد شد ',
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonText: 'متوجه شدم',
+                    }).then(() => {
+                        document.getElementById("requestCertificate").submit();
+                    });
+                }
+            }
+
+        }
+
+         function containsPersianChars(text) {
+            // Regex برای تشخیص کاراکترهای یونیکد فارسی/عربی
+            const persianRegex = /[\u0600-\u06FF\u200C\u200B]/;
+            return persianRegex.test(text);
+        }
+    </script>
+}

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TopLearn.DataLayer.Context;
 
 namespace TopLearn.DataLayer.Migrations
 {
     [DbContext(typeof(TopLearnContext))]
-    partial class TopLearnContextModelSnapshot : ModelSnapshot
+    [Migration("14040816124509_Certificate_Address")]
+    partial class Certificate_Address
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,12 +95,6 @@ namespace TopLearn.DataLayer.Migrations
                         .HasMaxLength(255);
 
                     b.Property<string>("PostalCode")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("SendDate")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("TrackingCode")
                         .HasMaxLength(200);
 
                     b.HasKey("CertificateId");

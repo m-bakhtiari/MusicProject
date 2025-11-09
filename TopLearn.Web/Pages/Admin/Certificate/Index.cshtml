@@ -40,25 +40,33 @@
                                 @foreach (var item in Model.Certificates)
                                 {
                                     <tr>
+                                        <td>
+                                            <a href="/Admin/Certificate/UploadCertificate/@item.CertificateId" class="btn btn-info btn-sm">
+                                                آپلود مدرک
+                                            </a>                                          
+                                            <a href="/Admin/Certificate/PayedCertificate/@item.CertificateId" class="btn btn-success btn-sm">
+                                                پرداخت شده
+                                            </a>
+                                        </td>
                                         <td>@item.FirstName &nbsp; @item.LastName</td>
                                         <td>
                                             @if (item.IsPay)
                                             {
-                                                <span class="alert alert-success">بله</span>
+                                                <span>بله</span>
                                             }
                                             else
                                             {
-                                                <span class="alert alert-warning">خیر</span>
+                                                <span>خیر</span>
                                             }
                                         </td>
                                         <td>
                                             @if (item.IsDone)
                                             {
-                                                <span class="alert alert-success">صادرشده</span>
+                                                <span>صادرشده</span>
                                             }
                                             else
                                             {
-                                                <span class="alert alert-warning">بررسی نشده</span>
+                                                <span>بررسی نشده</span>
                                             }
                                         </td>
                                         <td>@item.Mobile</td>

@@ -89,7 +89,7 @@ namespace TopLearn.Core.Services
             if (imgCourse != null && imgCourse.IsImage())
             {
                 product.CourseImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "course", product.CourseImageName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", product.CourseImageName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -209,7 +209,7 @@ namespace TopLearn.Core.Services
             var product = await _context.Courses.FindAsync(courseId);
             if (product.CourseImageName != "no-photo.jpg")
             {
-                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", product.CourseImageName);
+                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", product.CourseImageName);
                 if (File.Exists(deleteImagePath))
                 {
                     File.Delete(deleteImagePath);

@@ -46,7 +46,7 @@ namespace TopLearn.Web.Controllers
             if (string.IsNullOrWhiteSpace(mobile) || mobile.Length != 11 || string.IsNullOrWhiteSpace(selectedSeats) ||
                 string.IsNullOrWhiteSpace(nationalCode))
             {
-                return Redirect("/Ticket");
+                return Redirect("/ReserveTicket");
             }
             var res = await _ticketService.FinalizeTicketManual(mobile, selectedSeats, nationalCode);
             if (string.IsNullOrWhiteSpace(res) == false)
@@ -58,7 +58,7 @@ namespace TopLearn.Web.Controllers
                 ViewData["SeatReserve"] = ticket.Select(x => x.SeatNumber).ToList();
                 ViewData["mobile"] = data.Select(x => x.Mobile);
                 ViewData["Error"] = res;
-                return View("Index", data);
+                return View("ReserveTicket", data);
             }
             var model = await _ticketService.GetTicketByName(mobile.Trim());
             return View("DownloadTicket", model);

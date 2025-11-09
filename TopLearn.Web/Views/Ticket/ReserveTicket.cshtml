@@ -23,7 +23,14 @@
                         <span class="row-label">@((i + 1))</span>
                         @for (var j = 1; j <= int.Parse(seatCounts[i]); j++)
                         {
-                            <button value="@($"{i + 1}-{j}")" class="seat @(reservedSeats.Contains($"{i + 1}-{j}") ? "unavailable" : "available")">@j</button>
+                            @if(i==0 || i == 1)
+                            {
+                                <button value="@($"{i + 1}-{j}")" class="seat reserve">@j</button>
+                            }
+                            else
+                            {
+                                <button value="@($"{i + 1}-{j}")" class="seat @(reservedSeats.Contains($"{i + 1}-{j}") ? "unavailable" : "available")">@j</button>
+                            }
                         }
                     </div>
                 }
@@ -39,7 +46,7 @@
                     </div>
                     <div class="legend-item">
                         <span class="seatTag reserveTag"></span>
-                        <span>خریدناپذیر (زرد)</span>
+                        <span>غیرقابل فروش (زرد)</span>
                     </div>
                 </div>
 
@@ -54,14 +61,14 @@
         </div>*@
 
                         <div class="form-group">
-                            <label for="nationalCode">کد ملی :</label>
+                            <label for="nationalCode">:کد ملی </label>
                             <input type="text"
                                    class="form-control" name="nationalCode" id="nationalCode"
                                    required placeholder="1234567899" autocomplete="off">
                         </div>
 
                         <div class="form-group">
-                            <label for="mobile">شماره موبایل:</label>
+                            <label for="mobile">:شماره موبایل</label>
                             <input type="text" class="form-control" name="mobile" id="mobile" maxlength="11" minlength="11"
                                    required autocomplete="off" placeholder="09123456789">
                         </div>

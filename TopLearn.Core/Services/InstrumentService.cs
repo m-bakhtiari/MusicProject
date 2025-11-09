@@ -95,14 +95,14 @@ namespace TopLearn.Core.Services
             {
                 if (instrument.IconImage != "no-photo.jpg")
                 {
-                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", instrument.IconImage);
+                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", instrument.IconImage);
                     if (File.Exists(deleteImagePath))
                     {
                         File.Delete(deleteImagePath);
                     }
                 }
                 instrument.IconImage = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgInstrumentUp.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course/image", instrument.IconImage);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", instrument.IconImage);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {

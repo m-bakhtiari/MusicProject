@@ -21,5 +21,6 @@ namespace TopLearn.Web.Pages.Admin.Certificate
         {
             Certificates = await _CertificateService.GetCertificates();
         }
+
     }
 }

@@ -1,0 +1,77 @@
+﻿@using TopLearn.DataLayer.Entities.Course
+@model List<Certificate>
+
+<section data-scroll-section style="margin-top: 60px">
+
+    <!-- 💡 تغییر اصلی: کانتینر اصلی را به Flexbox تبدیل می‌کنیم -->
+    <div class="qr-code-container">
+
+        @foreach (var item in Model)
+        {
+            <!-- 💡 تغییر در آیتم: عرض را 25% تنظیم می‌کنیم (برای 4 ستون) -->
+            <div class="qr-item-wrapper">
+
+                <!-- محل QR Code -->
+                <div id="qrcode-@item.CertificateId" style="margin-top:10px;border:2px solid white;"></div>
+                <span style="margin-top:10px">@item.Instrument - @item.Academy</span>
+                <br />
+                <!-- دکمه دانلود -->
+                <a href="/DownloadCertificate/@item.CertificateId"
+                   download
+                   style="background-color:blue;color:white;padding:10px;border-radius:5px">
+                    دانلود مدرک
+                </a>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 🔗 داده مدل (همان کد قبلی که کار می‌کرد)
+    // فرض می‌کنیم در Core هستید، اگر نه از Json.Encode استفاده کنید
+    var data = @Html.Raw(Json.Serialize(Model.Select(x => new {
+              id = x.CertificateId,
+              fileName = x.FileName,
+              url = "vahidnajafizadeh.com/DownloadCertificate/" + x.CertificateId
+          })));
+
+    data.forEach(item => {
+        var container = document.getElementById(`qrcode-${item.id}`);
+        if (container) {
+            new QRCode(container, {
+                text: item.url,
+                width: 200, // کمی کوچکتر برای آیتم‌های کنار هم
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+    });
+});
+    </script>
+
+    <!-- 🎨 استایل‌های ضروری برای نمایش کنار هم -->
+    <style>
+        .qr-code-container {
+            display: flex; /* فعال‌سازی فلکس‌باکس */
+            flex-wrap: wrap; /* اجازه شکستن خط به آیتم‌ها */
+            justify-content: center; /* آیتم‌ها در وسط افقی قرار می‌گیرند */
+            gap: 20px; /* فاصله بین آیتم‌ها */
+        }
+
+        .qr-item-wrapper {
+            display: flex;
+            flex-direction: column; /* محتوا (عکس، QR، دکمه) زیر هم باشند */
+            align-items: center; /* آیتم‌های داخلی (عکس، QR، دکمه) وسط چین شوند */
+            text-align: center;
+            width: 23%; /* 4 آیتم در هر سطر (100/4 = 25%). 23% برای فضای خالی (gap) در نظر گرفته شد */
+            min-width: 200px; /* حداقل عرض برای جلوگیری از فشرده شدن در صفحات کوچک */
+            margin-bottom: 30px;
+        }
+    </style>
+}

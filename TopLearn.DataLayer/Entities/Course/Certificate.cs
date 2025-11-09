@@ -39,5 +39,19 @@ namespace TopLearn.DataLayer.Entities.Course
 
         [Required]
         public bool IsDone { get; set; }
+
+        [MaxLength(500)]
+        public string FileName { get; set; }
+
+        public string Address { get; set; }
+
+        [MaxLength(200)]
+        public string PostalCode { get; set; }
+
+        [MaxLength(200)]
+        public string TrackingCode { get; set; }
+
+        [MaxLength(50)]
+        public string SendDate { get; set; }
     }
 }

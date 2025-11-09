@@ -30,6 +30,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\academy\" />
     <Folder Include="wwwroot\instrument\" />
+    <Folder Include="wwwroot\certificate\" />
     <Folder Include="wwwroot\student\" />
     <Folder Include="wwwroot\UserAvatar\" />
     <Folder Include="wwwroot\note\" />
