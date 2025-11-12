@@ -36,16 +36,16 @@ namespace TopLearn.Core.Services
                     await imgInstrumentLogoUp.CopyToAsync(stream);
                 }
             }
-            if (imgInstrumentUp != null && imgInstrumentUp.IsImage())
-            {
-                instrument.IconImage = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgInstrumentUp.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/instrument", instrument.IconImage);
+            //if (imgInstrumentUp != null && imgInstrumentUp.IsImage())
+            //{
+            //    instrument.IconImage = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgInstrumentUp.FileName);
+            //    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/instrument", instrument.IconImage);
 
-                using (var stream = new FileStream(imagePath, FileMode.Create))
-                {
-                    await imgInstrumentUp.CopyToAsync(stream);
-                }
-            }
+            //    using (var stream = new FileStream(imagePath, FileMode.Create))
+            //    {
+            //        await imgInstrumentUp.CopyToAsync(stream);
+            //    }
+            //}
 
             instrument.CreatedDate = DateTime.Now.Date;
             await _context.Instruments.AddAsync(instrument);
@@ -54,14 +54,14 @@ namespace TopLearn.Core.Services
 
         public async Task DeleteInstrument(Instrument instrument)
         {
-            if (instrument.IconImage != "no-photo.jpg")
-            {
-                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/instrument", instrument.IconImage);
-                if (File.Exists(deleteImagePath))
-                {
-                    File.Delete(deleteImagePath);
-                }
-            }
+            //if (instrument.IconImage != "no-photo.jpg")
+            //{
+            //    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/instrument", instrument.IconImage);
+            //    if (File.Exists(deleteImagePath))
+            //    {
+            //        File.Delete(deleteImagePath);
+            //    }
+            //}
             if (instrument.ImageName != "no-photo.jpg")
             {
                 var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/instrument", instrument.ImageName);
@@ -91,24 +91,24 @@ namespace TopLearn.Core.Services
 
         public async Task UpdateInstrument(Instrument instrument, IFormFile imgInstrumentUp, IFormFile imgInstrumentLogoUp)
         {
-            if (imgInstrumentUp != null && imgInstrumentUp.IsImage())
-            {
-                if (instrument.IconImage != "no-photo.jpg")
-                {
-                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", instrument.IconImage);
-                    if (File.Exists(deleteImagePath))
-                    {
-                        File.Delete(deleteImagePath);
-                    }
-                }
-                instrument.IconImage = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgInstrumentUp.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", instrument.IconImage);
+            //if (imgInstrumentUp != null && imgInstrumentUp.IsImage())
+            //{
+            //    if (instrument.IconImage != "no-photo.jpg")
+            //    {
+            //        var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", instrument.IconImage);
+            //        if (File.Exists(deleteImagePath))
+            //        {
+            //            File.Delete(deleteImagePath);
+            //        }
+            //    }
+            //    instrument.IconImage = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgInstrumentUp.FileName);
+            //    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", instrument.IconImage);
 
-                using (var stream = new FileStream(imagePath, FileMode.Create))
-                {
-                    await imgInstrumentUp.CopyToAsync(stream);
-                }
-            }
+            //    using (var stream = new FileStream(imagePath, FileMode.Create))
+            //    {
+            //        await imgInstrumentUp.CopyToAsync(stream);
+            //    }
+            //}
             if (imgInstrumentLogoUp != null && imgInstrumentLogoUp.IsImage())
             {
                 if (instrument.ImageName != "no-photo.jpg")

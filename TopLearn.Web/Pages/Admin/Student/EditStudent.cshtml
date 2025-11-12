@@ -84,13 +84,14 @@
     </script>
 
     <script>
+        CKEDITOR.config.versionCheck = false;
         CKEDITOR.replace('description', {
             language: 'fa',
             contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
             extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
             toolbar: [
                 { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline','NumberedList', 'BulletedList'] },
                 { name: 'clipboard', items: ['Undo', 'Redo'] },
                 { name: 'editing', items: ['Scayt'] },
                 { name: 'links', items: ['Link', 'Unlink'] },

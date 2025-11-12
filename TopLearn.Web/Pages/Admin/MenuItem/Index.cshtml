@@ -27,17 +27,16 @@
                         <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>عنوان منو</th>
                                     <th>لینک</th>
-                                    <th>#</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.MenuItems)
                                 {
                                     <tr>
-                                        <td>@item.Title</td>
-                                        <td>@item.Link</td>
                                         <td>
                                             <a href="/Admin/MenuItem/DeleteMenuItem/@item.MenuItemId" class="btn btn-info btn-sm">
                                                 حذف
@@ -46,6 +45,9 @@
                                                 ویرایش
                                             </a>
                                         </td>
+                                        <td>@item.Title</td>
+                                        <td>@item.Link</td>
+                                       
                                     </tr>
                                 }
                             </tbody>

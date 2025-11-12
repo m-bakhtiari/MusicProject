@@ -45,9 +45,9 @@ namespace TopLearn.DataLayer.Context
             modelBuilder.Entity<User>().HasData(new User()
             {
                 Email = "vahidnajafizadeh@gmail.com",
-                Password = EncodePasswordMd5("123456"),
+                Password = EncodePasswordMd5("Percussion"),
                 RegisterDate = new DateTime(2024, 02, 02),
-                UserId = 1,
+                UserId = 2,
                 IsActive = true,
                 IsDelete = false,
                 UserName = "Vahid Najafizadeh"

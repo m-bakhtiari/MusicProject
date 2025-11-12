@@ -30,14 +30,12 @@
                             <thead>
                                 <tr>
                                     <th>عنوان ساز</th>
-
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var instrument in Model.Instruments)
                                 {
                                     <tr>
-                                        <td>@instrument.InstrumentTitle</td>
                                         <td>
                                             <a href="/Admin/Instruments/DeleteInstrument/@instrument.InstrumentId" class="btn btn-info btn-sm">
                                                 حذف
@@ -46,6 +44,9 @@
                                                 ویرایش
                                             </a>
                                         </td>
+
+                                        <td>@instrument.InstrumentTitle</td>
+                                       
                                     </tr>
                                 }
                             </tbody>
