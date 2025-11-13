@@ -1,12 +1,12 @@
 ﻿@page
 @model TopLearn.Web.Pages.Admin.StudentConcerts.CreateStudentConcertModel
 @{
-    ViewData["Title"] = "افزودن کنسرت هنرجویی جدید";
+    ViewData["Title"] = ViewData["Header"];
 }
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">افزودن کنسرت هنرجویی جدید</h1>
+        <h1 class="page-header">افزودن @ViewData["Header"] جدید</h1>
     </div>
 </div>
 
@@ -22,10 +22,13 @@
                 <label>عنوان</label>
                 <input type="text" asp-for="StudentConcert.Title" class="form-control">
             </div>
-            <div class="form-group">
-                <label>تاریخ کنسرت</label>
-                <input type="text" asp-for="StudentConcert.ConcertDate" class="form-control">
-            </div>
+            @if (ViewData["Type"].ToString() == "1" || ViewData["Type"].ToString() == "2")
+            {
+                <div class="form-group">
+                    <label>تاریخ برگزاری</label>
+                    <input type="text" asp-for="StudentConcert.ConcertDate" class="form-control">
+                </div>
+            }
             <div class="form-group">
                 <label>توضیحات</label>
                 <textarea id="description" class="form-control" asp-for="StudentConcert.Description" rows="10"></textarea>
@@ -50,13 +53,15 @@
 
     <script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>
     <script>
+                CKEDITOR.config.versionCheck = false;
+
         CKEDITOR.replace('description', {
             language: 'fa',
             contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
             extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
             toolbar: [
                 { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline','NumberedList', 'BulletedList'] },
                 { name: 'clipboard', items: ['Undo', 'Redo'] },
                 { name: 'editing', items: ['Scayt'] },
                 { name: 'links', items: ['Link', 'Unlink'] },
@@ -76,7 +81,7 @@
         function updatePreview() {
             $("#imagePreview").html("");
             // بررسی فایل‌هایی که در DataTransfer هستند
-            for (var i = 0; i < dt.files.length; i++) {
+            for (let i = 0; i < dt.files.length; i++) {
                 var file = dt.files[i];
                 var reader = new FileReader();
 

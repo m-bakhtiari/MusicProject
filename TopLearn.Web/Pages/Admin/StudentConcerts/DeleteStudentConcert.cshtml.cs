@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TopLearn.Core.Services.Interfaces;
@@ -9,6 +10,7 @@ using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Web.Pages.Admin.StudentConcerts
 {
+    [Authorize]
     public class DeleteStudentConcertModel : PageModel
     {
         private readonly IStudentConcertService _studentConcertService;
@@ -28,7 +30,7 @@ namespace TopLearn.Web.Pages.Admin.StudentConcerts
         {
             var model = await _studentConcertService.GetItemById(StudentConcert.StudentConcertId);
             await _studentConcertService.DeleteItem(model);
-            return RedirectToPage("Index");
+            return Redirect($"/Admin/StudentConcerts?type={model.Type}");
         }
     }
 }

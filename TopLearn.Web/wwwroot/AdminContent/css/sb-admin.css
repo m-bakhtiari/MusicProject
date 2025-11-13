@@ -5,6 +5,7 @@
 body {
     padding-top: 100px;
     background-color: #f8f8f8;
+    font-family: 'IRANSans' !important, sans-serif;
 }
 
 @media(min-width:768px) {

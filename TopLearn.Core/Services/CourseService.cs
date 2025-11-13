@@ -200,6 +200,15 @@ namespace TopLearn.Core.Services
 
         public async Task DeleteGroup(CourseGroup group)
         {
+            var model = await _context.CourseGroups.Where(x => x.ParentId == group.GroupId).ToListAsync();
+            if (model != null)
+            {
+                foreach (var item in model)
+                {
+                    _context.CourseGroups.Remove(item);
+                    await _context.SaveChangesAsync();
+                }
+            }
             _context.CourseGroups.Remove(group);
             await _context.SaveChangesAsync();
         }

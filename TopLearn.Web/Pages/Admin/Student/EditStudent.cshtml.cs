@@ -45,10 +45,9 @@ namespace TopLearn.Web.Pages.Admin.Student
         public async Task<IActionResult> OnPostDeleteStudentImage(int id)
         {
             // حذف تصویر از سرویس مربوطه
+            var studentId= await _studentService.GetStudentByImageId(id);
             await _studentService.DeleteImage(id);
-
-            // در صورت موفقیت‌آمیز بودن حذف، به عنوان پاسخ یک نتیجه JSON برگردانید
-            return new JsonResult(new { success = true });
+            return Redirect($"/Admin/Student/EditStudent/{studentId}");
         }
     }
 }

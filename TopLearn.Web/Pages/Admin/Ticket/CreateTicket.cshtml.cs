@@ -19,7 +19,7 @@ namespace TopLearn.Web.Pages.Admin.Ticket
         [BindProperty]
         public DataLayer.Entities.Course.ConcertTicket Ticket { get; set; }
 
-        public async Task OnGet(int? id)
+        public void OnGet(int? id)
         {
             Ticket = new DataLayer.Entities.Course.ConcertTicket();
         }

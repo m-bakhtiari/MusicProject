@@ -7,21 +7,22 @@ using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Core.Services.Interfaces
 {
-   public interface IStudentConcertService
-   {
-       Task Add(StudentConcert studentConcert,List<IFormFile> imagesFiles);
+    public interface IStudentConcertService
+    {
+        Task Add(StudentConcert studentConcert, List<IFormFile> imagesFiles);
 
-       Task Update(StudentConcert studentConcert, List<IFormFile> imagesFiles);
+        Task Update(StudentConcert studentConcert, List<IFormFile> imagesFiles);
 
-       Task<List<StudentConcert>> GetAll(int type);
+        Task<List<StudentConcert>> GetAll(int type);
 
-       Task<StudentConcert> GetItemById(int id);
+        Task<StudentConcert> GetItemById(int id);
 
-       Task DeleteItem(StudentConcert studentConcert);
-       Task DeleteImage(int id);
-       Task<List<StudentConcertImage>> GetImagesByConcertId(int concertId);
-       Task<StudentConcert> GetWorkshop();
-       Task<StudentConcert> GetHavana();
-       Task<List<StudentConcert>> GetBook();
-   }
+        Task DeleteItem(StudentConcert studentConcert);
+        Task DeleteImage(int id);
+        Task<List<StudentConcertImage>> GetImagesByConcertId(int concertId);
+        Task<StudentConcert> GetWorkshop();
+        Task<StudentConcert> GetHavana();
+        Task<List<StudentConcert>> GetBook();
+        Task<int> GetItemByImageId(int id);
+    }
 }

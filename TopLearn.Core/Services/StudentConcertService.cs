@@ -104,6 +104,12 @@ namespace TopLearn.Core.Services
                 .FirstOrDefaultAsync(x => x.StudentConcertId == id);
         }
 
+        public async Task<int> GetItemByImageId(int id)
+        {
+            var model = await _context.StudentConcertImages.FindAsync(id);
+            return model.StudentConcertId;
+        }
+
         public async Task<List<StudentConcertImage>> GetImagesByConcertId(int concertId)
         {
             return await _context.StudentConcertImages.Where(x=>x.StudentConcertId==concertId).ToListAsync();

@@ -15,12 +15,12 @@
 
 <div class="row">
     <form method="post" enctype="multipart/form-data">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group">
                 <label>نام و نام خانوادگی</label>
                 <input type="text" asp-for="Student.StudentFullName" class="form-control">
             </div>
-          @*   <div class="form-group">
+            @*   <div class="form-group">
                 <label>سازها هنرجو</label>
                 <input type="text" asp-for="Student.LearningInstrument" class="form-control">
             </div> *@
@@ -30,8 +30,18 @@
                 <span asp-validation-for="Student.Description"></span>
             </div>
             <div class="form-group">
-                <label>انتخاب تصویر</label>
-                <input type="file" id="imageList" name="imageList" multiple>
+                <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="logo" />
+                <div class="form-group">
+
+                    <label>عکس اصلی منتور</label>
+                    <input type="file" name="imgLogo" id="imgLogo">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label>گالری تصاویر منتور</label>
+                <!-- اضافه کردن یک کلاس برای دسترسی راحت‌تر -->
+                <input type="file" id="imageList" name="imageList" multiple class="file-input">
             </div>
 
             <div class="form-group">
@@ -40,15 +50,7 @@
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
 
         </div>
-        <div class="col-md-4">
-            <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="logo" />
-            <div class="form-group">
-
-                <label>انتخاب تصویر</label>
-                <input type="file" name="imgLogo" id="imgLogo">
-            </div>
-
-        </div>
+       
     </form>
 </div>
 
@@ -59,7 +61,7 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgLogo').attr('src', e.target.result);
+                    $('#imgCourse').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -99,7 +101,7 @@
         function updatePreview() {
             $("#imagePreview").html("");
             // بررسی فایل‌هایی که در DataTransfer هستند
-            for (var i = 0; i < dt.files.length; i++) {
+            for (let i = 0; i < dt.files.length; i++) {
                 var file = dt.files[i];
                 var reader = new FileReader();
 

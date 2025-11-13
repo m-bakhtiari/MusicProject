@@ -32,8 +32,12 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
         {
             MusicNote = await _musicNoteService.GetNoteById(id);
             var groups = await _instrumentService.GetAll();
-            if (MusicNote.InstrumentId != null)
-                ViewData["Instruments"] = new SelectList(groups, "Value", "Text", MusicNote.InstrumentId.Value);
+            var groupSelect = groups.Select(x => new SelectListItem()
+            {
+                Text = x.InstrumentTitle,
+                Value = x.InstrumentId.ToString()
+            });
+            ViewData["Instruments"] = new SelectList(groupSelect, "Value", "Text");
         }
 
         [Authorize]

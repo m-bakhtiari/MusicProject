@@ -1,13 +1,13 @@
 ﻿@page "{id}"
 @model TopLearn.Web.Pages.Admin.Student.EditStudentModel
 @{
-    ViewData["Title"] = "ویرایش آموزشگاه";
+    ViewData["Title"] = "ویرایش منتور";
 }
 
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">ویرایش آموزشگاه </h1>
+        <h1 class="page-header">ویرایش منتور </h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -18,19 +18,27 @@
         <input type="hidden" asp-for="Student.ImageName" />
 
         <!-- /.panel-heading -->
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group">
                 <label>نام هنرجو</label>
                 <input type="text" asp-for="Student.StudentFullName" class="form-control">
             </div>
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label>سازها</label>
                 <input type="text" asp-for="Student.LearningInstrument" class="form-control">
-            </div>
+            </div> *@
             <div class="form-group">
                 <label>توضیحات</label>
                 <textarea id="description" class="form-control" asp-for="Student.Description" rows="10"></textarea>
                 <span asp-validation-for="Student.Description"></span>
+            </div>
+            <div class="form-group">
+                <img id="imgCourse" src="/student/@Model.Student.ImageName" alt="logo" class="thumbnail" />
+
+                <div class="form-group">
+                    <label>عکس اصلی</label>
+                    <input type="file" name="imgLogo" id="imgLogo">
+                </div>
             </div>
             @foreach (var item in Model.Student.StudentImages)
             {
@@ -38,14 +46,14 @@
                     <img src="/student/@item.ImageName" class="img-thumbnail" style="width: 250px; height: 250px;
                                                                                             display: block;" alt="تصویر کنسرت">
                     <button style="position: absolute; top: 20px; right: 20px; background: red; color: white; border: none;
-                                   cursor: pointer; padding: 2px 5px;" onclick="deleteImage('@item.StudentImageId')"
+                                   cursor: pointer; padding: 2px 5px;"
                             asp-page-handler="DeleteStudentImage" asp-route-id="@item.StudentImageId">
                         X
                     </button>
                 </div>
             }
             <div class="form-group">
-                <label>انتخاب تصویر</label>
+                <label>گالری تصاویر</label>
                 <!-- به این شیوه name به فایل ها اختصاص می‌یابد و در ارسال فرم دریافت می‌شود -->
                 <input type="file" id="imageList" name="imageList" multiple>
             </div>
@@ -54,14 +62,7 @@
             </div>
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
         </div>
-        <div class="col-md-4">
-            <img id="imgCourse" src="/student/@Model.Student.ImageName" alt="logo" class="thumbnail" />
-
-            <div class="form-group">
-                <label>انتخاب تصویر</label>
-                <input type="file" name="imgLogo" id="imgLogo">
-            </div>
-        </div>
+       
     </form>
 </div>
 
@@ -82,6 +83,7 @@
             readURL(this);
         });
     </script>
+    <script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>
 
     <script>
         CKEDITOR.config.versionCheck = false;
@@ -168,13 +170,13 @@
             updatePreview();
         });
 
-        function deleteImage(id) {
-            $.post("/Admin/Student/EditStudent?handler=DeleteStudentImage", { id: id })
-                .done(function () {
-                    $("#image-" + id).remove(); // حذف تصویر از صفحه
-                });
+        // function deleteImage(id) {
+        //     $.post("/Admin/Student/EditStudent?handler=DeleteStudentImage", { id: id })
+        //         .done(function () {
+        //             $("#image-" + id).remove(); // حذف تصویر از صفحه
+        //         });
 
-        }
+        // }
 
 
     </script>

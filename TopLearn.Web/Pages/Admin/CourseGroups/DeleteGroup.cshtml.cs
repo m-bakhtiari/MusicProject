@@ -33,12 +33,7 @@ namespace TopLearn.Web.Pages.Admin.CourseGroups
         }
 
         public async Task<IActionResult> OnPost(CourseGroup group)
-        {
-            if (await _context.CourseGroups.AnyAsync(x => x.ParentId == group.GroupId))
-            {
-                ViewData["Error"] = "ابتدا تمام زیر گروه های این گروه را حذف نمایید";
-                return RedirectToPage("Index");
-            }
+        {          
 
             if (await _context.Courses.AnyAsync(x => x.GroupId == group.GroupId))
             {

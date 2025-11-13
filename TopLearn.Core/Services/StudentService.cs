@@ -91,6 +91,11 @@ namespace TopLearn.Core.Services
             return await _context.Students.Include(x => x.StudentImages).FirstOrDefaultAsync(x => x.StudentId == studentId);
         }
 
+        public async Task<int> GetStudentByImageId(int imageId)
+        {
+            var image = await _context.StudentImages.FindAsync(imageId);
+            return image.StudentId;
+        }
         public async Task UpdateStudent(Student student, IFormFile imgLogo, List<IFormFile> imagesFiles)
         {
             if (imgLogo != null && imgLogo.IsImage())
@@ -148,7 +153,7 @@ namespace TopLearn.Core.Services
 
         public async Task<Student> GetStudentByKey(string key)
         {
-            return await _context.Students.Include(x=>x.StudentImages).FirstOrDefaultAsync(x => x.ShortKey.Equals(key));
+            return await _context.Students.Include(x => x.StudentImages).FirstOrDefaultAsync(x => x.ShortKey.Equals(key));
         }
         private async Task<string> GenerateShortKey(int length = 4)
         {

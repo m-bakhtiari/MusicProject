@@ -18,7 +18,7 @@
         <input type="hidden" asp-for="Academy.LogoImageName" />
 
         <!-- /.panel-heading -->
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group">
                 <label>نام آموزشگاه</label>
                 <input type="text" asp-for="Academy.AcademyTitle" class="form-control">
@@ -43,22 +43,23 @@
                 <label>تلفن</label>
                 <input type="text" asp-for="Academy.Phone" class="form-control">
             </div>
+            <div class="form-group">
+                @if (Model.Academy.LogoImageName == "no-photo.jpg")
+                {
+                    <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="logo" />
+                }
+                else
+                {
+                    <img id="imgCourse" src="/academy/@Model.Academy.LogoImageName" alt="logo" class="thumbnail" />
+                }
+                <div class="form-group">
+                    <label>انتخاب تصویر</label>
+                    <input type="file" name="imgLogo" id="imgLogo">
+                </div>
+            </div>
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
         </div>
-        <div class="col-md-4">
-            @if (Model.Academy.LogoImageName == "no-photo.jpg")
-            {
-                <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="logo" />
-            }
-            else
-            {
-                <img id="imgCourse" src="/academy/@Model.Academy.LogoImageName" alt="logo" class="thumbnail" />
-            }
-            <div class="form-group">
-                <label>انتخاب تصویر</label>
-                <input type="file" name="imgLogo" id="imgLogo">
-            </div>
-        </div>
+       
     </form>
 </div>
 

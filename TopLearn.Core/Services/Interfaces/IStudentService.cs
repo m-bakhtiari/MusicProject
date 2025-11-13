@@ -16,6 +16,7 @@ namespace TopLearn.Core.Services.Interfaces
         Task DeleteStudent(Student student);
         Task DeleteImage(int id);
         Task<Student> GetStudentByKey(string key);
+        Task<int> GetStudentByImageId(int imageId);
 
     }
 }
