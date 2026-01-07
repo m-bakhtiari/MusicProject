@@ -8,12 +8,13 @@ using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Core.Services.Interfaces
 {
-   public interface IAcademyService
+    public interface IAcademyService
     {
         Task<List<Academy>> GetAllAcademy();
         Task<Academy> GetById(int academyId);
-        Task AddAcademy(Academy academy,IFormFile imgLogo);
-        Task UpdateAcademy(Academy academy,IFormFile imgLogo);
+        Task AddAcademy(Academy academy, IFormFile imgLogo);
+        Task UpdateAcademy(Academy academy, IFormFile imgLogo);
         Task DeleteAcademy(Academy academy);
+       
     }
 }

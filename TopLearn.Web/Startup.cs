@@ -78,7 +78,8 @@ namespace TopLearn.Web
             services.AddTransient<IMenuItemService, MenuItemService>();
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<ICertificateService, CertificateService>();
-            
+            services.AddTransient<IConcertPrizeService, ConcertPrizeService>();
+
             #endregion
         }
 

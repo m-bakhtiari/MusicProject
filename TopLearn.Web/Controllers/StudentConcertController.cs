@@ -59,5 +59,7 @@ namespace TopLearn.Web.Controllers
             var model = await _studentConcertService.GetItemById(id);
             return View("StudentConcertInfo", model);
         }
+
+      
     }
 }

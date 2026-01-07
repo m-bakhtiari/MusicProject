@@ -150,5 +150,17 @@ namespace TopLearn.Core.Services
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<StudentConcert>> GetVahidConcert()
+        {
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages)
+                .Where(x => x.Type == (int)ConstantValue.Type.VahidConcert).ToListAsync();
+        }
+
+        public async Task<List<StudentConcert>> GetMedia()
+        {
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages)
+                .Where(x => x.Type == (int)ConstantValue.Type.Media).ToListAsync();
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TopLearn.Core.Convertors;
 using TopLearn.Core.DTOs;
@@ -14,7 +15,7 @@ using TopLearn.DataLayer.Entities.User;
 
 namespace TopLearn.Core.Services
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
         private TopLearnContext _context;
 
@@ -29,23 +30,23 @@ namespace TopLearn.Core.Services
             return _context.Users.Any(u => u.UserName == userName);
         }
 
-        public bool IsExistEmail(string email)
+        public async Task<bool> IsExistMobile(string mobile)
         {
-            return _context.Users.Any(u => u.Email == email);
+            return await _context.Users.AnyAsync(u => u.Mobile == mobile);
         }
 
-        public int AddUser(User user)
+        public async Task<int> AddUser(User user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
             return user.UserId;
         }
 
-        public User LoginUser(LoginViewModel login)
+        public async Task<User> LoginUser(LoginViewModel login)
         {
             string hashPassword = PasswordHelper.EncodePasswordMd5(login.Password);
-            string email = FixedText.FixEmail(login.Email);
-            return _context.Users.SingleOrDefault(u => u.Email == email && u.Password == hashPassword);
+            string mobile = FixedText.FixEmail(login.Mobile);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Mobile == mobile && u.Password == hashPassword);
         }
 
         public User GetUserByEmail(string email)
@@ -115,7 +116,7 @@ namespace TopLearn.Core.Services
             int skip = (pageId - 1) * take;
 
 
-            UserForAdminViewModel list=new UserForAdminViewModel();
+            UserForAdminViewModel list = new UserForAdminViewModel();
             list.CurrentPage = pageId;
             list.PageCount = result.Count() / take;
             list.Users = result.OrderBy(u => u.RegisterDate).Skip(skip).Take(take).ToList();
@@ -125,7 +126,7 @@ namespace TopLearn.Core.Services
 
         public UserForAdminViewModel GetDeleteUsers(int pageId = 1, string filterEmail = "", string filterUserName = "")
         {
-            IQueryable<User> result = _context.Users.IgnoreQueryFilters().Where(u=>u.IsDelete);
+            IQueryable<User> result = _context.Users.IgnoreQueryFilters().Where(u => u.IsDelete);
 
             if (!string.IsNullOrEmpty(filterEmail))
             {

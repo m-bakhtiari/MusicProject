@@ -1,36 +1,299 @@
 ﻿@model TopLearn.Core.DTOs.LoginViewModel
-@{
-    ViewData["Title"] = "ورود به سایت";
-    Layout = "_AdminLayout";
-}
-<link rel="stylesheet" href="AdminContent/css/bootstrap-rtl.css"/>
 
-<section style="margin-top: 100px" data-scroll-section>
+<section data-scroll-section class="overflow">
+    <div class="note-position-1 note-amination">
+        &#9835;
+    </div>
+    <div class="note-position-2 note-amination animation-delay-2">
+        &#9833;
+    </div>
+    <div class="note-position-3 note-amination animation-delay-1">
+        &#119070;
+    </div>
+    <div class="note-position-4 note-amination">
+        &#9834;
+    </div>
 
-    <div class="container-fluid">
+    <div class="note-position-5 note-amination animation-delay-1">
+        &#119070;
+    </div>
+    <div class="note-position-6 note-amination">
+        &#9834;
+    </div>
+
+    <div class="note-position-7 note-amination animation-delay-1">
+        &#119070;
+    </div>
+
+
+    <div class="ring">
+        <i></i>
+        <i></i>
+        <i></i>
         <form asp-action="Login" method="post">
-
-            <div class="input-group">
-                <span class="input-group-addon" id="email-address"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input asp-for="Email" type="text" class="form-control" placeholder="ایمیل" aria-describedby="email-address">
-
+            <div class="loginDiv">
+                <div class="login">
+                    <h2> ورود </h2>
+                    <div class="inputBx">
+                        <input type="text" placeholder="شماره همراه" asp-for="Mobile">
+                    </div>
+                    <div class="inputBx">
+                        <input type="password" placeholder="رمز عبور" asp-for="Password">
+                    </div>
+                    <div class="inputBx">
+                        <input type="submit" value="ورود">
+                    </div>                  
+                     <div class="links">
+                        <a href="/RecoverPassword" id="recoveryPass"> بازیابی رمز عبور  </a>
+                        <a href="/Register" id="registerPart">ثبت نام</a>
+                    </div> 
+                </div>
             </div>
-            <span asp-validation-for="Email"></span>
-            <br />
-            <div class="input-group">
-                <span class="input-group-addon" id="password"><i class="glyphicon glyphicon-lock"></i></span>
-                <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور " aria-describedby="password">
-
-            </div>
-            <span asp-validation-for="Password"></span>
-            <br />
-            <div class="remember-me">
-                <label><input asp-for="RememberMe" type="checkbox" name="">  مرا بخاطر بسپار </label>
-            </div>
-            <br />
-            <button class="btn btn-success"> ورود به سایت </button>
 
         </form>
+       
     </div>
+
+
 </section>
 
+
+
+
+
+@section Styles {
+    <style>
+        .ring {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 7em auto;
+        }
+
+            .ring i {
+                position: absolute;
+                inset: 0;
+                border: 2px solid #fff;
+                transition: 0.5s;
+            }
+
+                .ring i:nth-child(1) {
+                    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+                    animation: animate 6s linear infinite;
+                }
+
+                .ring i:nth-child(2) {
+                    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+                    animation: animate 4s linear infinite;
+                }
+
+                .ring i:nth-child(3) {
+                    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+                    animation: animate2 10s linear infinite;
+                }
+
+        /*    .ring:hover i {
+                                border: 6px solid var(--clr);
+                                filter: drop-shadow(0 0 20px var(--clr));
+                            } */
+
+        @@keyframes animate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes animate2 {
+            0% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .login {
+            width: 24vw;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+
+            .login h2 {
+                font-size: 1.5em;
+                color: #fff;
+            }
+
+            .login .inputBx {
+                position: relative;
+                width: 100%;
+            }
+
+                .login .inputBx input {
+                    position: relative;
+                    width: 100%;
+                    padding: 12px 20px;
+                    background: transparent;
+                    border: 1px solid #ffffff57;
+                    height: 52px;
+                    border-radius: 40px;
+                    font-size: 1em;
+                    color: #fff;
+                    box-shadow: none;
+                    outline: none;
+                }
+
+                    .login .inputBx input[type="submit"] {
+                        width: 100%;
+                        background: #f5e54d;
+                        color: #000;
+                        border: none;
+                        cursor: pointer;
+                        transition: all 500ms;
+                    }
+
+                        .login .inputBx input[type="submit"]:hover {
+                            border: 1px solid #ffffff57;
+                            background: transparent;
+                            transition: all 500ms;
+                            color: #fff;
+                        }
+
+                    .login .inputBx input::placeholder {
+                        color: rgba(255, 255, 255, 0.75);
+                    }
+
+            .login .links {
+                position: relative;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                text-align: center;
+            }
+
+                .login .links a {
+                    color: #a3a3a3;
+                    text-decoration: none;
+                    margin: 0 auto;
+                    font-size: 0.85rem;
+                }
+
+        .note-position-1 {
+            top: 300px;
+            right: 2em;
+        }
+
+        .note-position-2 {
+            top: 180px;
+            left: 50px;
+        }
+
+        .note-position-3 {
+            top: 160px;
+            left: 100px;
+        }
+
+        .note-position-6 {
+            top: 53vh;
+            right: 6em;
+        }
+
+        .note-position-5 {
+            top: 80vh;
+            left: 8em;
+        }
+
+        .note-position-4 {
+            top: 60vh;
+            left: 3em;
+        }
+
+        .note-position-7 {
+            top: 61vh;
+            right: 205px;
+        }
+
+        .animation-delay-1 {
+            animation-delay: 1s;
+        }
+
+        .animation-delay-2 {
+            animation-delay: 2s;
+        }
+
+        .note-amination {
+            position: absolute;
+            font-size: 35px;
+            animation-name: notes;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            opacity: 0;
+        }
+
+        @@keyframes notes {
+            0% {
+                font-size: 35px;
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                font-size: 60px;
+                margin-top: -150px;
+                opacity: 0;
+            }
+        }
+
+        .loginDiv {
+            display: flex;
+        }
+
+        /* حالت پیش‌فرض */
+        .loginDiv {
+            display: flex;
+        }   
+
+        @@media (max-width: 992px) {
+            .login {
+                width: 68vw;
+            }
+
+            .ring i {
+                display: none;
+            }
+
+            .overflow {
+                overflow: hidden;
+            }
+
+            .ring {
+                position: relative;
+                width: 0;
+                height: 500px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 7em auto;
+            }
+        }
+    </style>
+}
+
+}

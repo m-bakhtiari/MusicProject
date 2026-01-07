@@ -72,7 +72,8 @@
 body {
     font-family: 'IRANSans' !important, sans-serif;
 }
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 1023px) {
     html,
     body {
         overflow-y: auto !important;
@@ -505,7 +506,7 @@ progress {
 
 @font-face {
     font-family: "BebasNeue";
-    font-size:medium;
+    font-size: medium;
     font-weight: 700;
     src: url("../fonts/BebasNeue.ttf") format("truetype");
 }
@@ -1830,6 +1831,7 @@ header .mainMenu .menu {
 @media screen and (max-width: 820px) {
     header .mainMenu .menu {
         right: calc(25vw + 25px);
+        top: 40% !important;
     }
 }
 
@@ -10816,7 +10818,8 @@ header .mainMenu .menu li:last-child {
 header .mainMenu .menu li a {
     display: inline-block;
     color: #fff;
-    font-size: 24px;
+    font-size: 21px;
+    line-height: 5px;
 }
 
 header .mainMenu .info {
@@ -11694,7 +11697,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
     margin: 0 auto;
     margin-top: 1em;
     width: 60%;
-    text-align: center;
+    text-align: left;
 }
 
 .TeamSec {
@@ -12191,7 +12194,7 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         }
     }
 
-   /* .listDnl ul {
+    /* .listDnl ul {
         width: 80%;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -12690,4 +12693,39 @@ header.fixed .mainHeader .col-logo .logo img.dark {
             width: 22px;
         }
     }
+
+    header .mainHeader .col-menu nav .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        justify-content: flex-start; /* آیتم‌ها از چپ شروع شوند */
+    }
+
+/*    -----------------------------------------------------------------  */
+        header .mainHeader .col-menu nav .menu li.loginItem {
+            margin-right: auto; /* این باعث می‌شود لاگین بچسبد به چپ */
+        }
+
+            header .mainHeader .col-menu nav .menu li.loginItem a {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 12px;
+                font-weight: 500;
+                color: white;
+            }
+
+    @media screen and (max-width: 820px) {
+        header .mainHeader .col-menu nav .menu li {
+            display: none;
+        }
+
+            header .mainHeader .col-menu nav .menu li.loginItem {
+                display: flex;
+            }
+    }
+
 }

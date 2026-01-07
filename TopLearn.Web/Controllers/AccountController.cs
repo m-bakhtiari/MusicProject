@@ -19,17 +19,14 @@ namespace TopLearn.Web.Controllers
     public class AccountController : Controller
     {
         private IUserService _userService;
-        private IViewRenderService _viewRender;
 
-        public AccountController(IUserService userService, IViewRenderService viewRender)
+        public AccountController(IUserService userService)
         {
             _userService = userService;
-            _viewRender = viewRender;
         }
 
-        #region Login
         [Route("Login")]
-        public ActionResult Login(bool EditProfile=false)
+        public ActionResult Login(bool EditProfile = false)
         {
             ViewBag.EditProfile = EditProfile;
             return View();
@@ -37,31 +34,31 @@ namespace TopLearn.Web.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public ActionResult Login(LoginViewModel login,string ReturnUrl="/")
+        public async Task<ActionResult> Login(LoginViewModel login, string ReturnUrl = "/")
         {
             if (!ModelState.IsValid)
             {
                 return View(login);
             }
 
-            var user = _userService.LoginUser(login);
-            if (user!=null)
+            var user = await _userService.LoginUser(login);
+            if (user != null)
             {
                 if (user.IsActive)
                 {
-                    var claims=new List<Claim>()
+                    var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
                         new Claim(ClaimTypes.Name,user.UserName)
                     };
-                    var identity=new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
-                    var principal= new ClaimsPrincipal(identity);
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
 
                     var properties = new AuthenticationProperties
                     {
                         IsPersistent = login.RememberMe
                     };
-                    HttpContext.SignInAsync(principal, properties);
+                    await HttpContext.SignInAsync(principal, properties);
 
                     ViewBag.IsSuccess = true;
                     //if (ReturnUrl != "/")
@@ -76,21 +73,50 @@ namespace TopLearn.Web.Controllers
                     ModelState.AddModelError("Email", "حساب کاربری شما فعال نمی باشد");
                 }
             }
-            ModelState.AddModelError("Email","کاربری با مشخصات وارد شده یافت نشد");
+            ModelState.AddModelError("Email", "کاربری با مشخصات وارد شده یافت نشد");
             return View(login);
         }
 
-        #endregion
 
-        #region Logout
         [Route("Logout")]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/Login");
         }
 
-        #endregion
+        [Route("Register")]
+        public IActionResult Register()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register(string mobile, string password)
+        {
+            var exist = await _userService.IsExistMobile(mobile);
+            if (exist)
+            {
+                ViewData["Message"] = "این شماره موبایل قبلا در سایت ثبت نام شده است";
+                return View("Register");
+            }
+            else
+            {
+                var user = new User()
+                {
+                    IsActive = true,
+                    IsDelete = false,
+                    Mobile = mobile,
+                    Password = PasswordHelper.EncodePasswordMd5(password),
+                    UserName = mobile,
+                    RegisterDate = DateTime.Now,
+                    Email = ""
+                };
+                await _userService.AddUser(user);
+                ViewData["Message"] = "این شماره موبایل قبلا در سایت ثبت نام شده است";
+                return View("Login");
+            }
+        }
     }
 }

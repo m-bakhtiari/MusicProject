@@ -11,7 +11,9 @@ namespace TopLearn.Core.DTOs
             StudentConcert = 1,
             Workshop = 2,
             Havana = 3,
-            Book=4
+            Book = 4,
+            VahidConcert = 5,
+            Media = 6
         }
     }
 }

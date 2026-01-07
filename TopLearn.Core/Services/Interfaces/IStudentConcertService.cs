@@ -24,5 +24,7 @@ namespace TopLearn.Core.Services.Interfaces
         Task<StudentConcert> GetHavana();
         Task<List<StudentConcert>> GetBook();
         Task<int> GetItemByImageId(int id);
+        Task<List<StudentConcert>> GetVahidConcert();
+        Task<List<StudentConcert>> GetMedia();
     }
 }

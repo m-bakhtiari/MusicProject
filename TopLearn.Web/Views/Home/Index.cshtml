@@ -1,8 +1,8 @@
 ﻿@model TopLearn.Core.DTOs.ItemForIndexDto
 
-<section class="hero" data-scroll-section>
+<section class="hero" data-scroll-section style="margin-top:15px !important">
     <video width="100%" height="auto" autoplay muted loop>
-        <source src="SiteTemplate/img/hirovid.mp4" type="video/mp4">
+        <source src="SiteTemplate/img/VID_20251226_172700_125.mp4" type="video/mp4">
     </video>
 
     <div class="divHero">
@@ -47,12 +47,21 @@
     </h5>
 </section>
 
-<section data-scroll-section class="imgCenter">
-    <img src="SiteTemplate/img/banner.png" alt="banner">
+@*<section data-scroll-section class="imgCenter" style="direction:ltr !important">
+    <img src="SiteTemplate/img/banner.png" alt="banner" data-fancybox data-src="SiteTemplate/img/banner.png" data-caption="وحید نجفی زاده">
+     <h2 style="color: #f2f2f2; text-align: center;">شروع کنسرت هاوانا</h2>
+    <p dir="rtl" style="unicode-bidi:isolate;color:white">
+        27&nbsp;آذر&nbsp;1404&nbsp;ساعت&nbsp;11&nbsp;صبح
+    </p>
+    <div class="flipclock" id="flipclock-1"></div>
+    <a href="/ReserveTicket" class="buy-ticket-button disabled">
+        خرید بلیط
+        <span class="sold-out">Sold Out</span>
+    </a> 
+
 </section>
 
-
-<section class="intro sliderNot" data-scroll-section>
+ <section class="intro sliderNot" data-scroll-section>
     <section class="base-template">
         <div class="wrapper base-template__wrapper">
 
@@ -85,20 +94,46 @@
         </div>
     </section>
 </section>
+ *@
 
-<section class="intro TeamSec" data-scroll-section>
+<section data-scroll-section style="margin-top: 50px;margin-bottom: 50px">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            @foreach (var item in Model.StudentConcerts)
+            {
+                <div class="swiper-slide" data-fancybox data-src="studentConcert/@item.StudentConcertImages.FirstOrDefault().ImageName"
+                     data-caption="@item.Description">
+                    <img src="/studentConcert/@item.StudentConcertImages.FirstOrDefault().ImageName" alt="@item.Title" />
+                    <div class="slide-info" style="margin-top: 30px">
+                        <h3>@item.Title</h3>
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+            }
+        </div>     
+    </div>
+</section>
+
+<section class="intro TeamSec" data-scroll-section style="padding:20px !important ; align-items:flex-start">
     <h1 class="titrSec base-template__title">
         Artistic Background
     </h1>
 
     <div class="base-template__text">
-        Percussionist and Instructor,
-        Has a teaching qualification card from the Ministry of Culture and Guidance,
-        Started activity in 2002,
-        Performance history with traditional, pop and orchestral groups,
-        Teaching background in Tehran's musical instrument academies And presenting percussion workshops in Tehran's academies,
-        Author and instructor of the book "Cajon",
-        Leader of the Havana's music Group,
+        Percussionist and Instructor
+        <br />
+        Has a teaching qualification card from the Ministry of Culture and Guidance 
+        <br />
+        Started activity in 2002
+        <br />
+        Performance history with traditional, pop and orchestral groups
+        <br />
+        Teaching background in Tehran's musical instrument academies And presenting percussion workshops in Tehran's academies
+        <br />
+        Author and instructor of the book "Cajon"
+        <br />
+        Leader of the Havana's music Group
+        <br />
         Organizer of Havana's concerts with pop and fusion singers in Tehran concert halls
     </div>
 </section>
@@ -115,127 +150,44 @@
                         <div class="why-us-trail-flex down">
                             <div class="why-us-trail move-down">
                                 <div class="why-us-taril-cards">
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/DSC08975.jpg" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt="ostad"
-                                             class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg" loading="lazy" alt="ostad"
-                                             class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg" loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/Ostad 05.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad2.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/conga_ostad.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad 04.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad3.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad 06.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/Untitled.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/DSC08975.jpg" alt="vahid najafizadeh" class="image-cover"></div>
+
                                 </div>
                             </div>
                         </div>
                         <div class="why-us-trail-flex">
                             <div class="why-us-trail move-up">
                                 <div class="why-us-taril-cards">
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg"
-                                             loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad 06.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad3.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/Untitled.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/conga_ostad.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad2.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/Ostad 05.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/DSC08975.jpg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad 04.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="why-us-trail-flex down">
                             <div class="why-us-trail move-down">
                                 <div class="why-us-taril-cards">
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg"
-                                             loading="lazy" alt="" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/conga_ostad.jpeg"
-                                             loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/Untitled.jpeg"
-                                             loading="lazy" alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad2.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/ostad3.jpeg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
-                                    <div class="why-us-taril-card">
-                                        <img src="SiteTemplate/img/DSC08975.jpg" loading="lazy"
-                                             alt="ostad" class="image-cover">
-                                    </div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/DSC08975.jpg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad 06.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/Ostad 05.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad3.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/Untitled.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/conga_ostad.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad 04.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+                                    <div class="why-us-taril-card"><img src="SiteTemplate/img/ostad2.jpeg" alt="vahid najafizadeh" class="image-cover"></div>
+
                                 </div>
                             </div>
                         </div>
@@ -403,7 +355,6 @@
                         </div>
                     </div>
                     <div class="avarars-js w-embed w-script">
-
                     </div>
                 </div>
             </div>
@@ -411,8 +362,10 @@
     </div>
 </section>
 
-@section Scripts
-{
+
+
+@section Scripts {
+
     <script>
         var swiper = new Swiper(".mySwiper", {
             effect: "cards",
@@ -431,6 +384,267 @@
             window.location.href = "/InstrumentInfo?id=" + id;
         }
     </script>
+    @if (!string.IsNullOrWhiteSpace(Model.Message))
+    {
+        <script>
+            Swal.fire({
+                title: 'برنده شدید',
+                html: 'شما برنده @Model.Message شدید؛ این پیام را اسکرین‌شات بگیرید و به شماره 09354868864 در واتس‌اپ ارسال کنید.',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonText: 'متوجه شدم'
+            });
+        </script>
+    }
+    <script>
+        (function () {
+
+                function FlipClock(el, config) {
+                    var _this = this;
+                    var updateTimeout;
+                    _this.el = el;
+                    _this.config = Object.assign({
+                        endDate: new Date('2025-12-18T11:00:00'),
+                        labels: {
+                            days: 'روز',
+                            hours: 'ساعت',
+                            minutes: 'دقیقه',
+                            seconds: 'ثانیه'
+                        }
+                    }, config);
+
+                    _this.current = {
+                        d: "00",
+                        h: "00",
+                        m: "00",
+                        s: "00"
+                    };
+
+                    createView();
+                    updateView();
+                    addObserver();
+
+                    function start() {
+                        var now = new Date().getTime();
+                        var end = _this.config.endDate.getTime();
+
+                        if (now >= end) {
+                            // وقتی زمان تمام شد
+                            _this.current = { d: "00", h: "00", m: "00", s: "00" };
+                            updateView();
+                            stop(); // تایمر را متوقف کن
+                            return;
+                        }
+
+                        _this.current = getTimeUntil(end, now);
+                        updateView();
+                        clearTimeout(updateTimeout);
+                        updateTimeout = setTimeout(start, 500);
+                    }
+
+                    function getTimeUntil(dateFuture, dateNow) {
+                        var delta = (dateFuture - dateNow) / 1000; // بدون abs تا منفی نشود
+                        if (delta <= 0) {
+                            return { d: "00", h: "00", m: "00", s: "00" };
+                        }
+
+                        var d = Math.floor(delta / 86400);
+                        delta -= d * 86400;
+                        var h = Math.floor(delta / 3600) % 24;
+                        delta -= h * 3600;
+                        var m = Math.floor(delta / 60) % 60;
+                        delta -= m * 60;
+                        var s = Math.floor(delta % 60);
+
+                        d = pad3(d);
+                        h = pad2(h);
+                        m = pad2(m);
+                        s = pad2(s);
+
+                        return {
+                            d: d + "",
+                            h: h + "",
+                            m: m + "",
+                            s: s + ""
+                        };
+                    }
+
+
+                    function stop() {
+                        clearTimeout(updateTimeout);
+                    }
+
+                    function destroy() {
+                        stop();
+                        _this.observer.disconnect();
+                        _this.el.innerHTML = "";
+                    }
+
+
+
+                    // Assumes a non-negative number.
+                    function pad2(number) {
+                        if (number < 10) return "0" + number;
+                        else return "" + number;
+                    }
+
+                    function pad3(number) {
+                        if (number < 10) return number;
+                        else if (number < 100) return number;
+                        else return "" + number;
+                    }
+
+                    function createView() {
+                        _this.daysLeaf = createLeaf(_this.config.labels.days, 3);
+                        _this.hoursLeaf = createLeaf(_this.config.labels.hours);
+                        _this.minutesLeaf = createLeaf(_this.config.labels.minutes);
+                        _this.secondsLeaf = createLeaf(_this.config.labels.seconds);
+                    }
+
+                    function createLeaf(label, digits) {
+                        var leaf = document.createElement("div");
+                        leaf.className = "leaf _" + (digits ? digits : "2") + "-digits";
+                        leaf.setAttribute("data-label", label);
+                        var top = document.createElement("div");
+                        var topLabel = document.createElement("span");
+                        top.className = "top-clock";
+                        top.appendChild(topLabel);
+                        var frontLeaf = document.createElement("div");
+                        var frontLabel = document.createElement("span");
+                        frontLeaf.className = "leaf-front";
+                        frontLeaf.appendChild(frontLabel);
+                        var backLeaf = document.createElement("div");
+                        var backLabel = document.createElement("span");
+                        backLeaf.className = "leaf-back";
+                        backLeaf.appendChild(backLabel);
+                        var bottom = document.createElement("div");
+                        var bottomLabel = document.createElement("span");
+                        bottom.className = "bottom";
+                        bottom.appendChild(bottomLabel);
+
+                        leaf.appendChild(top);
+                        leaf.appendChild(frontLeaf);
+                        leaf.appendChild(backLeaf);
+                        leaf.appendChild(bottom);
+
+                        _this.el.appendChild(leaf);
+
+                        return {
+                            el: leaf,
+                            topLabel: topLabel,
+                            frontLabel: frontLabel,
+                            backLabel: backLabel,
+                            bottomLabel: bottomLabel
+                        };
+                    }
+
+                    function updateView() {
+                        updateLeaf(_this.daysLeaf, _this.current.d);
+                        updateLeaf(_this.hoursLeaf, _this.current.h);
+                        updateLeaf(_this.minutesLeaf, _this.current.m);
+                        updateLeaf(_this.secondsLeaf, _this.current.s);
+                    }
+
+                    function updateLeaf(leaf, value) {
+                        if (leaf.isFlipping) return;
+
+                        var currentValue = leaf.topLabel.innerText;
+                        if (value !== currentValue) {
+                            leaf.isFlipping = true;
+                            leaf.topLabel.innerText = value;
+                            leaf.backLabel.innerText = value;
+                            leaf.el.classList.add("flip");
+
+                            clearTimeout(leaf.timeout);
+                            leaf.timeout = setTimeout(function () {
+                                leaf.frontLabel.innerText = value;
+                                leaf.bottomLabel.innerText = value;
+                                leaf.el.classList.remove("flip");
+                            }, 600);
+
+                            clearTimeout(leaf.timeout2);
+                            leaf.timeout2 = setTimeout(function () {
+                                leaf.isFlipping = false;
+                            }, 1000);
+                        }
+                    }
+
+                    function addObserver() {
+                        _this.observer = new IntersectionObserver(function (entries, observer) {
+                            entries.forEach(function (entry) {
+                                if (entry.isIntersecting) {
+                                    start();
+                                } else {
+                                    stop();
+                                }
+                            });
+                        });
+
+                        _this.observer.observe(_this.el);
+                    }
+
+                    return {
+                        start: start,
+                        stop: stop,
+                        destroy: destroy,
+                        getCurrent: function () {
+                            return _this.current;
+                        }
+                    };
+                }
+
+
+                //================================================
+                // Initialise the examples
+                var currentYear = new Date().getFullYear();
+
+                // FlipClock 1 Example: My Birthday
+                new FlipClock(document.getElementById('flipclock-1'), {
+                    endDate: new Date('2025-12-18T11:00:00'),
+                    labels: {
+                        days: 'روز',
+                        hours: 'ساعت',
+                        minutes: 'دقیقه',
+                        seconds: 'ثانیه'
+                    }
+                });
+
+            })();
+
+
+    </script>
+
+    <script src="SiteTemplate/js/swiper-bundleList.min.js"></script>
+    <script>
+        var swiper = new Swiper(".swiper",
+            {
+                effect: "coverflow",
+                centeredSlides: true,
+                slidesPerView: "auto",
+                grabCursor: true,
+                spaceBetween: 40,
+                coverflowEffect: {
+                    rotate: 25,
+                    stretch: 0,
+                    depth: 50,
+                    modifier: 1,
+                    slideShadows: false,
+                    theme: 'dark'
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false
+                },
+                loop: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                }
+            });
+
+
+    </script>
+
 
 }
 @section Styles
@@ -441,11 +655,461 @@
                 width: 85%;
             }
         }
+
         @@media only screen and (min-width: 768px) {
             .imgCenter img {
                 width: 40%;
             }
         }
+    </style>
+
+    <style>
+        /* Flipclock Looks */
+        .flipclock {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+            .flipclock * {
+                box-sizing: inherit;
+            }
+
+        .leaf {
+            display: flex;
+            flex-direction: column;
+            margin: 0 4px;
+            perspective: 300px;
+        }
+
+            .leaf::after {
+                content: attr(data-label);
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-top: 8px;
+                transform: translateX(-50%);
+                color: #f2f2f2;
+                font-size: 14px;
+                font-weight: 400;
+                text-transform: uppercase;
+                opacity: 0.5;
+            }
+
+        .top-clock,
+        .bottom,
+        .leaf-front,
+        .leaf-back {
+            position: relative;
+            display: block;
+            height: 64px;
+            width: 120px;
+            background-color: #f2f2f2;
+            color: #2d3748;
+            overflow: hidden;
+            border-color: #2d3748;
+        }
+
+            .top-clock span,
+            .bottom span,
+            .leaf-front span,
+            .leaf-back span {
+                position: absolute;
+                left: 50%;
+                width: 100%;
+                height: 128px;
+                text-align: center;
+                font-family: "Impact", sans-serif;
+                font-size: 80px;
+                line-height: 128px;
+                transform: translateX(-50%);
+            }
+
+        .leaf._3-digits .top-clock,
+        .leaf._3-digits .bottom,
+        .leaf._3-digits .leaf-front,
+        .leaf._3-digits .leaf-back {
+            width: 148px;
+        }
+
+        .top-clock,
+        .leaf-front {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            /* margin-bottom: 1px; */
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+        }
+
+            .top-clock span,
+            .leaf-front span {
+                top: 0;
+            }
+
+        .leaf-front {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .bottom,
+        .leaf-back {
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
+            .bottom span,
+            .leaf-back span {
+                bottom: 0;
+            }
+
+        .leaf-back {
+            position: absolute;
+            top: 64px;
+            z-index: 10;
+        }
+
+        /* Responsive */
+        @@media screen and (max-width: 600px) {
+            .flipclock {
+                padding: 6.66vw;
+            }
+
+            .leaf {
+                margin: 0 0.66vw;
+            }
+
+                .leaf::after {
+                    margin-top: 1.33vw;
+                    font-size: 2.33vw;
+                }
+
+            .top-clock,
+            .bottom,
+            .leaf-front,
+            .leaf-back {
+                height: 10.66vw;
+                width: 20vw;
+            }
+
+                .top-clock span,
+                .bottom span,
+                .leaf-front span,
+                .leaf-back span {
+                    height: 21.33vw;
+                    font-size: 13.33vw;
+                    line-height: 21.33vw;
+                }
+
+            .leaf._3-digits .top-clock,
+            .leaf._3-digits .bottom,
+            .leaf._3-digits .leaf-front,
+            .leaf._3-digits .leaf-back {
+                width: 24.66vw;
+            }
+
+            .top-clock,
+            .leaf-front {
+                border-top-left-radius: 1vw;
+                border-top-right-radius: 1vw;
+            }
+
+            .bottom,
+            .leaf-back {
+                border-bottom-left-radius: 1vw;
+                border-bottom-right-radius: 1vw;
+            }
+
+            .leaf-back {
+                top: 10.66vw;
+            }
+        }
+
+        /* Flipclock Animation */
+        .leaf-front {
+            transform-origin: bottom center;
+            transform: rotateX(0deg);
+            transform-style: preserve-3d;
+            transition-delay: 0.3s;
+        }
+
+        .leaf-back {
+            transform-origin: top center;
+            transform: rotateX(90deg);
+            transform-style: preserve-3d;
+            transition-delay: 0s;
+        }
+
+        .bottom::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            filter: blur(10px);
+        }
+
+        .flip .leaf-front {
+            transform: rotateX(-90deg);
+            transition: transform 0.3s ease-in, background-color 0.3s ease-in, color 0.3s ease-in;
+            transition-delay: 0s;
+            color: #1a1a1a;
+            /* جایگزین darken */
+            background-color: #bfbfbf;
+            /* جایگزین darken */
+        }
+
+        .flip .leaf-back {
+            transform: rotateX(0deg);
+            transition: transform 0.3s ease-in, background-color 0.3s ease-in, color 0.3s ease-in;
+            transition-delay: 0.3s;
+        }
+
+        .flip .bottom::before {
+            transition: height 0.3s ease-in-out;
+            transition-delay: 0.15s;
+            height: 100%;
+        }
+    </style>
+
+    <style>
+        .buy-ticket-button {
+            /* ابعاد و متن */
+            padding: 15px 35px;
+            font-size: 1.2em; /* اندازه فونت */
+            font-weight: bold;
+            /* رنگ‌ها و پس‌زمینه */
+            color: #ffffff; /* متن سفید برای کنتراست بالا */
+            background-color: #ff8c00; /* یک رنگ نارنجی/کهربایی جذاب (مانند رنگ متن در بنر) */
+            border: none;
+            border-radius: 8px; /* گوشه‌های کمی گرد */
+            /* سایه و عمق (برای سه بعدی به نظر رسیدن) */
+            box-shadow: 0 8px 15px rgba(255, 140, 0, 0.4); /* سایه نارنجی ملایم */
+            transition: all 0.3s ease; /* انتقال نرم برای افکت هاور */
+            /* فونت (اگر فونت فارسی خاصی استفاده می‌کنید، این قسمت باید در CSS کلی تنظیم شود) */
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif; /* یا هر فونت فارسی که استفاده می‌کنید */
+            /* موقعیت‌دهی (بسته به محل قرارگیری در HTML ممکن است لازم باشد) */
+            margin-top: 20px; /* فاصله از شمارش معکوس */
+            display: block; /* برای قرار گرفتن در مرکز و گرفتن عرض کامل در صورت نیاز */
+            width: fit-content; /* عرض متناسب با محتوا */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+            /* افکت هنگام بردن ماوس روی دکمه (Hover Effect) */
+            .buy-ticket-button:hover {
+                background-color: #ffa500; /* نارنجی کمی روشن‌تر */
+                box-shadow: 0 12px 20px rgba(255, 165, 0, 0.6); /* سایه پررنگ‌تر */
+                transform: translateY(-3px); /* کمی بالا آمدن دکمه */
+            }
+
+            /* افکت هنگام کلیک کردن */
+            .buy-ticket-button:active {
+                transform: translateY(0); /* برگشتن به جای اصلی */
+                box-shadow: 0 4px 8px rgba(255, 140, 0, 0.4); /* سایه کمتر برای حس "فشردن" */
+            }
+
+        .buy-ticket-link {
+            /* 1. ویژگی‌های ضروری برای شبیه شدن به دکمه */
+            display: inline-block; /* برای اعمال padding و margin، چون لینک‌ها به طور پیش‌فرض inline هستند */
+            text-decoration: none; /* حذف خط زیرین لینک */
+            text-align: center; /* اگر عرض مشخصی دارد، متن را وسط قرار می‌دهد */
+            /* 2. استایل دکمه (مشابه قبل) */
+            padding: 15px 35px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #ff8c00; /* رنگ نارنجی/کهربایی */
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(255, 140, 0, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            /* موقعیت‌دهی (مشابه قبل) */
+            margin-top: 20px;
+        }
+
+            /* افکت Hover */
+            .buy-ticket-link:hover {
+                background-color: #ffa500;
+                box-shadow: 0 12px 20px rgba(255, 165, 0, 0.6);
+                transform: translateY(-3px);
+            }
+
+            /* افکت Active */
+            .buy-ticket-link:active {
+                transform: translateY(0);
+                box-shadow: 0 4px 8px rgba(255, 140, 0, 0.4);
+            }
+
+        .buy-ticket-button {
+            display: inline-block;
+            position: relative;
+            padding: 12px 24px;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 6px;
+        }
+
+            .buy-ticket-button.disabled {
+                pointer-events: none; /* غیرقابل کلیک */
+                background-color: #aaa; /* رنگ خاکستری برای حالت غیرفعال */
+            }
+
+            .buy-ticket-button .sold-out {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                background: red;
+                color: #fff;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 4px 8px;
+                border-radius: 4px;
+                transform: rotate(-15deg); /* مورب شدن برچسب */
+            }
+
+    </style>
+
+    <style>
+
+
+        .swiper {
+            width: 100%;
+            padding: 40px 0 50px;
+        }
+
+        .swiper-slide {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: transparent;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+            .swiper-slide img {
+                width: 100%;
+                height: 200px; /* ارتفاع ثابت برای عکس */
+                object-fit: contain;
+                flex-shrink: 0;
+                -webkit-box-reflect: below -5px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+            }
+
+        .slide-info {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            height: auto; /* اجازه رشد با توجه به محتوا */
+        }
+
+            .slide-info h3 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+                color: white;
+                word-wrap: break-word;
+            }
+
+            .slide-info p {
+                font-size: 0.9rem;
+                color: #aaaaaa;
+                word-wrap: break-word;
+            }
+
+        .swiper-slide-active .overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(28, 22, 37, 0.6);
+            border-radius: inherit;
+            opacity: 0;
+            transition: all 0.4s linear;
+        }
+
+        .swiper-slide:hover .overlay {
+            opacity: 1;
+        }
+
+        .swiper-slide .overlay ion-icon {
+            opacity: 0;
+        }
+
+        .swiper-slide-active:hover .overlay ion-icon {
+            font-size: 4rem;
+            color: #eb0b0b;
+            opacity: 1;
+            cursor: pointer;
+        }
+    </style>
+
+    <style>
+        /* سکشن اول */
+        .textMain {
+            position: relative;
+            padding: 20px;
+            color: #fff;
+            background-image: url('/SiteTemplate/img/ostad 06.jpeg'); /* عکس اول */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+            .textMain::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.4);
+                z-index: 1;
+            }
+
+            .textMain * {
+                position: relative;
+                z-index: 2;
+            }
+
+        /* سکشن دوم */
+        .intro.TeamSec {
+            position: relative;
+            padding: 20px;
+            color: #fff;
+            background-image: url('/SiteTemplate/img/ostad 05.jpeg'); /* عکس دوم */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+            .intro.TeamSec::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.4);
+                z-index: 1;
+            }
+
+            .intro.TeamSec * {
+                position: relative;
+                z-index: 2;
+            }
 
 
     </style>

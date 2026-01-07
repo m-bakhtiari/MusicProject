@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using TopLearn.Core.DTOs;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 
 namespace TopLearn.Web.Controllers
@@ -22,24 +23,45 @@ namespace TopLearn.Web.Controllers
         private readonly IAcademyService _academyService;
         private readonly ILogger<HomeController> _logger;
         private readonly IStudentConcertService _studentConcertService;
+        private readonly IConcertPrizeService _concertPrizeService;
 
-        public HomeController(IInstrumentService instrumentService, IAcademyService academyService, ILogger<HomeController> logger, IStudentConcertService studentConcertService)
+        public HomeController(IConcertPrizeService concertPrizeService, IInstrumentService instrumentService, IAcademyService academyService, ILogger<HomeController> logger, IStudentConcertService studentConcertService)
         {
             _instrumentService = instrumentService;
             _academyService = academyService;
             _logger = logger;
             _studentConcertService = studentConcertService;
+            _concertPrizeService = concertPrizeService;
         }
 
         public async Task<IActionResult> Index()
         {
+            ViewData["Prize"] = null;
             var model = new ItemForIndexDto()
             {
                 Instruments = await _instrumentService.GetAll(),
-                Academies = await _academyService.GetAllAcademy()
+                Academies = await _academyService.GetAllAcademy(),
+                StudentConcerts = await _studentConcertService.GetVahidConcert(),
             };
             return View(model);
         }
+
+        [HttpGet("HavanaConcert")]
+        public async Task<IActionResult> HavanaConcert()
+        {
+
+            var ip = Request.HttpContext.Connection.RemoteIpAddress;
+            var prize = await _concertPrizeService.AddItem(ip.ToString());
+            var model = new ItemForIndexDto()
+            {
+                Instruments = await _instrumentService.GetAll(),
+                Academies = await _academyService.GetAllAcademy(),
+                StudentConcerts = await _studentConcertService.GetVahidConcert(),
+                Message = prize
+            };
+            return View("Index", model);
+        }
+
 
         [HttpGet("Gallery")]
         public IActionResult Gallery()

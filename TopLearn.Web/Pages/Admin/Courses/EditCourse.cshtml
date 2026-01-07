@@ -1,7 +1,7 @@
 ﻿@page "{id}"
 @model TopLearn.Web.Pages.Admin.Courses.EditCourseModel
 @{
-    ViewData["Title"] = "ویرایش دوره";
+    ViewData["Title"] = "ویرایش محصول";
 }
 
 <div class="row">
@@ -9,11 +9,11 @@
         <input type="hidden" asp-for="Product.CreateDate" />
         <input type="hidden" asp-for="Product.ProductId" />
         <input type="hidden" asp-for="Product.CourseImageName" />
-        <div class="col-md-8">
-            <h2>اطلاعات دوره</h2>
+        <div class="col-md-12">
+            <h2>اطلاعات محصول</h2>
             <hr />
             <div class="form-group">
-                <label>عنوان دوره</label>
+                <label>عنوان محصول</label>
                 <input type="text" asp-for="Product.CourseTitle" class="form-control">
                 <span asp-validation-for="Product.CourseTitle"></span>
             </div>
@@ -29,40 +29,41 @@
             </div>
 
             <div class="form-group">
-                <label>شرح دوره</label>
+                <label>شرح محصول</label>
                 <textarea id="description" class="form-control" asp-for="Product.CourseDescription" rows="10"></textarea>
                 <span asp-validation-for="Product.CourseDescription"></span>
             </div>
             <div class="form-group">
-                <label>قیمت دوره</label>
+                <label>قیمت محصول</label>
                 <input type="number" asp-for="Product.CoursePrice" class="form-control" />
                 <span asp-validation-for="Product.CoursePrice"></span>
             </div>
             <div class="form-group">
-                <label>کلمات کلیدی دوره</label>
+                <label>کلمات کلیدی محصول</label>
                 <input type="text" asp-for="Product.Tags" class="form-control">
                 <p class="help-block">کلمات را با - جدا کنید</p>
                 <span asp-validation-for="Product.Tags"></span>
             </div>
+            <div class="form-group">
+                <p>تصویر فعلی</p>
+                @if (Model.Product.CourseImageName == "no-photo.jpg")
+                {
+                    <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="image" />
+                }
+                else
+                {
+                    <img id="imgCourse" class="thumbnail" src="/course/@Model.Product.CourseImageName" alt="image" />
+                }
+                <div class="form-group">
+                    <label>انتخاب تصویر</label>
+                    <input type="file" name="imgCourseUp" id="imgCourseUp">
+                </div>
+
+
+            </div>
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
         </div>
-        <div class="col-md-4">
-            <p></p>
-            @if (Model.Product.CourseImageName == "no-photo.jpg")
-            {
-                <img id="imgCourse" class="thumbnail" src="/UserAvatar/Defult.jpg" alt="image" />
-            }
-            else
-            {
-                <img id="imgCourse" class="thumbnail" src="/course/image/@Model.Product.CourseImageName" alt="image" />
-            }
-            <div class="form-group">
-                <label>انتخاب تصویر</label>
-                <input type="file" name="imgCourseUp" id="imgCourseUp">
-            </div>
-
-
-        </div>
+      
     </form>
 </div>
 
@@ -71,6 +72,7 @@
 
     <script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>
     <script>
+        CKEDITOR.config.versionCheck = false;
         CKEDITOR.replace('description', {
             language: 'fa',
             contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ

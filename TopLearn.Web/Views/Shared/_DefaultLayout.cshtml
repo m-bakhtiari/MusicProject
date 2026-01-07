@@ -77,6 +77,21 @@
                                         <a href="@item.Link">@item.Title</a>
                                     </li>
                                 }
+                                <li class="loginItem">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a href="/Profile">
+                                            <span class="login-text">@User.Identity.Name خوش آمدید</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Login">ورود</a>
+                                        <label> &nbsp;/ &nbsp;</label>
+                                        <a href="/Register">ثبت نام</a>
+                                    }
+
+                                </li>
                             </ul>
                         </nav>
                     </div>

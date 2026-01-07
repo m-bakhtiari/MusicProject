@@ -37,6 +37,8 @@ namespace TopLearn.Web.Pages.Admin.StudentConcerts
                 ViewData["Header"] = "کلاس گروهی";
             else if (type == (int)ConstantValue.Type.Book)
                 ViewData["Header"] = "کتاب";
+            else if (type == (int)ConstantValue.Type.VahidConcert)
+                ViewData["Header"] = "کنسرت های من";
         }
 
         public async Task<IActionResult> OnPost(List<IFormFile> imageList)

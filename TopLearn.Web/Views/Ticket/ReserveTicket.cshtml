@@ -15,6 +15,40 @@
             <hr />
             <h3>انتخاب صندلی</h3>
             <h4 style="color:orangered">@ViewData["Error"]</h4>
+            <div class="footer row">
+                <form action="/BuyTicket" method="get" id="buyTicket">
+                    <div class="form-group">
+                        <p style="color: whitesmoke" id="selectedSeatList"></p>
+                    </div>
+                    @*   <div class="form-group">
+            <label for="firstname">نام :</label>
+            <input type="text" class="form-control" name="firstname" id="firstname" required>
+        </div>*@
+
+                    <div class="form-group">
+                        <label for="nationalCode">شماره صندلی</label>
+                        <input type="text"
+                               class="form-control" name="nationalCode" id="nationalCode"
+                               required placeholder="5-8" autocomplete="off">
+                    </div>
+
+                    @*   <div class="form-group">
+                            <label for="mobile">:شماره موبایل</label>
+                            <input type="text" class="form-control" name="mobile" id="mobile" maxlength="11" minlength="11"
+                                   required autocomplete="off" placeholder="09123456789">
+                        </div> *@
+                    <input type="hidden" name="selectedSeats" id="selectedSeats" required />
+                    <button type="button" style="background-color:blue;color:white;padding:10px;border-radius:5px;"
+                            id="saveBtn" onclick="confirmSubmit()">
+                        رزرو و ادامه
+                    </button>
+                    <strong style="border-bottom:2px dashed white;padding-bottom:10px"> تاریخ اجرا : 27 آذر 1404 ساعت 11 صبح</strong>
+                    <p style="color:white">
+                        شماره پشتیبانی بلیط فروشی:
+                        <a href="https://wa.me/989011588094" target="_blank" style="color:white">09011588094</a>
+                    </p>
+                </form>
+            </div>
             <div class="seat-chart">
 
                 @for (var i = 0; i < 13; i++)
@@ -23,9 +57,9 @@
                         <span class="row-label">@((i + 1))</span>
                         @for (var j = 1; j <= int.Parse(seatCounts[i]); j++)
                         {
-                            @if(i==0 || i == 1)
+                            @if (i == 0 || i == 1)
                             {
-                                <button value="@($"{i + 1}-{j}")" class="seat reserve">@j</button>
+                                <button value="@($"{i + 1}-{j}")" class="seat @(reservedSeats.Contains($"{i + 1}-{j}") ? "free" : "reserve")">@j</button>
                             }
                             else
                             {
@@ -48,38 +82,13 @@
                         <span class="seatTag reserveTag"></span>
                         <span>غیرقابل فروش (زرد)</span>
                     </div>
+                    <div class="legend-item">
+                        <span class="seatTag freeTag"></span>
+                        <span>مهمان ویژه (قرمز)</span>
+                    </div>
                 </div>
 
-                <div class="footer row">
-                    <form action="/BuyTicket" method="get" id="buyTicket">
-                        <div class="form-group">
-                            <p style="color: whitesmoke" id="selectedSeatList"></p>
-                        </div>
-                        @*   <div class="form-group">
-            <label for="firstname">نام :</label>
-            <input type="text" class="form-control" name="firstname" id="firstname" required>
-        </div>*@
-
-                        <div class="form-group">
-                            <label for="nationalCode">:کد ملی </label>
-                            <input type="text"
-                                   class="form-control" name="nationalCode" id="nationalCode"
-                                   required placeholder="1234567899" autocomplete="off">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="mobile">:شماره موبایل</label>
-                            <input type="text" class="form-control" name="mobile" id="mobile" maxlength="11" minlength="11"
-                                   required autocomplete="off" placeholder="09123456789">
-                        </div>
-                        <input type="hidden" name="selectedSeats" id="selectedSeats" required />
-                        <button type="button" style="background-color:blue;color:white;padding:10px;border-radius:5px;"
-                                id="saveBtn" onclick="confirmSubmit()">
-                            رزرو و ادامه
-                        </button>
-                        <strong> تاریخ اجرا : 27 آذر 1404 ساعت 11 صبح</strong>
-                    </form>
-                </div>
+               
             </div>
         </section>
 
@@ -193,28 +202,28 @@
 
 
         function confirmSubmit() {
-            var mobile = document.getElementById("mobile").value;
-            if(validMobiles.includes(mobile.trim())){
-             Swal.fire({
-                title: 'آیا از انتخاب خود اطمینان دارید؟',
-                text: 'پس از تایید امکان تغییر صندلی وجود ندارد.',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'بله، ادامه بده',
-                cancelButtonText: 'خیر، بازگشت'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById("buyTicket").submit();
-                }
-            });
-            }else{
-                 Swal.fire({
-                         title: "اخطار",
-                         text: "برای رزرو بلیط و پرداخت به شماره 09011588094 در تلگرام یا واتس اپ پیام دهید",
-                         icon: "warning"
-                 });
-            }
-
+            // var mobile = document.getElementById("mobile").value;
+            // if(validMobiles.includes(mobile.trim())){
+            //  Swal.fire({
+            //     title: 'آیا از انتخاب خود اطمینان دارید؟',
+            //     text: 'پس از تایید امکان تغییر صندلی وجود ندارد.',
+            //     icon: 'question',
+            //     showCancelButton: true,
+            //     confirmButtonText: 'بله، ادامه بده',
+            //     cancelButtonText: 'خیر، بازگشت'
+            // }).then((result) => {
+            //     if (result.isConfirmed) {
+                    
+            //     }
+            // });
+            // }else{
+            //      Swal.fire({
+            //              title: "اخطار",
+            //              text: "برای رزرو بلیط و پرداخت به شماره 09011588094 در تلگرام یا واتس اپ پیام دهید",
+            //              icon: "warning"
+            //      });
+            // }
+            document.getElementById("buyTicket").submit();
         }
 
     </script>
@@ -288,6 +297,11 @@
 
         .reserve {
             background: orange;
+            color: white;
+        }
+
+        .free {
+            background-color: darkred;
             color: white;
         }
 
@@ -393,6 +407,10 @@
             .reserveTag {
                 width: 100%;
             }
+
+            .freeTag {
+                width: 100%;
+            }
         }
 
         .legend {
@@ -437,6 +455,11 @@
 
         .reserveTag {
             background-color: orange;
+            color: white;
+        }
+
+        .freeTag {
+            background-color: darkred;
             color: white;
         }
     </style>

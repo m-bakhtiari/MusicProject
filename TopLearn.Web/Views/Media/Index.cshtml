@@ -1,0 +1,180 @@
+﻿@model List<TopLearn.DataLayer.Entities.Course.StudentConcert>
+
+<section data-scroll-section style="margin-top: 50px;margin-bottom: 50px">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            @foreach (var item in Model)
+            {
+                <a class="swiper-slide" href="/MediaInfo?id=@item.StudentConcertId">
+                    <img src="/studentConcert/@item.StudentConcertImages.FirstOrDefault().ImageName" alt="@item.Title " />
+                    <div class="slide-info" style="margin-top: 30px">
+                        <h3>@item.Title </h3>
+                    </div>
+                </a>
+            }
+
+        </div>
+
+        <!-- دکمه‌های ناوبری -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</section>
+
+@section Styles
+{
+
+    <style>
+
+
+        .swiper {
+            width: 100%;
+            padding: 40px 0 50px;
+        }
+
+        .swiper-slide {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: transparent;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+            .swiper-slide img {
+                width: 100%;
+                height: 200px; /* ارتفاع ثابت برای عکس */
+                object-fit: contain;
+                flex-shrink: 0;
+                background: transparent;
+                -webkit-box-reflect: below -5px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+            }
+
+        .slide-info {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            height: auto; /* اجازه رشد با توجه به محتوا */
+        }
+
+            .slide-info h3 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+                color: white;
+                word-wrap: break-word;
+            }
+
+            .slide-info p {
+                font-size: 0.9rem;
+                color: #aaaaaa;
+                word-wrap: break-word;
+            }
+
+        .swiper-slide-active .overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(28, 22, 37, 0.6);
+            border-radius: inherit;
+            opacity: 0;
+            transition: all 0.4s linear;
+        }
+
+        .swiper-slide:hover .overlay {
+            opacity: 1;
+        }
+
+        .swiper-slide .overlay ion-icon {
+            opacity: 0;
+        }
+
+        .swiper-slide-active:hover .overlay ion-icon {
+            font-size: 4rem;
+            color: #eb0b0b;
+            opacity: 1;
+            cursor: pointer;
+        }
+    </style>
+
+
+    <style>
+        .swiper {
+            position: relative; /* برای موقعیت‌دهی مطلق دکمه‌ها */
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            position: absolute;
+            /*top: 50%;*/ /* وسط عمودی */
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        /* موقعیت افقی */
+        .swiper-button-prev {
+            left: -20px;
+        }
+
+        .swiper-button-next {
+            right: -20px;
+        }
+
+        /* در حالت موبایل هم حفظ شود */
+        @@media (max-width: 768px) {
+            .swiper-button-prev,
+            .swiper-button-next {
+                left: 50px;
+                right: 50px;
+            }
+        }
+    </style>
+}
+@section Scripts
+{
+    <script src="SiteTemplate/js/swiper-bundleList.min.js"></script>
+    <script>
+        var swiper = new Swiper(".swiper",
+            {
+                effect: "coverflow",
+                centeredSlides: true,
+                slidesPerView: "auto",
+                grabCursor: true,
+                spaceBetween: 40,
+                coverflowEffect: {
+                    rotate: 25,
+                    stretch: 0,
+                    depth: 50,
+                    modifier: 1,
+                    slideShadows: false,
+                    theme: 'dark'
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false
+                },
+                loop: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                }
+            });
+
+            function MentorInfo(id,name){
+                window.location.href = '/MentorInfo?id='+id+'&name='+name;
+             }
+    </script>
+
+}
+
