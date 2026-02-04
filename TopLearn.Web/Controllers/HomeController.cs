@@ -77,6 +77,13 @@ namespace TopLearn.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [HttpGet]
+        [Route("NotFound")]
+        public IActionResult NotFound()
+        {
+            return View();
+        }
+
         //[Route("OnlinePayment/{id}")]
         //public IActionResult onlinePayment(int id)
         //{

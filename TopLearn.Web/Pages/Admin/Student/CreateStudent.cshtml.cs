@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Web.Pages.Admin.Student
 {
-    [Authorize]
+    [PermissionChecker]
     public class CreateStudentModel : PageModel
     {
         private readonly IStudentService _studentService;
@@ -21,9 +22,10 @@ namespace TopLearn.Web.Pages.Admin.Student
         [BindProperty]
         public DataLayer.Entities.Course.Student Student { get; set; }
 
-        public void OnGet(int? id)
+        public void OnGet(Enum type)
         {
-            Student = new DataLayer.Entities.Course.Student() { StudentImages = new List<StudentImage>() };
+            var typeStr = type.ToString();
+            Student = new DataLayer.Entities.Course.Student() { StudentImages = new List<StudentImage>(), ShortKey = typeStr };
         }
 
         public async Task<IActionResult> OnPost(IFormFile imgLogo, List<IFormFile> imageList)
@@ -33,7 +35,7 @@ namespace TopLearn.Web.Pages.Admin.Student
 
             await _studentService.AddStudent(Student, imgLogo, imageList);
 
-            return RedirectToPage("Index");
+            return Redirect($"/Admin/Student?type={Student.ShortKey}");
         }
     }
 }

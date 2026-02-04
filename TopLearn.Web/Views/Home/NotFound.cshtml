@@ -1,0 +1,75 @@
+﻿
+
+<section data-scroll-section class="body">
+
+    <h1 class="title">404</h1>
+    <div class="info404">
+        <h2>صفحه مورد نظر یافت نشد</h2>
+        <p style="font-weight: 100">متأسفیم، صفحه ای که به دنبال آن بودید در اینجا یافت نشد. پیوندی که دنبال کردید ممکن است خراب باشد یا دیگر وجود نداشته باشد. لطفاً دوباره امتحان کنید یا به منو سایت نگاهی بیندازید</p>
+        <a href="/" class="text">صفحه اصلی</a>
+    </div>
+
+</section>
+
+@section Styles {
+    <style>
+
+        .body {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            color: #fafafa;
+            perspective: 1200px;
+        }
+
+        .text {
+            text-transform: uppercase;
+            text-decoration: none;
+            background: #b3b3b3;
+            color: #0a0a0a;
+            padding: 1rem 4rem;
+            border-radius: 4rem;
+            font-size: 0.875rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .title {
+            font-size: clamp(5rem, 40vmin, 20rem);
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            margin-bottom: 1rem;
+            letter-spacing: 1rem;
+            transform: translate3d(0, 0, 0vmin);
+            background: radial-gradient(#e6e6e6, #7a7a7a 45%) var(--x) 100%/200% 200%;
+            /* color: transparent; */
+        }
+
+           /*  .title:after {
+                animation: swing 2s infinite alternate ease-in-out;
+                content: "404";
+                position: absolute;
+                top: 0;
+                left: 0;
+                color: #000;
+                filter: blur(1.5vmin);
+                transform: scale(1.05) translate3d(0, 12%, -10vmin) translate(calc((var(--swing-x, 0) * 0.05) * 1%), calc((var(--swing-y) * 0.05) * 1%));
+            } */
+
+      
+
+        .info404 {
+            text-align: center;
+            line-height: 1.5;
+            max-width: clamp(16rem, 90vmin, 25rem);
+        }
+
+            .info404 > p {
+                margin-bottom: 3rem;
+            }
+
+
+    </style>
+}

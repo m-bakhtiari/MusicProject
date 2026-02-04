@@ -26,7 +26,6 @@ namespace TopLearn.Core.Services
 
         public async Task AddStudent(Student student, IFormFile imgLogo, List<IFormFile> imagesFiles)
         {
-            student.ShortKey = await GenerateShortKey();
             student.ImageName = "no-photo.jpg";
             if (imgLogo != null && imgLogo.IsImage())
             {
@@ -81,9 +80,10 @@ namespace TopLearn.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Student>> GetAllStudent()
+        public async Task<List<Student>> GetAllStudent(Enum type)
         {
-            return await _context.Students.OrderBy(x => Guid.NewGuid()).ToListAsync();
+            var typeStr = type.ToString();
+            return await _context.Students.OrderBy(x => Guid.NewGuid()).Where(x => x.ShortKey == typeStr).ToListAsync();
         }
 
         public async Task<Student> GetById(int studentId)
@@ -151,20 +151,5 @@ namespace TopLearn.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Student> GetStudentByKey(string key)
-        {
-            return await _context.Students.Include(x => x.StudentImages).FirstOrDefaultAsync(x => x.ShortKey.Equals(key));
-        }
-        private async Task<string> GenerateShortKey(int length = 4)
-        {
-            var key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
-
-            while (await _context.Students.AnyAsync(s => s.ShortKey == key))
-            {
-                key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
-            }
-
-            return key;
-        }
     }
 }

@@ -13,23 +13,23 @@ namespace TopLearn.Core.Services.Interfaces
     {
         #region Group
 
-        Task<List<CourseGroup>> GetAllGroup();
+        Task<List<CourseGroup>> GetAllGroup(int? id);
         Task<List<SelectListItem>> GetGroupForManageCourse();
         Task<List<SelectListItem>> GetSubGroupForManageCourse(int groupId);
         Task<CourseGroup> GetById(int groupId);
-        Task AddGroup(CourseGroup group);
-        Task UpdateGroup(CourseGroup group);
+        Task AddGroup(CourseGroup group, IFormFile imgName);
+        Task UpdateGroup(CourseGroup group, IFormFile imgName);
         Task DeleteGroup(CourseGroup group);
-
+        Task<List<CourseGroup>> GetAllGroupWithSub();
         #endregion
 
         #region Course
 
         Task<List<ShowCourseForAdminViewModel>> GetCoursesForAdmin();
 
-        Task<int> AddCourse(Product product, IFormFile imgCourse);
+        Task<int> AddCourse(Product product, IFormFile imgCourse, List<IFormFile> imagesFiles);
         Task<Product> GetCourseById(int courseId);
-        Task UpdateCourse(Product product, IFormFile imgCourse);
+        Task UpdateCourse(Product product, IFormFile imgCourse, List<IFormFile> imagesFiles);
 
         Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = "", int groupId = 0, int take = 0);
 
@@ -40,6 +40,10 @@ namespace TopLearn.Core.Services.Interfaces
         Task DeleteCourse(int courseId);
 
         Task<List<Product>> GetProductsBySubGroup(int subId);
+
+        Task DeleteImage(int id);
+
+        Task<ProductImage> GetImageById(int imageId);
 
         #endregion
 

@@ -150,5 +150,10 @@ namespace TopLearn.Core.Services
 
             return list;
         }
+
+        public async Task<bool> CheckPermission(string username)
+        {
+            return await _context.Users.AnyAsync(x => x.UserName == username && x.IsActive == true && x.IsAdmin == true);
+        }
     }
 }

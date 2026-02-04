@@ -95,7 +95,6 @@ body {
 
 body {
     margin: 0;
-    font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
     line-height: var(--bs-body-line-height);
@@ -272,7 +271,6 @@ pre,
 code,
 kbd,
 samp {
-    font-family: var(--bs-font-monospace);
     font-size: 1em;
 }
 
@@ -502,13 +500,6 @@ progress {
 
 [hidden] {
     display: none !important;
-}
-
-@font-face {
-    font-family: "BebasNeue";
-    font-size: medium;
-    font-weight: 700;
-    src: url("../fonts/BebasNeue.ttf") format("truetype");
 }
 
 @font-face {
@@ -2467,7 +2458,6 @@ main.home .hero .text {
 main.home .hero .text h2 {
     width: 106px;
     text-align: left;
-    font-family: "BebasNeue";
     font-size: 24px;
     font-weight: 700;
     line-height: 24px;
@@ -2491,7 +2481,6 @@ main.home .hero .text h2 {
     color: #faffda;
     text-transform: uppercase;
     line-height: 165px;
-    font-family: "BebasNeue";
     letter-spacing: 6px;
 }
 
@@ -8881,7 +8870,6 @@ main.about .team .single .title h5 {
 }
 
 main.about .team .single .title h4 {
-    font-family: "Rokh";
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 0;
@@ -8992,7 +8980,6 @@ main.home .hero .text {
 main.home .hero .text h2 {
     width: 106px;
     text-align: left;
-    font-family: "BebasNeue";
     font-size: 24px;
     font-weight: 700;
     line-height: 24px;
@@ -10131,7 +10118,6 @@ h5 {
     color: #faffda;
     text-transform: uppercase;
     line-height: normal;
-    font-family: "BebasNeue";
     letter-spacing: 6px;
     text-align: center;
     margin: 0 auto;
@@ -11797,7 +11783,6 @@ header.fixed .mainHeader .col-logo .logo img.dark {
     padding: 1em 2em;
     background-color: transparent;
     color: #fff;
-    font-family: "IRANSans";
 }
 
     .my-carousel__control:hover {
@@ -12143,7 +12128,6 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         padding: 1em 2em;
         background-color: transparent;
         color: #fff;
-        font-family: "IRANSans";
     }
 
         .listDnl .tab-link:hover {
@@ -12294,7 +12278,6 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         color: #fff;
         text-transform: uppercase;
         margin: 0 0 8px;
-        font-family: Barracuda;
         font-size: 40px;
         font-weight: 400;
         line-height: 20px;
@@ -12327,7 +12310,6 @@ header.fixed .mainHeader .col-logo .logo img.dark {
         letter-spacing: 0;
         text-align: left;
         text-transform: uppercase;
-        font-family: Poppins;
         font-size: 16px;
         font-weight: 500;
         line-height: 16px;
@@ -12335,7 +12317,6 @@ header.fixed .mainHeader .col-logo .logo img.dark {
 
     .product-item-p2 {
         color: #fff;
-        font-family: Poppins;
         font-size: 16px;
         font-weight: undefined;
         letter-spacing: 0;

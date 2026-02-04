@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 
 namespace TopLearn.Web.Pages.Admin.MusicNote
 {
-    [Authorize]
+    [PermissionChecker]
     public class IndexModel : PageModel
     {
         private readonly IMusicNoteService _musicNoteService;

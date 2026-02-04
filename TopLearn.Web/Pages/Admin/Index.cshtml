@@ -1,7 +1,7 @@
 ﻿@page
+@using TopLearn.Core.DTOs
 @model TopLearn.Web.Pages.Admin.IndexModel
 @{
-
 }
 
 <div class="container-fluid">
@@ -23,7 +23,7 @@
             <a class="btn btn-primary btn-block" href="/Admin/Instruments">لیست ساز ها</a>
         </div>
         <div class="col-xs-4">
-            <a class="btn btn-default btn-block" href="/Admin/Student">منتورها</a>
+            <a class="btn btn-default btn-block" href="/Admin/Student?type=@ConstantValue.StudentType.Mentor">منتورها</a>
         </div>
         <div class="col-xs-4">
             <a class="btn btn-success btn-block" href="/Admin/MusicNote">نت ها</a>
@@ -32,25 +32,25 @@
     <br />
     <div class="row">
         <div class="col-xs-4">
-            <a class="btn btn-warning btn-block" href="/Admin/StudentConcerts?type=1">کنسرت های هنرجویی</a>
+            <a class="btn btn-warning btn-block" href="/Admin/StudentConcerts?type=@ConstantValue.Type.StudentConcert">کنسرت های هنرجویی</a>
         </div>
         <div class="col-xs-4">
-            <a class="btn btn-success btn-block" href="/Admin/StudentConcerts?type=2">ورک شاپ ها</a>
+            <a class="btn btn-success btn-block" href="/Admin/StudentConcerts?type=@ConstantValue.Type.Workshop">ورک شاپ ها</a>
         </div>
         <div class="col-xs-4">
-            <a class="btn btn-danger btn-block" href="/Admin/StudentConcerts?type=4">کتاب ها</a>
+            <a class="btn btn-danger btn-block" href="/Admin/StudentConcerts?type=@ConstantValue.Type.Book">کتاب ها</a>
         </div>
     </div>
     <br />
     <div class="row">
         <div class="col-xs-4">
-            <a class="btn btn-danger btn-block" href="/Admin/StudentConcerts?type=3">کلاس گروهی</a>
+            <a class="btn btn-danger btn-block" href="/Admin/StudentConcerts?type=@ConstantValue.Type.Havana">کلاس گروهی</a>
         </div>
         <div class="col-xs-4">
-            <a class="btn btn-primary btn-block" href="/Admin/CourseGroups">دسته بندی محصولات فروشگاهی</a>
+            <a class="btn btn-primary btn-block" href="/Admin/CourseGroups">دسته بندی محصولات </a>
         </div>
         <div class="col-xs-4">
-            <a class="btn btn-success btn-block" href="/Admin/Courses"> فروشگاهی</a>
+            <a class="btn btn-success btn-block" href="/Admin/Courses"> محصولات</a>
         </div>
     </div>
     <br />
@@ -59,10 +59,15 @@
             <a class="btn btn-danger btn-block" href="/Admin/Certificate">مدرک</a>
         </div>
         <div class="col-xs-4">
-            <a class="btn btn-success btn-block" href="/Admin/StudentConcerts?type=5"> کنسرت های من</a>
+            <a class="btn btn-success btn-block" href="/Admin/StudentConcerts?type=@ConstantValue.Type.VahidConcert"> کنسرت های من</a>
         </div>
         <div class="col-xs-4">
-            <a class="btn btn-default btn-block" href="/Admin/StudentConcerts?type=6">رسانه</a>
+            <a class="btn btn-default btn-block" href="/Admin/StudentConcerts?type=@ConstantValue.Type.Media">رسانه</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a class="btn btn-danger btn-block" href="/Admin/Student?type=@ConstantValue.StudentType.TopStudent">هنرجویان برتر گروهی</a>
         </div>
     </div>
 </div>

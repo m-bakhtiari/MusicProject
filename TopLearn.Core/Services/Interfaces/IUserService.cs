@@ -18,6 +18,7 @@ namespace TopLearn.Core.Services.Interfaces
         User GetUserByUserName(string username);
         void UpdateUser(User user);
         void DeleteUser(int userId);
+        Task<bool> CheckPermission(string username);
 
         #region User Panel
 

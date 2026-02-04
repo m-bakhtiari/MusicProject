@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
+
 namespace TopLearn.Web.Pages.Admin.CourseGroups
 {
-    [Authorize]
+    [PermissionChecker]
     public class EditGroupModel : PageModel
     {
         private ICourseService _courseService;
@@ -28,12 +27,12 @@ namespace TopLearn.Web.Pages.Admin.CourseGroups
             CourseGroups = await _courseService.GetById(id);
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(IFormFile imgLogo)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            await _courseService.UpdateGroup(CourseGroups);
+            await _courseService.UpdateGroup(CourseGroups, imgLogo);
 
             return RedirectToPage("Index");
         }

@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
+
 namespace TopLearn.Web.Pages.Admin.CourseGroups
 {
-    [Authorize]
+    [PermissionChecker]
     public class IndexModel : PageModel
     {
         private ICourseService _courseService;
@@ -20,7 +21,7 @@ namespace TopLearn.Web.Pages.Admin.CourseGroups
         public List<CourseGroup> CourseGroups { get; set; }
         public async Task OnGet()
         {
-            CourseGroups = await _courseService.GetAllGroup();
+            CourseGroups = await _courseService.GetAllGroupWithSub();
         }
     }
 }

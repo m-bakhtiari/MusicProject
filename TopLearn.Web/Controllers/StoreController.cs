@@ -15,12 +15,13 @@ namespace TopLearn.Web.Controllers
             _courseService = courseService;
         }
 
-        public async Task<IActionResult> Index(int? groupId)
+        public async Task<IActionResult> Index(int? id)
         {
-            if (groupId == null)
-                groupId = 0;
-            var model = await _courseService.GetCourse(groupId: groupId.Value);
-            ViewBag.pageId = 1;
+            if (id.HasValue)
+                ViewData["Target"] = "Product";
+            else
+                ViewData["Target"] = "Store";
+            var model = await _courseService.GetAllGroup(id);
             return View(model);
         }
 
@@ -29,6 +30,14 @@ namespace TopLearn.Web.Controllers
         public async Task<IActionResult> Product([FromQuery] int id)
         {
             var model = await _courseService.GetProductsBySubGroup(id);
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("ProductInfo")]
+        public async Task<IActionResult> ProductInfo([FromQuery] int id)
+        {
+            var model = await _courseService.GetCourseById(id);
             return View(model);
         }
     }

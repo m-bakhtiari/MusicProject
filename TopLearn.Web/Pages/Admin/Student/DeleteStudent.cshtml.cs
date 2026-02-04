@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
-using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Web.Pages.Admin.Student
 {
-    [Authorize]
+    [PermissionChecker]
     public class DeleteStudentModel : PageModel
     {
         private readonly IStudentService _studentService;
@@ -30,7 +26,7 @@ namespace TopLearn.Web.Pages.Admin.Student
         {
             var student = await _studentService.GetById(Student.StudentId);
             await _studentService.DeleteStudent(student);
-            return RedirectToPage("Index");
+            return Redirect($"/Admin/Student?type={student.ShortKey}");
         }
     }
 }

@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
+
 
 namespace TopLearn.Web.Pages.Admin.MenuItem
 {
-    [Authorize]
+    [PermissionChecker]
     public class CreateMenuItemModel : PageModel
     {
         private readonly IMenuItemService _menuItemService;

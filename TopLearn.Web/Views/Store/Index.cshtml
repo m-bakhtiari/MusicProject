@@ -1,25 +1,19 @@
-﻿
+﻿@model List<TopLearn.DataLayer.Entities.Course.CourseGroup>
+
+
 <section data-scroll-section style="margin-top: 50px;margin-bottom: 50px">
     <div class="swiper">
         <div class="swiper-wrapper">
-            <a class="swiper-slide" href="/Product?id=1">
-                <img src="/course/a006a1ec30c74960999019e2251f23a7.png" alt="کتاب" />
-                <div class="slide-info" style="margin-top: 30px">
-                    <h3>کتاب ها</h3>
-                </div>
-            </a>
-            <a class="swiper-slide" href="/Product?id=2">
-                <img src="/course/c97481fdbcce4b80a3bd96dda20d8e8f.png" alt="آرشا" />
-                <div class="slide-info" style="margin-top: 30px">
-                    <h3>هنگدرام های آرشا</h3>
-                </div>
-            </a>
-            <a class="swiper-slide" href="/Product?id=3">
-                <img src="/course/37b227b700454f58af4315f4f27531e6.png" alt="اسلپ" />
-                <div class="slide-info" style="margin-top: 30px">
-                    <h3>هنگدرام های اسلپ</h3>
-                </div>
-            </a>
+            @foreach (var item in Model)
+            {
+                <a class="swiper-slide" href="/@ViewData["Target"]?id=@item.GroupId">
+                    <img src="/group/@item.ImageName" alt="@item.GroupTitle" />
+                    <div class="slide-info" style="margin-top: 30px">
+                        <h3>@item.GroupTitle</h3>
+                    </div>
+                </a>
+            }
+
         </div>
 
         <!-- دکمه‌های ناوبری -->

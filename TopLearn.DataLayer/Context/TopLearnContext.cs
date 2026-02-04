@@ -37,6 +37,7 @@ namespace TopLearn.DataLayer.Context
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<ConcertPrize> ConcertPrizes { get; set; }
         public DbSet<ConcertPrizeType> ConcertPrizeTypes { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         #endregion
 
@@ -52,7 +53,11 @@ namespace TopLearn.DataLayer.Context
                 UserId = 2,
                 IsActive = true,
                 IsDelete = false,
-                UserName = "Vahid Najafizadeh"
+                UserName = "Vahid Najafizadeh",
+                IsAdmin = true,
+                Mobile = "09354868864",
+                FirstName = "وحید",
+                LastName = "نجفی زاده"
             });
 
 

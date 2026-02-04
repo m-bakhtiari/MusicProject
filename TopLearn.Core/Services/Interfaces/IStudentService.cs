@@ -9,13 +9,12 @@ namespace TopLearn.Core.Services.Interfaces
 {
     public interface IStudentService
     {
-        Task<List<Student>> GetAllStudent();
+        Task<List<Student>> GetAllStudent(Enum type);
         Task<Student> GetById(int studentId);
         Task AddStudent(Student student, IFormFile imgLogo, List<IFormFile> imageList);
         Task UpdateStudent(Student student, IFormFile imgLogo, List<IFormFile> imageList);
         Task DeleteStudent(Student student);
         Task DeleteImage(int id);
-        Task<Student> GetStudentByKey(string key);
         Task<int> GetStudentByImageId(int imageId);
 
     }

@@ -2,7 +2,6 @@
 @using TopLearn.Core.Services.Interfaces
 @inject IMenuItemService _menuItemService;
 @{
-    var today = DateTime.Now.ToPersianDate();
     var menu = await _menuItemService.GetAllMenuItem();
 }
 <!DOCTYPE html>
@@ -12,11 +11,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://vahidnajafizadeh.com/">
     <meta name="description" content="وب‌سایت رسمی وحید نجفی‌زاده؛ مدرس و نوازنده سازهای کوبه ای، سرپرست گروه هاوانا ، مدرس ساز های کاخن ، کونگا ، دف ، تنبک ، هنگدرام ، داربوکا و جیمبی.">
-    <meta name="keywords" content="وحید,نجفی زاده,استاد نجفی زاده,وحید نجفی زاده,استاد وحید نجفی زاده,کاخن,کونگا,کونگا,هنگدرام,هنگ درام,هاوانا,گروه نوازی,کوبه ای,درام">
     <meta name="keywords" content="استاد نجفی زاده" />
     <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="وحید نجفی‌زاده">
     <meta property="og:image" content="https://vahidnajafizadeh.com/SiteTemplate/img/ostad2.png" />
     <meta property="og:image:type" content="image/png" />
@@ -34,13 +32,13 @@
     <link rel="icon" href="/SiteTemplate/img/favicon-96x96.png" sizes="96x96" type="image/png">
     <link rel="icon" href="/SiteTemplate/img/web-app-manifest-192x192.png" sizes="192x192" type="image/png">
     <link rel="icon" href="/SiteTemplate/img/web-app-manifest-512x512.png" sizes="512x512" type="image/png">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+    <link rel="stylesheet" href="SiteTemplate/css/app.css?v=@DateTime.Now.Ticks">
+    @* <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> *@
+    <link rel="stylesheet" href="SiteTemplate/css/normalize.css">
     <link rel="stylesheet" href="SiteTemplate/css/swiper-bundleM.css">
     <link rel="stylesheet" href="SiteTemplate/css/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@6.0/dist/fancybox/fancybox.css" />
-    <link rel="stylesheet" href="SiteTemplate/css/app.css?v=@DateTime.Now.Ticks">
+    <link rel="stylesheet" href="SiteTemplate/css/fancybox.css" />
+    <link rel="stylesheet" href="SiteTemplate/css/swiper.css" />
     <link rel="apple-touch-icon" href="SiteTemplate/img/V-Logo.png">
 
     <link rel="canonical" href="https://vahidnajafizadeh.com" />
@@ -191,8 +189,8 @@
                     <img src="SiteTemplate/img/V-Logo.png" alt="logo" class="logo">
                 </div>
                 <div class="namasite">
-                    <a href="#">
-                        @today
+                    <a>
+                        © 2026 کلیه حقوق مادی و معنوی این وب‌سایت محفوظ و متعلق به وحید نجفی‌زاده است.
                     </a>
                 </div>
             </div>
@@ -205,8 +203,8 @@
     <script src="SiteTemplate/js/preview.js"></script>
     <script src="SiteTemplate/js/script.js"></script>
     <script src="SiteTemplate/js/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
+    <script src="SiteTemplate/js/sweet-alert.js"></script>
+    <script src="SiteTemplate/js/fancybox.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             var isDesktop = () => window.innerWidth > 767.9;
@@ -321,7 +319,7 @@
         </style>
     </noscript>
 
-    <script type="application/ld+json">
+    @*   <script type="application/ld+json">
         {
           "@@context": "https://schema.org",
           "@@type": "Article",
@@ -342,7 +340,7 @@
             }
           }
         }
-    </script>
+    </script> *@
 </body>
 
 </html>

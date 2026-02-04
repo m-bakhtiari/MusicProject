@@ -106,8 +106,9 @@ namespace TopLearn.Web
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                context.Response.Redirect("/notfound", permanent: false);
             });
+
         }
     }
 }

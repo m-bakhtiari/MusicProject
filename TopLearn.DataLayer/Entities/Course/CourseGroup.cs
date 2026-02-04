@@ -23,6 +23,9 @@ namespace TopLearn.DataLayer.Entities.Course
         [Display(Name = "گروه اصلی")]
         public int? ParentId { get; set; }
 
+        [MaxLength(100)]
+        public string ImageName { get; set; }
+
         [ForeignKey("ParentId")]
         public List<CourseGroup> CourseGroups { get; set; }
 

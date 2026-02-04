@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using TopLearn.Core.Services.Interfaces;
+using TopLearn.Core.Security;
+
 
 namespace TopLearn.Web.Pages.Admin.MenuItem
 {
+    [PermissionChecker]
     public class EditMenuItemModel : PageModel
     {
         private readonly IMenuItemService _menuItemService;
@@ -18,13 +21,11 @@ namespace TopLearn.Web.Pages.Admin.MenuItem
         [BindProperty]
         public DataLayer.Entities.Course.MenuItem MenuItem { get; set; }
 
-        [Authorize]
         public async Task OnGet(int id)
         {
             MenuItem = await _menuItemService.GetById(id);
         }
 
-        [Authorize]
         public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)

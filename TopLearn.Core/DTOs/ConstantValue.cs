@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace TopLearn.Core.DTOs
@@ -15,5 +16,12 @@ namespace TopLearn.Core.DTOs
             VahidConcert = 5,
             Media = 6
         }
+
+        public enum StudentType
+        {
+            Mentor = 1,
+            TopStudent = 2
+        }
+
     }
 }

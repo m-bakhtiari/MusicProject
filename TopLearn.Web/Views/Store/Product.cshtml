@@ -5,7 +5,7 @@
         <div class="swiper-wrapper">
             @foreach (var item in Model)
             {
-                <div class="swiper-slide">
+                <div class="swiper-slide" onclick="showProduct('@item.ProductId')">
                     <img src="/course/@item.CourseImageName" alt="@item.CourseTitle" />
                     <div class="slide-info" style="margin-top: 30px">
                         <h3>@item.CourseTitle</h3>
@@ -168,10 +168,10 @@
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev"
                 }
-            });
+            });           
 
-            function MentorInfo(id,name){
-                window.location.href = '/MentorInfo?id='+id+'&name='+name;
+               function showProduct(id){
+                window.location.href = '/ProductInfo?id='+id;
              }
     </script>
 

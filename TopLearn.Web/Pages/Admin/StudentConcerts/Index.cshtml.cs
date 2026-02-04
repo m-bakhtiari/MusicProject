@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TopLearn.Core.DTOs;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Web.Pages.Admin.StudentConcerts
 {
-    [Authorize]
+    [PermissionChecker]
     public class IndexModel : PageModel
     {
         private readonly IStudentConcertService _studentConcertService;

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TopLearn.Core.DTOs;
 using TopLearn.Core.Services.Interfaces;
 
 namespace TopLearn.Web.Controllers
@@ -18,7 +19,7 @@ namespace TopLearn.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _studentService.GetAllStudent();
+            var model = await _studentService.GetAllStudent(ConstantValue.StudentType.Mentor);
             return View(model);
         }
 
@@ -27,13 +28,6 @@ namespace TopLearn.Web.Controllers
         {
             var model = await _studentService.GetById(id);
             return View(model);
-        }
-
-        [HttpGet("/m")]
-        public async Task<IActionResult> MentorInfoByKey([FromQuery] string key)
-        {
-            var model = await _studentService.GetStudentByKey(key);
-            return View("MentorInfo",model);
         }
     }
 }

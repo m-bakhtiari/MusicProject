@@ -26,9 +26,16 @@ namespace TopLearn.Core.Services
             _context = context;
         }
 
-        public async Task<List<CourseGroup>> GetAllGroup()
+        public async Task<List<CourseGroup>> GetAllGroup(int? id)
         {
-            return await _context.CourseGroups.Include(c => c.CourseGroups).ToListAsync();
+            if (id.HasValue)
+                return await _context.CourseGroups.Where(x => x.ParentId == id).ToListAsync();
+            return await _context.CourseGroups.Where(x => x.ParentId == null).ToListAsync();
+        }
+
+        public async Task<List<CourseGroup>> GetAllGroupWithSub()
+        {
+            return await _context.CourseGroups.Include(x => x.CourseGroups).ToListAsync();
         }
 
         public async Task<List<SelectListItem>> GetGroupForManageCourse()
@@ -58,14 +65,42 @@ namespace TopLearn.Core.Services
             return await _context.CourseGroups.FindAsync(groupId);
         }
 
-        public async Task AddGroup(CourseGroup @group)
+        public async Task AddGroup(CourseGroup group, IFormFile imgName)
         {
+            if (imgName != null && imgName.IsImage())
+            {
+                group.ImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgName.FileName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/group", group.ImageName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await imgName.CopyToAsync(stream);
+                }
+            }
             await _context.CourseGroups.AddAsync(group);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateGroup(CourseGroup @group)
+        public async Task UpdateGroup(CourseGroup group, IFormFile imgName)
         {
+            if (imgName != null && imgName.IsImage())
+            {
+                if (group.ImageName != "no-photo.jpg")
+                {
+                    var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/group", group.ImageName);
+                    if (File.Exists(deleteImagePath))
+                    {
+                        File.Delete(deleteImagePath);
+                    }
+                }
+                group.ImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgName.FileName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/group", group.ImageName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await imgName.CopyToAsync(stream);
+                }
+            }
             _context.CourseGroups.Update(group);
             await _context.SaveChangesAsync();
         }
@@ -81,11 +116,11 @@ namespace TopLearn.Core.Services
             }).ToListAsync();
         }
 
-        public async Task<int> AddCourse(Product product, IFormFile imgCourse)
+        public async Task<int> AddCourse(Product product, IFormFile imgCourse, List<IFormFile> imagesFiles)
         {
             product.CreateDate = DateTime.Now;
             product.CourseImageName = "no-photo.jpg";
-            //TODO Check Image
+
             if (imgCourse != null && imgCourse.IsImage())
             {
                 product.CourseImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
@@ -96,7 +131,24 @@ namespace TopLearn.Core.Services
                     await imgCourse.CopyToAsync(stream);
                 }
             }
-            await _context.AddAsync(product);
+            var insert = await _context.AddAsync(product);
+            if (imagesFiles != null)
+            {
+                foreach (var file in imagesFiles)
+                {
+                    var photo = new ProductImage()
+                    {
+                        ProductId = insert.Entity.ProductId,
+                        ProductImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(file.FileName)
+                    };
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", photo.ProductImageName);
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    await _context.ProductImages.AddAsync(photo);
+                }
+            }
             await _context.SaveChangesAsync();
 
             return product.ProductId;
@@ -104,7 +156,8 @@ namespace TopLearn.Core.Services
 
         public async Task<Product> GetCourseById(int courseId)
         {
-            return await _context.Courses.FindAsync(courseId);
+            return await _context.Courses.Include(x => x.ProductImages).Include(x => x.CourseGroup)
+                .Include(x => x.Group).FirstOrDefaultAsync(x => x.ProductId == courseId);
         }
 
         public async Task<List<Product>> GetProductsBySubGroup(int subId)
@@ -115,10 +168,27 @@ namespace TopLearn.Core.Services
             return await _context.Courses.Where(x => x.SubGroup == subId).ToListAsync();
         }
 
-        public async Task UpdateCourse(Product product, IFormFile imgCourse)
+        public async Task UpdateCourse(Product product, IFormFile imgCourse, List<IFormFile> imagesFiles)
         {
             product.UpdateDate = DateTime.Now;
 
+            if (imagesFiles != null)
+            {
+                foreach (var file in imagesFiles)
+                {
+                    var photo = new ProductImage()
+                    {
+                        ProductId = product.ProductId,
+                        ProductImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(file.FileName)
+                    };
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", photo.ProductImageName);
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    await _context.ProductImages.AddAsync(photo);
+                }
+            }
             if (imgCourse != null && imgCourse.IsImage())
             {
                 if (product.CourseImageName != "no-photo.jpg")
@@ -209,6 +279,14 @@ namespace TopLearn.Core.Services
                     await _context.SaveChangesAsync();
                 }
             }
+            if (group.ImageName != "no-photo.jpg")
+            {
+                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/group", group.ImageName);
+                if (File.Exists(deleteImagePath))
+                {
+                    File.Delete(deleteImagePath);
+                }
+            }
             _context.CourseGroups.Remove(group);
             await _context.SaveChangesAsync();
         }
@@ -224,8 +302,35 @@ namespace TopLearn.Core.Services
                     File.Delete(deleteImagePath);
                 }
             }
+            var image = await _context.ProductImages.Where(x => x.ProductId == courseId).ToListAsync();
+            foreach (var item in image)
+            {
+                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", item.ProductImageName);
+                if (File.Exists(deleteImagePath))
+                {
+                    File.Delete(deleteImagePath);
+                }
+            }
+            _context.ProductImages.RemoveRange(image);
             _context.Courses.Remove(product);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteImage(int id)
+        {
+            var image = await _context.ProductImages.FindAsync(id);
+            var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/course", image.ProductImageName);
+            if (File.Exists(deleteImagePath))
+            {
+                File.Delete(deleteImagePath);
+            }
+            _context.Remove(image);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<ProductImage> GetImageById(int imageId)
+        {
+            return await _context.ProductImages.FindAsync(imageId);
         }
     }
 }

@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
+
 namespace TopLearn.Web.Pages.Admin.Instruments
 {
-    [Authorize]
+    [PermissionChecker]
     public class IndexModel : PageModel
     {
         private IInstrumentService _instrumentService;

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
 namespace TopLearn.Web.Pages.Admin.Student
 {
-    [Authorize]
+    [PermissionChecker]
     public class EditStudentModel : PageModel
     {
         private readonly IStudentService _studentService;
@@ -40,12 +38,12 @@ namespace TopLearn.Web.Pages.Admin.Student
 
             await _studentService.UpdateStudent(Student, imgLogo, imageList);
 
-            return RedirectToPage("Index");
+            return Redirect($"/Admin/Student?type={Student.ShortKey}");
         }
         public async Task<IActionResult> OnPostDeleteStudentImage(int id)
         {
             // حذف تصویر از سرویس مربوطه
-            var studentId= await _studentService.GetStudentByImageId(id);
+            var studentId = await _studentService.GetStudentByImageId(id);
             await _studentService.DeleteImage(id);
             return Redirect($"/Admin/Student/EditStudent/{studentId}");
         }

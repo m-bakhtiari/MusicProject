@@ -94,7 +94,7 @@ namespace TopLearn.Core.Services
 
         public async Task<List<StudentConcert>> GetAll(int type)
         {
-            var res = _context.StudentConcerts.OrderByDescending(x => x.Position).Where(x => x.Type == type);
+            var res = _context.StudentConcerts.OrderBy(x => x.Position).Where(x => x.Type == type);
             return await res.Include(x => x.StudentConcertImages).ToListAsync();
         }
 

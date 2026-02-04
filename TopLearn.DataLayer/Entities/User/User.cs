@@ -51,5 +51,7 @@ namespace TopLearn.DataLayer.Entities.User
         public string FirstName { get; set; }
         [MaxLength(100)]
         public string LastName { get; set; }
+
+        public bool IsAdmin { get; set; }
     }
 }

@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 
 namespace TopLearn.Web.Pages.Admin.Student
 {
-    [Authorize]
+    [PermissionChecker]
     public class IndexModel : PageModel
     {
         private readonly IStudentService _studentService;
@@ -17,9 +18,9 @@ namespace TopLearn.Web.Pages.Admin.Student
         }
 
         public List<DataLayer.Entities.Course.Student> Students { get; set; }
-        public async Task OnGet()
+        public async Task OnGet(Enum type)
         {
-            Students = await _studentService.GetAllStudent();
+            Students = await _studentService.GetAllStudent(type);
         }
     }
 }

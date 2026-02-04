@@ -205,6 +205,9 @@ namespace TopLearn.DataLayer.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<string>("ImageName")
+                        .HasMaxLength(100);
+
                     b.Property<bool>("IsDelete");
 
                     b.Property<int?>("ParentId");
@@ -318,6 +321,25 @@ namespace TopLearn.DataLayer.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ProductImage", b =>
+                {
+                    b.Property<int>("ProductImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<string>("ProductImageName")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.HasKey("ProductImageId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+                });
+
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.Student", b =>
                 {
                     b.Property<int>("StudentId")
@@ -423,6 +445,8 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<bool>("IsActive");
 
+                    b.Property<bool>("IsAdmin");
+
                     b.Property<bool>("IsDelete");
 
                     b.Property<string>("LastName")
@@ -449,7 +473,7 @@ namespace TopLearn.DataLayer.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { UserId = 2, Email = "vahidnajafizadeh@gmail.com", IsActive = true, IsDelete = false, Password = "CB-5C-10-C0-B4-88-ED-4F-38-26-BA-62-8D-18-CA-6A", RegisterDate = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), UserName = "Vahid Najafizadeh" }
+                        new { UserId = 2, Email = "vahidnajafizadeh@gmail.com", FirstName = "وحید", IsActive = true, IsAdmin = true, IsDelete = false, LastName = "نجفی زاده", Mobile = "09354868864", Password = "CB-5C-10-C0-B4-88-ED-4F-38-26-BA-62-8D-18-CA-6A", RegisterDate = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), UserName = "Vahid Najafizadeh" }
                     );
                 });
 
@@ -493,6 +517,14 @@ namespace TopLearn.DataLayer.Migrations
                     b.HasOne("TopLearn.DataLayer.Entities.Course.CourseGroup", "Group")
                         .WithMany("SubGroup")
                         .HasForeignKey("SubGroup");
+                });
+
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ProductImage", b =>
+                {
+                    b.HasOne("TopLearn.DataLayer.Entities.Course.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.StudentConcertImage", b =>

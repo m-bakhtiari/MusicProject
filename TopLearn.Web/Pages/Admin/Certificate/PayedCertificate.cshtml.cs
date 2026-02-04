@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
-using TopLearn.DataLayer.Entities.Course;
+
 
 namespace TopLearn.Web.Pages.Admin.Certificate
 {
-    [Authorize]
+    [PermissionChecker]
     public class PayedCertificateModel : PageModel
     {
         private readonly ICertificateService _certificateService;

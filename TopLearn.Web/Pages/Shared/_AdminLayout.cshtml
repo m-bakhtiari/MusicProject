@@ -1,4 +1,5 @@
-﻿
+﻿@using TopLearn.Core.DTOs
+
 <!DOCTYPE html>
 <html>
 
@@ -49,31 +50,40 @@
                             <a href="/Admin/Instruments">ساز ها</a>
                         </li>
                         <li>
-                            <a href="/Admin/Student">منتورها</a>
+                            <a href="/Admin/Student?type=@ConstantValue.StudentType.Mentor">منتورها</a>
                         </li>
                         <li>
                             <a href="/Admin/MusicNote">نت ها</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=1">کنسرت های هنرجویی</a>
+                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.StudentConcert">کنسرت های هنرجویی</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=2">ورک شاپ ها</a>
+                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Workshop">ورک شاپ ها</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=3">کلاس گروهی</a>
+                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Havana">کلاس گروهی</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=4">کتاب ها</a>
+                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Book">کتاب ها</a>
                         </li>
                         <li>
-                            <a href="/Admin/CourseGroups">دسته بندی محصولات فروشگاهی</a>
+                            <a href="/Admin/CourseGroups">دسته بندی محصولات </a>
                         </li>
                         <li>
-                            <a href="/Admin/Courses">فروشگاه</a>
+                            <a href="/Admin/Courses">محصولات</a>
                         </li>
                         <li>
                             <a href="/Admin/Certificate">مدرک</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.VahidConcert"> کنسرت های من</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Media"> رسانه</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Student?type=@ConstantValue.StudentType.TopStudent">هنرجویان فعال گروهی</a>
                         </li>
                     </ul>
                 </div>
@@ -86,7 +96,7 @@
 
     </div>
 
-    @*<script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>*@
+    <script src="/SiteTemplate/ckeditor/ckeditor.js"></script>
     <script src="/AdminContent/js/jquery-1.10.2.js"></script>
     <script src="/AdminContent/js/bootstrap.min.js"></script>
     <script src="/AdminContent/js/plugins/metisMenu/jquery.metisMenu.js"></script>

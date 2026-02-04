@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TopLearn.Core.Security;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Entities.Course;
 
+
 namespace TopLearn.Web.Pages.Admin.Courses
 {
-    [Authorize]
+    [PermissionChecker]
     public class CreateCourseModel : PageModel
     {
         private ICourseService _courseService;
@@ -38,14 +38,15 @@ namespace TopLearn.Web.Pages.Admin.Courses
 
         }
 
-        public async Task<IActionResult> OnPost(IFormFile imgCourseUp)
+        public async Task<IActionResult> OnPost(IFormFile imgCourseUp, List<IFormFile> imageList)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            await _courseService.AddCourse(Product, imgCourseUp);
+            await _courseService.AddCourse(Product, imgCourseUp, imageList);
 
             return RedirectToPage("Index");
         }
+
     }
 }
