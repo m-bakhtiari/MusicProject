@@ -24,18 +24,39 @@
                 <select class="form-control" asp-for="Product.SubGroup" asp-items="@(ViewData["SubGroups"] as SelectList)"></select>
                 <span asp-validation-for="Product.SubGroup"></span>
             </div>
-
+            <div class="form-group">
+                <label>موجود برای خرید</label>
+                <select class="form-control" asp-for="Product.IsAvailable">
+                    <option value="false">اتمام موجودی</option>
+                    <option value="true"> موجود</option>
+                </select>
+                <span asp-validation-for="Product.IsAvailable"></span>
+            </div>
+            <div class="form-group">
+                <label>توضیح مخنصر</label>
+                <input type="text" class="form-control" asp-for="Product.ShortDescription" />
+                <span asp-validation-for="Product.ShortDescription"></span>
+            </div>
             <div class="form-group">
                 <label>شرح محصول</label>
                 <textarea id="description" class="form-control" asp-for="Product.CourseDescription" rows="10"></textarea>
                 <span asp-validation-for="Product.CourseDescription"></span>
             </div>
             <div class="form-group">
+                <label>تعداد محصول</label>
+                <input type="number" asp-for="Product.Quantity" class="form-control" />
+                <span asp-validation-for="Product.Quantity"></span>
+            </div>
+            <div class="form-group">
                 <label>قیمت محصول</label>
                 <input type="number" asp-for="Product.CoursePrice" value="0" class="form-control" />
                 <span asp-validation-for="Product.CourseDescription"></span>
             </div>
-
+            <div class="form-group">
+                <label>قیمت با تخفیف</label>
+                <input type="number" asp-for="Product.SalePrice" class="form-control" />
+                <span asp-validation-for="Product.SalePrice"></span>
+            </div>
             <div class="form-group">
                 <label>کلمات کلیدی محصول</label>
                 <input type="text" asp-for="Product.Tags" class="form-control">
@@ -68,26 +89,6 @@
 @section Scripts
 {
    
-    <script>
-                CKEDITOR.config.versionCheck = false;
-        CKEDITOR.replace('description', {
-            language: 'fa',
-            contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
-            extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
-            toolbar: [
-                { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline','NumberedList', 'BulletedList'] },
-                { name: 'clipboard', items: ['Undo', 'Redo'] },
-                { name: 'editing', items: ['Scayt'] },
-                { name: 'links', items: ['Link', 'Unlink'] },
-                { name: 'insert', items: ['Image', 'Table'] },
-                { name: 'styles', items: ['Format'] },
-                { name: 'tools', items: ['Maximize'] },
-            ]
-        });
-
-
-    </script> 
 
     <script>
         $("#Course_GroupId").change(function () {

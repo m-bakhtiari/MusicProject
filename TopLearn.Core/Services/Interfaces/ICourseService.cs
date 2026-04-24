@@ -31,7 +31,7 @@ namespace TopLearn.Core.Services.Interfaces
         Task<Product> GetCourseById(int courseId);
         Task UpdateCourse(Product product, IFormFile imgCourse, List<IFormFile> imagesFiles);
 
-        Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = "", int groupId = 0, int take = 0);
+        Task<Tuple<List<Product>, int>> GetCourse(int pageId = 1, string filter = "", int groupId = 0, int take = 0);
 
         Task<Product> GetCourseForShow(int courseId);
 

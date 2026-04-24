@@ -3,15 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TopLearn.Core.DTOs;
-using TopLearn.Core.DTOs.Course;
 using TopLearn.Core.Generator;
 using TopLearn.Core.Services.Interfaces;
 using TopLearn.DataLayer.Context;
 using TopLearn.DataLayer.Entities.Course;
+using TopLearn.Core.Security;
 
 namespace TopLearn.Core.Services
 {
@@ -23,16 +22,26 @@ namespace TopLearn.Core.Services
         {
             _context = context;
         }
-        public async Task<int> AddNote(MusicNote musicNote, IFormFile noteFile)
+        public async Task<int> AddNote(MusicNote musicNote, IFormFile noteFile,IFormFile imageFile)
         {
             if (noteFile != null)
             {
                 musicNote.FileName = NameGenerator.GenerateUniqCode() + Path.GetExtension(noteFile.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await noteFile.CopyToAsync(stream);
+                }
+            }
+            if (imageFile != null && imageFile.IsImage())
+            {
+                musicNote.ImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imageFile.FileName);
                 var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.FileName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    await noteFile.CopyToAsync(stream);
+                    await imageFile.CopyToAsync(stream);
                 }
             }
             await _context.MusicNotes.AddAsync(musicNote);
@@ -44,7 +53,12 @@ namespace TopLearn.Core.Services
         public async Task DeleteNote(int noteId)
         {
             var note = await _context.MusicNotes.FindAsync(noteId);
-            var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", note.FileName);
+            var deleteFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", note.FileName);
+            if (File.Exists(deleteFilePath))
+            {
+                File.Delete(deleteFilePath);
+            }
+            var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", note.ImageName);
             if (File.Exists(deleteImagePath))
             {
                 File.Delete(deleteImagePath);
@@ -58,49 +72,41 @@ namespace TopLearn.Core.Services
             return await _context.MusicNotes.ToListAsync();
         }
 
-        public async Task<Tuple<List<MusicNote>, int>> GetCourse(int pageId = 1, string filter = "", int take = 0)
-        {
-            if (take == 0)
-                take = 8;
-
-            IQueryable<MusicNote> result = _context.MusicNotes;
-
-            if (!string.IsNullOrEmpty(filter))
-            {
-                result = result.Where(c => c.Title.Contains(filter));
-            }
-
-            var skip = (pageId - 1) * take;
-
-            var pageCount = await result.CountAsync() / take;
-
-            var query = await result.Skip(skip).Take(take).ToListAsync();
-
-            return Tuple.Create(query, pageCount);
-        }
-
         public async Task<MusicNote> GetNoteById(int noteId)
         {
             return await _context.MusicNotes.FindAsync(noteId);
         }
 
-        public async Task UpdateNote(MusicNote musicNote, IFormFile noteFile)
+        public async Task UpdateNote(MusicNote musicNote, IFormFile noteFile,IFormFile imageFile)
         {
-
-
             if (noteFile != null)
             {
-                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.FileName);
+                var deleteFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.FileName);
+                if (File.Exists(deleteFilePath))
+                {
+                    File.Delete(deleteFilePath);
+                }
+
+                musicNote.FileName = NameGenerator.GenerateUniqCode() + Path.GetExtension(noteFile.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await noteFile.CopyToAsync(stream);
+                }
+            }
+            if (imageFile != null && imageFile.IsImage())
+            {
+                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.ImageName);
                 if (File.Exists(deleteImagePath))
                 {
                     File.Delete(deleteImagePath);
                 }
 
-                musicNote.FileName = NameGenerator.GenerateUniqCode() + Path.GetExtension(noteFile.FileName);
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.FileName);
+                musicNote.ImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imageFile.FileName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/note", musicNote.ImageName);
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    await noteFile.CopyToAsync(stream);
+                    await imageFile.CopyToAsync(stream);
                 }
             }
             _context.MusicNotes.Update(musicNote);
@@ -144,7 +150,7 @@ namespace TopLearn.Core.Services
                 Title = c.Title,
                 InstrumentId = c.InstrumentId.Value,
                 InstrumentTitle = c.Instrument.InstrumentTitle,
-                InstrumentImageName = c.Instrument.ImageName
+                NoteImageName = c.ImageName
             }).Skip(skip).Take(take).ToListAsync();
             return Tuple.Create(query, pageCount);
         }

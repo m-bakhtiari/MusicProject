@@ -11,5 +11,7 @@ namespace TopLearn.Core.DTOs
         public List<Academy> Academies { get; set; }
         public string Message { get; set; }
         public List<StudentConcert> StudentConcerts { get; set; }
+        public List<Video> Videos { get; set; }
+        public List<GalleryImage> GalleryImages { get; set; }
     }
 }

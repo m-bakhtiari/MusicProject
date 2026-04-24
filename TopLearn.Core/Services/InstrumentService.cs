@@ -48,6 +48,7 @@ namespace TopLearn.Core.Services
             //}
 
             instrument.CreatedDate = DateTime.Now.Date;
+            instrument.UpdateDate = DateTime.Now;
             await _context.Instruments.AddAsync(instrument);
             await _context.SaveChangesAsync();
         }
@@ -127,7 +128,7 @@ namespace TopLearn.Core.Services
                     await imgInstrumentLogoUp.CopyToAsync(stream);
                 }
             }
-
+            instrument.UpdateDate = DateTime.Now;
             _context.Instruments.Update(instrument);
             await _context.SaveChangesAsync();
         }

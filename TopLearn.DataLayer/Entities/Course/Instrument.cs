@@ -11,19 +11,23 @@ namespace TopLearn.DataLayer.Entities.Course
         [Key]
         public int InstrumentId { get; set; }
 
-        [DisplayName("عنوان ساز")]
-        [MaxLength(450, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [MaxLength(450)]
         public string InstrumentTitle { get; set; }
 
-        [DisplayName("توضیحات")]
         public string Description { get; set; }
 
-        [DisplayName("تاریخ ایجاد")]
         public DateTime CreatedDate { get; set; }
 
+        [MaxLength(500)]
         public string IconImage { get; set; }
 
+        [MaxLength(500)]
         public string ImageName { get; set; }
+
+        [MaxLength(3500)]
+        public string VideoUrl { get; set; }
+
+        public DateTime UpdateDate { get; set; }
 
         public List<MusicNote> MusicNotes { get; set; }
     }

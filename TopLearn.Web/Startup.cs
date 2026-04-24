@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,9 +43,10 @@ namespace TopLearn.Web
             {
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/Logout";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(43200);
-
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.SlidingExpiration = true;
             });
+
 
             #endregion
 
@@ -79,6 +75,12 @@ namespace TopLearn.Web
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<ICertificateService, CertificateService>();
             services.AddTransient<IConcertPrizeService, ConcertPrizeService>();
+            services.AddTransient<ISharedService, SharedService>();
+            services.AddTransient<ISubscriberService, SubscriberService>();
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IGalleryImageService, GalleryImageService>();
+            services.AddTransient<IVideoService, VideoService>();
+            services.AddTransient<IContactMessageService, ContactMessageService>();
 
             #endregion
         }
@@ -90,7 +92,7 @@ namespace TopLearn.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
 

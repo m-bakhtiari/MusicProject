@@ -19,6 +19,9 @@ namespace TopLearn.DataLayer.Entities.Course
 
         public int? InstrumentId { get; set; }
 
+        [MaxLength(250)]
+        public string ImageName { get; set; }
+
         [ForeignKey("InstrumentId")]
         public Instrument Instrument { get; set; }
 }

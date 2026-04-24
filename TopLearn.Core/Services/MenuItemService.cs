@@ -33,7 +33,7 @@ namespace TopLearn.Core.Services
 
         public async Task<List<MenuItem>> GetAllMenuItem()
         {
-            return await _context.MenuItems.OrderBy(x => x.Position).ToListAsync();
+           return await _context.MenuItems.OrderBy(x => x.Position).ToListAsync();
         }
 
         public async Task<MenuItem> GetById(int menuItemId)

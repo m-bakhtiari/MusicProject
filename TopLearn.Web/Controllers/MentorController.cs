@@ -19,15 +19,23 @@ namespace TopLearn.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _studentService.GetAllStudent(ConstantValue.StudentType.Mentor);
+            var model = await _studentService.GetAllStudent((int)ConstantValue.StudentType.Mentor);
             return View(model);
         }
 
-        [HttpGet("/MentorInfo")]
-        public async Task<IActionResult> MentorInfo([FromQuery]int id, [FromQuery] string name)
+        [HttpGet("/Info")]
+        public async Task<IActionResult> Info([FromQuery]int id, [FromQuery] string name)
         {
             var model = await _studentService.GetById(id);
-            return View(model);
+            return View("MentorInfo",model);
         }
+
+        [Route("/TopStudent")]
+        public async Task<IActionResult> TopStudent()
+        {
+            var model = await _studentService.GetAllStudent((int)ConstantValue.StudentType.TopStudent);
+            return View("Index",model);
+        }
+
     }
 }

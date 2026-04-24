@@ -18,8 +18,9 @@ namespace TopLearn.Web.Pages.Admin.Student
         }
 
         public List<DataLayer.Entities.Course.Student> Students { get; set; }
-        public async Task OnGet(Enum type)
+        public async Task OnGet(int type)
         {
+            ViewData["type"]=type;
             Students = await _studentService.GetAllStudent(type);
         }
     }

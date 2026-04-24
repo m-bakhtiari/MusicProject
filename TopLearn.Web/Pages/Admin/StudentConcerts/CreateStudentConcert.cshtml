@@ -22,6 +22,10 @@
                 <label>عنوان</label>
                 <input type="text" asp-for="StudentConcert.Title" class="form-control">
             </div>
+            <div class="form-group">
+                <label>لینک ویدیو</label>
+                <input type="text" asp-for="StudentConcert.VideoUrl" class="form-control">
+            </div>
             @if (ViewData["Type"].ToString() == "1" || ViewData["Type"].ToString() == "2")
             {
                 <div class="form-group">
@@ -50,28 +54,6 @@
 </div>
 
 @section Scripts {
-
-    <script>
-                CKEDITOR.config.versionCheck = false;
-
-        CKEDITOR.replace('description', {
-            language: 'fa',
-            contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
-            extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
-            toolbar: [
-                { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline','NumberedList', 'BulletedList'] },
-                { name: 'clipboard', items: ['Undo', 'Redo'] },
-                { name: 'editing', items: ['Scayt'] },
-                { name: 'links', items: ['Link', 'Unlink'] },
-                { name: 'insert', items: ['Image', 'Table'] },
-                { name: 'styles', items: ['Format'] },
-                { name: 'tools', items: ['Maximize'] }
-            ]
-        });
-
-
-    </script>
 
     <script>
         // یک DataTransfer برای مدیریت فایل‌های انتخاب شده ایجاد می‌کنیم.

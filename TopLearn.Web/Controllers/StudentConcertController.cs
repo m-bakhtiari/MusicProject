@@ -12,10 +12,12 @@ namespace TopLearn.Web.Controllers
     public class StudentConcertController : Controller
     {
         private readonly IStudentConcertService _studentConcertService;
+        private readonly IStudentService _studentService;
 
-        public StudentConcertController(IStudentConcertService studentConcertService)
+        public StudentConcertController(IStudentConcertService studentConcertService, IStudentService studentService)
         {
             _studentConcertService = studentConcertService;
+            _studentService = studentService;
         }
         public async Task<IActionResult> Index()
         {
@@ -41,8 +43,13 @@ namespace TopLearn.Web.Controllers
         [HttpGet("/Havana")]
         public async Task<IActionResult> Havana()
         {
-            var model = await _studentConcertService.GetHavana();
-            return View("StudentConcertInfo", model);
+            var havana = await _studentConcertService.GetHavana();
+            var student = await _studentService.GetAllStudent((int)ConstantValue.StudentType.TopStudent);
+            return View("Havana", new StudentConcertVM()
+            {
+                StudentConcert = havana,
+                Students = student
+            });
         }
 
         [HttpGet("/Book")]
@@ -50,7 +57,7 @@ namespace TopLearn.Web.Controllers
         {
             var model = await _studentConcertService.GetBook();
             ViewBag.typeUrl = "/BookInfo?id=";
-            return View("Index", model);
+            return View("Index", new List<StudentConcert>() { model });
         }
 
         [HttpGet("/BookInfo")]
@@ -60,6 +67,6 @@ namespace TopLearn.Web.Controllers
             return View("StudentConcertInfo", model);
         }
 
-      
+
     }
 }

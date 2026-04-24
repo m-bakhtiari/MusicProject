@@ -26,6 +26,24 @@ namespace TopLearn.DataLayer.Entities.Course
         [MaxLength(5)]
         public string ShortKey { get; set; }
 
+        [MaxLength(1500)]
+        public string InstagramUrl { get; set; }
+
+        [MaxLength(1500)]
+        public string TelegramUrl { get; set; }
+
+        [MaxLength(1500)]
+        public string YoutubeUrl { get; set; }
+
+        [MaxLength(1500)]
+        public string VideoUrl { get; set; }
+
+        [MaxLength(50)]
+        public string HistoryYear { get; set; }
+
+        [MaxLength(50)]
+        public string HavanaYear { get; set; }
+
         public List<StudentImage> StudentImages { get; set; }
     }
 }

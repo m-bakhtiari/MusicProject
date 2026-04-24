@@ -28,9 +28,11 @@ namespace TopLearn.Core.Services
 
         public async Task<List<CourseGroup>> GetAllGroup(int? id)
         {
-            if (id.HasValue)
-                return await _context.CourseGroups.Where(x => x.ParentId == id).ToListAsync();
-            return await _context.CourseGroups.Where(x => x.ParentId == null).ToListAsync();
+            return await _context.CourseGroups.ToListAsync();
+
+            //if (id.HasValue)
+            //    return await _context.CourseGroups.Where(x => x.ParentId == id).ToListAsync();
+            //return await _context.CourseGroups.Where(x => x.ParentId == null).ToListAsync();
         }
 
         public async Task<List<CourseGroup>> GetAllGroupWithSub()
@@ -211,7 +213,7 @@ namespace TopLearn.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Tuple<List<ShowCourseListItemViewModel>, int>> GetCourse(int pageId = 1, string filter = "", int groupId = 0, int take = 0)
+        public async Task<Tuple<List<Product>, int>> GetCourse(int pageId = 1, string filter = "", int groupId = 0, int take = 0)
         {
             if (take == 0)
                 take = 8;
@@ -227,23 +229,9 @@ namespace TopLearn.Core.Services
                 result = result.Where(c => c.GroupId == groupId || c.SubGroup == groupId);
             }
             var skip = (pageId - 1) * take;
-            var pageCount = await result.Select(c => new ShowCourseListItemViewModel()
-            {
-                CourseId = c.ProductId,
-                ImageName = c.CourseImageName,
-                Price = c.CoursePrice,
-                Title = c.CourseTitle,
-                GroupTitle = group.FirstOrDefault(x => x.GroupId == c.GroupId).GroupTitle,
-            }).CountAsync() / take;
+            var pageCount = await result.CountAsync() / take;
 
-            var query = await result.Select(c => new ShowCourseListItemViewModel()
-            {
-                CourseId = c.ProductId,
-                ImageName = c.CourseImageName,
-                Price = c.CoursePrice,
-                Title = c.CourseTitle,
-                GroupTitle = group.FirstOrDefault(x => x.GroupId == c.GroupId).GroupTitle,
-            }).Skip(skip).Take(take).ToListAsync();
+            var query = await result.Skip(skip).Take(take).ToListAsync();
 
             return Tuple.Create(query, pageCount);
         }

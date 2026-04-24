@@ -10,10 +10,9 @@ namespace TopLearn.Core.Services.Interfaces
 {
     public interface IMusicNoteService
     {
-        Task<int> AddNote(MusicNote musicNote, IFormFile noteFile);
-        Task UpdateNote(MusicNote musicNote, IFormFile noteFile);
+        Task<int> AddNote(MusicNote musicNote, IFormFile noteFile, IFormFile imageFile);
+        Task UpdateNote(MusicNote musicNote, IFormFile noteFile, IFormFile imageFile);
         Task DeleteNote(int noteId);
-        Task<Tuple<List<MusicNote>, int>> GetCourse(int pageId = 1, string filter = "", int take = 0);
         Task<List<MusicNote>> GetAllNotes();
         Task<MusicNote> GetNoteById(int noteId);
 

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Threading.Tasks;
 using TopLearn.Core.Convertors;
 using TopLearn.Core.DTOs;
 using TopLearn.Core.Generator;
@@ -24,17 +21,14 @@ namespace TopLearn.Core.Services
             _context = context;
         }
 
-
-        public bool IsExistUserName(string userName)
-        {
-            return _context.Users.Any(u => u.UserName == userName);
-        }
-
         public async Task<bool> IsExistMobile(string mobile)
         {
             return await _context.Users.AnyAsync(u => u.Mobile == mobile);
         }
-
+        public async Task<bool> IsExistUsername(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.UserName == username);
+        }
         public async Task<int> AddUser(User user)
         {
             await _context.Users.AddAsync(user);
@@ -46,114 +40,76 @@ namespace TopLearn.Core.Services
         {
             string hashPassword = PasswordHelper.EncodePasswordMd5(login.Password);
             string mobile = FixedText.FixEmail(login.Mobile);
-            return await _context.Users.FirstOrDefaultAsync(u => u.Mobile == mobile && u.Password == hashPassword);
+            return await _context.Users.FirstOrDefaultAsync(u => (u.Mobile == mobile && u.Password == hashPassword && u.IsActive && !u.IsDelete) ||
+            (u.UserName == mobile && u.Password == hashPassword && u.IsActive && !u.IsDelete));
         }
 
-        public User GetUserByEmail(string email)
+        public async Task<ProfileVM> GetUserProfile(string username)
         {
-            return _context.Users.SingleOrDefault(u => u.Email == email);
-        }
-
-        public User GetUserById(int userId)
-        {
-            return _context.Users.Find(userId);
-        }
-
-
-        public User GetUserByUserName(string username)
-        {
-            return _context.Users.SingleOrDefault(u => u.UserName == username);
-        }
-
-        public void UpdateUser(User user)
-        {
-            _context.Update(user);
-            _context.SaveChanges();
-        }
-
-        public int GetUserIdByUserName(string userName)
-        {
-            return _context.Users.Single(u => u.UserName == userName).UserId;
-        }
-
-        public void DeleteUser(int userId)
-        {
-            User user = GetUserById(userId);
-            user.IsDelete = true;
-            UpdateUser(user);
-        }
-
-        public bool CompareOldPassword(string oldPassword, string username)
-        {
-            string hashOldPassword = PasswordHelper.EncodePasswordMd5(oldPassword);
-            return _context.Users.Any(u => u.UserName == username && u.Password == hashOldPassword);
-        }
-
-        public void ChangeUserPassword(string userName, string newPassword)
-        {
-            var user = GetUserByUserName(userName);
-            user.Password = PasswordHelper.EncodePasswordMd5(newPassword);
-            UpdateUser(user);
-        }
-
-
-        public UserForAdminViewModel GetUsers(int pageId = 1, string filterEmail = "", string filterUserName = "")
-        {
-            IQueryable<User> result = _context.Users;
-
-            if (!string.IsNullOrEmpty(filterEmail))
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
+            if (user == null) return null;
+            return new ProfileVM()
             {
-                result = result.Where(u => u.Email.Contains(filterEmail));
-            }
-
-            if (!string.IsNullOrEmpty(filterUserName))
-            {
-                result = result.Where(u => u.UserName.Contains(filterUserName));
-            }
-
-            // Show Item In Page
-            int take = 20;
-            int skip = (pageId - 1) * take;
-
-
-            UserForAdminViewModel list = new UserForAdminViewModel();
-            list.CurrentPage = pageId;
-            list.PageCount = result.Count() / take;
-            list.Users = result.OrderBy(u => u.RegisterDate).Skip(skip).Take(take).ToList();
-
-            return list;
-        }
-
-        public UserForAdminViewModel GetDeleteUsers(int pageId = 1, string filterEmail = "", string filterUserName = "")
-        {
-            IQueryable<User> result = _context.Users.IgnoreQueryFilters().Where(u => u.IsDelete);
-
-            if (!string.IsNullOrEmpty(filterEmail))
-            {
-                result = result.Where(u => u.Email.Contains(filterEmail));
-            }
-
-            if (!string.IsNullOrEmpty(filterUserName))
-            {
-                result = result.Where(u => u.UserName.Contains(filterUserName));
-            }
-
-            // Show Item In Page
-            int take = 20;
-            int skip = (pageId - 1) * take;
-
-
-            UserForAdminViewModel list = new UserForAdminViewModel();
-            list.CurrentPage = pageId;
-            list.PageCount = result.Count() / take;
-            list.Users = result.OrderBy(u => u.RegisterDate).Skip(skip).Take(take).ToList();
-
-            return list;
+                User = user
+            };
         }
 
         public async Task<bool> CheckPermission(string username)
         {
-            return await _context.Users.AnyAsync(x => x.UserName == username && x.IsActive == true && x.IsAdmin == true);
+            return await _context.Users.AnyAsync(x => x.UserName == username && x.IsActive == true && x.IsAdmin == true && !x.IsDelete);
+        }
+
+        public async Task<bool> IsUserRegistered(string username)
+        {
+            return await _context.Users.AnyAsync(x => x.UserName == username || x.Mobile == username);
+        }
+
+        public async Task<bool> UpdateProfile(ProfileVM profile, IFormFile imageFile)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == profile.UserName);
+            if (user == null)
+                return false;
+            if (string.IsNullOrWhiteSpace(user.ImageUrl) == false)
+            {
+                var deleteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", user.ImageUrl);
+                if (File.Exists(deleteImagePath))
+                {
+                    File.Delete(deleteImagePath);
+                }
+            }
+            if (imageFile != null && imageFile.IsImage())
+            {
+                user.ImageUrl = NameGenerator.GenerateUniqCode() + Path.GetExtension(imageFile.FileName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", user.ImageUrl);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+            }
+            user.Mobile = FixedText.FixEmail(profile.Mobile);
+            user.Email = profile.Email;
+            user.Address = profile.Address;
+            user.FullName = profile.FullName;
+            user.NationalCode = profile.NationalCode;
+            user.PostalCode = profile.PostalCode;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> UpdatePassword(string username, string password)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username);
+            if (user == null)
+                return false;
+            user.Password = PasswordHelper.EncodePasswordMd5(password);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<User> GetUserByUsername(string username)
+        {
+           return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
     }
 }

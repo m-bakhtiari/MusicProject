@@ -9,10 +9,21 @@
     <title>پنل مدیریت  </title>
     <link href="/AdminContent/css/bootstrap-rtl.css" rel="stylesheet">
     <link href="/AdminContent/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/AdminContent/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    @* <link href="/AdminContent/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet"> *@
     <link href="/AdminContent/css/plugins/timeline/timeline.css" rel="stylesheet">
     <link href="/AdminContent/css/sb-admin.css" rel="stylesheet">
+    <style>
+        .navbar-static-side {
+            height: calc(100vh - 50px);
+            overflow-y: auto;
+        }
 
+        @@media(max-width:768px) {
+            .navbar-static-side {
+                height: auto;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -33,7 +44,6 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-
                         <li>
                             <a href="/Admin"> پنل ادمین</a>
                         </li>
@@ -50,22 +60,22 @@
                             <a href="/Admin/Instruments">ساز ها</a>
                         </li>
                         <li>
-                            <a href="/Admin/Student?type=@ConstantValue.StudentType.Mentor">منتورها</a>
+                            <a href="/Admin/Student?type=1">منتورها</a>
                         </li>
                         <li>
                             <a href="/Admin/MusicNote">نت ها</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.StudentConcert">کنسرت های هنرجویی</a>
+                            <a href="/Admin/StudentConcerts?type=1">کنسرت های هنرجویی</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Workshop">ورک شاپ ها</a>
+                            <a href="/Admin/StudentConcerts?type=2">ورک شاپ ها</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Havana">کلاس گروهی</a>
+                            <a href="/Admin/StudentConcerts?type=3">کلاس گروهی</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Book">کتاب ها</a>
+                            <a href="/Admin/StudentConcerts?type=4">کتاب ها</a>
                         </li>
                         <li>
                             <a href="/Admin/CourseGroups">دسته بندی محصولات </a>
@@ -77,13 +87,34 @@
                             <a href="/Admin/Certificate">مدرک</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.VahidConcert"> کنسرت های من</a>
+                            <a href="/Admin/StudentConcerts?type=5"> کنسرت های من</a>
                         </li>
                         <li>
-                            <a href="/Admin/StudentConcerts?type=@ConstantValue.Type.Media"> رسانه</a>
+                            <a href="/Admin/StudentConcerts?type=6"> رادیو جوان</a>
                         </li>
                         <li>
-                            <a href="/Admin/Student?type=@ConstantValue.StudentType.TopStudent">هنرجویان فعال گروهی</a>
+                            <a href="/Admin/StudentConcerts?type=7"> جام جم</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Student?type=2">هنرجویان فعال گروهی</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Comments">کامنت ها</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Subscribers">مشترکین</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/User">کاربران</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Video">ویدیوها</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/GalleryImage">گالری تصاویر</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Subscribers">مشترکین</a>
                         </li>
                     </ul>
                 </div>
@@ -96,16 +127,44 @@
 
     </div>
 
-    <script src="/SiteTemplate/ckeditor/ckeditor.js"></script>
+    @* <script src="/SiteTemplate/ckeditor/ckeditor.js"></script> *@
+    <script src="/admincontent/tinymce/tinymce.min.js"></script>
     <script src="/AdminContent/js/jquery-1.10.2.js"></script>
     <script src="/AdminContent/js/bootstrap.min.js"></script>
     <script src="/AdminContent/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-    <script src="/AdminContent/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="/AdminContent/js/plugins/morris/morris.js"></script>
+    @*  <script src="/AdminContent/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="/AdminContent/js/plugins/morris/morris.js"></script> *@
 
     <script src="/AdminContent/js/sb-admin.js"></script>
     <script src="/AdminContent/js/demo/dashboard-demo.js"></script>
+    <script>
+        tinymce.init({
+          selector: '#description',
+          license_key: 'gpl',
+
+          language: 'fa',
+          directionality: 'rtl',
+          height: 350,
+
+          plugins: [
+            'lists link image table fullscreen code'
+          ],
+
+          toolbar:
+            'ltr rtl | ' +
+            'alignright aligncenter alignleft | ' +
+            'bold italic underline | ' +
+            'numlist bullist | ' +
+            'undo redo | ' +
+            'link unlink | ' +
+            'image table | ' +
+            'formatselect | ' +
+            'fullscreen',
+
+          menubar: false
+        });
+    </script>
     @await RenderSectionAsync("Scripts", false)
 </body>
 

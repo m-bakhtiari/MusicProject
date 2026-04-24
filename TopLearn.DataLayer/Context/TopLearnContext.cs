@@ -38,6 +38,11 @@ namespace TopLearn.DataLayer.Context
         public DbSet<ConcertPrize> ConcertPrizes { get; set; }
         public DbSet<ConcertPrizeType> ConcertPrizeTypes { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Video> Videos { get; set; }
+        public DbSet<GalleryImage> GalleryImages { get; set; }
+        public DbSet<ContactMessage> ContactMessage { get; set; }
 
         #endregion
 

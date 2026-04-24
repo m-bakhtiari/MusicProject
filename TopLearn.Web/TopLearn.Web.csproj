@@ -25,6 +25,15 @@
     <Content Update="Pages\_ViewStart.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="wwwroot\manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\offline.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\sw.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +41,8 @@
     <Folder Include="wwwroot\instrument\" />
     <Folder Include="wwwroot\certificate\" />
     <Folder Include="wwwroot\group\" />
+    <Folder Include="wwwroot\galleryImage\" />
+    <Folder Include="wwwroot\video\" />
     <Folder Include="wwwroot\student\" />
     <Folder Include="wwwroot\UserAvatar\" />
     <Folder Include="wwwroot\note\" />

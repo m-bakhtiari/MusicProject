@@ -37,12 +37,12 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
             MusicNote = new DataLayer.Entities.Course.MusicNote() { };
         }
 
-        public async Task<IActionResult> OnPost(IFormFile imgLogo)
+        public async Task<IActionResult> OnPost(IFormFile noteFile,IFormFile imageFile)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            await _musicNoteService.AddNote(MusicNote, imgLogo);
+            await _musicNoteService.AddNote(MusicNote, noteFile,imageFile);
 
             return RedirectToPage("Index");
         }

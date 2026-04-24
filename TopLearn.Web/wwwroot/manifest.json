@@ -1,0 +1,30 @@
+{
+  "name": "Vahid Najafizadeh",
+  "short_name": "Najafizadeh",
+  "description": "Vahid Najafizadeh The Percussionist and The Instructor",
+  "background_color": "#fff",
+  "theme_color": "#3f51b5",
+  "start_url": "/",
+  "scope": ".",
+  "orientation": "portrait-primary",
+  "display": "standalone",
+  "dir": "rtl",
+  "lang": "fa-IR",
+  "icons": [
+    {
+      "src": "siteTemplate/img/favicon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "siteTemplate/img/web-app-manifest-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "siteTemplate/img/web-app-manifest-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

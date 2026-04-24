@@ -22,9 +22,11 @@ namespace TopLearn.Core.Services.Interfaces
         Task<List<StudentConcertImage>> GetImagesByConcertId(int concertId);
         Task<StudentConcert> GetWorkshop();
         Task<StudentConcert> GetHavana();
-        Task<List<StudentConcert>> GetBook();
+        Task<StudentConcert> GetBook();
         Task<int> GetItemByImageId(int id);
         Task<List<StudentConcert>> GetVahidConcert();
         Task<List<StudentConcert>> GetMedia();
+        Task<StudentConcert> GetRadioJavan();
+        Task<StudentConcert> GetJaamJam();
     }
 }

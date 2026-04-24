@@ -33,14 +33,15 @@
     <link rel="icon" href="/SiteTemplate/img/web-app-manifest-192x192.png" sizes="192x192" type="image/png">
     <link rel="icon" href="/SiteTemplate/img/web-app-manifest-512x512.png" sizes="512x512" type="image/png">
     <link rel="stylesheet" href="SiteTemplate/css/app.css?v=@DateTime.Now.Ticks">
-    @* <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> *@
     <link rel="stylesheet" href="SiteTemplate/css/normalize.css">
     <link rel="stylesheet" href="SiteTemplate/css/swiper-bundleM.css">
     <link rel="stylesheet" href="SiteTemplate/css/swiper-bundle.min.css" />
     <link rel="stylesheet" href="SiteTemplate/css/fancybox.css" />
     <link rel="stylesheet" href="SiteTemplate/css/swiper.css" />
+    <link rel="stylesheet" href="SiteTemplate/css/added-new.css" />
+    <link rel="stylesheet" href="SiteTemplate/css/custom.css" />
     <link rel="apple-touch-icon" href="SiteTemplate/img/V-Logo.png">
-
+   @*  <link rel="manifest" href="./manifest.json" /> *@
     <link rel="canonical" href="https://vahidnajafizadeh.com" />
     <link rel="canonical" href="https://vahidnajafizadeh.com/academy" />
     <link rel="canonical" href="https://vahidnajafizadeh.com/studentConcert" />
@@ -50,14 +51,30 @@
     <link rel="canonical" href="https://vahidnajafizadeh.com/workshop" />
 
 
+    <!--For Safari-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Vahid Najafizadeh">
+    <link rel="apple-touch-startup-image" href="SiteTemplate/img/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="SiteTemplate/img/favicon-96x96.png">
+   
+    <!--End For Safari-->
+    <!--IE-->
+    <meta name="msapplication-TileImage" content="SiteTemplate/img/favicon-96x96.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta name="msapplication-starturl" content="/">
+    <!--End IE-->
+    <!-- Theme color for mobile users -->
+    <meta name="theme-color" content="#3f51b5">
 
-    @await RenderSectionAsync("Styles", false)
 </head>
 
 <body>
     <img src="SiteTemplate/img/shape-2.png" class="shape-1" alt="menu">
     <img src="SiteTemplate/img/shape-1.png" class="shape-2" alt="menu">
-
+   @*  <button id="installBtn" class="pwa-install-btn">
+        📲 نصب اپلیکیشن
+    </button> *@
     <div class="mouseCircle"></div>
     <header class="light fixed">
         <section class="mainHeader">
@@ -66,7 +83,7 @@
                     <div class="col-menu">
                         <nav>
                             <ul class="menu">
-                                <li>
+                                <li id="menu-mobile">
                                     <button class="openMenu"></button>
                                 </li>
                                 @foreach (var item in menu)
@@ -75,27 +92,41 @@
                                         <a href="@item.Link">@item.Title</a>
                                     </li>
                                 }
-                                <li class="loginItem">
-                                    @if (User.Identity.IsAuthenticated)
-                                    {
-                                        <a href="/Profile">
-                                            <span class="login-text">@User.Identity.Name خوش آمدید</span>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li class="profile-dropdown mobileAuth" style="margin-right:auto">
+                                        <a href="javascript:void(0)" class="profile-toggle">
+                                            پروفایل ▾
                                         </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="/Login">ورود</a>
-                                        <label> &nbsp;/ &nbsp;</label>
-                                        <a href="/Register">ثبت نام</a>
-                                    }
 
-                                </li>
+                                        <ul class="dropdown-menu">
+                                            <li id="dropdown-menu01">
+                                                <a href="/Profile" style="opacity:1">تغییر اطلاعات</a>
+                                            </li>
+                                            <li id="dropdown-menu02">
+                                                <a href="/ChangePassword" style="opacity:1">تغییر رمز عبور</a>
+                                            </li>
+                                            <li id="dropdown-menu03">
+                                                <a href="/Logout" style="opacity:1">خروج</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li style="margin-right:auto" class="mobileAuth">
+                                        <a href="/Login">ورود</a>
+                                    </li>
+                                    <li class="mobileAuth">
+                                        <a href="/Register">ثبت نام</a>
+                                    </li>
+                                }
+
                             </ul>
                         </nav>
                     </div>
                     <div class="col-logo">
-                        <a href="/" class="logo">
-                        </a>
+                        <a href="/" class="logo"></a>
                     </div>
                 </div>
             </div>
@@ -199,148 +230,17 @@
 
 
     <script src="SiteTemplate/js/scroll.js"></script>
+    <script src="SiteTemplate/js/jquery.js"></script>
     <script src="SiteTemplate/js/swiper-bundle.min.js"></script>
     <script src="SiteTemplate/js/preview.js"></script>
     <script src="SiteTemplate/js/script.js"></script>
     <script src="SiteTemplate/js/app.js"></script>
     <script src="SiteTemplate/js/sweet-alert.js"></script>
     <script src="SiteTemplate/js/fancybox.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            var isDesktop = () => window.innerWidth > 767.9;
-
-            var gap = 15;
-
-            if (isDesktop()) gap = 0.0285 * window.innerWidth;
-
-            var sliders = [];
-
-            ["#horizontal-ticker-rtl", "#horizontal-ticker-ltr"].forEach(
-                (query, index) => {
-                    sliders.push(
-                        new Swiper(query, {
-                            loop: true,
-                            slidesPerView: "auto",
-                            spaceBetween: gap,
-                            speed: 8000,
-                            allowTouchMove: false,
-                            autoplay: {
-                                delay: 0,
-                                reverseDirection: index,
-                                disableOnInteraction: false
-                            }
-                        })
-                    );
-                }
-            );
-
-            window.addEventListener("resize", () => {
-                isDesktop() ? (gap = 0.0285 * window.innerWidth) : (gap = 15);
-
-                sliders.forEach((slider) => {
-                    slider.params.spaceBetween = gap;
-                    slider.update();
-                });
-            });
-        });
-
-
-        document.querySelectorAll('.parket .info').forEach((elem) => {
-            elem.querySelector('.dot').addEventListener('click',
-                () => {
-                    elem.querySelector('.dot').classList.add('active');
-                    elem.querySelector('.box').classList.add('active');
-                });
-            elem.querySelector('.close').addEventListener('click',
-                () => {
-                    elem.querySelector('.dot').classList.remove('active');
-                    elem.querySelector('.box').classList.remove('active');
-                });
-        });
-
-
-
-        var swiper = new Swiper(".sliderMe .mySwiper", {
-            effect: "cards",
-            grabCursor: true,
-        });
-
-
-        var swiper = new Swiper(".my-carousel__swiper", {
-            loop: true,
-            ltr: true,
-            grabCursor: false,
-            centeredSlides: true,
-            centeredSlidesBounds: true,
-            navigation: {
-                nextEl: ".my-carousel__control--next",
-                prevEl: ".my-carousel__control--prev"
-            },
-            slidesPerView: 3,
-            effect: "creative",
-            creativeEffect: {
-                perspective: true,
-                limitProgress: 3,
-                prev: {
-                    translate: ["-90%", "20%", -100],
-                    rotate: [0, 0, -20],
-                    origin: "bottom"
-                },
-                next: {
-                    translate: ["90%", "20%", -100],
-                    rotate: [0, 0, 20],
-                    origin: "bottom"
-                }
-            }
-        });
-
-    </script>
-    <script>
-        Fancybox.bind("[data-fancybox]", {
-            Toolbar: {
-                display: [
-                    { id: "counter", position: "center" },
-                    "fullscreen",
-                    "close",
-                ],
-            },
-            Image: {
-                zoom: true,
-            },
-        });
-    </script>
-    @await RenderSectionAsync("Scripts", false)
-
-    <noscript>
-        <style amp-boilerplate>
-            body {
-                visibility: visible
-            }
-        </style>
-    </noscript>
-
-    @*   <script type="application/ld+json">
-        {
-          "@@context": "https://schema.org",
-          "@@type": "Article",
-          "headline": "وحید نجفی زاده",
-          "description": "وبسایت رسمی وحید نجفی زاده ، مدرس و نوازنده پرکاشن",
-          "author": {
-            "@@type": "Person",
-            "name": "وحید نجفی زاده"
-          },
-          "datePublished": "2025-10-09",
-          "image": "https://vahidnajafizadeh.com/SiteTemplate/img/icon-whatsapp-big.png",
-          "publisher": {
-            "@@type": "Organization",
-            "name": "VahidNajafizadeh",
-            "logo": {
-              "@@type": "ImageObject",
-              "url": "https://vahidnajafizadeh.com/SiteTemplate/img/icon-whatsapp-big.png"
-            }
-          }
-        }
-    </script> *@
+    <script src ="SiteTemplate/js/swiper-bundleList.min.js"></script>
+    <script src="SiteTemplate/js/custom.js"></script>
+    <script src="SiteTemplate/js/added-new.js"></script>
+    @* <script src="sw.js" defer></script> *@
 </body>
 
 </html>

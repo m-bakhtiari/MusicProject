@@ -1,0 +1,66 @@
+﻿@model TopLearn.Core.DTOs.ProfileVM
+
+<section data-scroll-section class="overflow">
+    <div class="note-position-1 note-amination">
+        &#9835;
+    </div>
+    <div class="note-position-2 note-amination animation-delay-2">
+        &#9833;
+    </div>
+    <div class="note-position-3 note-amination animation-delay-1">
+        &#119070;
+    </div>
+    <div class="note-position-4 note-amination">
+        &#9834;
+    </div>
+
+    <div class="note-position-5 note-amination animation-delay-1">
+        &#119070;
+    </div>
+    <div class="note-position-6 note-amination">
+        &#9834;
+    </div>
+
+    <div class="note-position-7 note-amination animation-delay-1">
+        &#119070;
+    </div>
+
+
+    <div class="ring">
+        <i></i>
+        <i></i>
+        <i></i>
+        <form id="registerForm" action="/UpdateProfile" method="post">
+            <div class="login RegisterPart">
+                <h2>پروفایل </h2>
+                <strong id="message" style="color:orangered">@ViewData["Message"]</strong>
+                <input type="hidden" asp-for="UserName" />
+                <div class="inputBx">
+                    <input type="text" placeholder="شماره موبایل" asp-for="Mobile" id="mobile">
+                </div>
+                <div class="inputBx">
+                    <input type="text" placeholder="نام و نام خانوادگی" asp-for="FullName" id="fullName">
+                </div>
+                <div class="inputBx">
+                    <input type="text" placeholder="کدپستی " asp-for="PostalCode" id="postalCode">
+                </div>
+                <div class="inputBx">
+                    <input type="email" placeholder="ایمیل " asp-for="Email" id="email">
+                </div>
+                <div class="inputBx">
+                    <textarea placeholder="آدرس" asp-for="Address" id="address"></textarea>
+                </div>
+
+                <div class="inputBx">
+                    <input type="button" value="ثبت" onclick="register()">
+                </div>
+                <div class="links">
+                    <a href="/ChangePassword" id="recoveryPass"> ویرایش رمز عبور  </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</section>
+

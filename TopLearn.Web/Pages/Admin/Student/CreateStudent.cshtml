@@ -2,13 +2,13 @@
 
 @model TopLearn.Web.Pages.Admin.Student.CreateStudentModel
 @{
-    ViewData["Title"] = "افزودن هنرجو جدید";
+    ViewData["Title"] = "افزودن ";
 }
 
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">افزودن هنرجو جدید</h1>
+        <h1 class="page-header">افزودن</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -16,14 +16,41 @@
 <div class="row">
     <form method="post" enctype="multipart/form-data">
         <div class="col-md-12">
+            <input type="hidden" asp-for="Student.ShortKey">
+
             <div class="form-group">
                 <label>نام و نام خانوادگی</label>
                 <input type="text" asp-for="Student.StudentFullName" class="form-control">
             </div>
-            @*   <div class="form-group">
-                <label>سازها هنرجو</label>
+            <div class="form-group">
+                <label>سازها </label>
                 <input type="text" asp-for="Student.LearningInstrument" class="form-control">
-            </div> *@
+            </div>
+            <div class="form-group">
+                <label>تاریخچه فعالیت</label>
+                <input type="text" asp-for="Student.HistoryYear" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>عضویت در گروه</label>
+                <input type="text" asp-for="Student.HavanaYear" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>آدرس اینستاگرام</label>
+                <input type="text" asp-for="Student.InstagramUrl" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>آدرس تلگرام</label>
+                <input type="text" asp-for="Student.TelegramUrl" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>آدرس یوتیوب</label>
+                <input type="text" asp-for="Student.YoutubeUrl" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>آدرس ویدیو (آدرس ها را با // از هم جدا نمایید)</label>
+                <input type="text" asp-for="Student.VideoUrl" class="form-control">
+                
+            </div>
             <div class="form-group">
                 <label>توضیحات</label>
                 <textarea id="description" class="form-control" asp-for="Student.Description" rows="15"></textarea>
@@ -50,7 +77,7 @@
             <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
 
         </div>
-       
+
     </form>
 </div>
 
@@ -72,26 +99,7 @@
         });
     </script>
 
-    <script>
-        CKEDITOR.config.versionCheck = false;
-        CKEDITOR.replace('description', {
-            language: 'fa',
-            contentsLangDirection: 'rtl', // جهت پیش‌فرض راست‌به‌چپ
-            extraPlugins: 'bidi,justify', // فعال‌سازی پلاگین‌های جهت‌دهی و چینش
-            toolbar: [
-                { name: 'paragraph', items: ['BidiRtl', 'BidiLtr', '-', 'JustifyRight', 'JustifyCenter', 'JustifyLeft'] },
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline','NumberedList', 'BulletedList'] },
-                { name: 'clipboard', items: ['Undo', 'Redo'] },
-                { name: 'editing', items: ['Scayt'] },
-                { name: 'links', items: ['Link', 'Unlink'] },
-                { name: 'insert', items: ['Image', 'Table'] },
-                { name: 'styles', items: ['Format'] },
-                { name: 'tools', items: ['Maximize'] }
-            ]
-        });
 
-
-    </script>
 
     <script>
         // یک DataTransfer برای مدیریت فایل‌های انتخاب شده ایجاد می‌کنیم.

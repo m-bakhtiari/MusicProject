@@ -80,7 +80,7 @@ namespace TopLearn.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Student>> GetAllStudent(Enum type)
+        public async Task<List<Student>> GetAllStudent(int type)
         {
             var typeStr = type.ToString();
             return await _context.Students.OrderBy(x => Guid.NewGuid()).Where(x => x.ShortKey == typeStr).ToListAsync();

@@ -22,7 +22,7 @@ namespace TopLearn.Web.Pages.Admin.Student
         [BindProperty]
         public DataLayer.Entities.Course.Student Student { get; set; }
 
-        public void OnGet(Enum type)
+        public void OnGet(int type)
         {
             var typeStr = type.ToString();
             Student = new DataLayer.Entities.Course.Student() { StudentImages = new List<StudentImage>(), ShortKey = typeStr };

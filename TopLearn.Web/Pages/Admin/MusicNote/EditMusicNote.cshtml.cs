@@ -37,12 +37,12 @@ namespace TopLearn.Web.Pages.Admin.MusicNote
             ViewData["Instruments"] = new SelectList(groupSelect, "Value", "Text");
         }
 
-        public async Task<IActionResult> OnPost(IFormFile imgLogo)
+        public async Task<IActionResult> OnPost(IFormFile noteFile, IFormFile imageFile)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            await _musicNoteService.UpdateNote(MusicNote, imgLogo);
+            await _musicNoteService.UpdateNote(MusicNote, noteFile, imageFile);
 
             return RedirectToPage("Index");
         }

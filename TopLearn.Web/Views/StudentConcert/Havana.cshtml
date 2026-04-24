@@ -1,0 +1,51 @@
+﻿@model TopLearn.Core.DTOs.StudentConcertVM
+
+<section data-scroll-section style="margin-top: 50px;margin-bottom: 50px">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            @foreach (var item in Model.StudentConcert.StudentConcertImages)
+            {
+                <div class="swiper-slide" data-fancybox data-src="studentConcert/@item.ImageName" data-caption="@Model.StudentConcert.Title">
+                    <img src="/studentConcert/@item.ImageName" alt="@Model.StudentConcert.Title" />
+                    <div class="slide-info" style="margin-top: 30px">
+                        <h3>@Model.StudentConcert.Title</h3>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (Model.StudentConcert.StudentConcertImages.Count > 1)
+        {
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        }
+
+    </div>
+</section>
+
+<section data-scroll-section>
+    <div class="text">
+        @Html.Raw(Model.StudentConcert.Description)
+    </div>
+</section>
+
+<section data-scroll-section style="margin-top: 50px;margin-bottom: 50px">
+    <h3 style="text-align:center">نفرات فعال در گروه</h3>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            @foreach (var item in Model.Students)
+            {
+                <div class="swiper-slide" onclick="MentorInfo('@item.StudentId','@item.StudentFullName.Replace(' ', '-')')">
+                    <img src="/student/@item.ImageName" alt="@item.StudentFullName" />
+                    <div class="slide-info" style="margin-top: 30px">
+                        <h3>@item.StudentFullName</h3>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- دکمه‌های ناوبری -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</section>

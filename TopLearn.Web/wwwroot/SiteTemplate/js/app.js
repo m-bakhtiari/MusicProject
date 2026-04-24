@@ -43,26 +43,26 @@ if (document.querySelector("[data-scroll-container]") != undefined) {
         el: document.querySelector("[data-scroll-container]"),
         smooth: true
     });
-    locoScroll.on("scroll", (args) => {
-        if (args.delta != undefined) {
-            var scrTop = args.delta.y;
-            if (scrTop > 80) {
-                document.querySelector("header").classList.add("fixed");
-            } else {
-                document.querySelector("header").classList.remove("fixed");
-            }
-        }
-    })
+    //locoScroll.on("scroll", (args) => {
+    //    if (args.delta != undefined) {
+    //        var scrTop = args.delta.y;
+    //        if (scrTop > 80) {
+    //            document.querySelector("header").classList.add("fixed");
+    //        } else {
+    //            document.querySelector("header").classList.remove("fixed");
+    //        }
+    //    }
+    //})
 }
-document.addEventListener("scroll",
-    () => {
-        var scrTop = document.scrollingElement.scrollTop;
-        if (scrTop > 80) {
-            document.querySelector("header").classList.add("fixed");
-        } else {
-            document.querySelector("header").classList.remove("fixed");
-        }
-    });
+//document.addEventListener("scroll",
+//    () => {
+//        var scrTop = document.scrollingElement.scrollTop;
+//        if (scrTop > 80) {
+//            document.querySelector("header").classList.add("fixed");
+//        } else {
+//            document.querySelector("header").classList.remove("fixed");
+//        }
+//    });
 // Mouse
 var hasCircle = document.querySelectorAll(".hasCircle");
 var mouseCircle = document.querySelector(".mouseCircle");

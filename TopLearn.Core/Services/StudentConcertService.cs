@@ -112,20 +112,21 @@ namespace TopLearn.Core.Services
 
         public async Task<List<StudentConcertImage>> GetImagesByConcertId(int concertId)
         {
-            return await _context.StudentConcertImages.Where(x=>x.StudentConcertId==concertId).ToListAsync();
+            return await _context.StudentConcertImages.Where(x => x.StudentConcertId == concertId).ToListAsync();
         }
 
         public async Task<StudentConcert> GetWorkshop()
         {
-            return await _context.StudentConcerts.Include(x=>x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Workshop);
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Workshop);
         }
         public async Task<StudentConcert> GetHavana()
         {
             return await _context.StudentConcerts.Include(x => x.StudentConcertImages).FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Havana);
         }
-        public async Task<List<StudentConcert>> GetBook()
+        public async Task<StudentConcert> GetBook()
         {
-            return await _context.StudentConcerts.Include(x => x.StudentConcertImages).Where(x => x.Type == (int)ConstantValue.Type.Book).ToListAsync();
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages)
+                .FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.Book);
         }
         public async Task Update(StudentConcert studentConcert, List<IFormFile> imagesFiles)
         {
@@ -160,7 +161,17 @@ namespace TopLearn.Core.Services
         public async Task<List<StudentConcert>> GetMedia()
         {
             return await _context.StudentConcerts.Include(x => x.StudentConcertImages)
-                .Where(x => x.Type == (int)ConstantValue.Type.Media).ToListAsync();
+                .Where(x => x.Type == (int)ConstantValue.Type.RadioJavan || x.Type == (int)ConstantValue.Type.JaamJam).ToListAsync();
+        }
+        public async Task<StudentConcert> GetRadioJavan()
+        {
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages)
+                .FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.RadioJavan);
+        }
+        public async Task<StudentConcert> GetJaamJam()
+        {
+            return await _context.StudentConcerts.Include(x => x.StudentConcertImages)
+                .FirstOrDefaultAsync(x => x.Type == (int)ConstantValue.Type.JaamJam);
         }
     }
 }

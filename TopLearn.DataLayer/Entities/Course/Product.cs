@@ -17,15 +17,17 @@ namespace TopLearn.DataLayer.Entities.Course
 
         public int? SubGroup { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(450, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [Required]
+        [MaxLength(450)]
         public string CourseTitle { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [Required]
         public string CourseDescription { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [Required]
         public int CoursePrice { get; set; }
+
+        public int? SalePrice { get; set; }
 
         [MaxLength(600)]
         public string Tags { get; set; }
@@ -37,6 +39,13 @@ namespace TopLearn.DataLayer.Entities.Course
         public DateTime CreateDate { get; set; }
 
         public DateTime? UpdateDate { get; set; }
+
+        public bool? IsAvailable { get; set; }
+
+        public int? Quantity { get; set; }
+
+        [MaxLength(1500)]
+        public string ShortDescription { get; set; }
 
         #region Relations
 

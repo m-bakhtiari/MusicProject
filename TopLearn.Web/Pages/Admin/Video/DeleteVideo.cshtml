@@ -1,0 +1,37 @@
+﻿@page "{id}"
+@model TopLearn.Web.Pages.Admin.Video.DeleteVideoModel
+@{
+    ViewData["Title"] = "حذف ویدیو";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">حذف ویدیو </h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Video.VideoId" />
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    حذف ویدیو
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>آیا از حذف @Model.Video.Title اطمینان دارید ؟</label>
+                    </div>
+                    
+                    <input type="submit" value="حذف اطلاعات" class="btn btn-danger" />
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+
+    </form>
+</div>
+
+

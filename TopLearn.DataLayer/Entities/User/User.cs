@@ -16,31 +16,24 @@ namespace TopLearn.DataLayer.Entities.User
         [Key]
         public int UserId { get; set; }
 
-        [Display(Name = "نام کاربری")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [Required]
+        [MaxLength(200)]
         public string UserName { get; set; }
 
-        [Display(Name = "ایمیل")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نمی باشد")]
+        [Required]
+        [MaxLength(200)]
+        [EmailAddress]
         public string Email { get; set; }
 
-        [Display(Name = "کلمه عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [MaxLength(200)]
         public string Password { get; set; }
 
-        [Display(Name = "وضعیت")]
         public bool IsActive { get; set; }
 
-        [Display(Name = "تاریخ ثبت نام")]
         public DateTime RegisterDate { get; set; }
 
         public bool IsDelete { get; set; }
 
-        [MaxLength(100)]
         public string Mobile { get; set; }
 
         public string Address { get; set; }
@@ -53,5 +46,14 @@ namespace TopLearn.DataLayer.Entities.User
         public string LastName { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        [MaxLength(500)]
+        public string ImageUrl { get; set; }
+
+        [MaxLength(200)]
+        public string FullName { get; set; }
+
+        [MaxLength(50)]
+        public string NationalCode { get; set; }
     }
 }

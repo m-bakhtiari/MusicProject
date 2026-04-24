@@ -5,8 +5,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using TopLearn.Core.Convertors;
 using TopLearn.Core.DTOs;
 using TopLearn.Core.Generator;
@@ -117,6 +119,27 @@ namespace TopLearn.Web.Controllers
                 ViewData["Message"] = "این شماره موبایل قبلا در سایت ثبت نام شده است";
                 return View("Login");
             }
+        }
+
+        [Authorize]
+        [Route("/Profile")]
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userService.GetUserByUsername(User.Identity.Name);
+            ViewData["Message"] = "";
+            return View(user);
+        }
+
+        [Authorize]
+        [Route("UpdateProfile")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(ProfileVM profile)
+        {
+            await _userService.UpdateProfile(profile,null);
+            var user = await _userService.GetUserByUsername(User.Identity.Name);
+            ViewData["Message"] = "به روز رسانی با موفقیت انجام شد";
+            return View("Profile", user);
         }
     }
 }

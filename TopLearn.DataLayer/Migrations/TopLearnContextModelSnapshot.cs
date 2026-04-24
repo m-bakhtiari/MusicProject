@@ -106,6 +106,52 @@ namespace TopLearn.DataLayer.Migrations
                     b.ToTable("Certificates");
                 });
 
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CommentText")
+                        .HasMaxLength(3500);
+
+                    b.Property<int>("CommentType");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(150);
+
+                    b.Property<int?>("InstrumentId");
+
+                    b.Property<bool>("IsShowOnSite");
+
+                    b.Property<string>("Mobile")
+                        .HasMaxLength(50);
+
+                    b.Property<int?>("ParentId");
+
+                    b.Property<int?>("ProductId");
+
+                    b.Property<int?>("StudentConcertId");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("InstrumentId");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StudentConcertId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ConcertPrize", b =>
                 {
                     b.Property<int>("Id")
@@ -195,6 +241,33 @@ namespace TopLearn.DataLayer.Migrations
                     b.ToTable("ConcertTicketSeats");
                 });
 
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ContactMessage", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50);
+
+                    b.Property<bool>("IsSeen");
+
+                    b.Property<string>("Mobile")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Text")
+                        .HasMaxLength(7500);
+
+                    b.HasKey("MessageId");
+
+                    b.ToTable("ContactMessage");
+                });
+
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.CourseGroup", b =>
                 {
                     b.Property<int>("GroupId")
@@ -219,6 +292,20 @@ namespace TopLearn.DataLayer.Migrations
                     b.ToTable("CourseGroups");
                 });
 
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.GalleryImage", b =>
+                {
+                    b.Property<int>("GalleryImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageName")
+                        .HasMaxLength(100);
+
+                    b.HasKey("GalleryImageId");
+
+                    b.ToTable("GalleryImages");
+                });
+
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.Instrument", b =>
                 {
                     b.Property<int>("InstrumentId")
@@ -229,12 +316,19 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("IconImage");
+                    b.Property<string>("IconImage")
+                        .HasMaxLength(500);
 
-                    b.Property<string>("ImageName");
+                    b.Property<string>("ImageName")
+                        .HasMaxLength(500);
 
                     b.Property<string>("InstrumentTitle")
                         .HasMaxLength(450);
+
+                    b.Property<DateTime>("UpdateDate");
+
+                    b.Property<string>("VideoUrl")
+                        .HasMaxLength(3500);
 
                     b.HasKey("InstrumentId");
 
@@ -251,6 +345,8 @@ namespace TopLearn.DataLayer.Migrations
                         .IsRequired()
                         .HasMaxLength(500);
 
+                    b.Property<int?>("ParentId");
+
                     b.Property<int>("Position");
 
                     b.Property<string>("Title")
@@ -258,6 +354,8 @@ namespace TopLearn.DataLayer.Migrations
                         .HasMaxLength(500);
 
                     b.HasKey("MenuItemId");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("MenuItems");
                 });
@@ -270,6 +368,9 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<string>("FileName")
                         .HasMaxLength(100);
+
+                    b.Property<string>("ImageName")
+                        .HasMaxLength(250);
 
                     b.Property<int?>("InstrumentId");
 
@@ -304,6 +405,15 @@ namespace TopLearn.DataLayer.Migrations
                     b.Property<DateTime>("CreateDate");
 
                     b.Property<int>("GroupId");
+
+                    b.Property<bool?>("IsAvailable");
+
+                    b.Property<int?>("Quantity");
+
+                    b.Property<int?>("SalePrice");
+
+                    b.Property<string>("ShortDescription")
+                        .HasMaxLength(1500);
 
                     b.Property<int?>("SubGroup");
 
@@ -348,8 +458,17 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("HavanaYear")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("HistoryYear")
+                        .HasMaxLength(50);
+
                     b.Property<string>("ImageName")
                         .HasMaxLength(500);
+
+                    b.Property<string>("InstagramUrl")
+                        .HasMaxLength(1500);
 
                     b.Property<string>("LearningInstrument")
                         .HasMaxLength(200);
@@ -361,6 +480,15 @@ namespace TopLearn.DataLayer.Migrations
 
                     b.Property<string>("StudentFullName")
                         .HasMaxLength(200);
+
+                    b.Property<string>("TelegramUrl")
+                        .HasMaxLength(1500);
+
+                    b.Property<string>("VideoUrl")
+                        .HasMaxLength(1500);
+
+                    b.Property<string>("YoutubeUrl")
+                        .HasMaxLength(1500);
 
                     b.HasKey("StudentId");
 
@@ -384,6 +512,9 @@ namespace TopLearn.DataLayer.Migrations
                         .HasMaxLength(800);
 
                     b.Property<int?>("Type");
+
+                    b.Property<string>("VideoUrl")
+                        .HasMaxLength(3500);
 
                     b.HasKey("StudentConcertId");
 
@@ -428,6 +559,48 @@ namespace TopLearn.DataLayer.Migrations
                     b.ToTable("StudentImages");
                 });
 
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.Subscriber", b =>
+                {
+                    b.Property<int>("SubscriberId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("SubscriberId");
+
+                    b.ToTable("Subscribers");
+                });
+
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.Video", b =>
+                {
+                    b.Property<int>("VideoId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Position");
+
+                    b.Property<string>("ThumbnailImage")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ThumbnailImageUrl")
+                        .HasMaxLength(350);
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(300);
+
+                    b.Property<int>("VideoType");
+
+                    b.Property<string>("VideoUrl")
+                        .HasMaxLength(200);
+
+                    b.HasKey("VideoId");
+
+                    b.ToTable("Videos");
+                });
+
             modelBuilder.Entity("TopLearn.DataLayer.Entities.User.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -443,6 +616,12 @@ namespace TopLearn.DataLayer.Migrations
                     b.Property<string>("FirstName")
                         .HasMaxLength(100);
 
+                    b.Property<string>("FullName")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(500);
+
                     b.Property<bool>("IsActive");
 
                     b.Property<bool>("IsAdmin");
@@ -452,11 +631,12 @@ namespace TopLearn.DataLayer.Migrations
                     b.Property<string>("LastName")
                         .HasMaxLength(100);
 
-                    b.Property<string>("Mobile")
-                        .HasMaxLength(100);
+                    b.Property<string>("Mobile");
+
+                    b.Property<string>("NationalCode")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(200);
 
                     b.Property<string>("PostalCode")
@@ -475,6 +655,29 @@ namespace TopLearn.DataLayer.Migrations
                     b.HasData(
                         new { UserId = 2, Email = "vahidnajafizadeh@gmail.com", FirstName = "وحید", IsActive = true, IsAdmin = true, IsDelete = false, LastName = "نجفی زاده", Mobile = "09354868864", Password = "CB-5C-10-C0-B4-88-ED-4F-38-26-BA-62-8D-18-CA-6A", RegisterDate = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), UserName = "Vahid Najafizadeh" }
                     );
+                });
+
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.Comment", b =>
+                {
+                    b.HasOne("TopLearn.DataLayer.Entities.Course.Instrument", "Instrument")
+                        .WithMany()
+                        .HasForeignKey("InstrumentId");
+
+                    b.HasOne("TopLearn.DataLayer.Entities.Course.Comment")
+                        .WithMany("Comments")
+                        .HasForeignKey("ParentId");
+
+                    b.HasOne("TopLearn.DataLayer.Entities.Course.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("TopLearn.DataLayer.Entities.Course.StudentConcert", "StudentConcert")
+                        .WithMany()
+                        .HasForeignKey("StudentConcertId");
+
+                    b.HasOne("TopLearn.DataLayer.Entities.User.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.ConcertPrize", b =>
@@ -497,6 +700,13 @@ namespace TopLearn.DataLayer.Migrations
                 {
                     b.HasOne("TopLearn.DataLayer.Entities.Course.CourseGroup")
                         .WithMany("CourseGroups")
+                        .HasForeignKey("ParentId");
+                });
+
+            modelBuilder.Entity("TopLearn.DataLayer.Entities.Course.MenuItem", b =>
+                {
+                    b.HasOne("TopLearn.DataLayer.Entities.Course.MenuItem")
+                        .WithMany("menuItems")
                         .HasForeignKey("ParentId");
                 });
 
